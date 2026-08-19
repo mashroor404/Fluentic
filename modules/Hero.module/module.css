@@ -5,11 +5,11 @@
 
 .hero-title-block {
   display: flex;
-  width: min(100%, var(--hero-content-width, 800px));
+  width: min(100%, var(--hero-content-width, 960px));
   margin: 0 auto;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .hero-title-block .eyebrow-custom {
@@ -21,45 +21,46 @@
 }
 
 .hero-heading {
-  margin: 0;
-  color: var(--text-primary, #1b0c27);
-  font-size: clamp(3rem, 6.25vw, 6rem);
-  font-weight: var(--font-weight-medium, 500);
   letter-spacing: -0.055em;
-  line-height: 0.98;
   text-wrap: balance;
 }
 
 .hero-description-wrap {
-  width: min(100%, 660px);
+  width: min(100%, 720px);
   margin-top: 28px;
 }
 
-.hero-description-wrap .text-medium {
-  margin: 0;
-  color: var(--text-secondary, #5d6c7b);
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  line-height: 1.6;
+.hero-description-wrap .body {
+  margin-bottom: 0;
 }
 
 .hero-button-wrapper {
   display: flex;
   margin-top: 36px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 12px;
 }
 
 .hero-image-block {
   position: relative;
-  width: min(100%, 1280px);
-  margin: clamp(56px, 7vw, 96px) auto 0;
+  width: min(100%, 1200px);
+  margin: clamp(56px, 6vw, 88px) auto 0;
 }
 
 .hero-image-wrap {
   position: relative;
   min-height: 300px;
+  padding: clamp(56px, 7vw, 96px) clamp(32px, 8vw, 128px) 28px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-bottom: 0;
+  border-radius: 36px 36px 0 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 
 .hero-image-02 {
@@ -68,15 +69,18 @@
   display: block;
   width: 100%;
   height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(55, 24, 82, 0.1);
 }
 
 .hero-message-block {
   position: absolute;
   z-index: 3;
-  top: 11%;
+  top: 38%;
   left: 50%;
   display: flex;
-  width: min(50%, 590px);
+  width: min(48%, 560px);
   transform: translateX(-50%);
   flex-direction: column;
   gap: clamp(8px, 1vw, 16px);
@@ -101,7 +105,6 @@
 
 .message-text-wrap {
   padding: clamp(9px, 1vw, 14px) clamp(12px, 1.3vw, 18px);
-  color: var(--text-primary, #1b0c27);
   background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(27, 12, 39, 0.08);
   border-radius: 14px 14px 14px 4px;
@@ -110,15 +113,13 @@
 }
 
 .hero-message-wrapper--user .message-text-wrap {
-  color: var(--text-light-primary, #fff);
-  background: var(--dark-bg, #1b0c27);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.94);
   border-radius: 14px 14px 4px 14px;
 }
 
 .message-text {
   margin: 0;
-  font-size: clamp(0.65rem, 0.85vw, 0.875rem);
-  line-height: 1.45;
 }
 
 .message-avatar-wrap {
@@ -172,7 +173,7 @@
 .hero-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(248, 247, 248, 0.82), rgba(248, 247, 248, 0.28) 55%, rgba(248, 247, 248, 0.92));
+  background: linear-gradient(180deg, rgba(248, 247, 248, 0.16), rgba(248, 247, 248, 0.04) 58%, rgba(248, 247, 248, 0.12));
 }
 
 @media (max-width: 991px) {
@@ -181,12 +182,12 @@
 
 @media (max-width: 767px) {
   .hero-section { --hero-spacing: 96px; }
-  .hero-heading { font-size: clamp(2.65rem, 13vw, 4.25rem); }
   .hero-description-wrap { margin-top: 22px; }
   .hero-button-wrapper { margin-top: 28px; }
   .hero-button-wrap, .hero-button-wrap .button-primary { width: 100%; }
-  .hero-image-block { margin-top: 56px; width: 120%; left: -10%; }
-  .hero-message-block { top: 8%; width: 66%; }
+  .hero-image-block { margin-top: 56px; }
+  .hero-image-wrap { padding: 42px 20px 20px; border-radius: 24px 24px 0 0; }
+  .hero-message-block { top: 32%; width: 70%; }
   .hero-message-wrapper--user { padding-left: 5%; }
   .hero-message-wrapper--agent { padding-right: 3%; }
   .hero-message-wrapper:nth-child(n + 3) { display: none; }
@@ -194,7 +195,6 @@
 
 @media (max-width: 479px) {
   .hero-message-block { width: 72%; }
-  .message-text { font-size: 0.55rem; }
   .message-avatar-wrap { display: none; }
 }
 

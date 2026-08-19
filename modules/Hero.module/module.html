@@ -4,7 +4,7 @@
 <style>
   {% scope_css %}
   .hero-section {
-    --hero-content-width: {{ module.style.content_max_width|default(800) }}px;
+    --hero-content-width: {{ module.style.content_max_width|default(960) }}px;
     --hero-spacing: {{ module.style.section_spacing|default(120) }}px;
     position: relative;
     isolation: isolate;
@@ -32,7 +32,7 @@
 
         {% if module.content.description %}
           <div class="hero-description-wrap">
-            <p class="text-medium">{{ module.content.description }}</p>
+            <p class="body">{{ module.content.description }}</p>
           </div>
         {% endif %}
 
@@ -63,7 +63,7 @@
                       </div>
                     {% endif %}
                     <div class="message-text-wrap">
-                      <p class="message-text">{{ item.text }}</p>
+                      <p class="message-text body-2">{{ item.text }}</p>
                     </div>
                     {% if item.sender != 'agent' and item.avatar.src %}
                       <div class="message-avatar-wrap">
