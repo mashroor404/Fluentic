@@ -139,5 +139,6 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Group section-level content separately from repeatable card/item fields. Use repeaters when editors need to add, remove, reorder, or update cards.
 - Reference bundled theme media through `get_asset_url` and allow an image field to override the bundled default.
 - Scope module CSS with `{% require_css %}` and `{% scope_css %}` so multiple DnD instances can coexist safely.
+- Import `/Fluentic/Macros/Button.html` as `btn_macros` and use `btn_macros.eyebrow_label(...)` for module eyebrow badges instead of recreating their markup or styles.
 - Consume global CSS variables for colors, fonts, typography sizes, font weights, borders, and container width. Keep section-specific measurements local to the module.
 - Add JavaScript only when required for the requested behavior. The first `solution-section.module` implementation deliberately uses none.

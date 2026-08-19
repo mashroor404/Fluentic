@@ -1,3 +1,5 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
 {% require_css %}
 <style>
   {% scope_css %}
@@ -12,28 +14,6 @@
     flex-direction: column;
     margin: 0 auto clamp(2.5rem, 4vw, 3.75rem);
     text-align: center;
-  }
-
-  .solution-section__eyebrow {
-    align-items: center;
-    background-color: var(--bg-primary);
-    border-radius: 999px;
-    color: var(--text-primary);
-    display: inline-flex;
-    font-family: var(--secondary-font);
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-medium);
-    gap: 0.5625rem;
-    letter-spacing: 0.04em;
-    line-height: 1.2;
-    padding: 0.3125rem 0.75rem;
-    text-transform: uppercase;
-  }
-
-  .solution-section__eyebrow img {
-    display: block;
-    height: 0.875rem;
-    width: 0.875rem;
   }
 
   .solution-section__heading {
@@ -166,16 +146,11 @@
 </style>
 {% end_require_css %}
 
-{% set eyebrow_icon = get_asset_url("../../css/elements/Assets/icons/6984fc2e00e2222da1035dca_Star.svg") %}
-
 <section class="solution-section">
   <div class="container">
     <header class="solution-section__header">
       {% if module.section_content.eyebrow_text %}
-        <div class="solution-section__eyebrow">
-          <img src="{{ eyebrow_icon|escape_url }}" alt="" aria-hidden="true" loading="lazy">
-          <span>{{ module.section_content.eyebrow_text|escape_html }}</span>
-        </div>
+        {{ btn_macros.eyebrow_label(module.section_content.eyebrow_text) }}
       {% endif %}
 
       {% if module.section_content.heading %}
