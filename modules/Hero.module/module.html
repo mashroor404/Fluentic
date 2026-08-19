@@ -3,315 +3,108 @@
 {% require_css %}
 <style>
   {% scope_css %}
-  /* ==================================
-     Hero Section Base
-     ================================== */
   .hero-section {
+    --hero-content-width: {{ module.style.content_max_width|default(800) }}px;
+    --hero-spacing: {{ module.style.section_spacing|default(120) }}px;
     position: relative;
-    padding-top: 10em; 
-    padding-bottom: 5em;
-    text-align: center;
+    isolation: isolate;
     overflow: hidden;
-   
-  }
-
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* ==================================
-     Typography & Layout 
-     ================================== */
-  .hero-title {
-   
-  }
-
-  .hero-title-line {
-    display: block;
-    color: var(--text-primary);
-  }
-
-  .hero-title-inline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    color: var (--text-primary);
-  }
-
-  /* ==================================
-     Multi-Layer Title Icon (No Scale, Slide Left)
-     ================================== */
-  .hero-title-icon {
-    position: relative;
-    display: inline-flex;
-    width: 56px;
-    height: 56px;
-    vertical-align: middle;
-    /* Extra margin on left to account for the sliding layers */
-    margin: 0 4px 0 24px; 
-  }
-
-  .hero-icon-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-4);
-    border-radius: 14px;
-  }
-
-  /* Bottom Layer (Lightest Opacity, shifted furthest left) */
-  .hero-icon-layer.is-1 {
-    opacity: 0.3;
-    transform: translateX(-24px); 
-    z-index: 0;
-  }
-
-  /* Middle Layer (Medium Opacity, shifted slightly left) */
-  .hero-icon-layer.is-2 {
-    opacity: 0.6;
-    transform: translateX(-12px);
-    z-index: 1;
-  }
-
-  /* Main Top Layer */
-  .hero-icon-main {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-4);
-    border-radius: 14px;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(47, 107, 255, 0.2);
-    z-index: 2;
-  }
-
-  .hero-icon-main svg {
-    width: 32px;
-    height: 32px;
-    fill: currentColor;
-  }
-
-  /* ==================================
-     Description & Buttons
-     ================================== */
-  .hero-description {
-    color: var(--text-secondary, #6B738B);
-    max-width: 680px;
-  }
-
-  .hero-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  /* ==================================
-     Hero Image & 3D Perspective
-     ================================== */
-  .hero-image-perspective {
-    perspective: 1200px;
-    max-width: 1040px;
-    margin: 0 auto;
-  }
-
-  .hero-image-wrapper {
-    position: relative;
-    width: 100%;
-    border-radius: 16px;
-    overflow: hidden;
-    transform-origin: top center; 
-    will-change: transform; 
-  }
-
-  .hero-image-wrapper img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  /* ==================================
-     Mobile Responsive
-     ================================== */
-  @media screen and (max-width: 767px) {
-    .hero-section {
-      padding-top: 120px;
-    }
-    .hero-title-icon {
-      width: 44px;
-      height: 44px;
-      margin: 0 4px 0 20px;
-    }
-    .hero-icon-layer.is-1 {
-      transform: translateX(-18px);
-    }
-    .hero-icon-layer.is-2 {
-      transform: translateX(-9px);
-    }
-    .hero-icon-layer, .hero-icon-main {
-      border-radius: 10px;
-    }
-    .hero-icon-main svg {
-      width: 24px;
-      height: 24px;
-    }
-    .hero-buttons {
-      flex-direction: column;
-    }
-  }
-  
-  /* Initial GSAP hiding to prevent flash before load */
-  .gsap-hide {
-    opacity: 0;
+    padding-top: var(--hero-spacing);
+    background-color: {{ module.style.background_color.color|default('#F8F7F8') }};
   }
   {% end_scope_css %}
 </style>
 {% end_require_css %}
 
-<section class="hero-section">
-  <div class="container">
-    
-    <!-- Hero Content (Text & Buttons) -->
-    <div class="hero-content mb-72">
-      
-      <!-- Eyebrow -->
-      <div class="gsap-hide gsap-eyebrow">
-        {% if module.eyebrow_text %}
-          {{ btn_macros.eyebrow_label(module.eyebrow_text) }}
+<section class="hero-section" data-fluentic-hero>
+  <div class="hero-content-block">
+    <div class="container">
+      <div class="hero-title-block">
+        {% if module.content.show_eyebrow and module.content.eyebrow_text %}
+          {{ btn_macros.eyebrow_label(module.content.eyebrow_text, module.content.eyebrow_icon.src) }}
         {% endif %}
-      </div>
 
-      <!-- Title with Inline SVG -->
-      <h1 class="hero-title mb-36 mt-24">
-        <span class="hero-title-line hero-title-inline">
-          
-          <span class="gsap-hide gsap-title-text">{{ module.title.title_prefix }}</span> 
-          
-          {% if module.title.text_middle_icon %}
-            <span class="hero-title-icon gsap-hide gsap-icon">
-              <!-- 30% and 60% layered backgrounds -->
-              <span class="hero-icon-layer is-1"></span>
-              <span class="hero-icon-layer is-2"></span>
-              
-              <!-- Main Icon -->
-              <span class="hero-icon-main">
-                {{ module.title.text_middle_icon }}
-              </span>
-            </span>
+        {% if module.content.heading %}
+          <div class="hero-title-wrap">
+            <h1 class="hero-heading">{{ module.content.heading }}</h1>
+          </div>
+        {% endif %}
+
+        {% if module.content.description %}
+          <div class="hero-description-wrap">
+            <p class="text-medium">{{ module.content.description }}</p>
+          </div>
+        {% endif %}
+
+        <div class="hero-button-wrapper">
+          {% if module.primary_button.show and module.primary_button.text %}
+            <div class="hero-button-wrap">
+              {{ btn_macros.animated_button(module.primary_button.text, module.primary_button.link.url.href|default('#')) }}
+            </div>
           {% endif %}
-          
-          <span class="gsap-hide gsap-title-text">{{ module.title.rest_title_ }}</span>
-          
-        </span>
-        <span class="hero-title-line gsap-hide gsap-title-text">{{ module.title.bottom_title }}</span>
-      </h1>
-
-      <!-- Description (Utilizing global .body class) -->
-      <div class="hero-description body gsap-hide gsap-desc mb-36">
-        {{ module.description.description }}
-      </div>
-
-      <!-- Buttons -->
-      <div class="hero-buttons gsap-hide gsap-btns gap-36">
-        {{ btn_macros.animated_button(module.primary_button_text|default("Book a Strategy Call"), module.primary_button_link.url.href|default("#")) }}
-        {{ btn_macros.secondary_button(module.secondary_button_text|default("See the 10 Plays"), module.secondary_button_link.url.href|default("#")) }}
-      </div>
-      
-    </div>
-
-    <!-- Hero Image with Perspective Wrapper -->
-    {% if module.hero_image.src %}
-      <div class="hero-image-perspective gsap-hide gsap-img">
-        <div class="hero-image-wrapper">
-          <img src="{{ module.hero_image.src }}" alt="{{ module.hero_image.alt }}" loading="{{ module.hero_image.loading }}" width="{{ module.hero_image.width }}" height="{{ module.hero_image.height }}">
+          {% if module.secondary_button.show and module.secondary_button.text %}
+            <div class="hero-button-wrap">
+              {{ btn_macros.secondary_button(module.secondary_button.text, module.secondary_button.link.url.href|default('#')) }}
+            </div>
+          {% endif %}
         </div>
       </div>
-    {% endif %}
-    
+
+      {% if module.visual.main_image.src %}
+        <div class="hero-image-block">
+          <div class="hero-image-wrap">
+            {% if module.messages|length %}
+              <div class="hero-message-block" aria-label="Example AI agent conversation">
+                {% for item in module.messages %}
+                  <div class="hero-message-wrapper hero-message-wrapper--{{ item.sender }}">
+                    {% if item.sender == 'agent' and item.avatar.src %}
+                      <div class="message-avatar-wrap">
+                        <img src="{{ item.avatar.src|escape_url }}" alt="{{ item.avatar.alt|escape_attr }}" loading="lazy">
+                      </div>
+                    {% endif %}
+                    <div class="message-text-wrap">
+                      <p class="message-text">{{ item.text }}</p>
+                    </div>
+                    {% if item.sender != 'agent' and item.avatar.src %}
+                      <div class="message-avatar-wrap">
+                        <img src="{{ item.avatar.src|escape_url }}" alt="{{ item.avatar.alt|escape_attr }}" loading="lazy">
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <img
+              src="{{ module.visual.main_image.src|escape_url }}"
+              alt="{{ module.visual.main_image.alt|escape_attr }}"
+              class="hero-image-02"
+              loading="eager"
+              {% if module.visual.main_image.width %}width="{{ module.visual.main_image.width }}"{% endif %}
+              {% if module.visual.main_image.height %}height="{{ module.visual.main_image.height }}"{% endif %}
+            >
+
+            {% if module.visual.show_particles %}
+              {% if module.visual.particle_one.src %}
+                <img src="{{ module.visual.particle_one.src|escape_url }}" alt="" class="hero-particle hero-particle--one" loading="lazy">
+              {% endif %}
+              {% if module.visual.particle_two.src %}
+                <img src="{{ module.visual.particle_two.src|escape_url }}" alt="" class="hero-particle hero-particle--two" loading="lazy">
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
   </div>
+
+  {% if module.background_video.enabled and (module.background_video.mp4_url or module.background_video.webm_url) %}
+    <div class="hero-video" aria-hidden="true">
+      <video autoplay loop muted playsinline poster="{{ module.background_video.poster.src|escape_url }}">
+        {% if module.background_video.webm_url %}<source src="{{ module.background_video.webm_url|escape_url }}" type="video/webm">{% endif %}
+        {% if module.background_video.mp4_url %}<source src="{{ module.background_video.mp4_url|escape_url }}" type="video/mp4">{% endif %}
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+  {% endif %}
 </section>
-
-<!-- GSAP Scroll & Intro Animation -->
-{% require_js %}
-<script>
-  document.addEventListener("DOMContentLoaded", (event) => {
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
-
-      // 1. Initial Load Timeline
-      const introTl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      // Animate Main Icon popping in
-      introTl.fromTo(".gsap-icon", 
-        { scale: 0.5, opacity: 0 }, 
-        { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.5)", delay: 0.2 }
-      )
-      // Animate background layers sliding out to the left
-      .from(".hero-icon-layer.is-1", 
-        { x: 0, opacity: 0, duration: 0.6, ease: "power2.out" }, 
-        "-=0.4"
-      )
-      .from(".hero-icon-layer.is-2", 
-        { x: 0, opacity: 0, duration: 0.6, ease: "power2.out" }, 
-        "<" // Starts at the exact same time as is-1
-      )
-      // Animate Title Text sliding up
-      .fromTo(".gsap-title-text", 
-        { y: 30, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 }, 
-        "-=0.5"
-      )
-      // Animate Eyebrow fading in
-      .fromTo(".gsap-eyebrow", 
-        { y: -10, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.5 }, 
-        "-=0.5"
-      )
-      // Animate Description sliding up
-      .fromTo(".gsap-desc", 
-        { y: 20, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.6 }, 
-        "-=0.5"
-      )
-      // Animate Buttons popping up
-      .fromTo(".gsap-btns", 
-        { y: 20, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.6 }, 
-        "-=0.5"
-      )
-      // Fade in the hero image wrapper at the very end
-      .fromTo(".gsap-img", 
-        { opacity: 0, y: 30 }, 
-        { opacity: 1, y: 0, duration: 0.8 }, 
-        "-=0.4"
-      );
-
-      // 2. The Reversed Tilt & Scale Animation on Scroll
-      gsap.to(".hero-image-wrapper", {
-        y: 60,
-        scale: 0.85,
-        rotationX: 30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero-section",
-          start: "top top", 
-          end: "bottom center", 
-          scrub: 1 
-        }
-      });
-      
-    } else {
-      console.warn("GSAP or ScrollTrigger is missing. Ensure CDNs are in base.html.");
-    }
-  });
-</script>
-{% end_require_js %}
