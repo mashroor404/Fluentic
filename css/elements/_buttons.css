@@ -154,3 +154,65 @@ button:disabled,
 }
 
 /****** Fluentic animated buttons END *********/
+
+
+/****** Fluentic eyebrow badge START *********/
+
+/* Shared eyebrow treatment used by the hero and other marketing modules. */
+.eyebrow-custom {
+  display: inline-flex;
+  box-sizing: border-box;
+  min-height: 36px;
+  padding: 7px 14px;
+  align-items: center;
+  gap: 9px;
+  color: var(--eyebrow-text-color, var(--text-primary, #1B0C27));
+  font-family: var(--secondary-font, 'General Sans', sans-serif);
+  font-size: var(--eyebrow-font-size, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+  background: var(--eyebrow-bg-color, rgba(255, 255, 255, 0.72));
+  border: 1px solid var(--eyebrow-border-color, rgba(27, 12, 39, 0.1));
+  border-radius: var(--eyebrow-border-radius, 999px);
+  box-shadow: 0 8px 24px rgba(27, 12, 39, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.eyebrow-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.eyebrow-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.eyebrow-text {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: 0.01em;
+}
+
+.eyebrow-cursor {
+  width: 2px;
+  height: 1em;
+  background: currentColor;
+  border-radius: 2px;
+  animation: fluentic-cursor-blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes fluentic-cursor-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow-cursor { animation: none; }
+}
+
+/****** Fluentic eyebrow badge END *********/

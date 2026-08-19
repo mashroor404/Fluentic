@@ -7,8 +7,8 @@
 <!---------------------------  
 Primary animated button START
 --------------------------->
-{% macro animated_button(text, link) %}
-  <a href="{{ link }}" data-wf--button-primary--variant="base" class="button-primary w-inline-block">
+{% macro animated_button(text, link, open_in_new_tab=false, no_follow=false) %}
+  <a href="{{ link|escape_url }}"{% if open_in_new_tab %} target="_blank"{% endif %}{% if open_in_new_tab or no_follow %} rel="{% if no_follow %}nofollow{% endif %}{% if open_in_new_tab %}{% if no_follow %} {% endif %}noopener{% endif %}"{% endif %} data-wf--button-primary--variant="base" class="button-primary w-inline-block">
     <div class="button-text-wrap">
       <div class="button-text">{{ text }}</div>
       <div class="button-text hover" aria-hidden="true">{{ text }}</div>
@@ -26,8 +26,8 @@ Primary animated button END
 <!-- ------------------------- 
 Seconday animated button START
 --------------------------->
-{% macro secondary_button(text, link) %}
-  <a href="{{ link }}" data-wf--button-primary--variant="v2" class="button-primary w-variant-e4e0b913-5cf5-aedf-c7d4-cf7f758b0ff5 w-inline-block">
+{% macro secondary_button(text, link, open_in_new_tab=false, no_follow=false) %}
+  <a href="{{ link|escape_url }}"{% if open_in_new_tab %} target="_blank"{% endif %}{% if open_in_new_tab or no_follow %} rel="{% if no_follow %}nofollow{% endif %}{% if open_in_new_tab %}{% if no_follow %} {% endif %}noopener{% endif %}"{% endif %} data-wf--button-primary--variant="v2" class="button-primary w-variant-e4e0b913-5cf5-aedf-c7d4-cf7f758b0ff5 w-inline-block">
     <div class="button-text-wrap">
       <div class="button-text">{{ text }}</div>
       <div class="button-text hover" aria-hidden="true">{{ text }}</div>
@@ -47,7 +47,7 @@ Eyebrow badge START
 {% macro eyebrow_label(text, icon_src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20fbee52b758d1d52eda94_energy-ellipse.svg") %}
   <div class="eyebrow-custom">
     <!-- Eyebrow Icon -->
-    <img loading="lazy" src="{{ icon_src }}" alt="" class="eyebrow-icon">
+    {% if icon_src %}<img loading="lazy" src="{{ icon_src|escape_url }}" alt="" class="eyebrow-icon">{% endif %}
     
     <!-- Eyebrow Content & Cursor -->
     <div class="eyebrow-content">
