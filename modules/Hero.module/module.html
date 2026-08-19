@@ -39,12 +39,12 @@
         <div class="hero-button-wrapper">
           {% if module.primary_button.show and module.primary_button.text %}
             <div class="hero-button-wrap">
-              {{ btn_macros.animated_button(module.primary_button.text, module.primary_button.link.url.href|default('#')) }}
+              {{ btn_macros.animated_button(module.primary_button.text, module.primary_button.link.url.href|default('#'), module.primary_button.link.open_in_new_tab, module.primary_button.link.no_follow) }}
             </div>
           {% endif %}
           {% if module.secondary_button.show and module.secondary_button.text %}
             <div class="hero-button-wrap">
-              {{ btn_macros.secondary_button(module.secondary_button.text, module.secondary_button.link.url.href|default('#')) }}
+              {{ btn_macros.secondary_button(module.secondary_button.text, module.secondary_button.link.url.href|default('#'), module.secondary_button.link.open_in_new_tab, module.secondary_button.link.no_follow) }}
             </div>
           {% endif %}
         </div>
