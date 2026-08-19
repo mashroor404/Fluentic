@@ -8,25 +8,10 @@
 Primary animated button START
 --------------------------->
 {% macro animated_button(text, link) %}
-  <a href="{{ link }}" class="p-btn">
-    <!-- Expanding Background -->
-    <div class="btn-bg-fill"></div>
-    
-    <!-- Left Icon (Visible by default, masking container) -->
-    <div class="btn-icon-left">
-      <!-- The sliding track holding two arrows -->
-      <div class="btn-icon-track">
-        <img src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20ef4f1998cb56dd0d3f3a_83810f41f50243f20509717f1fa10ebc_button-arrows.svg" alt="Arrow" class="btn-icon-img">
-        <img src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20ef4f1998cb56dd0d3f3a_83810f41f50243f20509717f1fa10ebc_button-arrows.svg" alt="Arrow" class="btn-icon-img">
-      </div>
-    </div>
-    
-    <!-- Dynamic Button Text -->
-    <span class="btn-text">{{ text }}</span>
-    
-    <!-- Right Icon (Hidden by default, slides in on hover) -->
-    <div class="btn-icon-right">
-      <img src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20ef4f1998cb56dd0d3f3a_83810f41f50243f20509717f1fa10ebc_button-arrows.svg" alt="Arrow" class="btn-icon-img">
+  <a href="{{ link }}" data-wf--button-primary--variant="base" class="button-primary w-inline-block">
+    <div class="button-text-wrap">
+      <div class="button-text">{{ text }}</div>
+      <div class="button-text hover" aria-hidden="true">{{ text }}</div>
     </div>
   </a>
 {% endmacro %}
@@ -42,25 +27,10 @@ Primary animated button END
 Seconday animated button START
 --------------------------->
 {% macro secondary_button(text, link) %}
-  <a href="{{ link }}" class="s-btn">
-    <!-- Expanding Background for Hover -->
-    <div class="s-btn-bg-fill"></div>
-    
-    <!-- Left Icon (Visible by default, masking container) -->
-    <div class="s-btn-icon-left">
-      <!-- The sliding track holding two arrows -->
-      <div class="s-btn-icon-track">
-        <img src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20ef4f1998cb56dd0d3f3a_83810f41f50243f20509717f1fa10ebc_button-arrows.svg" alt="Arrow" class="s-btn-icon-img">
-        <img src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20ef4f1998cb56dd0d3f3a_83810f41f50243f20509717f1fa10ebc_button-arrows.svg" alt="Arrow" class="s-btn-icon-img">
-      </div>
-    </div>
-    
-    <!-- Button Text -->
-    <span class="s-btn-text">{{ text }}</span>
-    
-    <!-- Right Icon (Hidden by default, slides in on hover) -->
-    <div class="s-btn-icon-right">
-      <img src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20ef4f1998cb56dd0d3f3a_83810f41f50243f20509717f1fa10ebc_button-arrows.svg" alt="Arrow" class="s-btn-icon-img">
+  <a href="{{ link }}" data-wf--button-primary--variant="v2" class="button-primary w-variant-e4e0b913-5cf5-aedf-c7d4-cf7f758b0ff5 w-inline-block">
+    <div class="button-text-wrap">
+      <div class="button-text">{{ text }}</div>
+      <div class="button-text hover" aria-hidden="true">{{ text }}</div>
     </div>
   </a>
 {% endmacro %}
