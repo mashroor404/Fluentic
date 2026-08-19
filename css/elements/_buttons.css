@@ -78,17 +78,6 @@ button:disabled,
   text-decoration: none;
 }
 
-/* The primary CTA stays visually unchanged on hover. */
-.button-primary[data-wf--button-primary--variant='base'] .button-text.hover {
-  display: none;
-}
-
-.button-primary[data-wf--button-primary--variant='base']:hover .button-text:not(.hover),
-.button-primary[data-wf--button-primary--variant='base']:focus-visible .button-text:not(.hover) {
-  opacity: 1;
-  transform: none;
-}
-
 /* The fixed-height viewport clips the two vertically stacked text labels. */
 .button-primary .button-text-wrap {
   position: relative;
