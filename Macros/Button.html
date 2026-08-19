@@ -44,10 +44,10 @@ Secondary animated button END
 <!--  -------------------------
 Eyebrow badge START
 ------------------------------>
-{% macro eyebrow_label(text) %}
+{% macro eyebrow_label(text, icon_src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20fbee52b758d1d52eda94_energy-ellipse.svg") %}
   <div class="eyebrow-custom">
     <!-- Eyebrow Icon -->
-    <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20fbee52b758d1d52eda94_energy-ellipse.svg" alt="Energy Ellipse Icon" class="eyebrow-icon">
+    <img loading="lazy" src="{{ icon_src }}" alt="" class="eyebrow-icon">
     
     <!-- Eyebrow Content & Cursor -->
     <div class="eyebrow-content">
