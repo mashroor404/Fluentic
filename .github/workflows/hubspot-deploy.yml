@@ -7,6 +7,9 @@ on:
 
 jobs:
   deploy:
+    # Forks do not have the upstream repository's HubSpot credentials and must
+    # never deploy. This remains enabled when the workflow is merged upstream.
+    if: github.event.repository.fork == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
