@@ -1,0 +1,149 @@
+[
+  {
+    "id": "9c3a3d7b-e6ee-4c02-a8d0-4f166c190508",
+    "name": "section_content",
+    "label": "Section content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "ed978c0f-2a4e-47f3-a4f4-0d6cc70e739d",
+        "name": "eyebrow_text",
+        "label": "Eyebrow text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "AI-Driven Features"
+      },
+      {
+        "id": "ee041bb8-8dd0-4fd2-ab2a-7e46ef28df7b",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Build, Deploy and Scale Your Entire AI Workforce"
+      },
+      {
+        "id": "b5c5fc77-f1e0-4dca-890f-e522914c817c",
+        "name": "description",
+        "label": "Description",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Flentic helps you eliminate bottlenecks, automate complex workflows, and make smarter decisions with AI agents working 24/7."
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "eyebrow_text": "AI-Driven Features",
+      "heading": "Build, Deploy and Scale Your Entire AI Workforce",
+      "description": "Flentic helps you eliminate bottlenecks, automate complex workflows, and make smarter decisions with AI agents working 24/7."
+    }
+  },
+  {
+    "id": "1d7d34e4-d6b0-4a16-92f0-70a598421ac0",
+    "name": "cards",
+    "label": "Solution cards",
+    "required": false,
+    "locked": false,
+    "occurrence": {
+      "min": 1,
+      "max": 8,
+      "sorting_label_field": null,
+      "default": 4
+    },
+    "children": [
+      {
+        "id": "ce63aa08-677c-4890-8109-45b2f820dd03",
+        "name": "title",
+        "label": "Title",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Adaptive Learning"
+      },
+      {
+        "id": "db59f619-945e-4573-b467-2338414c2c51",
+        "name": "description",
+        "label": "Description",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "AI that evolves with your data, continuously improving performance and adapting to new patterns"
+      },
+      {
+        "id": "d8a6d987-66da-4b40-b127-6729415314b8",
+        "name": "show_image",
+        "label": "Show image",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "a1ed48cc-4ecf-4174-a8d5-c32f30092755",
+        "name": "image",
+        "label": "Image",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "cards.show_image",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "image",
+        "display_width": null
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": [
+      {
+        "title": "Adaptive Learning",
+        "description": "AI that evolves with your data, continuously improving performance and adapting to new patterns",
+        "show_image": true
+      },
+      {
+        "title": "Smart Automation",
+        "description": "Empowering you with AI-driven workflows designed to simplify operations, enhance productivity",
+        "show_image": true
+      },
+      {
+        "title": "Sales Outreach",
+        "description": "Personalize campaigns at scale, nurture leads, and close deals faster with AI-driven engagement.",
+        "show_image": true
+      },
+      {
+        "title": "Predictive Analytics",
+        "description": "Harness advanced models to forecast trends, uncover insights",
+        "show_image": true
+      }
+    ]
+  }
+]

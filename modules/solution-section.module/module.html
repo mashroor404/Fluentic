@@ -1,0 +1,246 @@
+{% require_css %}
+<style>
+  {% scope_css %}
+  .solution-section {
+    background-color: var(--page-bg);
+    padding: clamp(5rem, 8vw, 10rem) 0 0;
+  }
+
+  .solution-section__header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto clamp(2.5rem, 4vw, 3.75rem);
+    text-align: center;
+  }
+
+  .solution-section__eyebrow {
+    align-items: center;
+    background-color: var(--bg-primary);
+    border-radius: 999px;
+    color: var(--text-primary);
+    display: inline-flex;
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    gap: 0.5625rem;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    padding: 0.3125rem 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .solution-section__eyebrow img {
+    display: block;
+    height: 0.875rem;
+    width: 0.875rem;
+  }
+
+  .solution-section__heading {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 1rem auto 0;
+    max-width: 49.9375rem;
+  }
+
+  .solution-section__description {
+    color: var(--text-secondary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.55;
+    margin: 1.5rem auto 0;
+    max-width: 43.75rem;
+  }
+
+  .solution-section__grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    margin: 0 auto;
+    max-width: 71.25rem;
+  }
+
+  .solution-card {
+    background-color: var(--bg-primary);
+    border: var(--global-border-width) solid color-mix(in srgb, var(--global-border-color) 45%, transparent);
+    border-radius: max(var(--global-border-radius), 1rem);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--text-primary) 6%, transparent);
+    grid-column: span 6;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0.5rem;
+  }
+
+  .solution-card:nth-child(4n + 1) {
+    grid-column: span 5;
+  }
+
+  .solution-card:nth-child(4n + 2) {
+    grid-column: span 7;
+  }
+
+  .solution-card:nth-child(4n + 3) {
+    grid-column: span 8;
+  }
+
+  .solution-card:nth-child(4n + 4) {
+    grid-column: span 4;
+  }
+
+  .solution-card__image-wrap {
+    border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.75rem);
+    overflow: hidden;
+  }
+
+  .solution-card__image {
+    display: block;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .solution-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.875rem 1.375rem 1.375rem;
+  }
+
+  .solution-card__title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h5);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .solution-card__description {
+    color: var(--text-secondary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 991px) {
+    .solution-section__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .solution-card,
+    .solution-card:nth-child(4n + 1),
+    .solution-card:nth-child(4n + 2),
+    .solution-card:nth-child(4n + 3),
+    .solution-card:nth-child(4n + 4) {
+      grid-column: span 1;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .solution-section {
+      padding-top: 4rem;
+    }
+
+    .solution-section__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .solution-section__header {
+      margin-bottom: 2.5rem;
+    }
+
+    .solution-card__body {
+      gap: 0.625rem;
+      padding: 1.25rem 1rem;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% set eyebrow_icon = get_asset_url("../../css/elements/Assets/icons/6984fc2e00e2222da1035dca_Star.svg") %}
+
+<section class="solution-section">
+  <div class="container">
+    <header class="solution-section__header">
+      {% if module.section_content.eyebrow_text %}
+        <div class="solution-section__eyebrow">
+          <img src="{{ eyebrow_icon|escape_url }}" alt="" aria-hidden="true" loading="lazy">
+          <span>{{ module.section_content.eyebrow_text|escape_html }}</span>
+        </div>
+      {% endif %}
+
+      {% if module.section_content.heading %}
+        <h2 class="solution-section__heading">{{ module.section_content.heading|escape_html }}</h2>
+      {% endif %}
+
+      {% if module.section_content.description %}
+        <p class="solution-section__description">{{ module.section_content.description|escape_html }}</p>
+      {% endif %}
+    </header>
+
+    {% if module.cards %}
+      <div class="solution-section__grid">
+        {% for item in module.cards %}
+          {% set image_src = item.image.src %}
+          {% set image_width = item.image.width %}
+          {% set image_height = item.image.height %}
+
+          {% if not image_src %}
+            {% if loop.index == 1 %}
+              {% set image_src = get_asset_url("../../css/elements/Assets/images/697ecd315fcc93485bf72760_Solution Image.png") %}
+              {% set image_width = 1808 %}
+              {% set image_height = 1336 %}
+            {% elif loop.index == 2 %}
+              {% set image_src = get_asset_url("../../css/elements/Assets/images/697eced4ca91ffc3ae8106ed_Solution Image (1).webp") %}
+              {% set image_width = 2520 %}
+              {% set image_height = 1336 %}
+            {% elif loop.index == 3 %}
+              {% set image_src = get_asset_url("../../css/elements/Assets/images/697ecf127492ed77fe29bc94_Solution Image.webp") %}
+              {% set image_width = 2840 %}
+              {% set image_height = 1336 %}
+            {% elif loop.index == 4 %}
+              {% set image_src = get_asset_url("../../css/elements/Assets/images/697eced4643a824875f40837_Solution Image (2).webp") %}
+              {% set image_width = 1496 %}
+              {% set image_height = 1336 %}
+            {% endif %}
+          {% endif %}
+
+          <article class="solution-card">
+            {% if item.show_image and image_src %}
+              <div class="solution-card__image-wrap">
+                <img
+                  class="solution-card__image"
+                  src="{{ image_src|escape_url }}"
+                  alt="{{ item.image.alt|default(item.title)|escape_attr }}"
+                  {% if image_width %}width="{{ image_width }}"{% endif %}
+                  {% if image_height %}height="{{ image_height }}"{% endif %}
+                  {% if item.image.loading and item.image.loading != "disabled" %}loading="{{ item.image.loading }}"{% else %}loading="lazy"{% endif %}
+                >
+              </div>
+            {% endif %}
+
+            {% if item.title or item.description %}
+              <div class="solution-card__body">
+                {% if item.title %}
+                  <h3 class="solution-card__title">{{ item.title|escape_html }}</h3>
+                {% endif %}
+                {% if item.description %}
+                  <p class="solution-card__description">{{ item.description|escape_html }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
