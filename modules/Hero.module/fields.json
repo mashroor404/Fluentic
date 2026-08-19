@@ -272,14 +272,14 @@
         "type": "choice",
         "display_width": null,
         "choices": [
-          {
-            "label": "User (right)",
-            "value": "user"
-          },
-          {
-            "label": "AI agent (left)",
-            "value": "agent"
-          }
+          [
+            "user",
+            "User (right)"
+          ],
+          [
+            "agent",
+            "AI agent (left)"
+          ]
         ],
         "display": "select",
         "default": "user"
@@ -554,7 +554,7 @@
         "display": "text",
         "step": 10,
         "suffix": "px",
-        "default": 800
+        "default": 960
       },
       {
         "id": "f83e7126-6aa1-479f-9b47-4ccf3e5880bf",
@@ -578,7 +578,7 @@
         "color": "#F8F7F8",
         "opacity": 100
       },
-      "content_max_width": 800,
+      "content_max_width": 960,
       "section_spacing": 120
     }
   }
