@@ -1,339 +1,415 @@
-{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+{% macro link_attributes(link) %}
+  {% set href = link.url.href %}
+  {% if link.url.type is equalto "EMAIL_ADDRESS" %}
+    {% set href = "mailto:" + href %}
+  {% elif link.url.type is equalto "PHONE_NUMBER" %}
+    {% set href = "tel:" + href %}
+  {% endif %}
+  href="{{ href|default('#')|escape_url }}"
+  {% if link.open_in_new_tab %}target="_blank"{% endif %}
+  {% if link.rel %}
+    rel="{{ link.rel|escape_attr }}"
+  {% elif link.open_in_new_tab %}
+    rel="noopener"
+  {% endif %}
+{% endmacro %}
+
+{% macro social_icon(platform) %}
+  {% if platform == "instagram" %}
+    <svg viewBox="0 0 26 24" aria-hidden="true">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3194 2H8.43056C5.36231 2 2.875 4.48731 2.875 7.55556V16.4444C2.875 19.5127 5.36231 22 8.43056 22H17.3194C20.3876 22 22.875 19.5127 22.875 16.4444V7.55556C22.875 4.48731 20.3876 2 17.3194 2ZM20.9305 16.4444C20.9244 18.4362 19.3112 20.0494 17.3194 20.0556H8.43056C6.43873 20.0494 4.82555 18.4362 4.81945 16.4444V7.55556C4.82555 5.56372 6.43873 3.95054 8.43056 3.94444H17.3194C19.3112 3.95054 20.9244 5.56372 20.9305 7.55556V16.4444ZM18.1527 7.83333C18.7664 7.83333 19.2638 7.33587 19.2638 6.72222C19.2638 6.10858 18.7664 5.61111 18.1527 5.61111C17.5391 5.61111 17.0416 6.10858 17.0416 6.72222C17.0416 7.33587 17.5391 7.83333 18.1527 7.83333ZM12.875 7C10.1136 7 7.875 9.23858 7.875 12C7.875 14.7614 10.1136 17 12.875 17C15.6364 17 17.875 14.7614 17.875 12C17.878 10.673 17.3521 9.39952 16.4137 8.4612C15.4754 7.52288 14.202 6.99704 12.875 7ZM9.81945 12C9.81945 13.6876 11.1874 15.0556 12.875 15.0556C14.5625 15.0556 15.9305 13.6876 15.9305 12C15.9305 10.3124 14.5625 8.94444 12.875 8.94444C11.1874 8.94444 9.81945 10.3124 9.81945 12Z" fill="currentColor"/>
+    </svg>
+  {% elif platform == "x" %}
+    <svg viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M17.839 0H2.16104C.967563 0 0 .967563 0 2.16104V17.839C0 19.0324.967563 20 2.16104 20H17.839C19.0324 20 20 19.0324 20 17.839V2.16104C20 .967563 19.0324 0 17.839 0ZM12.7566 16.9604 9.0401 11.5514 4.38696 16.9604H3.18435L8.50611 10.7746 3.18435 3.02934H7.24336L10.7627 8.15126 15.1689 3.02934H16.3715L11.2968 8.92828 16.8156 16.9604H12.7566Z" fill="currentColor"/>
+    </svg>
+  {% elif platform == "linkedin" %}
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.22222 2H19.7778C21.0051 2 22 2.99492 22 4.22222V19.7778C22 21.0051 21.0051 22 19.7778 22H4.22222C2.99492 22 2 21.0051 2 19.7778V4.22222C2 2.99492 2.99492 2 4.22222 2ZM7.55556 18.6667C7.86238 18.6667 8.11111 18.4179 8.11111 18.1111V10.3333C8.11111 10.0266 7.86238 9.77778 7.55556 9.77778H5.88889C5.58207 9.77778 5.33333 10.0266 5.33333 10.3333V18.1111C5.33333 18.4179 5.58207 18.6667 5.88889 18.6667H7.55556ZM6.72222 8.66667C5.80174 8.66667 5.05556 7.92048 5.05556 7C5.05556 6.07952 5.80174 5.33333 6.72222 5.33333C7.6427 5.33333 8.38889 6.07952 8.38889 7C8.38889 7.92048 7.6427 8.66667 6.72222 8.66667ZM18.1111 18.6667C18.4179 18.6667 18.6667 18.4179 18.6667 18.1111V13C18.7028 11.2342 17.3973 9.72724 15.6444 9.51111C14.4189 9.39917 13.2314 9.97156 12.5556 11V10.3333C12.5556 10.0266 12.3068 9.77778 12 9.77778H10.3333C10.0266 9.77778 9.77778 10.0266 9.77778 10.3333V18.1111C9.77778 18.4179 10.0266 18.6667 10.3333 18.6667H12C12.3068 18.6667 12.5556 18.4179 12.5556 18.1111V13.9444C12.5556 13.024 13.3018 12.2778 14.2222 12.2778C15.1427 12.2778 15.8889 13.024 15.8889 13.9444V18.1111C15.8889 18.4179 16.1377 18.6667 16.4444 18.6667H18.1111Z" fill="currentColor"/>
+    </svg>
+  {% else %}
+    <svg viewBox="0 0 15 24" aria-hidden="true">
+      <path d="M11.5556 5.33333H8.22222C7.60855 5.33333 7.11111 5.8308 7.11111 6.44444V9.77778H11.5556C11.6819 9.77498 11.8018 9.83378 11.8769 9.93544C11.952 10.0371 11.9731 10.1689 11.9333 10.2889L11.1111 12.7333C11.0353 12.9577 10.8257 13.1093 10.5889 13.1111H7.11111V21.4444C7.11111 21.7512 6.86233 22 6.55555 22H3.77778C3.47096 22 3.22222 21.7512 3.22222 21.4444V13.1111H1.55555C1.24873 13.1111 1 12.8623 1 12.5556V10.3333C1 10.0266 1.24873 9.77778 1.55555 9.77778H3.22222V6.44444C3.22222 3.98984 5.21211 2 7.66667 2H11.5556C11.8623 2 12.1111 2.24873 12.1111 2.55556V4.77778C12.1111 5.0846 11.8623 5.33333 11.5556 5.33333Z" fill="currentColor"/>
+    </svg>
+  {% endif %}
+{% endmacro %}
 
 {% require_css %}
 <style>
-{% scope_css %}
-  .footer-section {
-    background: var(--gradient-1);
+  {% scope_css %}
+  .footer {
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    padding-top: 3.75rem;
   }
 
-  .footer-container {
-    background-color: var(--bg-primary);
-    border-radius: 20px;
+  .footer__container {
+    box-sizing: border-box;
+    max-width: min(var(--container-max-width), 77.5rem);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    width: 100%;
   }
 
-  .inner-container{
-    max-width: var(--container-max-width);
-    width:90%;
-    margin:0 auto;
-}
-
-  /* Top Section */
-  .footer-top {
+  .footer__content {
     display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    position: relative;
+  }
+
+  .footer__main {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  .footer__content-wrapper {
+    align-items: stretch;
+    display: flex;
+    gap: 1.5rem;
     justify-content: space-between;
+  }
+
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 19.625rem;
+  }
+
+  .footer__brand-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer__logo-link {
+    display: block;
+    max-width: 11rem;
+    width: 100%;
+  }
+
+  .footer__logo {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  .footer__description {
+    color: var(--text-secondary);
+    font-size: var(--text-body-2);
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  .footer__social-list {
+    align-items: center;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer__social-link {
+    align-items: center;
+    color: var(--text-primary);
+    display: inline-flex;
+    height: 1.5rem;
+    justify-content: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+    width: 1.5rem;
+  }
+
+  .footer__social-link:hover {
+    color: var(--accent-purple);
+    transform: translateY(-2px);
+  }
+
+  .footer__social-link:focus-visible,
+  .footer__link:focus-visible,
+  .footer__legal-link:focus-visible,
+  .footer__logo-link:focus-visible {
+    outline: 2px solid var(--accent-purple);
+    outline-offset: 4px;
+  }
+
+  .footer__social-link svg {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .footer__widgets {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 27.125rem;
+    width: 100%;
+  }
+
+  .footer__widget {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .footer__widget-title {
+    color: var(--text-primary);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .footer__link-list {
     align-items: flex-start;
-
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    list-style: none;
+    margin: 0 !important;
+    padding: 0;
   }
 
-  .footer-title-btn {
-    max-width: 580px;
+  .footer__link-list li {
+    margin: 0;
   }
 
-  .footer-title-btn h2 {
+  .footer__link,
+  .footer__legal-link,
+  .footer__copyright a {
+    color: color-mix(in srgb, var(--text-primary) 60%, transparent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer__link {
+    font-size: var(--text-body-2);
+    line-height: 1.62;
+  }
+
+  .footer__link:hover,
+  .footer__legal-link:hover,
+  .footer__copyright a:hover {
     color: var(--text-primary);
   }
 
-  .footer-title-btn p {
-    color: var(--text-secondary);
-  }
-
-
-  .footer-img {
-    flex-shrink: 0;
-    max-width: 350px;
-  }
-
-  .footer-img img {
-    width: 100%;
-    height: auto;
+  .footer__wordmark {
     display: block;
+    height: auto;
+    width: 100%;
   }
 
-  /* Middle Section */
-  .footer-middle {
-   
+  .footer__bottom {
+    border-top: 1px solid color-mix(in srgb, var(--text-primary) 8%, transparent);
+    margin-top: 2.5rem;
   }
 
-  .middle-title p {
-   color: var(--text-secondary);
-  }
-
-  .middle-cta {
+  .footer__legal-bar {
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: var(--global-border-width) solid var(--global-border-color);
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
   }
 
-  .middle-cta a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-
-  /* Bottom Section */
-  .navigation-section {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    
-  }
-
-  .nav-col h6 {
-    color:var(--text-primary);
-  }
-
-  .nav-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(12px, 0.8vw, 16px);
-  }
-
-  .nav-col ul li a {
-    color: var( --text-secondary);
-    transition: color .3s cubic-bezier(.445, .05, .55, .95);
-  }
-
-  .nav-col ul li a:hover {
-   color:var(--text-primary);
-  }
-
-  .footer-copyright-social {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: var(--global-border-width) solid var(--global-border-color);
-  }
-
-  .copyright-text p {
-    color:var( --text-secondary) ;
+  .footer__copyright,
+  .footer__copyright p {
+    color: var(--text-secondary);
+    font-size: var(--text-body-2);
+    line-height: 1.62;
     margin: 0;
   }
 
-  .social-icons {
+  .footer__legal-links {
+    align-items: center;
     display: flex;
-    align-items: center;
-    gap: 12px;
+    gap: 2rem;
   }
 
-  .social-icons a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-/*     background-color: #0f172a; */
-/*     color: #ffffff; */
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-  }
-  
-  .social-icons a svg {
-    width: 24px;
-    height: 24px;
+  .footer__legal-link {
+    font-size: var(--text-body-2);
   }
 
-  .social-icons a:hover {
-    opacity: 0.8;
-  }
-
-  /* Responsive Mobile Design */
-  @media (max-width: 991px) {
-    .footer-section {
-    padding: 16px;
-}
-
-    .footer-top {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-       padding: 0 16px;
+  @media screen and (max-width: 991px) {
+    .footer__content-wrapper {
+      flex-wrap: wrap;
     }
 
-   .footer-middle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 16px;
-}
+    .footer__legal-bar {
+      gap: 0.75rem;
+    }
+  }
 
-    .middle-cta {
+  @media screen and (max-width: 767px) {
+    .footer {
+      padding-top: 2.5rem;
+    }
+
+    .footer__container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .footer__content {
+      gap: 1.875rem;
+    }
+
+    .footer__content-wrapper {
+      display: grid;
+      gap: 1.5rem 2rem;
+      grid-template-columns: 0.75fr 1fr;
+    }
+
+    .footer__brand {
+      gap: 1rem;
+    }
+
+    .footer__logo-link {
+      max-width: 10rem;
+    }
+
+    .footer__legal-bar {
+      align-items: flex-start;
       flex-direction: column;
+      padding-top: 1.875rem;
     }
 
-    .navigation-section {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px 20px;
-      padding: 0 16px;
+    .footer__legal-links {
+      order: -1;
     }
-
-    .footer-copyright-social {
-     flex-direction:column;
-     gap:16px;
-     padding-left: 16px;
-     padding-right: 16px;
-}
   }
 
-  @media (max-width: 768px) {
-    .inner-container{
-   width:100%;
-}
-}
-
-  @media (max-width: 600px) {
-
-
-    .navigation-section {
+  @media screen and (max-width: 479px) {
+    .footer__content-wrapper {
       grid-template-columns: 1fr;
     }
 
-    .footer-copyright-social {
-      flex-direction: column;
-      gap: 20px;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
+    .footer__brand {
+      max-width: none;
+    }
+
+    .footer__logo-link {
+      max-width: 8.75rem;
+    }
+
+    .footer__widgets {
+      gap: 1.5rem;
+    }
+
+    .footer__legal-links {
+      flex-wrap: wrap;
+      gap: 1rem;
     }
   }
-{% end_scope_css %}
+  {% end_scope_css %}
 </style>
 {% end_require_css %}
 
+{% set logo_src = module.brand.logo.src %}
+{% set logo_width = module.brand.logo.width %}
+{% set logo_height = module.brand.logo.height %}
+{% if not logo_src %}
+  {% set logo_src = get_asset_url("../../../css/elements/Assets/icons/697ec1c8909a6d1410bb79d7_2c1e6508fc385ddbb919bad34bc84025_Logo.svg") %}
+  {% set logo_width = 136 %}
+  {% set logo_height = 32 %}
+{% endif %}
 
-<footer class="footer-section p-40 footer-start">
-  <div class="footer-container">
-    <div class="inner-container pb-40 pt-80 ">
+{% set wordmark_src = module.wordmark.image.src %}
+{% set wordmark_width = module.wordmark.image.width %}
+{% set wordmark_height = module.wordmark.image.height %}
+{% if not wordmark_src %}
+  {% set wordmark_src = get_asset_url("../../../css/elements/Assets/icons/69a95407693b440480f7be8d_2f0554ecc75f7397d9205c27694cff39_Logo Text.svg") %}
+  {% set wordmark_width = 1140 %}
+  {% set wordmark_height = 233 %}
+{% endif %}
 
-      <!-- Top Section -->
-      <div class="footer-top gap-24 mb-72">
-        <div class="footer-title-btn">
-          <h2 class="mb-36">{{ module.footer_top.footer_title }}</h2>
-          <p class="mb-36 body">{{ module.footer_top.footer_description }}</p>
-          <div>
-             {{ btn_macros.animated_button(module.footer_top.button_text, module.footer_top.button_link.url.href) }}
+<section class="footer" aria-label="Site footer">
+  <div class="container footer__container">
+    <div class="footer__content">
+      <div class="footer__main">
+        <div class="footer__content-wrapper">
+          <div class="footer__brand">
+            <div class="footer__brand-copy">
+              <a class="footer__logo-link" {{ link_attributes(module.brand.logo_link) }}>
+                <img
+                  class="footer__logo"
+                  src="{{ logo_src|escape_url }}"
+                  alt="{{ module.brand.logo.alt|default(module.brand.logo_alt_text)|escape_attr }}"
+                  width="{{ logo_width }}"
+                  height="{{ logo_height }}"
+                  {% if module.brand.logo.loading and module.brand.logo.loading != "disabled" %}loading="{{ module.brand.logo.loading }}"{% else %}loading="lazy"{% endif %}
+                >
+              </a>
+
+              {% if module.brand.description %}
+                <p class="footer__description">{{ module.brand.description|escape_html }}</p>
+              {% endif %}
+            </div>
+
+            {% if module.social_links %}
+              <div class="footer__social-list" aria-label="Social media">
+                {% for item in module.social_links %}
+                  <a class="footer__social-link" aria-label="{{ item.platform|capitalize|escape_attr }}" {{ link_attributes(item.link) }}>
+                    {{ social_icon(item.platform) }}
+                  </a>
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
-           
-        </div>
-        <div class="footer-img">
-          {% if module.footer_top.footer_image.src %}
-            <img src="{{ module.footer_top.footer_image.src|escape_url }}" alt="{{ module.footer_top.footer_image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+
+          {% if module.navigation_columns %}
+            <div class="footer__widgets">
+              {% for column in module.navigation_columns %}
+                <div class="footer__widget">
+                  {% if column.title %}
+                    <p class="footer__widget-title">{{ column.title|escape_html }}</p>
+                  {% endif %}
+                  {% if column.links %}
+                    <ul class="footer__link-list">
+                      {% for item in column.links %}
+                        <li>
+                          <a class="footer__link" {{ link_attributes(item.link) }}>{{ item.text|escape_html }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
       </div>
 
-      <!-- Middle Section -->
-      <div class="footer-middle mb-72">
-        <div class="middle-title">
-          <p class="body-2 mb-20">{{ module.footer_middle.footer_middle_title }}</p>
-        </div>
-        <div class="middle-cta pb-36 gap-20">
-          {% for item in module.footer_middle.footer_middle_ctas %}
-            {% set href = item.link_field.url.href %}
-            {% if item.link_field.url.type is equalto "EMAIL_ADDRESS" %}
-              {% set href = "mailto:" + href %}
-            {% elif item.link_field.url.type is equalto "PHONE_NUMBER" %}
-              {% set href = "tel:" + href %}
-            {% endif %}
-            <a 
-              {% if item.link_field.url.type is equalto "CALL_TO_ACTION"  %}
-                href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #}
-              {% else %}
-                href="{{ href|escape_url }}"
-              {% endif %}
-              {% if item.link_field.open_in_new_tab %}
-                target="_blank"
-              {% endif %}
-              {% if item.link_field.rel %}
-                rel="{{ item.link_field.rel|escape_attr }}"
-              {% endif %}
-              >
-              {{ item.cta_text }}
-            </a>
-          {% endfor %}
-        </div> 
-      </div>
-
-      <!-- Bottom Section -->
-      <div class="footer-bottom">
-        <div class="navigation-section mb-36 gap-72">
-          {% for item in module.footer_bottom %}
-            <div class="nav-col">
-              <h6 class="mb-16">{{ item.navigation_title }}</h6>
-              <ul class="body">
-                {% for item2 in item.navigation %}
-                  <li>
-                    {% set href = item2.navigation_link.url.href %}
-                    {% if item2.navigation_link.url.type is equalto "EMAIL_ADDRESS" %}
-                      {% set href = "mailto:" + href %}
-                    {% elif item2.navigation_link.url.type is equalto "PHONE_NUMBER" %}
-                      {% set href = "tel:" + href %}
-                    {% endif %}
-                    <a 
-                      {% if item2.navigation_link.url.type is equalto "CALL_TO_ACTION"  %}
-                        href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #}
-                      {% else %}
-                        href="{{ href|escape_url }}"
-                      {% endif %}
-                      {% if item2.navigation_link.open_in_new_tab %}
-                        target="_blank"
-                      {% endif %}
-                      {% if item2.navigation_link.rel %}
-                        rel="{{ item2.navigation_link.rel|escape_attr }}"
-                      {% endif %}
-                      >
-                      {{ item2.navigation_text }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endfor %}
-        </div>
-
-        <div class="footer-copyright-social pt-40">
-          <div class="copyright-text">
-            <p class="body-2">{{ module.copyright_text }}</p>
-          </div>
-          <div class="social-icons">
-            {% for item in module.social_section %}
-              {% set href = item.social_links.url.href %}
-              {% if item.social_links.url.type is equalto "EMAIL_ADDRESS" %}
-                {% set href = "mailto:" + href %}
-              {% elif item.social_links.url.type is equalto "PHONE_NUMBER" %}
-                {% set href = "tel:" + href %}
-              {% endif %}
-              <a
-                {% if item.social_links.url.type is equalto "CALL_TO_ACTION"  %}
-                  href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #}
-                {% else %}
-                  href="{{ href|escape_url }}"
-                {% endif %}
-                {% if item.social_links.open_in_new_tab %}
-                  target="_blank"
-                {% endif %}
-                {% if item.social_links.rel %}
-                  rel="{{ item.social_links.rel|escape_attr }}"
-                {% endif %}
-                >
-                {{ item.social_svg }}
-              </a>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-
+      {% if module.wordmark.show_wordmark and wordmark_src %}
+        <img
+          class="footer__wordmark"
+          src="{{ wordmark_src|escape_url }}"
+          alt="{{ module.wordmark.image.alt|default(module.wordmark.alt_text)|escape_attr }}"
+          width="{{ wordmark_width }}"
+          height="{{ wordmark_height }}"
+          {% if module.wordmark.image.loading and module.wordmark.image.loading != "disabled" %}loading="{{ module.wordmark.image.loading }}"{% else %}loading="lazy"{% endif %}
+        >
+      {% endif %}
     </div>
   </div>
-</footer>
+
+  <div class="footer__bottom">
+    <div class="container footer__container">
+      <div class="footer__legal-bar">
+        {% if module.legal.copyright %}
+          <div class="footer__copyright">{{ module.legal.copyright }}</div>
+        {% endif %}
+
+        {% if module.legal.links %}
+          <div class="footer__legal-links">
+            {% for item in module.legal.links %}
+              <a class="footer__legal-link" {{ link_attributes(item.link) }}>{{ item.text|escape_html }}</a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
