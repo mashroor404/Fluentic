@@ -142,3 +142,11 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Import `/Fluentic/Macros/Button.html` as `btn_macros` and use `btn_macros.eyebrow_label(...)` for module eyebrow badges instead of recreating their markup or styles.
 - Consume global CSS variables for colors, fonts, typography sizes, font weights, borders, and container width. Keep section-specific measurements local to the module.
 - Add JavaScript only when required for the requested behavior. The first `solution-section.module` implementation deliberately uses none.
+
+## Replace global modules safely
+
+- Before replacing a global module, find every template/partial reader and preserve the deployed folder path, module label, and existing `module_id` unless a new remote module is explicitly required.
+- Keep the outer semantic landmark owned by the global partial. For example, `templates/partials/footer.html` owns the `<footer>` element, so `Global/Footer.module` renders `<section class="footer">` rather than nesting another `<footer>` landmark.
+- Bundle default logos and artwork with the theme and resolve them through `get_asset_url`; image fields should override those defaults.
+- Keep global navigation, social, brand, wordmark, and legal content editor-controlled through grouped and repeatable fields.
+- Preserve a rollback path through version control and do not upload the replacement until the user explicitly requests deployment.

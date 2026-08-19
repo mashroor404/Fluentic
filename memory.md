@@ -127,3 +127,9 @@ Responsive `srcset` renditions were excluded when an original source asset was a
 `modules/solution-section.module/` recreates the second section of the Fluentic Webflow homepage as an editable HubSpot DnD module. Its editor fields control the eyebrow, heading, description, and a repeatable list of one to eight solution cards. Each card has editable title, description, image visibility, and image selection.
 
 The four default cards use the downloaded local Solution Image assets through `get_asset_url`. The eyebrow is rendered with `btn_macros.eyebrow_label` from `/Fluentic/Macros/Button.html`, keeping it consistent with other theme modules. Desktop cards follow the reference's asymmetric 5/7 then 8/4 column layout, becoming two equal columns on tablet and one column on mobile. Styling is scoped per module instance and consumes the project's global color, typography, border, and container variables. The initial module intentionally has no animation or external JavaScript dependency.
+
+## Global Footer module
+
+`modules/Global/Footer.module/` was rebuilt from the Fluentic Webflow footer reference while preserving its existing folder name, `Footer` label, and HubSpot module ID `383963363024`. `templates/partials/footer.html` remains the only template reader and still loads the module from `../../modules/Global/Footer.module`.
+
+The editable schema now covers the brand logo/link/description, four selectable social platforms, repeatable navigation columns and links, optional oversized wordmark, copyright rich text, and repeatable legal links. The bundled Fluentic logo and large Logo Text SVGs are local `get_asset_url` fallbacks. The module renders a section with the required `footer` class inside the existing global `<footer>` partial, avoiding invalid nested footer landmarks. Styling uses global theme variables and follows the reference's desktop, tablet, and mobile layout without adding JavaScript.
