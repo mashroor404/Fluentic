@@ -20,7 +20,7 @@ images/          Theme preview/static image assets
 
 ## How the HubSpot theme is configured
 
-1. `theme.json` identifies the theme as `Fluentic`, makes it available for new content, disables domain stylesheets, defines a mobile breakpoint at 767px, and points the preview screenshot at `/CoreAI theme/images/TransparentHeader.png`.
+1. `theme.json` identifies the theme as `Fluentic`, makes it available for new content, disables domain stylesheets, defines a mobile breakpoint at 767px, and points the preview screenshot at `/Fluentic/images/TransparentHeader.png`.
 2. The root `fields.json` defines the settings exposed by the theme editor. The current groups are global colors, global fonts, general styles, buttons, and container width.
 3. HubSpot exposes those root settings to HubL CSS through the `theme` object. For example, `theme.theme_colors.background_colors.dark_bg.color` reads the Dark Background color from `fields.json`.
 4. `templates/layouts/base.html` is the shared page shell. It loads `css/main.css`, optional template CSS, HubSpot's standard header includes, `js/main.js`, and standard footer includes. It also renders the global header and footer partials.
@@ -59,7 +59,7 @@ HubSpot theme editor
 
 Most modules are folders named `*.module` with `meta.json`, `fields.json`, `module.html`, and usually empty `module.css`/`module.js` placeholders. Module HTML commonly:
 
-- imports `/CoreAI theme/Macros/Button.html` as `btn_macros`;
+- imports `/Fluentic/Macros/Button.html` as `btn_macros`;
 - wraps inline styles in `{% require_css %}` and `{% scope_css %}`;
 - uses `module.<field_name>` values defined by that module's `fields.json`;
 - uses `{% require_js %}` for module-specific GSAP/ScrollTrigger behavior;
@@ -70,7 +70,7 @@ The global header and footer are inserted by `templates/partials/header.html` an
 
 ## Things to verify before deployment
 
-- The theme label is `Fluentic`, but the hard-coded HubL asset/module paths use `/CoreAI theme` in the home template, module imports, and `theme.json` screenshot path.
+- The deployed Design Manager folder is `/Fluentic` in HubSpot account `246817745`. Theme-owned imports, module paths, and the screenshot path were normalized to this folder on 2026-08-19.
 - Blog templates still use `/Re-board theme` module and screenshot paths. Those modules are not present in this repository, so blog templates need path/module cleanup before relying on them.
 - `templates/partials/header.html` references `../../modules/Global/header.module` (lowercase `header`), while the checked-in folder is `modules/Global/Header.module`. Confirm the deployed filesystem's case behavior or normalize the path and folder.
 - `css/elements/global.css` defines `--bg-primary` and `--text-primary`, but several older styles reference names such as `--primary-bg`, `--primary-dark-text-color`, `--border-width`, and `--border-color`. If those styles render incorrectly, this variable-name mismatch is a likely cause.
@@ -108,3 +108,16 @@ Core color tokens from the live stylesheet:
 | Neutral 8 | `#F6F5F4` |
 
 The main accent gradient is `linear-gradient(120deg, #F0E9F7, #D588FC 61%, #FF49D4)`. A smaller icon gradient uses `linear-gradient(#FFF, #F0EAF6)`. These Webflow values are the best visual reference when aligning the HubSpot theme; they are not currently the same as the existing HubSpot defaults in root `fields.json`.
+
+## Fluentic Webflow reference assets
+
+The original media referenced by the public homepage and its published stylesheet was downloaded on 2026-08-19 to `css/elements/Assets/`:
+
+```text
+images/              30 raster images and video poster frames
+icons/               22 SVG files
+video/                4 MP4/WebM files
+asset-manifest.csv   Local filename-to-source URL mapping
+```
+
+Responsive `srcset` renditions were excluded when an original source asset was available. Use `asset-manifest.csv` to trace a local file back to its Webflow CDN URL.
