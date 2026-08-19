@@ -272,14 +272,14 @@
         "type": "choice",
         "display_width": null,
         "choices": [
-          {
-            "label": "User (right)",
-            "value": "user"
-          },
-          {
-            "label": "AI agent (left)",
-            "value": "agent"
-          }
+          [
+            "user",
+            "User (right)"
+          ],
+          [
+            "agent",
+            "AI agent (left)"
+          ]
         ],
         "display": "select",
         "default": "user"
