@@ -1,0 +1,320 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .enterprise-section-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .enterprise-section {
+    position: relative;
+    padding: 120px 0;
+    /* Using your requested global variable with a dark fallback */
+    background-color: var(--dark-bg, #0B101E);
+  }
+
+  .enterprise-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Header Content (Center Aligned)
+     ================================== */
+  .enterprise-header {
+    max-width: 680px;
+    margin: 0 auto 64px;
+    text-align: center;
+  }
+
+  .enterprise-header h2 {
+    margin: 24px 0 0;
+    color: #ffffff; /* Forces white text on dark background */
+    letter-spacing: -0.02em;
+  }
+
+  .enterprise-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .enterprise-header-desc {
+    margin: 24px auto 0; 
+    color: var(--text-secondary);
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Cards Grid & Dynamic Borders
+     ================================== */
+  .enterprise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .enterprise-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 48px 32px;
+    border-color: rgba(255, 255, 255, 0.1);
+    border-style: solid;
+    border-width: 0;
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+
+  .enterprise-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Desktop Borders (3 columns) */
+  @media screen and (min-width: 1025px) {
+    /* Right borders for col 1 & 2 */
+    .enterprise-card:nth-child(1),
+    .enterprise-card:nth-child(2),
+    .enterprise-card:nth-child(4),
+    .enterprise-card:nth-child(5) {
+      border-right-width: 1px;
+    }
+    /* Bottom borders for top row */
+    .enterprise-card:nth-child(1),
+    .enterprise-card:nth-child(2),
+    .enterprise-card:nth-child(3) {
+      border-bottom-width: 1px;
+    }
+  }
+
+  /* Tablet Borders (2 columns) */
+  @media screen and (max-width: 1024px) and (min-width: 768px) {
+    .enterprise-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    /* Right border for odd items (col 1) */
+    .enterprise-card:nth-child(odd) {
+      border-right-width: 1px;
+    }
+    /* Bottom border for all except the last row */
+    .enterprise-card:not(:nth-last-child(-n+2)) {
+      border-bottom-width: 1px;
+    }
+  }
+
+  /* Mobile Borders (1 column) */
+  @media screen and (max-width: 767px) {
+    .enterprise-section {
+      padding: 80px 0;
+    }
+    .enterprise-grid {
+      grid-template-columns: 1fr;
+    }
+    .enterprise-card {
+      padding: 40px 16px;
+    }
+    /* Bottom border for all except the very last item */
+    .enterprise-card:not(:last-child) {
+      border-bottom-width: 1px;
+    }
+  }
+
+  /* ==================================
+     Card Content
+     ================================== */
+  .enterprise-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    /* Using your requested global variable for the icon */
+    background: var(--gradient-2, linear-gradient(135deg, #51a2ff 0%, #0552fc 100%));
+    border-radius: 10px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(5, 82, 252, 0.3);
+  }
+
+  .enterprise-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none; /* Inherits SVG strokes properly */
+  }
+
+  .enterprise-card-title {
+    color: #ffffff;
+    font-size: clamp(1.125rem, 1.5vw, 1.35rem);
+    margin: 0 0 12px 0;
+  }
+
+  .enterprise-card-desc {
+    color: var(--text-secondary, #94A3B8);
+    margin: 0;
+    max-width: 280px;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-ent-card {
+    opacity: 0;
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<div class="enterprise-section-wrapper">
+  <section class="enterprise-section">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="enterprise-header">
+        <!-- Eyebrow -->
+        <div class="gsap-ent-eyebrow" style="opacity: 0;">
+          {% if module.eyebrow_text %}
+            {{ btn_macros.eyebrow_label(module.eyebrow_text) }}
+          {% endif %}
+        </div>
+
+        <!-- Title -->
+        {% if module.title %}
+          <h2 class="gsap-blur-reveal">{{ module.title }}</h2>
+        {% endif %}
+
+        <!-- Description (Added for standardized animation support) -->
+        {% if module.description %}
+          <p class="body enterprise-header-desc" style="opacity: 0;">
+            {{ module.description }}
+          </p>
+        {% endif %}
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="enterprise-grid">
+        {% for item in module.cards %}
+          <div class="enterprise-card gsap-ent-card">
+            
+            <!-- Icon Background with SVG -->
+            <div class="enterprise-icon">
+              {{ item.card_icon_svg }}
+            </div>
+
+            <!-- Content -->
+            <h4 class="enterprise-card-title">{{ item.title }}</h4>
+            <p class="body-2 enterprise-card-desc">{{ item.description }}</p>
+            
+          </div>
+        {% endfor %}
+      </div>
+      
+    </div>
+  </section>
+</div>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      console.warn("GSAP missing. Animations will not load.");
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    const section = document.querySelector(".enterprise-section");
+    if (!section) return;
+
+    /* ------------------------------------------------------------------
+       1. Eyebrow Reveal
+    ------------------------------------------------------------------ */
+    const eyebrow = section.querySelector(".gsap-ent-eyebrow");
+    if (eyebrow) {
+      gsap.fromTo(eyebrow, 
+        { opacity: 0, y: 15 }, 
+        { 
+          opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+          scrollTrigger: { trigger: section, start: 'top 85%', once: true }
+        }
+      );
+    }
+
+    /* ------------------------------------------------------------------
+       2. Heading Blur Reveal
+    ------------------------------------------------------------------ */
+    const heading = section.querySelector(".gsap-blur-reveal");
+    if (heading) {
+      const words = heading.textContent.trim().split(/\s+/);
+      heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+      const wordSpans = heading.querySelectorAll('.word');
+
+      gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+      ScrollTrigger.create({
+        trigger: heading,
+        start: 'top 85%',
+        once: true,
+        onEnter() {
+          gsap.to(wordSpans, {
+            opacity: 1,
+            filter: 'blur(0px)',
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'sine.out'
+          });
+        }
+      });
+    }
+
+    /* ------------------------------------------------------------------
+       3. Description Fade
+    ------------------------------------------------------------------ */
+    const headerDesc = section.querySelector(".enterprise-header-desc");
+    if (headerDesc) {
+      gsap.fromTo(headerDesc, 
+        { opacity: 0, y: 15 }, 
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.8, 
+          delay: 0.3, // Waits slightly for the title to finish revealing
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section.querySelector('.enterprise-header'),
+            start: 'top 85%',
+            once: true
+          }
+        }
+      );
+    }
+
+    /* ------------------------------------------------------------------
+       4. Cards Grid (Staggered fade in & slide up)
+    ------------------------------------------------------------------ */
+    gsap.fromTo(".gsap-ent-card", 
+      { 
+        y: 40, 
+        opacity: 0 
+      }, 
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        stagger: 0.1, 
+        delay: 0.4, // Delays card entrance so header reveals first
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".enterprise-grid",
+          start: "top 85%",
+          once: true
+        }
+      }
+    );
+
+  });
+</script>
+{% end_require_js %}

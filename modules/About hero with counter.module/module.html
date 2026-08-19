@@ -1,0 +1,299 @@
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout
+     ================================== */
+  .about-stats-section {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .about-stats-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Images Row (Portrait + Landscape)
+     ================================== */
+  .about-images-wrap {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 48px;
+    align-items: stretch;
+  }
+
+  .about-img-portrait {
+    flex: 0 0 35%; /* Takes up roughly 35% of the width */
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--bg-accent-2, #E2E8F0);
+  }
+
+  .about-img-landscape {
+    flex: 1; /* Takes up the remaining 65% */
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--bg-accent-2, #E2E8F0);
+  }
+
+  .about-images-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .about-images-wrap div:hover img {
+    transform: scale(1.03);
+  }
+
+  /* ==================================
+     Description Text
+     ================================== */
+  .about-description-wrap {
+    margin-bottom: 64px;
+    max-width: 100%;
+  }
+
+  .about-description-wrap p {
+    color: var(--text-secondary, #475569);
+    margin: 0;
+  }
+
+  /* ==================================
+     Stats Cards Grid (4 Columns)
+     ================================== */
+  .about-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+
+  /* Inheriting abr-section card styles */
+  .about-card {
+    background-color: var(--bg-accent-3, #F1F5F9); 
+    border-radius: 12px;
+    padding: 32px 24px;
+    border: 1px solid rgba(1, 16, 50, 0.05); /* Subtle border for light mode */
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-card:hover {
+    box-shadow: 0 12px 32px rgba(1, 16, 50, 0.06);
+  }
+
+  .about-card-title {
+    font-family: var(--primary-font, system-ui, sans-serif);
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    font-weight: 500;
+    color: var(--primary-color, #2F6BFF);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.03em;
+  }
+
+  .about-card-desc {
+    color: var(--text-primary, #011032);
+    margin: 0;
+  }
+
+  /* GSAP initial hide states */
+  .gsap-about-el {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  
+  .gsap-about-card {
+    opacity: 0;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 1024px) {
+    .about-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .about-stats-section {
+      padding: 64px 0;
+    }
+    
+    /* Stack Images on Mobile */
+    .about-images-wrap {
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    
+    /* Taller portrait aspect ratio to match the reference image */
+    .about-img-portrait {
+      aspect-ratio: 3 / 4;
+      width: 100%;
+    }
+
+    .about-img-landscape {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+    }
+
+    .about-description-wrap {
+      margin-bottom: 40px;
+    }
+
+    /* 2x2 Grid for Mobile Stats */
+    .about-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    .about-card {
+      padding: 20px 16px; /* Slightly tighter padding so text fits */
+    }
+
+    .about-card-title {
+      font-size: clamp(1.5rem, 6vw, 2rem); /* Scaled down slightly for 2-column mobile */
+      margin-bottom: 8px;
+    }
+
+    .about-card-desc {
+      font-size: 13px; /* Ensure description remains readable without overflowing */
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="about-stats-section">
+  <div class="container">
+    
+    <!-- Top Row: Split Images -->
+    <div class="about-images-wrap gsap-about-el">
+      <div class="about-img-portrait">
+        {% if module.images.image_portrait.src %}
+          <img src="{{ module.images.image_portrait.src }}" alt="{{ module.images.image_portrait.alt|default('Portrait Image') }}" loading="{{ module.images.image_portrait.loading }}">
+        {% endif %}
+      </div>
+      <div class="about-img-landscape">
+        {% if module.images.image_landscape.src %}
+          <img src="{{ module.images.image_landscape.src }}" alt="{{ module.images.image_landscape.alt|default('Landscape Image') }}" loading="{{ module.images.image_landscape.loading }}">
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Middle Row: Description -->
+    {% if module.description %}
+      <div class="about-description-wrap gsap-about-el">
+        <p class="body">{{ module.description }}</p>
+      </div>
+    {% endif %}
+
+    <!-- Bottom Row: 3D Counter Cards -->
+    <div class="about-cards-grid">
+      {% for item in module.counter_cards %}
+        <div class="about-card gsap-about-card">
+          <!-- Card Large Stat -->
+          <div class="about-card-title">{{ item.title }}</div>
+          <!-- Card Small Description (Added body-highlight class here) -->
+          <p class="body-highlight about-card-desc">{{ item.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- GSAP Scroll & Interactions -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 1. Reveal Images & Text (Slide up and fade in)
+      gsap.fromTo(".gsap-about-el", 
+        { y: 40, opacity: 0 }, 
+        { 
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-stats-section",
+            start: "top 85%"
+          }
+        }
+      );
+
+      // 2. Prepare Counter Animation Data
+      document.querySelectorAll('.about-card-title').forEach(title => {
+        title.innerHTML = title.innerText.replace(/(\d+\.?\d*)/g, (match) => {
+          return `<span class="counter-num" data-target="${match}">0</span>`;
+        });
+      });
+
+      // 3. Cards Fade-In & Counter Trigger
+      gsap.fromTo(".gsap-about-card", 
+        { y: 40, opacity: 0 }, 
+        { 
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-cards-grid",
+            start: "top 85%"
+          }
+        }
+      );
+
+      // 4. Execute actual number counting
+      gsap.utils.toArray('.about-card-title .counter-num').forEach(el => {
+        const target = parseFloat(el.getAttribute('data-target'));
+        const isFloat = el.getAttribute('data-target').includes('.');
+        
+        gsap.to(el, {
+          innerHTML: target,
+          duration: 2,
+          ease: "power2.out",
+          snap: { innerHTML: isFloat ? 0.1 : 1 }, 
+          scrollTrigger: {
+            trigger: ".about-cards-grid",
+            start: "top 85%"
+          }
+        });
+      });
+
+      // 5. Card 3D Tilt Hover Animation (Same as abr-section)
+      document.querySelectorAll('.about-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = ((y - centerY) / centerY) * -10; 
+          const rotateY = ((x - centerX) / centerX) * 10;
+          
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        // Reset to flat when mouse leaves
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+      });
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

@@ -1,0 +1,21 @@
+<!--
+  templateType: global_partial
+  isAvailableForNewContent: false
+  label: Footer
+-->
+<!-- Begin partial -->
+
+
+<footer class="footer-wrapper">
+
+  {% dnd_area "footer-area" label="Footer", class="footer-area" %}
+  {% dnd_section full_width=true, padding={ "top": 0, "right": 0, "bottom": 0, "left": 0 } %}
+
+  {% dnd_module path="../../modules/Global/Footer.module" %}{% end_dnd_module %}
+  
+  {% end_dnd_section %}
+  {% end_dnd_area %}
+ 
+</footer>
+
+<!-- End partial -->

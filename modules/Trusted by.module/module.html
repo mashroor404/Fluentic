@@ -1,0 +1,427 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout
+     ================================== */
+  .reviews-section {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .reviews-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Header
+     ================================== */
+  .reviews-header {
+    max-width: 760px;
+    margin: 0 auto 64px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .reviews-header h2 {
+    margin: 24px 0 0 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* Standardized Title Animation Classes */
+  .reviews-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  /* ==================================
+     Grid Layout (3 Columns)
+     ================================== */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  /* ==================================
+     Review Cards
+     ================================== */
+  .review-card {
+    background-color: #F7F9FA;
+    border-radius: 20px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 36px rgba(1, 16, 50, 0.04);
+  }
+
+  /* Quote Icon */
+  .review-quote-icon {
+    width: 20px;
+    height: 20px;
+    background: var(--gradient-2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+
+  .review-quote-icon img {
+    width: 6px;
+    height: 6px;
+    object-fit: contain;
+  }
+
+  /* Review Text */
+  .review-text {
+    flex-grow: 1;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+
+  /* Author Box */
+  .review-author-box {
+    background-color: #E2E8F0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .author-name {
+    font-family: var(--primary-font);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .author-designation {
+    font-family: var(--secondary-font);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Stars */
+  .author-rating {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: auto; /* Pushes to the right */
+    flex-shrink: 0;
+  }
+
+  .author-rating svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  /* ==================================
+     Desktop Footer Banner
+     ================================== */
+  .reviews-footer-banner {
+    background-color: var(--primary-color, #2F6BFF);
+    border-radius: 16px;
+    padding: 12px 12px 12px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .rf-banner-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* Avatar Stack */
+  .rf-avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  .rf-avatar-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 4px solid #7198f899;
+  }
+
+  .rf-avatar-img:not(:first-child) {
+    margin-left: -16px;
+  }
+
+  /* Banner Text */
+  .rf-banner-text {
+    font-family: var(--tertiary-font);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  /* Override macro button text color for the blue banner */
+  .rf-banner-right .button-class { /* Replace .button-class with your macro's actual class if needed */
+    color: #ffffff !important; 
+  }
+
+  /* ==================================
+     Mobile Footer Button
+     ================================== */
+  .reviews-mobile-footer {
+    display: none; /* Hidden on desktop */
+    justify-content: center;
+    margin-top: 48px;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-review-el {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Responsive Styles
+     ================================== */
+  @media screen and (max-width: 991px) {
+    /* Stack cards on tablet/mobile */
+    .reviews-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    
+    /* Hide the big desktop banner */
+    .reviews-footer-banner {
+      display: none !important;
+    }
+
+    /* Show the simple animated mobile button */
+    .reviews-mobile-footer {
+      display: flex !important;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .reviews-section {
+      padding: 64px 0;
+    }
+
+    .reviews-header {
+      margin-bottom: 40px;
+    }
+
+    .review-card {
+      padding: 32px 24px;
+    }
+
+    .review-author-box {
+      flex-wrap: wrap; /* Allows stars to drop down if text is very long */
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="section reviews-section">
+  <div class="container">
+    
+    <!-- Section Header -->
+    <div class="reviews-header">
+      <!-- Eyebrow -->
+      {% if module.eyebrow_text %}
+        <div class="eyebrow-custom gsap-review-el">
+          <img class="eyebrow-icon" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20fbee52b758d1d52eda94_energy-ellipse.svg" alt="Energy Icon">
+          <div class="eyebrow-content">
+            <p class="eyebrow-text">{{ module.eyebrow_text }}</p>
+            <span class="eyebrow-cursor"></span>
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Title (Standardized Blur Reveal) -->
+      {% if module.title %}
+        <h2 class="gsap-blur-reveal">{{ module.title }}</h2>
+      {% endif %}
+    </div>
+
+    <!-- Review Grid -->
+    <div class="reviews-grid">
+      {% for item in module.review %}
+        <div class="review-card gsap-review-el">
+          
+          <!-- Quote Icon -->
+          <div class="review-quote-icon">
+            {% if item.qoute_icon.src %}
+              <img src="{{ item.qoute_icon.src }}" alt="{{ item.qoute_icon.alt|default('Quote') }}" loading="{{ item.qoute_icon.loading }}">
+            {% endif %}
+          </div>
+
+          <!-- Review Text -->
+          {% if item.review %}
+            <p class="body review-text">{{ item.review }}</p>
+          {% endif %}
+
+          <!-- Author Info Box -->
+          <div class="review-author-box">
+            
+            {% if item.author_image.src %}
+              <img class="author-avatar" src="{{ item.author_image.src }}" alt="{{ item.author_name|default('Author') }}" loading="{{ item.author_image.loading }}">
+            {% endif %}
+            
+            <div class="author-info">
+              {% if item.author_name %}
+                <h4 class="author-name">{{ item.author_name }}</h4>
+              {% endif %}
+              {% if item.author_details %}
+                <span class="author-designation">{{ item.author_details }}</span>
+              {% endif %}
+            </div>
+
+            <!-- Loop through Rating value to duplicate SVG stars -->
+            {% if item.rating and item.rating_icon %}
+              <div class="author-rating">
+                {% for i in range(item.rating) %}
+                  {{ item.rating_icon|safe }}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Desktop Footer Banner (Hidden on Mobile) -->
+    <div class="reviews-footer-banner gsap-review-el">
+      <div class="rf-banner-left">
+        <div class="rf-avatars">
+          {% for client in module.footer_card.clients %}
+            {% if client.src %}
+              <img class="rf-avatar-img" src="{{ client.src }}" alt="{{ client.alt|default('Client') }}" loading="{{ client.loading }}">
+            {% endif %}
+          {% endfor %}
+        </div>
+        
+        {% if module.footer_card.stories %}
+          <p class="rf-banner-text">{{ module.footer_card.stories }}</p>
+        {% endif %}
+      </div>
+
+      <div class="rf-banner-right">
+        <!-- Replaced hardcoded button with global macro -->
+        {% if module.footer_card.button_text %}
+          {{ btn_macros.animated_button(module.footer_card.button_text, module.footer_card.link.url.href) }}
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Mobile Footer Button (Visible ONLY on Mobile) -->
+    <div class="reviews-mobile-footer gsap-review-el">
+      <!-- Replaced hardcoded button with global macro -->
+      {% if module.footer_card.button_text %}
+        {{ btn_macros.animated_button(module.footer_card.button_text, module.footer_card.link.url.href) }}
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".reviews-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         1. Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.05,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         2. Staggered Elements (Eyebrow, Cards, Footer)
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-review-el", 
+        { y: 40, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.15, 
+          delay: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".reviews-header",
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

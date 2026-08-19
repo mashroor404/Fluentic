@@ -1,0 +1,426 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .abr-section-wrapper {
+    position: relative;
+    z-index: 10; 
+    /* Clip horizontal overflow ONLY, leave vertical open */
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .abr-section {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden; 
+  }
+
+  .abr-section .container {
+    position: relative;
+    z-index: 2; 
+  }
+
+  /* ==================================
+     Diagonal Rising Zig-Zag Chart Graphic
+     ================================== */
+  .why_graphic-contain {
+    position: absolute;
+    top: calc(-20% - 15px); 
+    right: 0%; 
+    width: 55%; 
+    height: 90%;
+    max-width: 900px;
+    z-index: 1;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+  }
+
+  .why_graphic-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .graphic_line-wrap {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 10px; 
+    transform: translateX(-50%);
+    will-change: opacity, transform, filter;
+  }
+
+  /* Zig-Zag Directions */
+  .graphic_line-wrap.is-top-dot {
+    flex-direction: column; 
+  }
+  
+  .graphic_line-wrap.is-btm-dot {
+    flex-direction: column-reverse; 
+  }
+
+  /* The solid dot (Head) */
+  .graphic_line-dot {
+    width: 10px; 
+    height: 10px; 
+    border-radius: 50%;
+    background: #044EFC; 
+    box-shadow: none; 
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  /* The thicker vertical line (Tail) */
+  .graphic_line {
+    width: 8px; 
+    flex-grow: 1; 
+    border-radius: 4px;
+    z-index: 1;
+  }
+
+  /* Fades downward away from the top dot */
+  .graphic_line-wrap.is-top-dot .graphic_line {
+    background: linear-gradient(to bottom, rgba(4, 78, 252, 1) 0%, rgba(4, 78, 252, 0.35) 45%, rgba(4, 78, 252, 0) 100%);
+    margin-top: -4px; 
+  }
+
+  /* Fades upward away from the bottom dot */
+  .graphic_line-wrap.is-btm-dot .graphic_line {
+    background: linear-gradient(to top, rgba(4, 78, 252, 1) 0%, rgba(4, 78, 252, 0.35) 45%, rgba(4, 78, 252, 0) 100%);
+    margin-bottom: -4px;
+  }
+
+  /* ==================================
+     Header Content (Left Aligned)
+     ================================== */
+  .abr-header {
+    max-width: 640px;
+    margin-bottom: 64px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .abr-header h2 {
+    margin: 16px 0 24px;
+    letter-spacing: -0.02em;
+  }
+  
+  .abr-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .abr-header .body {
+    color: var(--text-secondary);
+  }
+
+  .abr-header-desc {
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Stats Cards Grid (4 Columns)
+     ================================== */
+  .abr-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .abr-card {
+    background-color: var(--bg-accent-3); 
+    border-radius: 12px;
+    padding: 32px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .abr-card:hover {
+    box-shadow: 0 12px 32px rgba(1, 16, 50, 0.06);
+  }
+
+  .abr-card-title {
+    font-family: var(--primary-font, system-ui, sans-serif);
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    font-weight: 400;
+    color: var(--primary-color, #2F6BFF);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.03em;
+  }
+
+  .abr-card-desc {
+    color: var(--text-primary, #011032);
+    margin: 0;
+  }
+
+  /* GSAP initial hide states to prevent flickering before scroll */
+  .gsap-abr-card {
+    opacity: 0;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 1024px) {
+    .abr-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .why_graphic-contain {
+      width: 100%;
+      top: 0;
+      opacity: 0.6; 
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .abr-section {
+      /* Pushes the text content significantly down to make room for the graphic */
+      padding: 320px 0 64px 0; 
+    }
+    .abr-cards-grid {
+      grid-template-columns: 1fr;
+    }
+    .abr-header {
+      margin-bottom: 40px;
+    }
+    .why_graphic-contain {
+      width: 130%; /* Stretches the graphic across the mobile screen */
+      right: -15%; /* Centers the stretched graphic */
+      top: -5%; 
+      height: 350px; /* Fixed height block at the top */
+      opacity: 1; /* Fully visible on mobile */
+      /* Adjusted mask to fade out right before the text starts */
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 65%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 65%, transparent 100%);
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<div class="abr-section-wrapper">
+
+  <!-- Animated Rising Curve Chart Graphic -->
+  <div class="why_graphic-contain">
+    <div class="why_graphic-wrap">
+      
+      {% set curve_centers = [12, 14, 15, 18, 17, 20, 22, 24, 23, 26, 28, 34, 40, 48, 56, 62, 60, 64, 68, 66, 70, 74, 72, 76, 78, 82, 80, 84, 86, 85, 88, 90, 89, 92, 91] %}
+
+      {% for i in range(1, 36) %}
+
+          {% set progress = (loop.index - 1) / 34 %}
+          {% set center = curve_centers[loop.index - 1] %}
+          
+          {# Alternates every bar: dot-on-top vs dot-on-bottom = the zig-zag #}
+          {% set is_top_dot = loop.index is divisibleby 2 %}
+
+          {% set gap = [4.5, 5.8, 5.0, 6.4, 4.8, 5.5, 5.2, 6.0][loop.index % 8] %}
+          {% set dot_pos = center + (gap if is_top_dot else -gap) %}
+
+          {% set length_jitter = [24, 33, 21, 30, 19, 35, 22, 28][loop.index % 8] %}
+          {% set bar_length = 14 + (progress * 25) + (length_jitter * 0.35) %}
+
+          {% if is_top_dot %}
+            {% set box_bottom = dot_pos - bar_length %}
+          {% else %}
+            {% set box_bottom = dot_pos %}
+          {% endif %}
+
+          {% set x_pos = progress * 100 %}
+          {% set target_op = 0.25 + (progress * 0.75) %}
+
+        <div class="graphic_line-wrap gsap-graphic-line {% if is_top_dot %}is-top-dot{% else %}is-btm-dot{% endif %}"
+             style="left: {{ x_pos }}%; bottom: {{ box_bottom }}%; height: {{ bar_length }}%; opacity: {{ target_op }};">
+          <div class="graphic_line-dot"></div>
+          <div class="graphic_line"></div>
+        </div>
+        
+      {% endfor %}
+    </div>
+  </div>
+
+  <section class="abr-section">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="abr-header">
+        
+        <!-- Eyebrow (No Animation) -->
+        <div>
+          {% if module.headign_contents.eyebrow_text %}
+            {{ btn_macros.eyebrow_label(module.headign_contents.eyebrow_text) }}
+          {% endif %}
+        </div>
+
+        <!-- Title -->
+        {% if module.headign_contents.title %}
+          <h2 class="gsap-blur-reveal">{{ module.headign_contents.title }}</h2>
+        {% endif %}
+
+        <!-- Description -->
+        {% if module.headign_contents.description %}
+          <p class="body abr-header-desc" style="opacity: 0;">{{ module.headign_contents.description }}</p>
+        {% endif %}
+        
+      </div>
+
+      <!-- Stats Cards Grid -->
+      <div class="abr-cards-grid">
+        {% for item in module.card %}
+          <div class="abr-card gsap-abr-card">
+            <!-- Card Large Stat -->
+            <div class="abr-card-title">{{ item.card_title }}</div>
+            <!-- Card Small Description -->
+            <p class="body-2 abr-card-desc">{{ item.card_description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      
+    </div>
+  </section>
+</div>
+
+<!-- GSAP Scroll & Interactions -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".abr-section");
+      if (!section) return;
+
+      // 1. Diagonal Wave Chart Animation (Slower, elegant sweep)
+      gsap.from(".gsap-graphic-line", {
+        y: 80, // Slightly more vertical travel
+        opacity: 0,
+        filter: "blur(12px)", 
+        duration: 1.8, 
+        stagger: 0.06, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".abr-section",
+          start: "top 75%"
+        }
+      });
+
+      // 2. Heading Blur Reveal
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      // 3. Description Fade
+      const headerDesc = section.querySelector(".abr-header-desc");
+      if (headerDesc) {
+        gsap.fromTo(headerDesc, 
+          { opacity: 0, y: 15 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            delay: 0.3, // Waits slightly for the title to start 
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section.querySelector('.abr-header'),
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 4. Prepare Counter Animation Data
+      document.querySelectorAll('.abr-card-title').forEach(title => {
+        title.innerHTML = title.innerText.replace(/(\d+\.?\d*)/g, (match) => {
+          return `<span class="counter-num" data-target="${match}">0</span>`;
+        });
+      });
+
+      // 5. Cards Fade-In & Counter Trigger
+      gsap.fromTo(".gsap-abr-card", 
+        { y: 40, opacity: 0 }, 
+        { 
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".abr-cards-grid",
+            start: "top 85%"
+          }
+        }
+      );
+
+      // Execute actual number counting
+      gsap.utils.toArray('.counter-num').forEach(el => {
+        const target = parseFloat(el.getAttribute('data-target'));
+        const isFloat = el.getAttribute('data-target').includes('.');
+        
+        gsap.to(el, {
+          innerHTML: target,
+          duration: 2,
+          ease: "power2.out",
+          snap: { innerHTML: isFloat ? 0.1 : 1 }, 
+          scrollTrigger: {
+            trigger: ".abr-cards-grid",
+            start: "top 85%"
+          }
+        });
+      });
+
+      // 6. Card 3D Tilt Hover Animation
+      document.querySelectorAll('.abr-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = ((y - centerY) / centerY) * -10; 
+          const rotateY = ((x - centerX) / centerX) * 10;
+          
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        // Reset to flat when mouse leaves
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+      });
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

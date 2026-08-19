@@ -1,0 +1,65 @@
+[ {
+  "id" : "7097c96e-8a97-aa1d-440e-6fefa0268aa4",
+  "name" : "eyebrow_text",
+  "label" : "Eyebrow Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Pricing"
+}, {
+  "id" : "324a9a9c-4670-8027-6eca-df2e5baa1542",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Pricing your CFO will actually like."
+}, {
+  "id" : "5b432c80-4503-a0fa-7230-243c64519453",
+  "name" : "subtitle",
+  "label" : "Subtitle",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "The enterprise ABM platforms run $60K–$250K a year — a realistic mid-market first year lands around $185K. This is not that."
+}, {
+  "id" : "a4907d6f-d67a-396a-549e-46e84feb38a0",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "569e60c8-dd7b-18ec-913e-40f63b30e880",
+    "name" : "title_max_width",
+    "label" : "Title max width",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "suffix" : "px",
+    "type" : "number",
+    "display_width" : null
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "88cca316-1bfd-aa5e-7f1b-88a27ddc5abe",
+  "name" : "button_text",
+  "label" : "Button Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Get Started Free"
+} ]

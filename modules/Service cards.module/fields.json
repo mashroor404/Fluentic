@@ -1,0 +1,186 @@
+[ {
+  "id" : "124c5210-d06e-7b5c-8517-1e6b70ccc9e4",
+  "name" : "heading_content",
+  "label" : "Heading Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "d060798d-4755-203b-e1c6-2c990862f800",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "AI AGENTS"
+  }, {
+    "id" : "797d74d8-b3a3-8e19-7a7d-bbe674f73afb",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Agents that run the whole motion."
+  }, {
+    "id" : "5cd13ff8-1069-19c9-651c-c70fad998983",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Not another dashboard that tells you what to do. Agents that do it — list to buying group to sequence to air cover to booked meeting — then wait for your approval."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "AI AGENTS",
+    "title" : "Agents that run the whole motion.",
+    "description" : "Not another dashboard that tells you what to do. Agents that do it — list to buying group to sequence to air cover to booked meeting — then wait for your approval."
+  }
+}, {
+  "id" : "d4200f09-5a63-4e63-4565-49f9bdf9e9e3",
+  "name" : "cards",
+  "label" : "Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "e9f772e2-1774-ed9c-27f2-63b1a15c5981",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Target-account lists & tiering"
+  }, {
+    "id" : "8cacb6a7-3951-a646-3252-6bab5f805377",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ICP-filtered, enriched, and tiered inside your portal — one shared list that sales actually works, not a CSV nobody opens."
+  }, {
+    "id" : "7a6bbcc9-18b1-1db0-ff28-d85e26a3f166",
+    "name" : "card_image",
+    "label" : "Card image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/card%20image.webp",
+      "alt" : "card image",
+      "loading" : "lazy",
+      "width" : 367,
+      "height" : 206,
+      "max_width" : 367,
+      "max_height" : 206
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "Target-account lists & tiering",
+    "description" : "ICP-filtered, enriched, and tiered inside your portal — one shared list that sales actually works, not a CSV nobody opens.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/card%20image.webp",
+      "alt" : "card image",
+      "loading" : "lazy",
+      "width" : 367,
+      "height" : 206,
+      "max_width" : 367,
+      "max_height" : 206
+    }
+  }, {
+    "title" : "Target-account lists & tiering",
+    "description" : "ICP-filtered, enriched, and tiered inside your portal — one shared list that sales actually works, not a CSV nobody opens.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/card%20image.webp",
+      "alt" : "card image",
+      "loading" : "lazy",
+      "width" : 367,
+      "height" : 206,
+      "max_width" : 367,
+      "max_height" : 206
+    }
+  }, {
+    "title" : "Target-account lists & tiering",
+    "description" : "ICP-filtered, enriched, and tiered inside your portal — one shared list that sales actually works, not a CSV nobody opens.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/card%20image.webp",
+      "alt" : "card image",
+      "loading" : "lazy",
+      "width" : 367,
+      "height" : 206,
+      "max_width" : 367,
+      "max_height" : 206
+    }
+  }, {
+    "title" : "Target-account lists & tiering",
+    "description" : "ICP-filtered, enriched, and tiered inside your portal — one shared list that sales actually works, not a CSV nobody opens.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/card%20image.webp",
+      "alt" : "card image",
+      "loading" : "lazy",
+      "width" : 367,
+      "height" : 206,
+      "max_width" : 367,
+      "max_height" : 206
+    }
+  }, {
+    "title" : "Target-account lists & tiering",
+    "description" : "ICP-filtered, enriched, and tiered inside your portal — one shared list that sales actually works, not a CSV nobody opens.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/card%20image.webp",
+      "alt" : "card image",
+      "loading" : "lazy",
+      "width" : 367,
+      "height" : 206,
+      "max_width" : 367,
+      "max_height" : 206
+    }
+  }, {
+    "title" : "Target-account lists & tiering",
+    "description" : "ICP-filtered, enriched, and tiered inside your portal — one shared list that sales actually works, not a CSV nobody opens.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/card%20image.webp",
+      "alt" : "card image",
+      "loading" : "lazy",
+      "width" : 367,
+      "height" : 206,
+      "max_width" : 367,
+      "max_height" : 206
+    }
+  } ]
+} ]

@@ -1,0 +1,351 @@
+[ {
+  "id" : "3edaa496-b8f9-acbd-f877-891424b8ae4c",
+  "name" : "heading_content",
+  "label" : "Heading Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "414fbde1-7429-36a3-602c-280ad11f2c0f",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "OUR TEAM"
+  }, {
+    "id" : "f73b9732-c258-24fc-b1fa-374dabc32e55",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Teamwork That Fuels Growth"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "OUR TEAM",
+    "title" : "Teamwork That Fuels Growth"
+  }
+}, {
+  "id" : "64a4eb2c-44fa-2941-ec56-84a5f8a4ff48",
+  "name" : "teams",
+  "label" : "Teams",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "6f786c94-816f-bfc7-ca6a-76a14cf78a9b",
+    "name" : "user_name",
+    "label" : "Name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Emily Carter"
+  }, {
+    "id" : "e77dbf18-6b52-cb21-faa8-ed65092e6c21",
+    "name" : "designation",
+    "label" : "Designation",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "CEO"
+  }, {
+    "id" : "f9abdc76-ef8f-8ac2-1180-3ddcd654f528",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31f0a284420f9b8787e661_team-img-1.webp",
+      "alt" : "6a31f0a284420f9b8787e661_team-img-1",
+      "loading" : "lazy",
+      "width" : 453,
+      "height" : 614,
+      "max_width" : 453,
+      "max_height" : 614
+    }
+  }, {
+    "id" : "b92ca53b-4de0-b2c0-7979-617d771c44b6",
+    "name" : "instagram",
+    "label" : "Instagram",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "d216e8fd-b08c-13a8-a319-20bf9750e242",
+      "name" : "instagram_svg",
+      "label" : "Instagram svg",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 18 18\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M13.3193 4.55322H13.3273M4.95215 0.967285H12.9209C15.1214 0.967285 16.9053 2.75115 16.9053 4.95166V12.9204C16.9053 15.1209 15.1214 16.9048 12.9209 16.9048H4.95215C2.75164 16.9048 0.967773 15.1209 0.967773 12.9204V4.95166C0.967773 2.75115 2.75164 0.967285 4.95215 0.967285ZM12.124 8.434C12.2224 9.0972 12.1091 9.77452 11.8003 10.3696C11.4915 10.9647 11.0029 11.4473 10.4041 11.7487C9.8052 12.0502 9.12654 12.1551 8.4646 12.0486C7.80267 11.9421 7.19118 11.6295 6.7171 11.1555C6.24302 10.6814 5.9305 10.0699 5.82398 9.40796C5.71747 8.74602 5.82239 8.06736 6.12382 7.46849C6.42524 6.86962 6.90783 6.38105 7.50293 6.07226C8.09804 5.76347 8.77536 5.65019 9.43856 5.74854C10.115 5.84885 10.7413 6.16408 11.2249 6.64765C11.7085 7.13123 12.0237 7.75752 12.124 8.434Z\" stroke=\"currentColor\" stroke-width=\"1.9347\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+    }, {
+      "id" : "e272ed88-86f4-3120-2f02-5e54153a62cb",
+      "name" : "link",
+      "label" : "Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "instagram_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 18 18\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M13.3193 4.55322H13.3273M4.95215 0.967285H12.9209C15.1214 0.967285 16.9053 2.75115 16.9053 4.95166V12.9204C16.9053 15.1209 15.1214 16.9048 12.9209 16.9048H4.95215C2.75164 16.9048 0.967773 15.1209 0.967773 12.9204V4.95166C0.967773 2.75115 2.75164 0.967285 4.95215 0.967285ZM12.124 8.434C12.2224 9.0972 12.1091 9.77452 11.8003 10.3696C11.4915 10.9647 11.0029 11.4473 10.4041 11.7487C9.8052 12.0502 9.12654 12.1551 8.4646 12.0486C7.80267 11.9421 7.19118 11.6295 6.7171 11.1555C6.24302 10.6814 5.9305 10.0699 5.82398 9.40796C5.71747 8.74602 5.82239 8.06736 6.12382 7.46849C6.42524 6.86962 6.90783 6.38105 7.50293 6.07226C8.09804 5.76347 8.77536 5.65019 9.43856 5.74854C10.115 5.84885 10.7413 6.16408 11.2249 6.64765C11.7085 7.13123 12.0237 7.75752 12.124 8.434Z\" stroke=\"currentColor\" stroke-width=\"1.9347\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  }, {
+    "id" : "6dc31c07-f710-1b89-fc01-c1badf9025c3",
+    "name" : "linkedin",
+    "label" : "LinkedIn",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "1dcedbd8-55e5-7396-2cf0-95ed7070b403",
+      "name" : "linkedin_svg",
+      "label" : "LinkedIn svg ",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 17 17\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M3.79464 17V5.62864H0.265625V17H3.79464ZM2.01116 4.10738C3.14955 4.10738 4.06027 3.1566 4.06027 2.01566C4.06027 0.912752 3.14955 0 2.01116 0C0.910714 0 0 0.912752 0 2.01566C0 3.1566 0.910714 4.10738 2.01116 4.10738ZM16.9621 17H17V10.7629C17 7.72036 16.317 5.36242 12.75 5.36242C11.0424 5.36242 9.90402 6.3132 9.41071 7.18792H9.37277V5.62864H5.99554V17H9.52455V11.3714C9.52455 9.88814 9.79018 8.48098 11.6116 8.48098C13.433 8.48098 13.471 10.1544 13.471 11.4855V17H16.9621Z\" fill=\"currentColor\"></path></svg>"
+    }, {
+      "id" : "ef8e7d41-2a43-98bb-20e9-77f76caedd70",
+      "name" : "link",
+      "label" : "Link ",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "linkedin_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 17 17\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M3.79464 17V5.62864H0.265625V17H3.79464ZM2.01116 4.10738C3.14955 4.10738 4.06027 3.1566 4.06027 2.01566C4.06027 0.912752 3.14955 0 2.01116 0C0.910714 0 0 0.912752 0 2.01566C0 3.1566 0.910714 4.10738 2.01116 4.10738ZM16.9621 17H17V10.7629C17 7.72036 16.317 5.36242 12.75 5.36242C11.0424 5.36242 9.90402 6.3132 9.41071 7.18792H9.37277V5.62864H5.99554V17H9.52455V11.3714C9.52455 9.88814 9.79018 8.48098 11.6116 8.48098C13.433 8.48098 13.471 10.1544 13.471 11.4855V17H16.9621Z\" fill=\"currentColor\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "user_name" : "Emily Carter",
+    "designation" : "CEO",
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31f0a284420f9b8787e661_team-img-1.webp",
+      "alt" : "6a31f0a284420f9b8787e661_team-img-1",
+      "loading" : "lazy",
+      "width" : 453,
+      "height" : 614,
+      "max_width" : 453,
+      "max_height" : 614
+    },
+    "instagram" : {
+      "instagram_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 18 18\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M13.3193 4.55322H13.3273M4.95215 0.967285H12.9209C15.1214 0.967285 16.9053 2.75115 16.9053 4.95166V12.9204C16.9053 15.1209 15.1214 16.9048 12.9209 16.9048H4.95215C2.75164 16.9048 0.967773 15.1209 0.967773 12.9204V4.95166C0.967773 2.75115 2.75164 0.967285 4.95215 0.967285ZM12.124 8.434C12.2224 9.0972 12.1091 9.77452 11.8003 10.3696C11.4915 10.9647 11.0029 11.4473 10.4041 11.7487C9.8052 12.0502 9.12654 12.1551 8.4646 12.0486C7.80267 11.9421 7.19118 11.6295 6.7171 11.1555C6.24302 10.6814 5.9305 10.0699 5.82398 9.40796C5.71747 8.74602 5.82239 8.06736 6.12382 7.46849C6.42524 6.86962 6.90783 6.38105 7.50293 6.07226C8.09804 5.76347 8.77536 5.65019 9.43856 5.74854C10.115 5.84885 10.7413 6.16408 11.2249 6.64765C11.7085 7.13123 12.0237 7.75752 12.124 8.434Z\" stroke=\"currentColor\" stroke-width=\"1.9347\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "linkedin" : {
+      "linkedin_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 17 17\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M3.79464 17V5.62864H0.265625V17H3.79464ZM2.01116 4.10738C3.14955 4.10738 4.06027 3.1566 4.06027 2.01566C4.06027 0.912752 3.14955 0 2.01116 0C0.910714 0 0 0.912752 0 2.01566C0 3.1566 0.910714 4.10738 2.01116 4.10738ZM16.9621 17H17V10.7629C17 7.72036 16.317 5.36242 12.75 5.36242C11.0424 5.36242 9.90402 6.3132 9.41071 7.18792H9.37277V5.62864H5.99554V17H9.52455V11.3714C9.52455 9.88814 9.79018 8.48098 11.6116 8.48098C13.433 8.48098 13.471 10.1544 13.471 11.4855V17H16.9621Z\" fill=\"currentColor\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  }, {
+    "user_name" : "Emily Carter",
+    "designation" : "CEO",
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31f0a284420f9b8787e661_team-img-1.webp",
+      "alt" : "6a31f0a284420f9b8787e661_team-img-1",
+      "loading" : "lazy",
+      "width" : 453,
+      "height" : 614,
+      "max_width" : 453,
+      "max_height" : 614
+    },
+    "instagram" : {
+      "instagram_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 18 18\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M13.3193 4.55322H13.3273M4.95215 0.967285H12.9209C15.1214 0.967285 16.9053 2.75115 16.9053 4.95166V12.9204C16.9053 15.1209 15.1214 16.9048 12.9209 16.9048H4.95215C2.75164 16.9048 0.967773 15.1209 0.967773 12.9204V4.95166C0.967773 2.75115 2.75164 0.967285 4.95215 0.967285ZM12.124 8.434C12.2224 9.0972 12.1091 9.77452 11.8003 10.3696C11.4915 10.9647 11.0029 11.4473 10.4041 11.7487C9.8052 12.0502 9.12654 12.1551 8.4646 12.0486C7.80267 11.9421 7.19118 11.6295 6.7171 11.1555C6.24302 10.6814 5.9305 10.0699 5.82398 9.40796C5.71747 8.74602 5.82239 8.06736 6.12382 7.46849C6.42524 6.86962 6.90783 6.38105 7.50293 6.07226C8.09804 5.76347 8.77536 5.65019 9.43856 5.74854C10.115 5.84885 10.7413 6.16408 11.2249 6.64765C11.7085 7.13123 12.0237 7.75752 12.124 8.434Z\" stroke=\"currentColor\" stroke-width=\"1.9347\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "linkedin" : {
+      "linkedin_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 17 17\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M3.79464 17V5.62864H0.265625V17H3.79464ZM2.01116 4.10738C3.14955 4.10738 4.06027 3.1566 4.06027 2.01566C4.06027 0.912752 3.14955 0 2.01116 0C0.910714 0 0 0.912752 0 2.01566C0 3.1566 0.910714 4.10738 2.01116 4.10738ZM16.9621 17H17V10.7629C17 7.72036 16.317 5.36242 12.75 5.36242C11.0424 5.36242 9.90402 6.3132 9.41071 7.18792H9.37277V5.62864H5.99554V17H9.52455V11.3714C9.52455 9.88814 9.79018 8.48098 11.6116 8.48098C13.433 8.48098 13.471 10.1544 13.471 11.4855V17H16.9621Z\" fill=\"currentColor\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  }, {
+    "user_name" : "Emily Carter",
+    "designation" : "CEO",
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31f0a284420f9b8787e661_team-img-1.webp",
+      "alt" : "6a31f0a284420f9b8787e661_team-img-1",
+      "loading" : "lazy",
+      "width" : 453,
+      "height" : 614,
+      "max_width" : 453,
+      "max_height" : 614
+    },
+    "instagram" : {
+      "instagram_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 18 18\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M13.3193 4.55322H13.3273M4.95215 0.967285H12.9209C15.1214 0.967285 16.9053 2.75115 16.9053 4.95166V12.9204C16.9053 15.1209 15.1214 16.9048 12.9209 16.9048H4.95215C2.75164 16.9048 0.967773 15.1209 0.967773 12.9204V4.95166C0.967773 2.75115 2.75164 0.967285 4.95215 0.967285ZM12.124 8.434C12.2224 9.0972 12.1091 9.77452 11.8003 10.3696C11.4915 10.9647 11.0029 11.4473 10.4041 11.7487C9.8052 12.0502 9.12654 12.1551 8.4646 12.0486C7.80267 11.9421 7.19118 11.6295 6.7171 11.1555C6.24302 10.6814 5.9305 10.0699 5.82398 9.40796C5.71747 8.74602 5.82239 8.06736 6.12382 7.46849C6.42524 6.86962 6.90783 6.38105 7.50293 6.07226C8.09804 5.76347 8.77536 5.65019 9.43856 5.74854C10.115 5.84885 10.7413 6.16408 11.2249 6.64765C11.7085 7.13123 12.0237 7.75752 12.124 8.434Z\" stroke=\"currentColor\" stroke-width=\"1.9347\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "linkedin" : {
+      "linkedin_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 17 17\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M3.79464 17V5.62864H0.265625V17H3.79464ZM2.01116 4.10738C3.14955 4.10738 4.06027 3.1566 4.06027 2.01566C4.06027 0.912752 3.14955 0 2.01116 0C0.910714 0 0 0.912752 0 2.01566C0 3.1566 0.910714 4.10738 2.01116 4.10738ZM16.9621 17H17V10.7629C17 7.72036 16.317 5.36242 12.75 5.36242C11.0424 5.36242 9.90402 6.3132 9.41071 7.18792H9.37277V5.62864H5.99554V17H9.52455V11.3714C9.52455 9.88814 9.79018 8.48098 11.6116 8.48098C13.433 8.48098 13.471 10.1544 13.471 11.4855V17H16.9621Z\" fill=\"currentColor\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  }, {
+    "user_name" : "Emily Carter",
+    "designation" : "CEO",
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31f0a284420f9b8787e661_team-img-1.webp",
+      "alt" : "6a31f0a284420f9b8787e661_team-img-1",
+      "loading" : "lazy",
+      "width" : 453,
+      "height" : 614,
+      "max_width" : 453,
+      "max_height" : 614
+    },
+    "instagram" : {
+      "instagram_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 18 18\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M13.3193 4.55322H13.3273M4.95215 0.967285H12.9209C15.1214 0.967285 16.9053 2.75115 16.9053 4.95166V12.9204C16.9053 15.1209 15.1214 16.9048 12.9209 16.9048H4.95215C2.75164 16.9048 0.967773 15.1209 0.967773 12.9204V4.95166C0.967773 2.75115 2.75164 0.967285 4.95215 0.967285ZM12.124 8.434C12.2224 9.0972 12.1091 9.77452 11.8003 10.3696C11.4915 10.9647 11.0029 11.4473 10.4041 11.7487C9.8052 12.0502 9.12654 12.1551 8.4646 12.0486C7.80267 11.9421 7.19118 11.6295 6.7171 11.1555C6.24302 10.6814 5.9305 10.0699 5.82398 9.40796C5.71747 8.74602 5.82239 8.06736 6.12382 7.46849C6.42524 6.86962 6.90783 6.38105 7.50293 6.07226C8.09804 5.76347 8.77536 5.65019 9.43856 5.74854C10.115 5.84885 10.7413 6.16408 11.2249 6.64765C11.7085 7.13123 12.0237 7.75752 12.124 8.434Z\" stroke=\"currentColor\" stroke-width=\"1.9347\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "linkedin" : {
+      "linkedin_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 17 17\" fill=\"none\" class=\"icon-1x1-tiny\"><path d=\"M3.79464 17V5.62864H0.265625V17H3.79464ZM2.01116 4.10738C3.14955 4.10738 4.06027 3.1566 4.06027 2.01566C4.06027 0.912752 3.14955 0 2.01116 0C0.910714 0 0 0.912752 0 2.01566C0 3.1566 0.910714 4.10738 2.01116 4.10738ZM16.9621 17H17V10.7629C17 7.72036 16.317 5.36242 12.75 5.36242C11.0424 5.36242 9.90402 6.3132 9.41071 7.18792H9.37277V5.62864H5.99554V17H9.52455V11.3714C9.52455 9.88814 9.79018 8.48098 11.6116 8.48098C13.433 8.48098 13.471 10.1544 13.471 11.4855V17H16.9621Z\" fill=\"currentColor\"></path></svg>",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  } ]
+} ]

@@ -1,0 +1,13 @@
+{
+  "global" : false,
+  "content_types" : [ "CASE_STUDY", "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 383963363028,
+  "css_assets" : [ {
+    "autoload" : true,
+    "path" : "../../../css/main.css",
+    "name" : "main.css"
+  } ],
+  "label" : "Header",
+  "is_available_for_new_content" : true
+}

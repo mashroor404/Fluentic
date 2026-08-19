@@ -1,0 +1,199 @@
+[ {
+  "id" : "1ef93449-133b-784b-01bb-3be256325c0b",
+  "name" : "section_headers",
+  "label" : "Section headers",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "3126d335-42f2-f25e-ff02-e817445292e8",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Smart Tools"
+  }, {
+    "id" : "ac937de1-8aa4-9599-1c38-1c316811fe05",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Everything You Need to Build and Scale AI Agents"
+  }, {
+    "id" : "141883ff-2501-5921-3a15-454a955ff621",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ABR gives you a complete toolkit to design, deploy, and manage intelligent automation systems without complexity. From connecting your tools to running fully autonomous workflows, every feature is built to help you save time, reduce manual effort, and scale operations effortlessly."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "Smart Tools",
+    "title" : "Everything You Need to Build and Scale AI Agents",
+    "description" : "ABR gives you a complete toolkit to design, deploy, and manage intelligent automation systems without complexity. From connecting your tools to running fully autonomous workflows, every feature is built to help you save time, reduce manual effort, and scale operations effortlessly."
+  }
+}, {
+  "id" : "c9aede5d-7a5e-59cd-c0b0-d502191d4aef",
+  "name" : "image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32ee306cc86885131552f7_tools-img.webp",
+    "alt" : "6a32ee306cc86885131552f7_tools-img",
+    "loading" : "lazy",
+    "width" : 663,
+    "height" : 524,
+    "max_width" : 663,
+    "max_height" : 524
+  }
+}, {
+  "id" : "4567e3a5-2baf-d57e-4851-45f8dd79fc57",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "36090caf-e260-e6a4-599c-473457089f99",
+    "name" : "image_background_image",
+    "label" : "Image background image",
+    "required" : false,
+    "locked" : false,
+    "type" : "backgroundimage",
+    "display_width" : null,
+    "default" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a361996f438ba184407d6e0_BG%20IMG%20UPDATED%203x-p-2000.webp"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image_background_image" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a361996f438ba184407d6e0_BG%20IMG%20UPDATED%203x-p-2000.webp"
+    }
+  }
+}, {
+  "id" : "1b44c7e4-5eeb-3788-22ba-8bece28703c6",
+  "name" : "badges",
+  "label" : "Badges",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "3268e14a-4040-1fc4-557f-6661edf7ca6a",
+    "name" : "badge_text",
+    "label" : "Badge text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "AI Workflow Automation"
+  }, {
+    "id" : "9ee5be4e-43d6-c25a-da6e-16c4dc81387b",
+    "name" : "icon",
+    "label" : "Icon",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square.svg",
+      "alt" : "6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square",
+      "loading" : "lazy",
+      "width" : 20,
+      "height" : 20,
+      "max_width" : 20,
+      "max_height" : 20
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "badge_text" : "AI Workflow Automation",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square.svg",
+      "alt" : "6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square",
+      "loading" : "lazy",
+      "width" : 20,
+      "height" : 20,
+      "max_width" : 20,
+      "max_height" : 20
+    }
+  }, {
+    "badge_text" : "AI Workflow Automation",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square.svg",
+      "alt" : "6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square",
+      "loading" : "lazy",
+      "width" : 20,
+      "height" : 20,
+      "max_width" : 20,
+      "max_height" : 20
+    }
+  }, {
+    "badge_text" : "AI Workflow Automation",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square.svg",
+      "alt" : "6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square",
+      "loading" : "lazy",
+      "width" : 20,
+      "height" : 20,
+      "max_width" : 20,
+      "max_height" : 20
+    }
+  }, {
+    "badge_text" : "AI Workflow Automation",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square.svg",
+      "alt" : "6a250b65a18d5d024dafda1a_e1f5239cc04b1d4910186033f5db10a8_checkmark-square",
+      "loading" : "lazy",
+      "width" : 20,
+      "height" : 20,
+      "max_width" : 20,
+      "max_height" : 20
+    }
+  } ]
+} ]

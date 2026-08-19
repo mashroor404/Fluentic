@@ -1,0 +1,482 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .faqs-section {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .faqs-section .container {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max-width, 1280px);
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+
+  /* ==================================
+     Grid Layout
+     ================================== */
+  .faqs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: stretch; /* Forces both columns to be equal height */
+  }
+
+  .faqs-left {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Stretches to the full height of the grid cell */
+  }
+
+  /* ==================================
+     Header Content
+     ================================== */
+  .faqs-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 64px; /* Minimum gap before the mini card */
+  }
+
+  .faqs-header h2 {
+    margin: 24px 0 0;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  /* Standardized Title Animation Classes */
+  .faqs-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  /* ==================================
+     Mini Card (Glassmorphism & Custom BG)
+     ================================== */
+  .faqs-mini-card {
+    /* Pushes the card to the absolute bottom of the left column */
+    margin-top: auto; 
+    
+    /* Fallback gradient if no image is present */
+    background-color: var(--bg-accent-2, #E2E8F0);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(1, 16, 50, 0.04);
+    /* Ensures background images fit perfectly */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Avatars Group */
+  .faqs-avatars {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .faqs-avatar-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid var(--bg-primary);
+    margin-left: -16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .faqs-avatar-img:first-child {
+    margin-left: 0;
+  }
+
+  .faqs-mini-title {
+    font-family: var(--primary-font);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+  }
+
+  .faqs-mini-desc {
+    color: var(--text-secondary);
+    margin: 0 0 32px 0;
+  }
+
+  /* Solid Blue Button matching reference */
+  .faqs-solid-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-family: var(--primary-font);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .faqs-solid-btn:hover {
+    background-color: #011032;
+  }
+
+  /* ==================================
+     FAQs Accordion List
+     ================================== */
+  .faqs-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faqs-item {
+    border-bottom: 1px solid rgba(1, 16, 50, 0.1);
+    padding: 24px 0;
+  }
+
+  .faqs-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    gap: 24px;
+  }
+
+  .faqs-item-title {
+    font-family: var(--primary-font, sans-serif);
+    font-size: clamp(1.25rem, 2vw, 1.35rem);
+    font-weight: 600;
+    color: var(--text-secondary, #848484);
+    margin: 0;
+    transition: color 0.5s ease;
+  }
+
+  .faqs-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: #01103214;
+    backdrop-filter: blur(54px);
+    color: var(--text-primary);
+    border-radius: 8px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .faqs-icon-wrap svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* Smooth Grid Height Transition for Body */
+  .faqs-item-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .faqs-item-desc {
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .faqs-item-desc p {
+    color: var(--text-secondary, #6B738B);
+    margin: 0;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  /* ACTIVE ACCORDION STATE */
+  .faqs-item.is-open .faqs-item-title {
+    color: var(--text-primary, #011032);
+  }
+
+  /* 1. Wrapper turns into gradient, stays square */
+  .faqs-item.is-open .faqs-icon-wrap {
+    background: var(--gradient-2, linear-gradient(135deg, #51a2ff 0%, #0552fc 100%));
+    color: #ffffff;
+  }
+
+  /* 2. SVG independently rotates inside the wrapper */
+  .faqs-item.is-open .faqs-icon-wrap svg {
+    transform: rotate(45deg);
+  }
+
+  .faqs-item.is-open .faqs-item-body {
+    grid-template-rows: 1fr;
+  }
+
+  .faqs-item.is-open .faqs-item-desc {
+    opacity: 1;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-faqs-el {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .faqs-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+    
+    /* Flatten the left column so we can reorder its children individually */
+    .faqs-left {
+      display: contents; 
+    }
+    
+    /* Reorder Elements */
+    .faqs-header {
+      order: 1;
+      margin-bottom: 0; /* Handled by flex gap now */
+    }
+    
+    .faqs-right {
+      order: 2;
+      width: 100%;
+    }
+    
+    .faqs-mini-card {
+      order: 3;
+      margin-top: 0; /* Remove auto-margin since it's no longer filling vertical space */
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .faqs-section {
+      padding: 64px 0;
+    }
+    
+    .faqs-grid {
+      gap: 48px;
+    }
+    
+    .faqs-mini-card {
+      padding: 32px 24px;
+    }
+
+    .faqs-item-title {
+      font-size: 1.15rem;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="faqs-section">
+  <div class="container">
+    <div class="faqs-grid">
+      
+      <!-- Left Column: Header & Mini Card -->
+      <div class="faqs-left">
+        
+        <div class="faqs-header">
+          <!-- Eyebrow (Static) -->
+          {% if module.section_header.eyebrow_text %}
+            <div>
+              {{ btn_macros.eyebrow_label(module.section_header.eyebrow_text) }}
+            </div>
+          {% endif %}
+
+          <!-- Title (Standardized Blur Reveal) -->
+          {% if module.section_header.title %}
+            <h2 class="gsap-blur-reveal">{{ module.section_header.title }}</h2>
+          {% endif %}
+        </div>
+
+        <!-- Mini Card with Dynamic Background Image -->
+        <div class="faqs-mini-card gsap-faqs-el" 
+             {% if module.style.mini_card_background_image.src %}
+             style="background-image: url('{{ module.style.mini_card_background_image.src }}');"
+             {% endif %}>
+          <!-- Overlapping Avatars -->
+          <div class="faqs-avatars">
+            {% for avatar in module.mini_card.avater_images %}
+              {% if avatar.src %}
+                <img src="{{ avatar.src }}" alt="{{ avatar.alt|default('Avatar') }}" class="faqs-avatar-img" loading="{{ avatar.loading }}">
+              {% endif %}
+            {% endfor %}
+          </div>
+          
+          <!-- Text Content -->
+          {% if module.mini_card.title %}
+            <h4 class="faqs-mini-title">{{ module.mini_card.title }}</h4>
+          {% endif %}
+          
+          {% if module.mini_card.description %}
+            <p class="body-2 faqs-mini-desc">{{ module.mini_card.description }}</p>
+          {% endif %}
+
+          <!-- Action Button -->
+          {% if module.mini_card.button %}
+            <a href="{{ module.mini_card.link.url.href }}" 
+               class="faqs-solid-btn"
+               {% if module.mini_card.link.open_in_new_tab %}target="_blank"{% endif %}
+               {% if module.mini_card.link.no_follow %}rel="nofollow"{% endif %}>
+              {{ module.mini_card.button }}
+            </a>
+          {% endif %}
+        </div>
+
+      </div>
+
+      <!-- Right Column: FAQs List -->
+      <div class="faqs-right">
+        <div class="faqs-list">
+          {% for faq in module.faqs %}
+            <div class="faqs-item gsap-faqs-el">
+              
+              <!-- Accordion Header -->
+              <div class="faqs-item-header">
+                <h3 class="faqs-item-title">{{ faq.faq_title }}</h3>
+                <div class="faqs-icon-wrap">
+                  {{ module.faq_icon|safe }}
+                </div>
+              </div>
+
+              <!-- Accordion Body -->
+              <div class="faqs-item-body">
+                <div class="faqs-item-desc">
+                  <p class="body-2">{{ faq.faq_description }}</p>
+                </div>
+              </div>
+
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- JS for Accordion Interaction & GSAP Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    
+    /* ------------------------------------------------------------------
+       1. FAQ Accordion Logic (Hover for Desktop, Click for Mobile)
+    ------------------------------------------------------------------ */
+    const faqItems = document.querySelectorAll('.faqs-item');
+
+    faqItems.forEach(item => {
+      const header = item.querySelector('.faqs-item-header');
+
+      // Desktop: Open on Hover Enter, Close on Hover Leave
+      item.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 991) {
+          item.classList.add('is-open');
+        }
+      });
+      
+      item.addEventListener('mouseleave', () => {
+        if (window.innerWidth > 991) {
+          item.classList.remove('is-open');
+        }
+      });
+
+      // Mobile: Toggle Open/Close on Click
+      header.addEventListener('click', () => {
+        if (window.innerWidth <= 991) {
+          const isOpen = item.classList.contains('is-open');
+          
+          // Close all others (optional accordion style)
+          faqItems.forEach(faq => faq.classList.remove('is-open'));
+          
+          // Toggle the clicked one
+          if (!isOpen) {
+            item.classList.add('is-open');
+          }
+        }
+      });
+    });
+
+    /* ------------------------------------------------------------------
+       2. GSAP Scroll Entrance Animations
+    ------------------------------------------------------------------ */
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".faqs-section");
+      if (!section) return;
+
+      // Heading Blur Reveal
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      // Mini Card & FAQ Items Staggered Fade Up
+      gsap.fromTo(".gsap-faqs-el", 
+        { y: 30, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.1, 
+          delay: 0.2, // Small delay so the title reveals first
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".faqs-grid",
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

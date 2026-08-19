@@ -1,0 +1,197 @@
+[ {
+  "id" : "3edaa496-b8f9-acbd-f877-891424b8ae4c",
+  "name" : "heading_content",
+  "label" : "Heading Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "414fbde1-7429-36a3-602c-280ad11f2c0f",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Our story"
+  }, {
+    "id" : "f73b9732-c258-24fc-b1fa-374dabc32e55",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Built for teams who believe automation should think"
+  }, {
+    "id" : "a1f4501f-e395-aa5f-6e27-42017d23098d",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "CoreAi was founded with one belief — that repetitive, manual work shouldn't hold great teams back. We built an AI agent platform that doesn't just automate tasks, it understands them."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "Our story",
+    "title" : "Built for teams who believe automation should think",
+    "description" : "CoreAi was founded with one belief — that repetitive, manual work shouldn't hold great teams back. We built an AI agent platform that doesn't just automate tasks, it understands them."
+  }
+}, {
+  "id" : "18de53cc-e801-5501-43ae-b2dbcf22524c",
+  "name" : "image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31c9466c096eedfd0e4f54_about-story_img.webp",
+    "alt" : "6a31c9466c096eedfd0e4f54_about-story_img",
+    "loading" : "lazy",
+    "width" : 999,
+    "height" : 773,
+    "max_width" : 999,
+    "max_height" : 773
+  }
+}, {
+  "id" : "b219845a-cdaa-cdb5-338a-a365bb6636b7",
+  "name" : "list_items",
+  "label" : "List Items",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "e2a4a860-b86b-975a-3e69-28ddd24c236c",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Our Vision"
+  }, {
+    "id" : "e732fa43-fe71-c26f-c150-b0f6d517301f",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "To make AI automation accessible, scalable, and impactful for businesses of every size."
+  }, {
+    "id" : "a0994bbc-3745-b8a9-bf8c-569866bc560b",
+    "name" : "icon",
+    "label" : "Icon",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31cb2295973eab58db9731_eye.svg",
+      "alt" : "6a31cb2295973eab58db9731_eye",
+      "loading" : "lazy",
+      "width" : 24,
+      "height" : 24,
+      "max_width" : 24,
+      "max_height" : 24
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "Our Vision",
+    "description" : "To make AI automation accessible, scalable, and impactful for businesses of every size.",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31cb2295973eab58db9731_eye.svg",
+      "alt" : "6a31cb2295973eab58db9731_eye",
+      "loading" : "lazy",
+      "width" : 24,
+      "height" : 24,
+      "max_width" : 24,
+      "max_height" : 24
+    }
+  }, {
+    "title" : "Our Vision",
+    "description" : "To make AI automation accessible, scalable, and impactful for businesses of every size.",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31cb2295973eab58db9731_eye.svg",
+      "alt" : "6a31cb2295973eab58db9731_eye",
+      "loading" : "lazy",
+      "width" : 24,
+      "height" : 24,
+      "max_width" : 24,
+      "max_height" : 24
+    }
+  }, {
+    "title" : "Our Vision",
+    "description" : "To make AI automation accessible, scalable, and impactful for businesses of every size.",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a31cb2295973eab58db9731_eye.svg",
+      "alt" : "6a31cb2295973eab58db9731_eye",
+      "loading" : "lazy",
+      "width" : 24,
+      "height" : 24,
+      "max_width" : 24,
+      "max_height" : 24
+    }
+  } ]
+}, {
+  "id" : "ba5fec7e-d8e8-d251-d4a5-35bf55aa6e71",
+  "name" : "button_text",
+  "label" : "Button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Get Started Free"
+}, {
+  "id" : "8ae1505d-9618-70f1-4a6a-a346c495878c",
+  "name" : "button_link",
+  "label" : "Button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "type" : "EXTERNAL",
+      "href" : ""
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+} ]

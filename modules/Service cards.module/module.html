@@ -1,0 +1,245 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+  Section Layout & Background
+  ================================== */
+  .ai-agents-section-wrapper {
+    position: relative;
+    z-index: 10; 
+  }
+
+  .ai-agents-section {
+    position: relative;
+    padding: 100px 0;
+    background-color: var(--dark-bg); 
+  }
+
+  .ai-agents-section .container {
+    position: relative;
+    z-index: 2; 
+  }
+
+  /* ==================================
+  Header Content (Center Aligned)
+  ================================== */
+  .ai-agents-header {
+    margin: 0 auto 64px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-agents-header { 
+    margin: 16px 0 24px;
+    margin-bottom:3.5rem;
+    letter-spacing: -0.02em;
+    color: var(--text-light-primary); /* Forces white text on the dark background */
+  }
+
+  .ai-agents-header .body {
+    color: var(--text-light-secondary); 
+    max-width:680px;
+    margin:0 auto;
+  }
+
+  /* ==================================
+  Cards Grid
+  ================================== */
+  .ai-agents-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-agent-card {
+    /* Subtle transparent white overlay for the dark card background */
+    background-color: rgba(255, 255, 255, 0.03); 
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+  }
+
+  .ai-agent-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Card Image */
+  .ai-agent-card-img-wrap {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    background-color: rgba(0, 0, 0, 0.2);
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-agent-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  } 
+
+  /* Card Text */
+  .ai-agent-card-title {
+    color: var(--text-light-primary);
+    margin-bottom: 3rem;
+    font-weight: 600;
+  }
+
+  .ai-agent-card-desc {
+    color: var(--text-light-secondary);
+    margin: 0;
+  }
+
+  /* ==================================
+  GSAP Initial States
+  ================================== */
+  .gsap-agents-text {
+    opacity: 0;
+    will-change: transform, filter, opacity;
+    margin-bottom:2rem;
+  }
+
+  .gsap-agents-card {
+    opacity: 0;
+  }
+
+  /* ==================================
+  Mobile Responsive
+  ================================== */
+  @media screen and (max-width: 1024px) {
+    .ai-agents-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .ai-agents-section {
+      padding: 64px 0;
+    }
+    .ai-agents-grid {
+      grid-template-columns: 1fr;
+    }
+    .ai-agents-header {
+      margin-bottom: 40px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<div class="ai-agents-section-wrapper">
+  <section class="ai-agents-section">
+    <div class="container">
+
+      <!-- Section Header -->
+      <div class="ai-agents-header">
+
+        <!-- Eyebrow -->
+        <div class="gsap-agents-text">
+          {% if module.heading_content.eyebrow_text %}
+          {{ btn_macros.eyebrow_label(module.heading_content.eyebrow_text) }}
+          {% endif %}
+        </div>
+
+        <!-- Title -->
+        {% if module.heading_content.title %}
+        <h2 class="gsap-agents-text">{{ module.heading_content.title }}</h2>
+        {% endif %}
+
+        <!-- Description (Global .body class) -->
+        {% if module.heading_content.description %}
+        <p class="body gsap-agents-text">{{ module.heading_content.description }}</p>
+        {% endif %}
+
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="ai-agents-grid">
+        {% for item in module.cards %}
+        <div class="ai-agent-card gsap-agents-card">
+
+          <!-- Image -->
+          {% if item.card_image.src %}
+          <div class="ai-agent-card-img-wrap">
+            <img src="{{ item.card_image.src }}" alt="{{ item.card_image.alt }}" loading="{{ item.card_image.loading }}" width="{{ item.card_image.width }}" height="{{ item.card_image.height }}">
+          </div>
+          {% endif %}
+
+          <!-- Content -->
+          <div class="ai-agent-card-content">
+            <!-- Global h4 sizing -->
+            <h4 class="ai-agent-card-title">{{ item.title }}</h4>
+            <!-- Global body-2 sizing -->
+            <p class="body-2 ai-agent-card-desc">{{ item.description }}</p>
+          </div>
+
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- GSAP Scroll & Interactions -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 1. Text Animation (Slide up + Blur reveal)
+      gsap.fromTo(".gsap-agents-text", 
+                  { 
+        y: 30, 
+        opacity: 0,
+        filter: "blur(8px)" 
+      }, 
+                  { 
+        y: 0, 
+        opacity: 1, 
+        filter: "blur(0px)",
+        duration: 0.8, 
+        stagger: 0.15, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".ai-agents-header",
+          start: "top 85%" 
+        }
+      }
+                 );
+
+      // 2. Cards Fade-In Stagger
+      gsap.fromTo(".gsap-agents-card", 
+                  { y: 40, opacity: 0 }, 
+                  { 
+        y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".ai-agents-grid",
+          start: "top 85%"
+        }
+      }
+                 );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

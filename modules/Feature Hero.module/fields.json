@@ -1,0 +1,153 @@
+[ {
+  "id" : "54986eda-22f2-c93b-cf8e-415c069e717f",
+  "name" : "image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32e704f39c3b22b14d5dac_features-img.webp",
+    "alt" : "6a32e704f39c3b22b14d5dac_features-img",
+    "loading" : "lazy",
+    "width" : 848,
+    "height" : 486,
+    "max_width" : 848,
+    "max_height" : 486
+  }
+}, {
+  "id" : "b889fb80-fbe1-3898-5040-48e352e4e2a1",
+  "name" : "details",
+  "label" : "Details",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "ABR has completely transformed the way our team operates. Tasks that once took hours are now handled automatically by AI agents, allowing us to focus on growth and strategy. The platform is intuitive, reliable, and has become an essential part of our daily workflow."
+}, {
+  "id" : "3f303d6b-1d9e-18e6-7fd8-3403cc0e4462",
+  "name" : "author_and_rating",
+  "label" : "Author and rating",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "073cfc0a-7f26-5037-3e7a-2d47eaa10dfc",
+    "name" : "author_name",
+    "label" : "Author name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Sarah Williams"
+  }, {
+    "id" : "63f25c13-4ffc-24f4-72a3-90130a20e60f",
+    "name" : "author_details",
+    "label" : "Author details",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "CEO, BrightLoop"
+  }, {
+    "id" : "812e0a13-2a72-f79c-ae6a-6f010869024c",
+    "name" : "rating",
+    "label" : "Rating",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 5
+  }, {
+    "id" : "752c563e-d19f-b802-196d-f8afb57387a2",
+    "name" : "rating_icon",
+    "label" : "Rating Icon",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" fill=\"none\"><script xmlns=\"\" id=\"eppiocemhmnlbhjplcgkofciiegomcon\"/><script xmlns=\"\"/><script xmlns=\"\"/><path d=\"M8.89646 0C9.76497 0 10.4491 0.656001 10.8859 1.54116L12.3443 4.48228C12.3886 4.5733 12.4934 4.70148 12.651 4.81873C12.8084 4.93586 12.9626 5.00048 13.0641 5.01752L15.7042 5.45979C16.6579 5.62005 17.4572 6.08751 17.7167 6.90151C17.976 7.71483 17.5961 8.56003 16.9103 9.24708L16.9096 9.24775L14.8586 11.3157C14.7773 11.3977 14.6862 11.5521 14.6291 11.7533C14.5724 11.9531 14.5674 12.135 14.5931 12.2526L14.5935 12.2543L15.1803 14.8125C15.4236 15.8773 15.343 16.9331 14.592 17.4851C13.8385 18.0389 12.8088 17.7934 11.8733 17.2363L9.39844 15.7591C9.29451 15.697 9.11602 15.6467 8.90059 15.6467C8.68674 15.6467 8.5045 15.6964 8.39381 15.7607L8.39225 15.7617L5.92226 17.2359C4.98789 17.795 3.95943 18.0362 3.20584 17.4818C2.45541 16.9297 2.37069 15.8758 2.61484 14.812L3.20153 12.2543L3.20189 12.2526C3.22761 12.135 3.22258 11.9531 3.16585 11.7533C3.10874 11.5521 3.01768 11.3977 2.93639 11.3157L0.88385 9.24624C0.202462 8.55923 -0.176174 7.71476 0.0810352 6.90263C0.338993 6.08814 1.13679 5.6201 2.09107 5.45974L4.72903 5.01784L4.72987 5.0177C4.82658 5.00092 4.9785 4.93703 5.13558 4.8196C5.29295 4.70194 5.39806 4.57349 5.44237 4.48228L5.4446 4.47773L6.90124 1.54038L6.90182 1.53922C7.3427 0.654795 8.02895 0 8.89646 0Z\" fill=\"#FFE063\"/><script xmlns=\"\"/></svg>"
+  }, {
+    "id" : "32c0ddac-cb62-3eac-cd32-2ee4951043ce",
+    "name" : "author_image",
+    "label" : "Author image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32e5a6802c6c62cd701b8b_team-img.webp",
+      "alt" : "6a32e5a6802c6c62cd701b8b_team-img",
+      "loading" : "lazy",
+      "width" : 89,
+      "height" : 89,
+      "max_width" : 89,
+      "max_height" : 89
+    }
+  }, {
+    "id" : "2eafd79f-39f6-eb2f-9d6d-2d89d5e861a0",
+    "name" : "qoute_icon",
+    "label" : "Qoute icon",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32185a14039013e0c03964_quote.svg",
+      "alt" : "6a32185a14039013e0c03964_quote",
+      "loading" : "lazy",
+      "width" : 7,
+      "height" : 7,
+      "max_width" : 7,
+      "max_height" : 7
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "author_name" : "Sarah Williams",
+    "author_details" : "CEO, BrightLoop",
+    "rating" : 5,
+    "rating_icon" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" fill=\"none\"><script xmlns=\"\" id=\"eppiocemhmnlbhjplcgkofciiegomcon\"/><script xmlns=\"\"/><script xmlns=\"\"/><path d=\"M8.89646 0C9.76497 0 10.4491 0.656001 10.8859 1.54116L12.3443 4.48228C12.3886 4.5733 12.4934 4.70148 12.651 4.81873C12.8084 4.93586 12.9626 5.00048 13.0641 5.01752L15.7042 5.45979C16.6579 5.62005 17.4572 6.08751 17.7167 6.90151C17.976 7.71483 17.5961 8.56003 16.9103 9.24708L16.9096 9.24775L14.8586 11.3157C14.7773 11.3977 14.6862 11.5521 14.6291 11.7533C14.5724 11.9531 14.5674 12.135 14.5931 12.2526L14.5935 12.2543L15.1803 14.8125C15.4236 15.8773 15.343 16.9331 14.592 17.4851C13.8385 18.0389 12.8088 17.7934 11.8733 17.2363L9.39844 15.7591C9.29451 15.697 9.11602 15.6467 8.90059 15.6467C8.68674 15.6467 8.5045 15.6964 8.39381 15.7607L8.39225 15.7617L5.92226 17.2359C4.98789 17.795 3.95943 18.0362 3.20584 17.4818C2.45541 16.9297 2.37069 15.8758 2.61484 14.812L3.20153 12.2543L3.20189 12.2526C3.22761 12.135 3.22258 11.9531 3.16585 11.7533C3.10874 11.5521 3.01768 11.3977 2.93639 11.3157L0.88385 9.24624C0.202462 8.55923 -0.176174 7.71476 0.0810352 6.90263C0.338993 6.08814 1.13679 5.6201 2.09107 5.45974L4.72903 5.01784L4.72987 5.0177C4.82658 5.00092 4.9785 4.93703 5.13558 4.8196C5.29295 4.70194 5.39806 4.57349 5.44237 4.48228L5.4446 4.47773L6.90124 1.54038L6.90182 1.53922C7.3427 0.654795 8.02895 0 8.89646 0Z\" fill=\"#FFE063\"/><script xmlns=\"\"/></svg>",
+    "author_image" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32e5a6802c6c62cd701b8b_team-img.webp",
+      "alt" : "6a32e5a6802c6c62cd701b8b_team-img",
+      "loading" : "lazy",
+      "width" : 89,
+      "height" : 89,
+      "max_width" : 89,
+      "max_height" : 89
+    },
+    "qoute_icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32185a14039013e0c03964_quote.svg",
+      "alt" : "6a32185a14039013e0c03964_quote",
+      "loading" : "lazy",
+      "width" : 7,
+      "height" : 7,
+      "max_width" : 7,
+      "max_height" : 7
+    }
+  }
+} ]

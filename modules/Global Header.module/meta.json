@@ -1,0 +1,18 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 383963362028,
+  "css_assets" : [ {
+    "autoload" : true,
+    "path" : "../../css/main.css",
+    "name" : "main.css"
+  } ],
+  "js_assets" : [ {
+    "autoload" : true,
+    "path" : "../../js/main.js",
+    "name" : "main.js"
+  } ],
+  "label" : "Global Header",
+  "is_available_for_new_content" : true
+}

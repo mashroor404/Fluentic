@@ -1,0 +1,533 @@
+/* @import url('http://example.com/example_style.css'); */
+
+/***********************************************/
+/* CSS @imports must be at the top of the file */
+/* Add them above this section                 */
+/***********************************************/
+
+/*****************************************/
+/* Start your style declarations here    */
+/*****************************************/
+
+/* Fluentic's primary typeface from the Webflow reference. */
+@font-face {
+  font-family: 'General Sans';
+  src: url('https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec41fe8b9f6763ed90274_GeneralSans-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec41fbb887c700ce2fa27_GeneralSans-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec41fc251f37c18860de1_GeneralSans-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec41ffbb6776af76878c8_GeneralSans-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec41f7cb029a3970f4408_GeneralSans-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Legacy project fonts remain available during the migration. */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://26291308.fs1.hubspotusercontent-eu1.net/hubfs/26291308/Inter%20Display%20Font/InterDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Franklin Gothic Book';
+  src: url('https://145627525.fs1.hubspotusercontent-eu1.net/hubfs/145627525/Re-board%20web%20content/FRABK.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+:root {
+  /* Global Colors */
+  --primary-color: {{ theme.theme_colors.dark_primary.color }};
+
+  /* Background Colors */
+  --bg-star: {{ theme.theme_colors.background_colors.star.color }};
+  --page-bg: {{ theme.theme_colors.background_colors.page_bg.color }};
+  --bg-primary: {{ theme.theme_colors.background_colors.bg_primary.color }};
+  --bg-accent-1: {{ theme.theme_colors.background_colors.accent_bg_1.color }};
+  --bg-accent-2: {{ theme.theme_colors.background_colors.accent_bg_2.color }};
+  --bg-accent-3: {{ theme.theme_colors.background_colors.accent_bg_3.color }};
+  --dark-bg: {{ theme.theme_colors.background_colors.dark_bg.color }};
+
+  /* Text Colors */
+  --text-primary: {{ theme.theme_colors.text_colors.text_primary.color }};
+  --text-secondary: {{ theme.theme_colors.text_colors.text_secondary.color }};
+  --text-tertiary: {{ theme.theme_colors.text_colors.text_tertiary.color }};
+  --text-light-primary: {{ theme.theme_colors.text_colors.text_light_primary.color }};
+  --text-light-secondary: {{ theme.theme_colors.text_colors.text_light_secondary.color }};
+
+  /* Fluentic Accent Colors */
+  --accent-blue: {{ theme.theme_colors.accent_colors.blue.color }};
+  --accent-purple: {{ theme.theme_colors.accent_colors.purple.color }};
+  --accent-pink: {{ theme.theme_colors.accent_colors.pink.color }};
+  --accent-orange: {{ theme.theme_colors.accent_colors.orange.color }};
+  --accent-red: {{ theme.theme_colors.accent_colors.red.color }};
+  --accent-red-bright: {{ theme.theme_colors.accent_colors.bright_red.color }};
+  --gradient-light: {{ theme.theme_colors.accent_colors.gradient_light.color }};
+  --gradient-middle: {{ theme.theme_colors.accent_colors.gradient_middle.color }};
+  --gradient-hot: {{ theme.theme_colors.accent_colors.gradient_hot.color }};
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(120deg, var(--gradient-light), var(--gradient-middle) 61%, var(--gradient-hot));
+  --gradient-icon: linear-gradient(var(--bg-primary), var(--bg-accent-2));
+  --gradient-1: var(--gradient-brand);
+  --gradient-2: {{ theme.theme_colors.gradients.gradient_2.css }};
+  --gradient-3: {{ theme.theme_colors.gradients.gradient_3.css }};
+  --gradient-4: {{ theme.theme_colors.gradients.gradient_4.css }};
+
+  /* Global Fonts */
+  --primary-font: '{{ theme.global_fonts.primary.font }}', {{ theme.global_fonts.primary.fallback|default('sans-serif') }};
+  --primary-font-color: {{ theme.global_fonts.primary.color }};
+
+  --secondary-font: '{{ theme.global_fonts.secondary.font }}', {{ theme.global_fonts.secondary.fallback|default('sans-serif') }};
+  --secondary-font-color: {{ theme.global_fonts.secondary.color }};
+
+  --tertiary-font: '{{ theme.global_fonts.tertiary.font }}', {{ theme.global_fonts.tertiary.fallback|default('sans-serif') }};
+  --tertiary-font-color: {{ theme.global_fonts.tertiary.color }};
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* General Styles */
+  --global-border-width: {{ theme.general_styles.global_border_width }}px;
+  --global-border-color: {{ theme.general_styles.global_border_color.color }};
+  --global-border-radius: {{ theme.general_styles.global_border_radius }}px;
+
+  /* Primary Button */
+  --btn-primary-font: '{{ theme.buttons.primary_button.text.font.font }}', {{ theme.buttons.primary_button.text.font.fallback|default('sans-serif') }};
+  --btn-primary-font-size: {{ theme.buttons.primary_button.text.font.size }}{{ theme.buttons.primary_button.text.font.size_unit }};
+  --btn-primary-text-color: {{ theme.buttons.primary_button.text.font.color }};
+  --btn-primary-bg-color: {{ theme.buttons.primary_button.background.color.color }};
+  --btn-primary-border-radius: {{ theme.buttons.primary_button.corner.radius }}px;
+
+  /* Secondary Button */
+  --btn-secondary-font: '{{ theme.buttons.secondary_button.text.font.font }}', {{ theme.buttons.secondary_button.text.font.fallback|default('sans-serif') }};
+  --btn-secondary-font-size: {{ theme.buttons.secondary_button.text.font.size }}{{ theme.buttons.secondary_button.text.font.size_unit }};
+  --btn-secondary-text-color: {{ theme.buttons.secondary_button.text.font.color }};
+  --btn-secondary-bg-color: {{ theme.buttons.secondary_button.background.color.color }};
+  --btn-secondary-border-radius: {{ theme.buttons.secondary_button.corner.radius }}px;
+
+  /* Container */
+  --container-max-width: {{ theme.container.container_max_width }}px;
+
+  /* Compatibility aliases used by older Fluentic modules/templates. */
+  --primary-bg: var(--bg-primary);
+  --secondary-bg: var(--page-bg);
+  --card-bg: var(--bg-primary);
+  --primary-dark-text-color: var(--text-primary);
+  --secondary-dark-text-color: var(--text-secondary);
+  --tertiary-dark-text-color: var(--text-tertiary);
+  --light-text-color: var(--text-light-primary);
+  --border-width: var(--global-border-width);
+  --border-color: var(--global-border-color);
+  --border-radius: var(--global-border-radius);
+  --blue-background: var(--accent-blue);
+  --blue-text: var(--text-primary);
+}
+
+
+
+
+/* ==================================
+   Eyebrow Text (.eyebrow-custom)
+   ================================== */
+
+/* Main Wrapper - Styled as a subtle pill */
+.eyebrow-custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  padding: 10px 10px 10px 8px;
+  background-color: var(--bg-accent-2);
+  border-radius: 6px;
+}
+
+/* The Energy Ellipse Icon */
+.eyebrow-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* Inner Content Wrapper */
+.eyebrow-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* The Eyebrow Text */
+.eyebrow-text {
+  margin: 0;
+  font-family: var(--tertiary-font);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary); 
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+/* The Blinking Cursor */
+.eyebrow-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 14px;
+  background-color: color-mix(in srgb, var(--text-primary) 20%, transparent);
+  animation: eyebrow-blink 1s step-end infinite;
+}
+
+/* Blinking Keyframe Animation */
+@keyframes eyebrow-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+
+/****** Other Utility Classes CSS START *********/
+/***********************************************/
+
+.border {
+  border: var(--border-width) solid var(--border-color);
+}
+
+.primary-bg {
+  background-color: var(--primary-bg);
+}
+
+.secondary-bg {
+  background-color: var(--secondary-bg);
+}
+
+.dark-bg {
+  background-color: var(--dark-bg);
+}
+
+.rounded {
+  border-radius: var(--border-radius);
+}
+
+
+
+/****** Other Utility Classes CSS END *********/
+/*********************************************/
+
+
+/* Padding 80 */
+.p-80  { padding: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.pt-80 { padding-top: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.pr-80 { padding-right: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.pb-80 { padding-bottom: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.pl-80 { padding-left: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.px-80 { padding-inline: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.py-80 { padding-block: clamp(1rem, 4vw + 0.2rem, 5rem); }
+
+
+/* Margin 72 (36px to 72px) */
+.m-72  { margin: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.mt-72 { margin-top: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.mr-72 { margin-right: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.mb-72 { margin-bottom: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.ml-72 { margin-left: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.mx-72 { margin-inline: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.my-72 { margin-block: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+
+.p-72  { padding: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.pt-72 { padding-top: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.pr-72 { padding-right: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.pb-72 { padding-bottom: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.pl-72 { padding-left: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.px-72 { padding-inline: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+.py-72 { padding-block: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+
+.gap-72  { gap: clamp(2.25rem, 2.25vw + 1.8rem, 4.5rem); }
+
+
+
+/* Padding */
+.p-40 { padding: clamp(24px, 2vw, 40px); }
+.pt-40 { padding-top: clamp(24px, 2vw, 40px); }
+.pr-40 { padding-right: clamp(24px, 2vw, 40px); }
+.pb-40 { padding-bottom: clamp(24px, 2vw, 40px); }
+.pl-40 { padding-left: clamp(24px, 2vw, 40px); }
+.px-40 { padding-inline: clamp(24px, 2vw, 40px); }
+.py-40 { padding-block: clamp(24px, 2vw, 40px); }
+
+
+/* Margin 80 */
+.m-80  { margin: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.mt-80 { margin-top: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.mr-80 { margin-right: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.mb-80 { margin-bottom: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.ml-80 { margin-left: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.mx-80 { margin-inline: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.my-80 { margin-block: clamp(1rem, 4vw + 0.2rem, 5rem); }
+
+/* Gap 80 */
+.gap-80   { gap: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.gap-x-80 { column-gap: clamp(1rem, 4vw + 0.2rem, 5rem); }
+.gap-y-80 { row-gap: clamp(1rem, 4vw + 0.2rem, 5rem); }
+
+/* Margin */
+.m-40 { margin: clamp(24px, 2vw, 40px); }
+.mt-40 { margin-top: clamp(24px, 2vw, 40px); }
+.mr-40 { margin-right: clamp(24px, 2vw, 40px); }
+.mb-40 { margin-bottom: clamp(24px, 2vw, 40px); }
+.ml-40 { margin-left: clamp(24px, 2vw, 40px); }
+.mx-40 { margin-inline: clamp(24px, 2vw, 40px); }
+.my-40 { margin-block: clamp(24px, 2vw, 40px); }
+
+.p-36 { padding: clamp(22px, 1.8vw, 36px); }
+.pt-36 { padding-top: clamp(22px, 1.8vw, 36px); }
+.pr-36 { padding-right: clamp(22px, 1.8vw, 36px); }
+.pb-36 { padding-bottom: clamp(22px, 1.8vw, 36px); }
+.pl-36 { padding-left: clamp(22px, 1.8vw, 36px); }
+.px-36 { padding-inline: clamp(22px, 1.8vw, 36px); }
+.py-36 { padding-block: clamp(22px, 1.8vw, 36px); }
+
+/* Margin */
+.m-36 { margin: clamp(22px, 1.8vw, 36px); }
+.mt-36 { margin-top: clamp(22px, 1.8vw, 36px); }
+.mr-36 { margin-right: clamp(22px, 1.8vw, 36px); }
+.mb-36 { margin-bottom: clamp(22px, 1.8vw, 36px); }
+.ml-36 { margin-left: clamp(22px, 1.8vw, 36px); }
+.mx-36 { margin-inline: clamp(22px, 1.8vw, 36px); }
+.my-36 { margin-block: clamp(22px, 1.8vw, 36px); }
+
+/* Padding */
+.p-32 { padding: clamp(20px, 1.6vw, 32px); }
+.pt-32 { padding-top: clamp(20px, 1.6vw, 32px); }
+.pr-32 { padding-right: clamp(20px, 1.6vw, 32px); }
+.pb-32 { padding-bottom: clamp(20px, 1.6vw, 32px); }
+.pl-32 { padding-left: clamp(20px, 1.6vw, 32px); }
+.px-32 { padding-inline: clamp(20px, 1.6vw, 32px); }
+.py-32 { padding-block: clamp(20px, 1.6vw, 32px); }
+
+/* Margin */
+.m-32 { margin: clamp(20px, 1.6vw, 32px); }
+.mt-32 { margin-top: clamp(20px, 1.6vw, 32px); }
+.mr-32 { margin-right: clamp(20px, 1.6vw, 32px); }
+.mb-32 { margin-bottom: clamp(20px, 1.6vw, 32px); }
+.ml-32 { margin-left: clamp(20px, 1.6vw, 32px); }
+.mx-32 { margin-inline: clamp(20px, 1.6vw, 32px); }
+.my-32 { margin-block: clamp(20px, 1.6vw, 32px); }
+
+/* Padding */
+.p-24 { padding: clamp(16px, 1.2vw, 24px); }
+.pt-24 { padding-top: clamp(16px, 1.2vw, 24px); }
+.pr-24 { padding-right: clamp(16px, 1.2vw, 24px); }
+.pb-24 { padding-bottom: clamp(16px, 1.2vw, 24px); }
+.pl-24 { padding-left: clamp(16px, 1.2vw, 24px); }
+.px-24 { padding-inline: clamp(16px, 1.2vw, 24px); }
+.py-24 { padding-block: clamp(16px, 1.2vw, 24px); }
+
+/* Margin */
+.m-24 { margin: clamp(16px, 1.2vw, 24px); }
+.mt-24 { margin-top: clamp(16px, 1.2vw, 24px); }
+.mr-24 { margin-right: clamp(16px, 1.2vw, 24px); }
+.mb-24 { margin-bottom: clamp(16px, 1.2vw, 24px); }
+.ml-24 { margin-left: clamp(16px, 1.2vw, 24px); }
+.mx-24 { margin-inline: clamp(16px, 1.2vw, 24px); }
+.my-24 { margin-block: clamp(16px, 1.2vw, 24px); }
+
+
+
+.p-20 { padding: clamp(12px, 1vw, 20px); }
+.pt-20 { padding-top: clamp(12px, 1vw, 20px); }
+.pr-20 { padding-right: clamp(12px, 1vw, 20px); }
+.pb-20 { padding-bottom: clamp(12px, 1vw, 20px); }
+.pl-20 { padding-left: clamp(12px, 1vw, 20px); }
+.px-20 { padding-left: clamp(12px, 1vw, 20px); padding-right: clamp(12px, 1vw, 20px); }
+.py-20 { padding-top: clamp(12px, 1vw, 20px); padding-bottom: clamp(12px, 1vw, 20px); }
+
+
+.m-20 { margin: clamp(12px, 1vw, 20px); }
+.mt-20 { margin-top: clamp(12px, 1vw, 20px); }
+.mr-20 { margin-right: clamp(12px, 1vw, 20px); }
+.mb-20 { margin-bottom: clamp(12px, 1vw, 20px); }
+.ml-20 { margin-left: clamp(12px, 1vw, 20px); }
+.mx-20 { margin-left: clamp(12px, 1vw, 20px); margin-right: clamp(12px, 1vw, 20px); }
+.my-20 { margin-top: clamp(12px, 1vw, 20px); margin-bottom: clamp(12px, 1vw, 20px); }
+
+/* Padding */
+.p-16 { padding: clamp(12px, 0.8vw, 16px); }
+.pt-16 { padding-top: clamp(12px, 0.8vw, 16px); }
+.pr-16 { padding-right: clamp(12px, 0.8vw, 16px); }
+.pb-16 { padding-bottom: clamp(12px, 0.8vw, 16px); }
+.pl-16 { padding-left: clamp(12px, 0.8vw, 16px); }
+.px-16 { padding-inline: clamp(12px, 0.8vw, 16px); }
+.py-16 { padding-block: clamp(12px, 0.8vw, 16px); }
+
+/* Margin */
+.m-16 { margin: clamp(12px, 0.8vw, 16px); }
+.mt-16 { margin-top: clamp(12px, 0.8vw, 16px); }
+.mr-16 { margin-right: clamp(12px, 0.8vw, 16px); }
+.mb-16 { margin-bottom: clamp(12px, 0.8vw, 16px); }
+.ml-16 { margin-left: clamp(12px, 0.8vw, 16px); }
+.mx-16 { margin-inline: clamp(12px, 0.8vw, 16px); }
+.my-16 { margin-block: clamp(12px, 0.8vw, 16px); }
+
+.p-10 { padding: clamp(6px, 0.5vw, 10px); }
+.pt-10 { padding-top: clamp(6px, 0.5vw, 10px); }
+.pr-10 { padding-right: clamp(6px, 0.5vw, 10px); }
+.pb-10 { padding-bottom: clamp(6px, 0.5vw, 10px); }
+.pl-10 { padding-left: clamp(6px, 0.5vw, 10px); }
+.px-10 { padding-left: clamp(6px, 0.5vw, 10px); padding-right: clamp(6px, 0.5vw, 10px); }
+.py-10 { padding-top: clamp(6px, 0.5vw, 10px); padding-bottom: clamp(6px, 0.5vw, 10px); }
+
+.m-10 { margin: clamp(6px, 0.5vw, 10px); }
+.mt-10 { margin-top: clamp(6px, 0.5vw, 10px); }
+.mr-10 { margin-right: clamp(6px, 0.5vw, 10px); }
+.mb-10 { margin-bottom: clamp(6px, 0.5vw, 10px); }
+.ml-10 { margin-left: clamp(6px, 0.5vw, 10px); }
+.mx-10 { margin-left: clamp(6px, 0.5vw, 10px); margin-right: clamp(6px, 0.5vw, 10px); }
+.my-10 { margin-top: clamp(6px, 0.5vw, 10px); margin-bottom: clamp(6px, 0.5vw, 10px); }
+
+/* Gap 48 (36px to 48px) */
+.gap-48   { gap: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.gap-x-48 { column-gap: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.gap-y-48 { row-gap: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+
+
+/* Padding 48 */
+.p-48  { padding: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.pt-48 { padding-top: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.pr-48 { padding-right: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.pb-48 { padding-bottom: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.pl-48 { padding-left: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.px-48 { padding-inline: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.py-48 { padding-block: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+
+/* Margin 48 */
+.m-48  { margin: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.mt-48 { margin-top: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.mr-48 { margin-right: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.mb-48 { margin-bottom: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.ml-48 { margin-left: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.mx-48 { margin-inline: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+.my-48 { margin-block: clamp(2.25rem, 0.75vw + 2.1rem, 3rem); }
+
+/* Gap 40 (24px to 40px) */
+.gap-40 { gap: clamp(24px, 2vw, 40px); }
+.gap-x-40 { column-gap: clamp(24px, 2vw, 40px); }
+.gap-y-40 { row-gap: clamp(24px, 2vw, 40px); }
+
+
+
+/* Gap 32 (20px to 32px) */
+.gap-32 { gap: clamp(20px, 1.6vw, 32px); }
+.gap-x-32 { column-gap: clamp(20px, 1.6vw, 32px); }
+.gap-y-32 { row-gap: clamp(20px, 1.6vw, 32px); }
+
+
+/* Gap 24 (16px to 24px) */
+.gap-24 { gap: clamp(16px, 1.2vw, 24px); }
+.gap-x-24 { column-gap: clamp(16px, 1.2vw, 24px); }
+.gap-y-24 { row-gap: clamp(16px, 1.2vw, 24px); }
+
+/* Gap 16 (12px to 16px) */
+.gap-16 { gap: clamp(12px, 0.8vw, 16px); }
+.gap-x-16 { column-gap: clamp(12px, 0.8vw, 16px); }
+.gap-y-16 { row-gap: clamp(12px, 0.8vw, 16px); }
+
+
+
+.gap-30 { gap: clamp(16px, 1.5vw, 30px); }
+.gap-x-30 { row-gap: clamp(16px, 1.5vw, 30px); }
+.gap-y-30 { column-gap: clamp(16px, 1.5vw, 30px); }
+
+
+.gap-36   { gap: clamp(1rem, 1.25vw + 0.75rem, 2.25rem); }
+.gap-x-36 { column-gap: clamp(1rem, 1.25vw + 0.75rem, 2.25rem); }
+.gap-y-36 { row-gap: clamp(1rem, 1.25vw + 0.75rem, 2.25rem); }
+
+
+
+.gap-20 { gap: clamp(12px, 1vw, 20px); }
+.gap-x-20 { row-gap: clamp(12px, 1vw, 20px); }
+.gap-y-20 { column-gap: clamp(12px, 1vw, 20px); }
+
+.gap-10 { gap: clamp(6px, 0.5vw, 10px); }
+.gap-x-10 { row-gap: clamp(6px, 0.5vw, 10px); }
+.gap-y-10 { column-gap: clamp(6px, 0.5vw, 10px); }
+
+
+/*************   */
+.clamp-1{
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* number of lines */
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/******  *********/
+
+
+
+/* global container for moduels */
+
+.section{
+  width:100%;
+  padding: 5em 0;
+}
+
+.container{
+  max-width:var(--container-max-width);
+  width:90%;
+  margin:0 auto;
+}
+
+
+
+/* Mobile css */
+@media(max-width:768px){
+  .section{
+    padding:3em 0;
+  }
+}

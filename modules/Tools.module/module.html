@@ -1,0 +1,266 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Grid Layout
+     ================================== */
+  .smart-tools-grid {
+    display: grid;
+    /* 45% Text / 55% Image split to match the reference */
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center; 
+  }
+
+  /* ==================================
+     Left Column: Content
+     ================================== */
+  .smart-tools-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .smart-tools-content h2 {
+    margin: 24px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .smart-tools-desc {
+    color: var(--text-secondary);
+    margin: 0 0 40px 0;
+  }
+
+  /* Standardized Title Animation Classes */
+  .smart-tools-content h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  /* ==================================
+     Badges Group
+     ================================== */
+  .smart-tools-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .smart-tools-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    /* Updated to dashed border */
+    border: 1px dashed #0000004d; 
+    border-radius: 100px; /* Pill shape */
+    background-color: transparent;
+  }
+
+  .smart-tools-badge img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .smart-tools-badge span {
+    color: var(--text-primary);
+    font-size: 0.875rem; /* 14px */
+    white-space: nowrap;
+  }
+
+  /* ==================================
+     Right Column: Image Wrap
+     ================================== */
+  .smart-tools-image-wrap {
+    width: 100%;
+    border-radius: 20px;
+    position: relative;
+    /* Fallback color and Background settings for the dynamic image */
+    background-color: var(--bg-accent-2);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .smart-tools-image-wrap:hover {
+    transform: scale(1.02);
+  }
+
+  .smart-tools-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-st-el {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .smart-tools-grid {
+      grid-template-columns: 1fr;
+      /* Reorder so text is above image on mobile */
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .smart-tools-image-wrap {
+      width: 100%;
+      order: 2;
+    }
+
+    .smart-tools-content {
+      order: 1;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .smart-tools-badges {
+      gap: 12px;
+    }
+    
+    .smart-tools-badge {
+      padding: 8px 14px;
+    }
+
+    .smart-tools-badge span {
+      font-size: 0.8125rem; /* 13px */
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="section smart-tools-section">
+  <div class="container">
+    <div class="smart-tools-grid">
+      
+      <!-- Left Column: Content -->
+      <div class="smart-tools-content">
+        
+        <!-- Eyebrow (Static) -->
+        {% if module.section_headers.eyebrow_text %}
+          <div class="gsap-st-el">
+            {{ btn_macros.eyebrow_label(module.section_headers.eyebrow_text) }}
+          </div>
+        {% endif %}
+
+        <!-- Title (Standardized Blur Reveal) -->
+        {% if module.section_headers.title %}
+          <h2 class="gsap-blur-reveal">{{ module.section_headers.title }}</h2>
+        {% endif %}
+
+        <!-- Description (Delayed Fade Up) -->
+        {% if module.section_headers.description %}
+          <p class="body smart-tools-desc gsap-st-el">{{ module.section_headers.description }}</p>
+        {% endif %}
+
+        <!-- Badges Loop -->
+        <div class="smart-tools-badges">
+          {% for badge in module.badges %}
+            <div class="smart-tools-badge gsap-st-el">
+              {% if badge.icon.src %}
+                <img src="{{ badge.icon.src }}" alt="{{ badge.icon.alt|default('Icon') }}" loading="{{ badge.icon.loading }}" width="{{ badge.icon.width }}" height="{{ badge.icon.height }}">
+              {% endif %}
+              
+              {% if badge.badge_text %}
+                <span class="body-2-highlight">{{ badge.badge_text }}</span>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+      <!-- Right Column: Image with dynamic BG -->
+      <div class="smart-tools-image-wrap gsap-st-el"
+           {% if module.style.image_background_image.src %}
+           style="background-image: url('{{ module.style.image_background_image.src }}');"
+           {% endif %}>
+        {% if module.image.src %}
+          <img src="{{ module.image.src }}" alt="{{ module.image.alt|default('Smart Tools Image') }}" loading="{{ module.image.loading }}" width="{{ module.image.width }}" height="{{ module.image.height }}">
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".smart-tools-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         1. Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.05,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         2. Staggered Elements (Eyebrow, Description, Badges, Image)
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-st-el", 
+        { y: 30, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.1, 
+          delay: 0.1, // Wait briefly for the title to start blurring in
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".smart-tools-grid",
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

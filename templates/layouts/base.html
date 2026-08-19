@@ -1,0 +1,310 @@
+<!--
+  templateType: none
+-->
+<!doctype html>
+<html lang="{{ html_lang }}" {{ html_lang_dir }}>
+  <head>
+    <meta charset="utf-8">
+    {% if page_meta.html_title or pageTitle %}<title>{{ page_meta.html_title or pageTitle }}</title>{% endif %}
+    {% if brand_settings.favicon.src %}<link rel="shortcut icon" href="{{ brand_settings.favicon.src }}" />{% endif %}
+    <meta name="description" content="{{ page_meta.meta_description }}">
+    {{ require_css(get_asset_url("../../css/main.css")) }}
+    
+    {# This is intended to be used if a template requires template specific style sheets #}
+    {% if template_css %}
+    {{ require_css(get_asset_url(template_css)) }}
+    {% endif %}
+    
+    {# To see a full list of what is included via standard_header_includes please reference this article: https://developers.hubspot.com/docs/cms/hubl/variables#required-page-template-variables #}
+    {{ standard_header_includes }}
+
+    <!-- GSAP Core & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+    <!-- Base & Loader CSS -->
+    <style>
+      /* Smooth Scroll required styles */
+      html.lenis, html.lenis body {
+        height: auto;
+      }
+      .lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+      .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+      .lenis.lenis-smooth iframe {
+        pointer-events: none;
+      }
+
+      /* Progressive Blur Wrapper (Pure Glass Method) */
+      .progressive-blur_wrap {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 140px; 
+        pointer-events: none; 
+        z-index: 9999;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
+        mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
+        background: transparent;
+      }
+      
+      body {
+        background-image: url('https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a361996f438ba184407d6e0_BG%20IMG%20UPDATED%203x-p-2000.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+      }
+
+      /* =======================================
+         PAGE LOADER STYLES
+         ======================================= */
+      #page-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #eaf0f4;
+        z-index: 999999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+
+      .loader-center-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 4rem;
+        box-sizing: border-box;
+      }
+
+      .loader-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #0b132a;
+      }
+
+      .loader-logo-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        object-fit: contain;
+      }
+
+      .loader-percentage {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: #0b132a;
+      }
+
+      /* Elevated Progress Bar Container with Bottom Gap */
+      .loader-progress-wrapper {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 0;
+        width: 100%;
+        padding: 0 2rem;
+        box-sizing: border-box;
+      }
+
+      .loader-progress-track {
+        width: 100%;
+        height: 4px;
+        background-color: #d1d9e0;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .loader-progress-bar {
+        width: 0%;
+        height: 100%;
+        background-color: #0052ff;
+        box-shadow: 0 0 12px rgba(0, 82, 255, 0.8);
+        border-radius: 2px;
+        /* Removed CSS transition for instant linear frame updates */
+      }
+
+      @media(max-width:768px){
+.loader-center-content{
+     flex-direction:column;
+     align-items:center;
+    text-align:center;
+        }
+    
+}
+    </style>
+  </head>
+
+  <body>
+
+    <!-- PAGE LOADER OVERLAY -->
+    <div id="page-loader">
+      <div class="loader-center-content">
+        <div class="loader-brand">
+<!--           <img src="https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a361996f438ba184407d6e0_BG%20IMG%20UPDATED%203x-p-2000.webp" alt="Logo" class="loader-logo-icon"> -->
+          <span>Account Based RevOps</span>
+        </div>
+        <div class="loader-percentage" id="loader-counter">0%</div>
+      </div>
+      
+      <!-- Elevated progress bar with gap -->
+      <div class="loader-progress-wrapper">
+        <div class="loader-progress-track">
+          <div class="loader-progress-bar" id="loader-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-wrapper {{ builtin_body_classes }}">
+      {% block header %}
+        {% global_partial path="../partials/header.html" %} 
+      {% endblock header %}
+
+      {# The main-content ID is used for the navigation skipper in the header.html file. #}
+      <main id="main-content" class="body-container-wrapper">
+        {% block body %}
+        {% endblock body %}
+      </main>
+
+      <!-- Wrapped the footer block with your target class just in case -->
+      <div class="footer-start">
+        {% block footer %}
+          {% global_partial path="../partials/footer.html" %}
+        {% endblock footer %}
+      </div>
+    </div>
+
+    <!-- Progressive Blur Element -->
+    <div class="progressive-blur_wrap" bis_skin_checked="1">
+    </div>
+
+    {{ require_js(get_asset_url("../../js/main.js")) }}
+    
+    {# To see a full list of what is included via standard_footer_includes please reference this article: https://developers.hubspot.com/docs/cms/hubl/variables#required-page-template-variables #}
+    {{ standard_footer_includes }}
+
+    <!-- Constant Speed Loader JS -->
+    <script>
+      (function() {
+        const progressBar = document.getElementById('loader-bar');
+        const progressCounter = document.getElementById('loader-counter');
+        const loader = document.getElementById('page-loader');
+
+        const DURATION = 500; // Exact duration in ms (2.0 seconds) for 0% to 100%
+        let startTime = null;
+        let isLoaded = false;
+
+        window.addEventListener('load', () => {
+          isLoaded = true;
+        });
+
+        function animateLoader(timestamp) {
+          if (!startTime) startTime = timestamp;
+          const elapsed = timestamp - startTime;
+          
+          // Calculate exact linear percentage
+          let progress = Math.min(Math.floor((elapsed / DURATION) * 100), 100);
+
+          if (progressBar) progressBar.style.width = progress + '%';
+          if (progressCounter) progressCounter.textContent = progress + '%';
+
+          // Keep animating until it reaches 100% AND window load event fired
+          if (progress < 100 || !isLoaded) {
+            requestAnimationFrame(animateLoader);
+          } else {
+            // Smooth GSAP exit transition
+            if (typeof gsap !== 'undefined') {
+              gsap.to(loader, {
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out",
+                onComplete: () => {
+                  loader.style.display = 'none';
+                }
+              });
+            } else {
+              loader.style.opacity = '0';
+              loader.style.transition = 'opacity 0.6s ease';
+              setTimeout(() => loader.style.display = 'none', 600);
+            }
+          }
+        }
+
+        requestAnimationFrame(animateLoader);
+      })();
+    </script>
+
+    <!-- Lenis Initialization & GSAP Sync -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initialize Lenis
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          mouseMultiplier: 1,
+          smoothTouch: false,
+          touchMultiplier: 2,
+          infinite: false,
+        });
+
+        // Sync Lenis with GSAP ScrollTrigger
+        if (typeof ScrollTrigger !== 'undefined') {
+          lenis.on('scroll', ScrollTrigger.update);
+
+          gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+          });
+
+          gsap.ticker.lagSmoothing(0);
+
+          // FADE OUT BLUR WHEN REACHING FOOTER
+          const footerTrigger = document.querySelector('.footer-start');
+          if (footerTrigger) {
+            gsap.to('.progressive-blur_wrap', {
+              opacity: 0,
+              duration: 0.3,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: footerTrigger,
+                start: "top bottom",
+                toggleActions: "play none none reverse"
+              }
+            });
+          }
+
+        } else {
+          // Fallback if GSAP isn't loaded
+          function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
+        }
+      });
+    </script>
+  </body>
+</html>

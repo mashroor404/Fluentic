@@ -1,0 +1,315 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .section {
+  }
+
+  .container {
+    max-width: var(--container-max-width, 1200px);
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Pricing Header */
+  .pricing-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pricing-header h2 {
+    color: var(--text-light-primary);
+  }
+
+  .header-p {
+    color: var(--text-light-secondary);
+    max-width: 650px;
+    margin-bottom: 0;
+  }
+
+  /* Pricing Grid */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+
+  /* Base Card Styles */
+  .pricing-card {
+    background: #01103214;
+    backdrop-filter: blur(54px);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-light-primary);
+  }
+
+  /* Highlighted Card (Popular) */
+  .pricing-card.highlight-card {
+    background: var(--bg-primary);
+  }
+
+  /* Card Header Area */
+  .card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-top-row h3{
+   color:var(--text-primary);
+}
+
+  .badge-popular {
+    background: var( --bg-accent-2);
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    border-radius: 50px;
+    gap: 4px;
+    padding: 7px 8px;
+    font-size:12px;
+  }
+
+  .badge-popular span{
+   font-size:12px;
+}
+
+  .price-display {
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .price-display h2{
+   color:var(--text-primary);
+}
+
+  .price-display h6 {
+    color: var(--text-secondary);
+  }
+
+  /* Features Inner Box */
+  .features-container {
+    background-color: #01103214;;
+    border-radius: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feat-title {
+    color: var(--text-secondary);
+    font-family: var(--tertiary-font);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    line-height: 1;
+    margin-top: 0;
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .features-list li {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: var(--global-border-width) dashed var(--global-border-color);
+    gap: 8px;
+  }
+
+  .features-list li:last-child {
+    border-bottom: none;
+  }
+
+  .check-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Card Buttons */
+  .card-btn {
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1), color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-family: var(--secondary-font);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .btn-dark {
+    background: var(--gradient-3);
+    color: var(--text-light-primary);
+  }
+
+  .btn-accent {
+    background: var(--primary-color); 
+    color: var(--text-light-primary);
+  }
+
+  .btn-dark:hover {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  .btn-accent:hover {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 991px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="section light-price">
+  <div class="container">
+
+    <!-- Pricing Cards Grid -->
+    <div class="pricing-grid gap-20">
+      
+      {% for item in module.pricing_cards %}
+        <div class="pricing-card p-24 {% if item.is_popular %}highlight-card{% endif %}">
+          <div class="card-top-row mb-24">
+            <h3>{{ item.card_label }}</h3>
+            {% if item.is_popular %}
+              <div class="badge-popular">
+                {{ item.popular_badge.popular_svg }}
+                <span class="body">{{ item.popular_badge.popular_text }}</span>
+              </div>
+            {% endif %}
+          </div>
+          
+          <div class="price-display mb-48">
+            <h2>{{ item.price }}</h2>
+            <h6 class="body">{{ item.duration }}</h6>
+          </div>
+          
+          <div class="features-container p-16">
+            <p class="feat-title mb-16">{{ item.feature_title }}</p>
+            <ul class="features-list">
+              {% for feature_item in item.features %}
+                <li class="pb-16 pt-16">
+                  <span class="check-icon">
+                    {{ feature_item.feature_icon_svg }}
+                  </span>
+                  <span class="body-2" style="color:var(--text-primary)">{{ feature_item.feature }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+
+            <!-- Dynamic Link Handling -->
+            {% set href = item.button_link.url.href %}
+            {% if item.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+              {% set href = "mailto:" + href %}
+            {% elif item.button_link.url.type is equalto "PHONE_NUMBER" %}
+              {% set href = "tel:" + href %}
+            {% endif %}
+            
+            <a 
+              {% if item.button_link.url.type is equalto "CALL_TO_ACTION"  %}
+                href="{{ href }}"
+              {% else %}
+                href="{{ href|escape_url }}"
+              {% endif %}
+              {% if item.button_link.open_in_new_tab %}
+                target="_blank"
+              {% endif %}
+              {% if item.button_link.rel %}
+                rel="{{ item.button_link.rel|escape_attr }}"
+              {% endif %}
+              class=" card-btn py-16 mt-auto {% if item.is_popular %}btn-accent{% else %}btn-dark{% endif %} mt-48">
+              {{ item.button_text }}
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 1. Blur Reveal for Eyebrow, Subtitle, and Button
+      gsap.fromTo("[data-blur-reveal]", 
+        { 
+          opacity: 0, 
+          filter: "blur(12px)", 
+          y: 25 
+        }, 
+        { 
+          opacity: 1, 
+          filter: "blur(0px)", 
+          y: 0, 
+          duration: 1, 
+          stagger: 0.15, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".pricing-header",
+            start: "top 85%"
+          }
+        }
+      );
+
+      // 2. Character-by-Character Reveal for the Title
+      const titleEl = document.querySelector(".title-split-reveal");
+      if (titleEl) {
+        const text = titleEl.innerText;
+        titleEl.innerHTML = ""; 
+        
+        text.split("").forEach(char => {
+          const span = document.createElement("span");
+          span.innerText = char === " " ? "\u00A0" : char;
+          span.style.display = "inline-block";
+          titleEl.appendChild(span);
+        });
+
+        gsap.fromTo(".title-split-reveal span", 
+          { 
+            opacity: 0, 
+            y: 15,
+            filter: "blur(4px)"
+          }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            filter: "blur(0px)",
+            duration: 0.4, 
+            stagger: 0.03, 
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".pricing-header",
+              start: "top 85%"
+            }
+          }
+        );
+      }
+    }
+  });
+</script>
+{% end_require_js %}

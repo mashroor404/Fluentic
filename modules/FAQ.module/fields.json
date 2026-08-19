@@ -1,0 +1,278 @@
+[ {
+  "id" : "637a5196-ee9f-a17f-21ad-fe345e7bf709",
+  "name" : "section_header",
+  "label" : "Section header",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "f9643fce-08a0-2484-00f4-809e0c4e596a",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "fAQ’s"
+  }, {
+    "id" : "cc4566b4-dc5c-decf-98d2-2079db6e23d0",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Frequently Asked Questions"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "fAQ’s",
+    "title" : "Frequently Asked Questions"
+  }
+}, {
+  "id" : "de604cde-53a1-3366-72fb-29a028a37d17",
+  "name" : "faqs",
+  "label" : "FAQs",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "fa02eb9f-5c63-71bf-835d-adb1d363eab8",
+    "name" : "faq_title",
+    "label" : "FAQ title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Can I start with the Starter plan for free?"
+  }, {
+    "id" : "47a99fed-1974-6af3-728c-83825be3eae9",
+    "name" : "faq_description",
+    "label" : "FAQ description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "On the Starter plan, agent runs pause until your next billing cycle resets. On the Team plan, you can purchase additional run packs at any time. Business plan users have unlimited runs with no interruptions."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "faq_title" : "Can I start with the Starter plan for free?",
+    "faq_description" : "On the Starter plan, agent runs pause until your next billing cycle resets. On the Team plan, you can purchase additional run packs at any time. Business plan users have unlimited runs with no interruptions."
+  }, {
+    "faq_title" : "Can I start with the Starter plan for free?",
+    "faq_description" : "On the Starter plan, agent runs pause until your next billing cycle resets. On the Team plan, you can purchase additional run packs at any time. Business plan users have unlimited runs with no interruptions."
+  }, {
+    "faq_title" : "Can I start with the Starter plan for free?",
+    "faq_description" : "On the Starter plan, agent runs pause until your next billing cycle resets. On the Team plan, you can purchase additional run packs at any time. Business plan users have unlimited runs with no interruptions."
+  }, {
+    "faq_title" : "Can I start with the Starter plan for free?",
+    "faq_description" : "On the Starter plan, agent runs pause until your next billing cycle resets. On the Team plan, you can purchase additional run packs at any time. Business plan users have unlimited runs with no interruptions."
+  } ]
+}, {
+  "id" : "5e863dfa-729c-30cb-c181-5e0e5748f6e5",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "6ddef933-1bc9-02e4-914a-f91b10d028ef",
+    "name" : "mini_card_background_image",
+    "label" : "Mini card background image",
+    "required" : false,
+    "locked" : false,
+    "type" : "backgroundimage",
+    "display_width" : null,
+    "default" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a361996f438ba184407d6e0_BG%20IMG%20UPDATED%203x-p-2000.webp"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "mini_card_background_image" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a361996f438ba184407d6e0_BG%20IMG%20UPDATED%203x-p-2000.webp"
+    }
+  }
+}, {
+  "id" : "363cc64d-1bca-0372-3bd4-6b404fa023b5",
+  "name" : "faq_icon",
+  "label" : "FAQ icon",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"0 0 17 17\" fill=\"none\" class=\"faqs_toggle-icon\"><path d=\"M15.012 7.99154L0.999971 8.02053M8.0205 15.0121L7.99152 1\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg>"
+}, {
+  "id" : "381eac24-0fee-a43a-514e-8d9dcfbcb976",
+  "name" : "mini_card",
+  "label" : "Mini card",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "ecf5841c-d5b4-aaa0-af93-55939200f19d",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Need Guidance?"
+  }, {
+    "id" : "95b4bbff-212e-92cb-2489-19c107c441fb",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Built-in optimizations for higher rankings."
+  }, {
+    "id" : "5889fd4b-4df9-f434-be06-bec995fc68e5",
+    "name" : "avater_images",
+    "label" : "Avater images",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : null,
+      "max" : null,
+      "sorting_label_field" : null,
+      "default" : 3
+    },
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : [ {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    } ]
+  }, {
+    "id" : "46e841f3-2d9b-1957-0db6-965b498cb3a6",
+    "name" : "button",
+    "label" : "Button",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Get Started Free"
+  }, {
+    "id" : "a9170434-4ad0-17c3-d7cb-adf99292e6c5",
+    "name" : "link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "title" : "Need Guidance?",
+    "description" : "Built-in optimizations for higher rankings.",
+    "avater_images" : [ {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    } ],
+    "button" : "Get Started Free",
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+} ]

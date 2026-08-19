@@ -1,0 +1,374 @@
+button,
+.button,
+.hs-button {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.15s linear;
+  white-space: normal;
+}
+
+button:disabled,
+.button:disabled,
+.hs-button:disabled {
+  background-color: #D0D0D0;
+  border-color: #D0D0D0;
+  color: #E6E6E6;
+}
+
+/* No button */
+
+.no-button,
+.no-button:hover,
+.no-button:focus,
+.no-button:active {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: initial;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  margin-bottom: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  transition: none;
+}
+
+
+
+
+/****** Custom Button CSS START *********/
+/*      Animated primary button        */
+/***************************/
+
+/* Base Button Styles */
+.p-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  background-image: radial-gradient(circle farthest-corner at 150% 0%, #51a2ff, #0552fc);
+  border-radius: 0.875em;
+  border: none;
+  padding: 8px 32px 8px 8px;
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 14px #1355ff66;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Expanding White Background (Layer 1) */
+.p-btn .btn-bg-fill {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 40px;
+  height: calc(100% - 16px);
+  background-color: #ffffff;
+  border-radius: calc(0.875em - 4px); 
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1; /* Sets the white box as the base layer */
+}
+
+/* ============================
+   INFINITE LOOP TRACK 
+   ============================ */
+
+/* Left Icon Wrapper (Layer 2 - Above White Box) */
+.p-btn .btn-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+  /* Strict sizing so it never expands past the white box */
+  width: 40px;
+  min-width: 40px; 
+  max-width: 40px;
+  height: 40px;
+  flex-shrink: 0; 
+  margin-right: 12px;
+  overflow: hidden; /* Clips the arrows */
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2; /* Forces icon to be ON TOP of the white box */
+}
+
+/* The Track that holds two arrows and slides perfectly */
+.p-btn .btn-icon-track {
+  display: flex;
+  gap: 20px; /* Exact space between arrows */
+  padding-left: 10px; /* Centers the visible arrow inside the 40px box */
+  width: max-content;
+  animation: infinite-slide 2.5s linear infinite; 
+}
+
+/* Base Icon styling */
+.p-btn .btn-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Seamless Left-to-Right Keyframes */
+@keyframes infinite-slide {
+  /* Shifts left by 40px (20px icon + 20px gap) */
+  0% { transform: translateX(-40px); } 
+  100% { transform: translateX(0px); } 
+}
+
+/* ============================ */
+
+/* Text Wrapper (Layer 2 - Above White Box) */
+.p-btn .btn-text {
+  position: relative;
+  color: #ffffff;
+  white-space: nowrap; /* Prevents text wrapping */
+  transition: color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2; /* Forces text to be ON TOP of the white box */
+}
+
+/* Right Icon Wrapper (Layer 2 - Above White Box) */
+.p-btn .btn-icon-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 0;
+  min-width: 0;
+  opacity: 0;
+  margin-left: 0;
+  transform: translateX(-15px);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+  z-index: 2; /* Forces right icon to be ON TOP */
+}
+
+/* ============================
+   HOVER ANIMATION STATES 
+   ============================ */
+
+/* 1. Pause the looping animation on hover */
+.p-btn:hover .btn-icon-track {
+  animation-play-state: paused;
+}
+
+/* 2. Shift padding to keep the text centered */
+.p-btn:hover {
+  padding: 8px 24px 8px 32px; 
+  box-shadow: 0 4px 12px rgba(5, 82, 252, 0.1);
+}
+
+/* 3. Expand the white background but leave 2px for a "gradient border" effect */
+.p-btn:hover .btn-bg-fill {
+  top: 2px;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: calc(0.875em - 2px); 
+}
+
+/* 4. Change text color */
+.p-btn:hover .btn-text {
+  color: #011032;
+}
+
+/* 5. Collapse and fade out the left icon wrapper */
+.p-btn:hover .btn-icon-left {
+  width: 0;
+  min-width: 0;
+  max-width: 0;
+  opacity: 0;
+  margin-right: 0;
+  transform: scale(0.5);
+}
+
+/* 6. Reveal and slide in the right icon */
+.p-btn:hover .btn-icon-right {
+  width: 24px;
+  min-width: 24px;
+  opacity: 1;
+  margin-left: 12px;
+  transform: translateX(0);
+  overflow: visible;
+}
+
+
+
+
+
+/* ==================================
+   Secondary Button (.s-btn)
+   ================================== */
+
+/* Base Styles (Padding and sizing exactly matches .p-btn) */
+.s-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  background: transparent;
+  border-radius: 0.875em;
+  border: none;
+  padding: 8px 32px 8px 8px; /* Matches .p-btn padding */
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1; 
+}
+
+/* Expanding Background (Invisible by default, expands on hover) */
+.s-btn .s-btn-bg-fill {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 40px; /* Matches .p-btn icon box size */
+  height: calc(100% - 16px);
+  background-color: transparent; 
+  border-radius: calc(0.875em - 4px); 
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1; 
+}
+
+/* ============================
+   INFINITE LOOP TRACK 
+   ============================ */
+
+/* Left Icon Wrapper (Layer 2) */
+.s-btn .s-btn-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+  /* Strict 40x40 sizing to match .p-btn exactly */
+  width: 40px;
+  min-width: 40px; 
+  max-width: 40px;
+  height: 40px;
+  flex-shrink: 0; 
+  margin-right: 12px; /* Matches .p-btn margin */
+  overflow: hidden; 
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2; 
+}
+
+/* Track and Loop */
+.s-btn .s-btn-icon-track {
+  display: flex;
+  gap: 20px; /* Matches .p-btn gap */
+  padding-left: 10px; /* Centers the icon in the 40px box */
+  width: max-content;
+  animation: s-infinite-slide 2.5s linear infinite; 
+}
+
+/* Base Icon styling */
+.s-btn .s-btn-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Seamless Left-to-Right Keyframes (matches 40px shift) */
+@keyframes s-infinite-slide {
+  0% { transform: translateX(-40px); } 
+  100% { transform: translateX(0px); } 
+}
+
+/* ============================ */
+
+/* Text Wrapper */
+.s-btn .s-btn-text {
+  position: relative;
+  color: #2F6BFF; /* Theme Blue text by default */
+  white-space: nowrap; 
+  transition: color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2; 
+}
+
+/* 1px Custom Underline */
+.s-btn .s-btn-text::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* Gives a little breathing room below the letters */
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor; /* Automatically inherits and transitions with the text color */
+  transition: background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Right Icon Wrapper (Hidden Initially) */
+.s-btn .s-btn-icon-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 0;
+  min-width: 0;
+  opacity: 0;
+  margin-left: 0;
+  transform: translateX(-15px);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+  z-index: 2; 
+}
+
+/* ============================
+   HOVER ANIMATION STATES 
+   ============================ */
+
+/* 1. Pause the looping animation on hover */
+.s-btn:hover .s-btn-icon-track {
+  animation-play-state: paused;
+}
+
+/* 2. Shift padding to balance the layout (Matches .p-btn) */
+.s-btn:hover {
+  padding: 8px 24px 8px 32px; 
+}
+
+/* 3. Expand a subtle background fill */
+.s-btn:hover .s-btn-bg-fill {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.875em;
+  background-color: rgba(47, 107, 255, 0.08); /* Faint blue pill background */
+}
+
+/* 4. Change text color to dark */
+.s-btn:hover .s-btn-text {
+  color: #011032;
+}
+
+/* 5. Collapse and fade out the left icon wrapper (Matches .p-btn) */
+.s-btn:hover .s-btn-icon-left {
+  width: 0;
+  min-width: 0;
+  max-width: 0;
+  opacity: 0;
+  margin-right: 0;
+  transform: scale(0.5);
+}
+
+/* 6. Reveal and slide in the right icon (Matches .p-btn) */
+.s-btn:hover .s-btn-icon-right {
+  width: 24px;
+  min-width: 24px;
+  opacity: 1;
+  margin-left: 12px;
+  transform: translateX(0);
+  overflow: visible;
+}

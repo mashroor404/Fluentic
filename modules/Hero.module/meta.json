@@ -1,0 +1,13 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 384016134892,
+  "css_assets" : [ {
+    "autoload" : true,
+    "path" : "../../css/main.css",
+    "name" : "main.css"
+  } ],
+  "label" : "Hero",
+  "is_available_for_new_content" : true
+}

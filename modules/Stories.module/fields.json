@@ -1,0 +1,122 @@
+[ {
+  "id" : "4cb0b12f-a68f-4cd4-50b4-8bcf0644d653",
+  "name" : "eyebrow_text",
+  "label" : "Eyebrow text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "CUSTOMER STORIES"
+}, {
+  "id" : "afaaeace-5184-a06a-f692-0e142062298c",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "How teams made the switch."
+}, {
+  "id" : "cab6bea4-ef08-b585-71d1-307b8a776f14",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "The ABR playbook breaks account-based down into simple, named motions — so you can see yourself in one and start there."
+}, {
+  "id" : "7301ed66-764a-a91f-1cfe-649742d70711",
+  "name" : "cards",
+  "label" : "Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 2
+  },
+  "children" : [ {
+    "id" : "e1aacaa7-b431-e462-c7ba-31681f413ef0",
+    "name" : "card_sub_title",
+    "label" : "Card sub title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Mini case · Displacement"
+  }, {
+    "id" : "c1878656-6b8f-2935-7b3b-69b8bfdaaa17",
+    "name" : "card_title",
+    "label" : "Card title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Kept on HubSpot vs. the legacy ABM stack"
+  }, {
+    "id" : "1e801675-f152-8c2a-04b0-de357a29288e",
+    "name" : "card_description",
+    "label" : "Card description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "A 400-person software company had board pressure to migrate to a legacy enterprise stack “for real ABM.” ABR stood up target-account plays inside their existing portal instead."
+  }, {
+    "id" : "5470ed0e-500e-1b2c-536c-c5965e287cef",
+    "name" : "mini_card_title",
+    "label" : "Mini Card title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "$185K"
+  }, {
+    "id" : "640d3532-38d7-11ed-485f-b542b9d4bf40",
+    "name" : "mini_card_description",
+    "label" : "Mini card description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "typical ABM-platform first-year budget avoided · engaged-account rate up 3.1× in one quarter"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "card_sub_title" : "Mini case · Displacement",
+    "card_title" : "Kept on HubSpot vs. the legacy ABM stack",
+    "card_description" : "A 400-person software company had board pressure to migrate to a legacy enterprise stack “for real ABM.” ABR stood up target-account plays inside their existing portal instead.",
+    "card_blue_title" : "$185K",
+    "mini_card_description" : "typical ABM-platform first-year budget avoided · engaged-account rate up 3.1× in one quarter"
+  }, {
+    "card_sub_title" : "Mini case · Displacement",
+    "card_title" : "Kept on HubSpot vs. the legacy ABM stack",
+    "card_description" : "A 400-person software company had board pressure to migrate to a legacy enterprise stack “for real ABM.” ABR stood up target-account plays inside their existing portal instead.",
+    "card_blue_title" : "$185K",
+    "mini_card_description" : "typical ABM-platform first-year budget avoided · engaged-account rate up 3.1× in one quarter"
+  } ]
+}, {
+  "id" : "dc89fadf-6395-d240-c463-a3e864e1f7c5",
+  "name" : "footer_text",
+  "label" : "Footer Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Beta-cohort results shown as directional prototypes — swap in named case studies as customers agree to attribution."
+} ]

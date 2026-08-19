@@ -1,0 +1,374 @@
+[ {
+  "id" : "adea5d83-5303-2d78-07d4-66beb8f22aa2",
+  "name" : "footer_top",
+  "label" : "Footer Top",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "69f75ddf-6818-cdf3-86de-f97c48156cf2",
+    "name" : "footer_title",
+    "label" : "Footer Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Is there a list of companiesworth investing in?"
+  }, {
+    "id" : "b35a428d-d835-0814-020f-bfdcc35182f5",
+    "name" : "footer_description",
+    "label" : "Footer Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Every B2B company has one. Your stack connects in about 15 minutes, engaged accounts show up in 30–60 days, and you get pipeline you can defend to the board inside a quarter."
+  }, {
+    "id" : "dfa69bee-dda1-9aae-00a8-3afdd31caac4",
+    "name" : "footer_image",
+    "label" : "Footer Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/6a274e3f0de666720eada4aa_footer-envelope.webp",
+      "alt" : "6a274e3f0de666720eada4aa_footer-envelope",
+      "loading" : "lazy",
+      "width" : 666,
+      "height" : 353,
+      "max_width" : 666,
+      "max_height" : 353
+    }
+  }, {
+    "id" : "acf8d871-9018-92b7-9e38-0416c5642c4d",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Book a Strategy Call"
+  }, {
+    "id" : "4478edaa-daae-80fe-1a4a-fc00e2019c3b",
+    "name" : "button_link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "PHONE_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.google.com",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "footer_title" : "Is there a list of companiesworth investing in?",
+    "footer_description" : "Every B2B company has one. Your stack connects in about 15 minutes, engaged accounts show up in 30–60 days, and you get pipeline you can defend to the board inside a quarter.",
+    "footer_image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/6a274e3f0de666720eada4aa_footer-envelope.webp",
+      "alt" : "6a274e3f0de666720eada4aa_footer-envelope",
+      "loading" : "lazy",
+      "width" : 666,
+      "height" : 353,
+      "max_width" : 666,
+      "max_height" : 353
+    },
+    "button_text" : "Book a Strategy Call",
+    "button_link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.google.com",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+}, {
+  "id" : "71ac5170-0aa3-f5ab-6f83-c9944cbe2443",
+  "name" : "footer_middle",
+  "label" : "Footer Middle",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "cedb92b3-d67e-28fc-3fd0-6f47c3aeeb6c",
+    "name" : "footer_middle_title",
+    "label" : "Footer Middle Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Not ready to talk? Start free:"
+  }, {
+    "id" : "57685f9a-7c8a-3a30-9c9e-c71ee071aca4",
+    "name" : "footer_middle_ctas",
+    "label" : "Footer Middle CTAs",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : null,
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "ba85a23a-8418-5955-fab0-fb4e8ea6b5f4",
+      "name" : "cta_text",
+      "label" : "Cta Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Build Your Buyer Persona with the Persona Agent"
+    }, {
+      "id" : "eb2edbc1-16ec-8a13-6d58-665987ab313d",
+      "name" : "link_field",
+      "label" : "Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "PHONE_NUMBER", "PAYMENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "cta_text" : "Build Your Buyer Persona with the Persona Agent",
+      "link_field" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "footer_middle_title" : "Not ready to talk? Start free:",
+    "footer_middle_ctas" : [ {
+      "cta_text" : "Build Your Buyer Persona with the Persona Agent",
+      "link_field" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  }
+}, {
+  "id" : "5e7661b9-b90a-a3f6-328f-f30a776337b9",
+  "name" : "footer_bottom",
+  "label" : "Footer Bottom",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 1
+  },
+  "children" : [ {
+    "id" : "8e4b06bf-29d2-2621-1e80-b7b2eb471802",
+    "name" : "navigation_title",
+    "label" : "Navigation Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Product"
+  }, {
+    "id" : "dd1a16e9-a52c-ad6c-2298-d483b1ae99cc",
+    "name" : "navigation",
+    "label" : "Navigation",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : null,
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "1c4f8934-916d-5376-c67c-aefe676e02bf",
+      "name" : "navigation_text",
+      "label" : "Navigation Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "The Ten Plays"
+    }, {
+      "id" : "39968d7c-df6c-0502-9768-793296bb3497",
+      "name" : "navigation_link",
+      "label" : "Navigation Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "PHONE_NUMBER", "PAYMENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.google.com",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "navigation_text" : "The Ten Plays",
+      "navigation_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.google.com",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "navigation_title" : "Product",
+    "navigation" : [ {
+      "navigation_text" : "The Ten Plays",
+      "navigation_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.google.com",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  } ]
+}, {
+  "id" : "8f66dfe8-5d26-e7e3-2352-cb853d6596d1",
+  "name" : "copyright_text",
+  "label" : "Copyright Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "© 2026 Account Based RevOps · accountbasedrevops.com"
+}, {
+  "id" : "ff8f0d7c-0400-dc91-fd76-8d2421960cf2",
+  "name" : "social_section",
+  "label" : "Social Section",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 1
+  },
+  "children" : [ {
+    "id" : "4ca3e849-dd08-0d3d-cc4c-f42cb2df7675",
+    "name" : "social_svg",
+    "label" : "Social SVG",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><g clip-path=\"url(#clip0_19033_36931)\"><path d=\"M12 0C5.3736 0 0 5.3736 0 12C0 18.6264 5.3736 24 12 24C18.6264 24 24 18.6264 24 12C24 5.3736 18.6264 0 12 0ZM8.51294 18.1406H5.59039V9.34808H8.51294V18.1406ZM7.05176 8.14746H7.03271C6.052 8.14746 5.41772 7.47235 5.41772 6.6286C5.41772 5.76581 6.07141 5.10938 7.07117 5.10938C8.07092 5.10938 8.68616 5.76581 8.7052 6.6286C8.7052 7.47235 8.07092 8.14746 7.05176 8.14746ZM19.051 18.1406H16.1288V13.4368C16.1288 12.2547 15.7057 11.4485 14.6483 11.4485C13.8409 11.4485 13.3601 11.9923 13.1488 12.5173C13.0715 12.7051 13.0527 12.9677 13.0527 13.2305V18.1406H10.1303C10.1303 18.1406 10.1686 10.173 10.1303 9.34808H13.0527V10.593C13.441 9.9939 14.1359 9.14172 15.6865 9.14172C17.6093 9.14172 19.051 10.3984 19.051 13.099V18.1406Z\" fill=\"#0B0F1A\"/></g><defs><clipPath id=\"clip0_19033_36931\"><rect width=\"24\" height=\"24\" fill=\"white\"/></clipPath></defs></svg>"
+  }, {
+    "id" : "24336780-2c23-d3ee-e118-19febf746cbd",
+    "name" : "social_links",
+    "label" : "Social Links",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "PHONE_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.google.com",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "social_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><g clip-path=\"url(#clip0_19033_36931)\"><path d=\"M12 0C5.3736 0 0 5.3736 0 12C0 18.6264 5.3736 24 12 24C18.6264 24 24 18.6264 24 12C24 5.3736 18.6264 0 12 0ZM8.51294 18.1406H5.59039V9.34808H8.51294V18.1406ZM7.05176 8.14746H7.03271C6.052 8.14746 5.41772 7.47235 5.41772 6.6286C5.41772 5.76581 6.07141 5.10938 7.07117 5.10938C8.07092 5.10938 8.68616 5.76581 8.7052 6.6286C8.7052 7.47235 8.07092 8.14746 7.05176 8.14746ZM19.051 18.1406H16.1288V13.4368C16.1288 12.2547 15.7057 11.4485 14.6483 11.4485C13.8409 11.4485 13.3601 11.9923 13.1488 12.5173C13.0715 12.7051 13.0527 12.9677 13.0527 13.2305V18.1406H10.1303C10.1303 18.1406 10.1686 10.173 10.1303 9.34808H13.0527V10.593C13.441 9.9939 14.1359 9.14172 15.6865 9.14172C17.6093 9.14172 19.051 10.3984 19.051 13.099V18.1406Z\" fill=\"#0B0F1A\"/></g><defs><clipPath id=\"clip0_19033_36931\"><rect width=\"24\" height=\"24\" fill=\"white\"/></clipPath></defs></svg>",
+    "social_links" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.google.com",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ]
+} ]

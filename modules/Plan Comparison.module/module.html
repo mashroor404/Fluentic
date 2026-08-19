@@ -1,0 +1,269 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .section {
+    background: var(--dark-bg);
+  }
+
+  .container {
+    max-width: var(--container-max-width); 
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Pricing Header */
+  .pricing-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pricing-header h2 {
+    color: var(--text-light-primary);
+  }
+
+  /* Comparison Section Layout */
+  .comparison-section {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .comparison-wrapper {
+    min-width: 768px; 
+  }
+
+  /* 4-Column Grid shared by Header and Table Rows */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Comparison Bar (Top Row) */
+  .comparison-bar {
+    background: #ffffff0f; 
+    border: 2px solid #ffffff0d;
+    border-radius: 16px;
+  }
+
+  .comparison-bar h6 {
+    color: var(--text-light-primary);
+    margin: 0;
+  }
+  
+  .plan-price {
+    color: var(--bg-accent-2);
+    margin: 2px 0 0 0;
+  }
+
+  /* Comparison Table Area */
+  .comparison-table {
+    border-radius: 12px;
+    border: 2px solid #ffffff0d;
+    background: #020811; 
+    overflow: hidden; /* Ensures child elements don't break the bottom radius */
+  }
+
+  /* Category Header (Blue Bar) */
+  .category-header {
+    background-image: radial-gradient(circle farthest-corner at -100% 0%, #51a2ff, #0552fc);
+    border-top: 2px solid #ffffff0d;
+    border-bottom: none; /* Removed so it blends behind the first row */
+    color: var(--text-light-primary);
+    margin: 0;
+    margin-bottom: -16px;
+    position: relative;
+    z-index: 0;
+  }
+  
+  /* Apply top border radius only to the very first category header */
+  .comparison-table > .category-wrapper:first-child .category-header {
+    border-radius: 11px 11px 0 0; 
+  }
+
+  /* Table Rows */
+  .table-row {
+    border-bottom: 1px solid #ffffff1a;
+  }
+
+  .comparison-table > .category-wrapper:last-child .table-row:last-child {
+    border-bottom: none;
+  }
+
+  /* Target the first row immediately following the header for the inset radius effect */
+  .category-header + .table-row {
+    border-radius: 16px 16px 0 0;
+    background: #020811;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid #ffffff1a;
+  }
+
+  .feature-name {
+    color: var(--text-light-primary, #ffffff);
+  }
+
+  .feature-value {
+    color: var(--text-light-primary, #ffffff);
+  }
+
+  /* Icon Helpers */
+  .icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Helper Utility Classes */
+  .text-center { text-align: center; }
+  .p-24 { padding: 24px; }
+  .px-24 { padding-left: 24px; padding-right: 24px; }
+  .py-16 { padding-top: 16px; padding-bottom: 16px; }
+
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="section pt-80 pb-80">
+  <div class="container">
+         
+    <!-- Header Section -->
+    <div class="pricing-header mb-72">
+      {% if module.eyebrow_text %}
+        <div data-blur-reveal>
+          {{ btn_macros.eyebrow_label(module.eyebrow_text) }}
+        </div>
+      {% endif %}
+      
+      {% if module.title %}
+        <h2 data-blur-reveal class="mt-24">{{ module.title }}</h2>
+      {% endif %}
+    </div>
+
+    <!-- Comparison Table Section -->
+    <div class="comparison-section">
+      <div class="comparison-wrapper">
+        
+        <!-- Top Comparison Bar -->
+        <div class="comparison-bar comparison-grid p-24 mb-24 gsap-table-reveal">
+          <div class="plan-header-col">
+            <h6>{{ module.comparison_bar.plan_header }}</h6>
+          </div>
+          {% for item in module.comparison_bar.pricing_plan %}
+            <div class="plan-header-col text-center">
+              <h6>{{ item.plan_name }}</h6>
+              <p class="body plan-price">{{ item.price }}</p>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Comparison Table Data (Moved OUTSIDE the loop) -->
+ {% for item in module.comparison_table %}
+        <div class="comparison-table mb-16">
+         
+            <div class="category-wrapper">
+              
+              <!-- Category Header Row -->
+              <div class="category-header gsap-table-reveal px-24 pt-16 pb-32">
+                <span class="body">{{ item.category_header }}</span>
+              </div>
+              
+              <!-- Category Feature Rows -->
+              {% for item2 in item.table_row %}
+                <div class="table-row comparison-grid p-24 gsap-table-reveal">
+                  <div class="feature-name">
+                    <span class="body">{{ item2.feature_name }}</span>
+                  </div>
+
+                  {% if item2.use_icons %}
+                    <!-- Render Icons -->
+                    {% for icon_choice in item2.icon_type %}
+                      <div class="feature-value text-center icon-wrapper">
+                        {% if icon_choice == 'check' %}
+                          <!-- Green Check -->
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+<rect width="26" height="26" rx="13" fill="#1FFF36" fill-opacity="0.3"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17.803 9.11345C18.0525 9.3516 18.0617 9.74692 17.8236 9.99642L11.266 16.8662C11.1499 16.9879 10.9897 17.0575 10.8215 17.0595C10.6534 17.0614 10.4916 16.9955 10.3727 16.8766L8.18683 14.6908C7.94293 14.4469 7.94293 14.0514 8.18683 13.8075C8.43072 13.5637 8.82615 13.5637 9.07004 13.8075L10.8039 15.5414L16.9201 9.13398C17.1582 8.88448 17.5535 8.87529 17.803 9.11345Z" fill="#1FFF36" stroke="#1FFF36" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>                        {% elif icon_choice == 'cross' %}
+                          <!-- Red Cross -->
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+<rect width="26" height="26" rx="13" fill="#FF5757" fill-opacity="0.3"/>
+<path d="M17.3343 17.3157L8.66724 8.6844M8.68513 17.3336L17.3164 8.6665" stroke="#FF5757" stroke-width="1.74589" stroke-linecap="round"/>
+</svg>                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  {% else %}
+                    <!-- Render Text -->
+                    {% for text_val in item2.feature_value %}
+                      <div class="feature-value text-center">
+                        <span class="body">{{ text_val }}</span>
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+
+                </div>
+              {% endfor %}
+              
+            </div>
+          
+        </div>
+{% endfor %}
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 1. Blur Reveal for Header Elements
+      gsap.fromTo("[data-blur-reveal]", 
+        { 
+          opacity: 0, 
+          filter: "blur(12px)", 
+          y: 25 
+        }, 
+        { 
+          opacity: 1, 
+          filter: "blur(0px)", 
+          y: 0, 
+          duration: 1, 
+          stagger: 0.15, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".pricing-header",
+            start: "top 85%"
+          }
+        }
+      );
+
+      // 2. Sequential Reveal for Comparison Table Rows
+      gsap.fromTo(".gsap-table-reveal",
+        { 
+          opacity: 0, 
+          y: 20 
+        },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.8,
+          stagger: 0.08, // Controls the speed of the cascading effect down the rows
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".comparison-section",
+            start: "top 85%"
+          }
+        }
+      );
+    }
+  });
+</script>
+{% end_require_js %}

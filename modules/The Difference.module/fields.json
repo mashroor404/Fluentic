@@ -1,0 +1,397 @@
+[ {
+  "id" : "6d487a72-1279-cf56-3693-d92378ff31f7",
+  "name" : "heading_contents",
+  "label" : "Heading contents",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "913aab48-75a8-ed03-ee8e-2530eba64d6d",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "THE DIFFERENCE"
+  }, {
+    "id" : "42a10655-5415-ca00-1e67-9c3dc548cc50",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Why you can only get this here?"
+  }, {
+    "id" : "fe72697a-d6ad-d98c-0c03-dd954b5d223f",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Every ABM platform sells you software and leaves the execution to you. We inverted it."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "THE DIFFERENCE",
+    "title" : "Why you can only get this here?",
+    "description" : "Every ABM platform sells you software and leaves the execution to you. We inverted it."
+  }
+}, {
+  "id" : "48c4f595-8f08-e0b6-3ff4-3cc10dba3cd5",
+  "name" : "tabs",
+  "label" : "Tabs",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "3df2a485-4eba-e16f-7a8e-1d8fe44fed23",
+    "name" : "tab_name",
+    "label" : "Tab name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Native to Your CRM"
+  }, {
+    "id" : "653bda42-9cd8-0a53-ae36-511d839ae311",
+    "name" : "cards",
+    "label" : "Cards",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "15c14b7e-4046-206c-e4bd-40ef6c6d4dc1",
+      "name" : "card_icon",
+      "label" : "Card icon",
+      "required" : false,
+      "locked" : false,
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "size_type" : "auto",
+        "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/color-adjustment.svg",
+        "alt" : "color-adjustment",
+        "loading" : "lazy",
+        "width" : 512,
+        "height" : 512,
+        "max_width" : 512,
+        "max_height" : 512
+      }
+    }, {
+      "id" : "5678614f-22b4-db84-f779-394d73c38f5b",
+      "name" : "card_title",
+      "label" : "Card title",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Your portal is the platform."
+    }, {
+      "id" : "0c9e2af8-efda-e7e2-80a9-f7904dff95c2",
+      "name" : "card_description",
+      "label" : "Card Description",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Data, execution, and reporting live in HubSpot, with external apps connected to and directed by it. Zero migration — and everything the agents build stays in your portal, even if you cancel."
+    }, {
+      "id" : "2e52b359-952e-1718-2ed1-b04c29453238",
+      "name" : "card_tertiary_text",
+      "label" : "Card tertiary text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "01 · NATIVE TO YOUR CRM"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "card_icon" : {
+        "size_type" : "auto",
+        "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/color-adjustment.svg",
+        "alt" : "color-adjustment",
+        "loading" : "lazy",
+        "width" : 512,
+        "height" : 512,
+        "max_width" : 512,
+        "max_height" : 512
+      },
+      "card_title" : "Your portal is the platform.",
+      "card_description" : "Data, execution, and reporting live in HubSpot, with external apps connected to and directed by it. Zero migration — and everything the agents build stays in your portal, even if you cancel.",
+      "card_tertiary_text" : "01 · NATIVE TO YOUR CRM"
+    }
+  }, {
+    "id" : "f2d65dae-d817-d542-ca88-140622daf389",
+    "name" : "review",
+    "label" : "Review",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : null,
+      "max" : 2,
+      "sorting_label_field" : null,
+      "default" : 2
+    },
+    "children" : [ {
+      "id" : "51395342-7937-24ff-8229-e2bb3c3ed3dd",
+      "name" : "review_text",
+      "label" : "Review Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”"
+    }, {
+      "id" : "b1bc984f-a9d1-8cdd-b2f5-d1407097c106",
+      "name" : "author_name",
+      "label" : "Author Name",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Kelvin Gee"
+    }, {
+      "id" : "f229f7c7-4858-571b-ec85-32ec9da136fc",
+      "name" : "designation",
+      "label" : "Designation",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Principal Analyst, Forrester — July 2025. "
+    }, {
+      "id" : "32ec42a9-3639-815d-e2b6-82bc65e7e5f2",
+      "name" : "details",
+      "label" : "Details",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "ABR is that convergence, executed in the CRM you already own."
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    }, {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    } ]
+  }, {
+    "id" : "c35943e2-3c05-1cff-0aba-9c847b62258a",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/image%2024.png",
+      "alt" : "image 24",
+      "loading" : "lazy",
+      "width" : 788,
+      "height" : 532,
+      "max_width" : 788,
+      "max_height" : 532
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "tab_name" : "Native to Your CRM",
+    "cards" : {
+      "card_icon" : {
+        "size_type" : "auto",
+        "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/color-adjustment.svg",
+        "alt" : "color-adjustment",
+        "loading" : "lazy",
+        "width" : 512,
+        "height" : 512,
+        "max_width" : 512,
+        "max_height" : 512
+      },
+      "card_title" : "Your portal is the platform.",
+      "card_description" : "Data, execution, and reporting live in HubSpot, with external apps connected to and directed by it. Zero migration — and everything the agents build stays in your portal, even if you cancel.",
+      "card_tertiary_text" : "01 · NATIVE TO YOUR CRM"
+    },
+    "review" : [ {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    }, {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    } ],
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/image%2024.png",
+      "alt" : "image 24",
+      "loading" : "lazy",
+      "width" : 788,
+      "height" : 532,
+      "max_width" : 788,
+      "max_height" : 532
+    }
+  }, {
+    "tab_name" : "Native to Your CRM",
+    "cards" : {
+      "card_icon" : {
+        "size_type" : "auto",
+        "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/color-adjustment.svg",
+        "alt" : "color-adjustment",
+        "loading" : "lazy",
+        "width" : 512,
+        "height" : 512,
+        "max_width" : 512,
+        "max_height" : 512
+      },
+      "card_title" : "Your portal is the platform.",
+      "card_description" : "Data, execution, and reporting live in HubSpot, with external apps connected to and directed by it. Zero migration — and everything the agents build stays in your portal, even if you cancel.",
+      "card_tertiary_text" : "01 · NATIVE TO YOUR CRM"
+    },
+    "review" : [ {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    }, {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    } ],
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/image%2024.png",
+      "alt" : "image 24",
+      "loading" : "lazy",
+      "width" : 788,
+      "height" : 532,
+      "max_width" : 788,
+      "max_height" : 532
+    }
+  }, {
+    "tab_name" : "Native to Your CRM",
+    "cards" : {
+      "card_icon" : {
+        "size_type" : "auto",
+        "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/color-adjustment.svg",
+        "alt" : "color-adjustment",
+        "loading" : "lazy",
+        "width" : 512,
+        "height" : 512,
+        "max_width" : 512,
+        "max_height" : 512
+      },
+      "card_title" : "Your portal is the platform.",
+      "card_description" : "Data, execution, and reporting live in HubSpot, with external apps connected to and directed by it. Zero migration — and everything the agents build stays in your portal, even if you cancel.",
+      "card_tertiary_text" : "01 · NATIVE TO YOUR CRM"
+    },
+    "review" : [ {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    }, {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    } ],
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/image%2024.png",
+      "alt" : "image 24",
+      "loading" : "lazy",
+      "width" : 788,
+      "height" : 532,
+      "max_width" : 788,
+      "max_height" : 532
+    }
+  }, {
+    "tab_name" : "Native to Your CRM",
+    "cards" : {
+      "card_icon" : {
+        "size_type" : "auto",
+        "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/color-adjustment.svg",
+        "alt" : "color-adjustment",
+        "loading" : "lazy",
+        "width" : 512,
+        "height" : 512,
+        "max_width" : 512,
+        "max_height" : 512
+      },
+      "card_title" : "Your portal is the platform.",
+      "card_description" : "Data, execution, and reporting live in HubSpot, with external apps connected to and directed by it. Zero migration — and everything the agents build stays in your portal, even if you cancel.",
+      "card_tertiary_text" : "01 · NATIVE TO YOUR CRM"
+    },
+    "review" : [ {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    }, {
+      "review_text" : "“The proliferation of data and the shift towards buying groups have set MAP and ABM platforms on a collision course. It has paved the way for what we now call Revenue Marketing Platforms.”",
+      "author_name" : "Kelvin Gee",
+      "designation" : "Principal Analyst, Forrester — July 2025. ",
+      "details" : "ABR is that convergence, executed in the CRM you already own."
+    } ],
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/image%2024.png",
+      "alt" : "image 24",
+      "loading" : "lazy",
+      "width" : 788,
+      "height" : 532,
+      "max_width" : 788,
+      "max_height" : 532
+    }
+  } ]
+} ]

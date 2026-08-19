@@ -1,0 +1,383 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .cs-section-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .cs-section {
+    position: relative;
+    padding: 100px 0;
+    
+  }
+
+  .cs-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Header (Split Layout)
+     ================================== */
+  .cs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 64px;
+    margin-bottom: 48px;
+  }
+
+  .cs-header-left {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .cs-header-right {
+    flex: 1;
+    max-width: 500px;
+    padding-bottom: 8px; /* Aligns visually with the baseline of the H2 */
+  }
+
+  .cs-header h2 {
+    margin: 24px 0 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* Standardized Title Animation Classes */
+  .cs-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .cs-header-desc {
+    will-change: transform, opacity;
+  }
+
+  .cs-header .body {
+    color: var(--text-secondary, #6B738B);
+    margin: 0;
+  }
+
+  /* ==================================
+     Dividers
+     ================================== */
+  .cs-divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(1, 16, 50, 0.1);
+    margin: 0;
+    border: none;
+  }
+
+  /* ==================================
+     Cards Grid
+     ================================== */
+  .cs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    padding: 64px 0;
+  }
+
+  .cs-card {
+    background-color: var(--bg-primary, #ffffff);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 12px 40px rgba(1, 16, 50, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+  }
+
+  .cs-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(1, 16, 50, 0.08);
+  }
+
+  /* Card Top Content */
+  .cs-card-subtitle {
+    font-family: var(--tertiary-font, sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-secondary, #6B738B);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .cs-card h4 {
+    margin: 0 0 16px 0;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  .cs-card-desc {
+    color: var(--text-secondary, #6B738B);
+    margin-bottom: 32px;
+    flex-grow: 1; /* Pushes the mini-card to the bottom evenly */
+  }
+
+  /* Inner Mini Card */
+  .cs-mini-card {
+    background-color: var(--bg-accent-3, #F1F5F9);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .cs-mini-title {
+    font-family: var(--primary-font, system-ui, sans-serif);
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-weight: 500;
+    color: var(--primary-color, #2F6BFF);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -0.03em;
+  }
+
+  .cs-mini-desc {
+    font-weight: 600;
+    color: var(--text-primary, #011032);
+    margin: 0;
+  }
+
+  /* ==================================
+     Footer
+     ================================== */
+  .cs-footer {
+    text-align: center;
+    max-width: 720px;
+    margin: 48px auto 0;
+    color: var(--text-secondary, #6B738B);
+  }
+
+  .cs-footer p {
+    margin: 0;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-cs-el {
+    opacity: 0;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .cs-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .cs-header-right {
+      padding-bottom: 0;
+    }
+    .cs-grid {
+      gap: 24px;
+      padding: 48px 0;
+    }
+    .cs-card {
+      padding: 32px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .cs-section {
+      padding: 64px 0;
+    }
+    .cs-grid {
+      grid-template-columns: 1fr;
+    }
+    .cs-card {
+      padding: 24px;
+    }
+    .cs-mini-card {
+      padding: 20px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<div class="cs-section-wrapper">
+  <section class="cs-section">
+    <div class="container">
+      
+      <!-- Split Header -->
+      <div class="cs-header">
+        <div class="cs-header-left">
+          
+          <!-- Eyebrow (Static, No Animation) -->
+          {% if module.eyebrow_text %}
+            <div>
+              {{ btn_macros.eyebrow_label(module.eyebrow_text) }}
+            </div>
+          {% endif %}
+
+          <!-- Title (Standardized Blur Reveal) -->
+          {% if module.title %}
+            <h2 class="gsap-blur-reveal">{{ module.title }}</h2>
+          {% endif %}
+          
+        </div>
+        
+        <div class="cs-header-right">
+          
+          <!-- Description (Delayed Fade Up) -->
+          {% if module.description %}
+            <p class="body cs-header-desc" style="opacity: 0;">{{ module.description }}</p>
+          {% endif %}
+          
+        </div>
+      </div>
+
+      <!-- Top Divider -->
+      <hr class="cs-divider gsap-cs-el">
+
+      <!-- Cards Grid -->
+      <div class="cs-grid">
+        {% for item in module.cards %}
+          <div class="cs-card gsap-cs-card">
+            
+            {% if item.card_sub_title %}
+              <div class="cs-card-subtitle">{{ item.card_sub_title }}</div>
+            {% endif %}
+            
+            {% if item.card_title %}
+              <h4>{{ item.card_title }}</h4>
+            {% endif %}
+            
+            {% if item.card_description %}
+              <p class="body-2 cs-card-desc">{{ item.card_description }}</p>
+            {% endif %}
+
+            <!-- Inner Mini Card -->
+            <div class="cs-mini-card">
+              {% if item.card_blue_title %}
+                <div class="cs-mini-title">{{ item.card_blue_title }}</div>
+              {% endif %}
+              
+              {% if item.mini_card_description %}
+                <p class="body-2 cs-mini-desc">{{ item.mini_card_description }}</p>
+              {% endif %}
+            </div>
+            
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Bottom Divider -->
+      <hr class="cs-divider gsap-cs-el">
+
+      <!-- Footer -->
+      <div class="cs-footer body-2 gsap-cs-el">
+        {{ module.footer_text }}
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".cs-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         1. Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         2. Description Fade
+      ------------------------------------------------------------------ */
+      const headerDesc = section.querySelector(".cs-header-desc");
+      if (headerDesc) {
+        gsap.fromTo(headerDesc, 
+          { opacity: 0, y: 15 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            delay: 0.3, // Waits slightly for the title to start 
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section.querySelector('.cs-header'),
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      /* ------------------------------------------------------------------
+         3. Dividers & Footer Elements
+      ------------------------------------------------------------------ */
+      gsap.utils.toArray(".gsap-cs-el").forEach(el => {
+        gsap.fromTo(el, 
+          { y: 30, opacity: 0 }, 
+          { 
+            y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%" 
+            }
+          }
+        );
+      });
+
+      /* ------------------------------------------------------------------
+         4. Cards Grid (Staggered slide up)
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-cs-card", 
+        { y: 40, opacity: 0 }, 
+        { 
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".cs-grid",
+            start: "top 85%"
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

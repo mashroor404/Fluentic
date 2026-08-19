@@ -1,0 +1,488 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Header Base & Layout
+     ================================== */
+  .site-header {
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent; 
+    border-bottom: none; 
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .site-header.is-scrolled {
+    padding-top: 16px; 
+  }
+
+  .padding-global {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .container.is-nav {
+    width: 100%;
+    max-width: var(--container-max-width, 1280px);
+    margin: 0 auto;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    background-color: transparent;
+  }
+
+  .nav_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+
+  /* ==================================
+     Floating Pill (Desktop Only)
+     ================================== */
+  @media screen and (min-width: 992px) {
+    .site-header.is-scrolled .container.is-nav {
+      max-width: 67em;
+      background-color: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 14px;
+      /* Removed the border entirely to fix the black blink bug */
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08); 
+      padding-left: 24px;
+      padding-right: 12px;
+    }
+    
+    .site-header.is-scrolled .nav_wrap {
+      min-height: 64px; 
+    }
+  }
+
+  /* ==================================
+     Logo
+     ================================== */
+  .logo_link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    z-index: 101; 
+  }
+
+  .logo_img {
+    max-height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .logo_link p {
+    font-family: var(--primary-font);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* ==================================
+     Desktop Navigation Menu
+     ================================== */
+  .nav_menu-wrap {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .nav_menu-contain {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav_menu_flex-wrap {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav_menu-list {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  .nav_menu-item {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Nav Link Base Styles */
+  .nav_menu-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--primary-font);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    opacity: 0.7; 
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent; 
+  }
+
+  .nav_menu-link p {
+    margin: 0;
+  }
+
+  /* SVG Icon Styles */
+  .nav-icon {
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor; 
+  }
+
+  .nav_menu-link:hover {
+    opacity: 1; 
+  }
+
+  /* ==================================
+     The Target Active Indicator Styling
+     ================================== */
+  .nav_menu-link.w--current {
+    opacity: 1;
+    background-color: #F0F0F0; 
+    color: var(--text-primary);
+    border: 1px solid #0000000f; 
+    box-shadow: 0 4px 12px rgba(1, 16, 50, 0.06); 
+  }
+
+  /* Show the icon ONLY when active */
+  .nav_menu-link.w--current .nav-icon {
+    display: flex; 
+    color: var(--primary-color, #2F6BFF); 
+  }
+
+  /* ==================================
+     Header CTA Gradient Override
+     ================================== */
+  .site-header .btn-wrap a,
+  .site-header .btn-wrap button,
+  .site-header .btn-wrap .btn {
+    background: var(--gradient-3) !important;
+  }
+
+  /* Hide Mobile Elements on Desktop */
+  .nav_menu-btn {
+    display: none;
+  }
+  .btn-wrap.is-nav {
+    display: none;
+  }
+
+  /* ==================================
+     Mobile Responsive (Tablet & Below)
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .site-header {
+      background-color: #F5F7F8;
+    }
+
+    .hide-tablet {
+      display: none !important;
+    }
+    
+    .nav_menu-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      z-index: 101;
+      padding: 0;
+    }
+    
+    .nav_menu-line-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 24px;
+    }
+    
+    .nav_menu-line {
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Floating White Card Menu */
+    .nav_menu-wrap {
+      position: absolute;
+      top: 100%;
+      left: 5%;
+      right: 5%;
+      width: auto;
+      margin-top: 16px;
+      background-color: #ffffff; 
+      padding: 24px;
+      border-radius: 20px; 
+      border: none;
+      box-shadow: 0 16px 40px rgba(1, 16, 50, 0.08);
+      
+      opacity: 0;
+      visibility: hidden;
+      transform-origin: top right;
+      transform: scale(0);
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; 
+      z-index: 100;
+    }
+
+    .nav_menu_flex-wrap {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .nav_menu-list {
+      flex-direction: column;
+      align-items: stretch; 
+      gap: 0; 
+      width: 100%;
+    }
+
+    .nav_menu-item {
+      width: 100%;
+      border-bottom: 1px dashed rgba(1, 16, 50, 0.1);
+    }
+    
+    .nav_menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .nav_menu-link {
+      font-size: 18px;
+      font-weight: 500;
+      padding: 20px 8px; 
+      width: 100%;
+      opacity: 1 !important; 
+      color: var(--text-primary) !important;
+    }
+
+    .nav_menu-link:hover {
+      background-color: transparent !important;
+      opacity: 1 !important;
+    }
+    
+    .nav_menu-link.w--current {
+      background-color: transparent !important;
+      border: 1px solid transparent !important;
+      box-shadow: none !important;
+    }
+
+    .btn-wrap.is-nav {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+    }
+    
+    .btn-wrap.is-nav .btn {
+      width: 100%;
+    }
+
+    /* Open State for the Menu Card */
+    .site-header.is-open .nav_menu-wrap {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0s;
+    }
+    
+    /* Hamburger to X Animation */
+    .site-header.is-open .nav_menu-line.is-first {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .site-header.is-open .nav_menu-line.is-middle {
+      opacity: 0;
+    }
+    .site-header.is-open .nav_menu-line.is-last {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<header class="nav site-header" data-sticky="true">
+  <div class="padding-global">
+    <div class="container is-nav">
+      <div class="nav_wrap">
+        
+        <!-- Background Overlay -->
+        <div class="nav_wrap-overlay"></div>
+        
+        <!-- Logo -->
+        <a data-wf--logo--variant="primary" href="{{ module.logo.logo_link.url.href|default('/') }}" class="logo_link w-inline-block">
+          {% if module.logo.logo_image.src %}
+            <img loading="eager" src="{{ module.logo.logo_image.src }}" alt="{{ module.logo.logo_image.alt }}" class="logo_img" width="{{ module.logo.logo_image.width }}" height="{{ module.logo.logo_image.height }}">
+          {% endif %}
+          <p>Account Based RevOps</p>
+        </a>
+
+        <!-- Navigation Menu -->
+        <div class="nav_menu-wrap">
+          <div class="nav_menu-contain">
+            <div class="nav_menu_flex-wrap">
+              <nav class="nav_menu">
+                <ul role="list" class="nav_menu-list">
+                  
+                  {% for item in module.navigation %}
+                    <li class="nav_menu-item">
+                      <a href="{{ item.nav_link.url.href }}" 
+                         class="nav_menu-link w-inline-block" 
+                         data-nav-index="{{ loop.index }}"
+                         {% if item.nav_link.open_in_new_tab %}target="_blank"{% endif %} 
+                         {% if item.nav_link.no_follow %}rel="nofollow"{% endif %}>
+                        
+                        <!-- SVG Icon Container -->
+                        {% if item.icon_svg_code %}
+                          <div class="nav-icon">
+                            {{ item.icon_svg_code }}
+                          </div>
+                        {% endif %}
+                        
+                        <p>{{ item.nav_text }}</p>
+                      </a>
+                    </li>
+                  {% endfor %}
+                  
+                </ul>
+              </nav>
+              
+              <!-- Mobile CTA Button (Inside Nav) -->
+              <div class="btn-wrap is-nav">
+                {% if module.cta.button_text %}
+                  <a href="{{ module.cta.button_link.url.href }}" 
+                     class="btn s-btn" 
+                     style="display: flex; justify-content: center; align-items: center; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;"
+                     {% if module.cta.button_link.open_in_new_tab %}target="_blank"{% endif %} 
+                     {% if module.cta.button_link.no_follow %}rel="nofollow"{% endif %}>
+                    {{ module.cta.button_text }}
+                  </a>
+                {% endif %}
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop CTA Button -->
+        <div class="btn-wrap hide-tablet">
+          {% if module.cta.button_text %}
+            {{ btn_macros.animated_button(module.cta.button_text, module.cta.button_link.url.href) }}
+          {% endif %}
+        </div>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button class="nav_menu-btn" aria-label="Toggle Navigation">
+          <div class="nav_menu-line-wrap">
+            <div class="nav_menu-line is-first"></div>
+            <div class="nav_menu-line is-middle"></div>
+            <div class="nav_menu-line is-last"></div>
+          </div>
+        </button>
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="nav_overlay"></div>
+</header>
+
+{% require_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var header = document.querySelector('.site-header');
+    var menuBtn = document.querySelector('.nav_menu-btn');
+
+    // 1. Hamburger Mobile Menu Toggle
+    if(menuBtn) {
+      menuBtn.addEventListener('click', function() {
+        header.classList.toggle('is-open');
+      });
+    }
+
+    // 2. 30vh Scroll Listener for Floating Pill Design
+    window.addEventListener('scroll', function() {
+      var scrollThreshold = window.innerHeight * 0.3;
+      if (window.scrollY > scrollThreshold) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    });
+
+    // 3. Loop-Index Active State Logic via LocalStorage
+    var navLinks = document.querySelectorAll('.nav_menu-link');
+    var logoLink = document.querySelector('.logo_link');
+    
+    // Check if the user has clicked a nav link before in this session
+    var activeIndex = localStorage.getItem('activeNavIndex');
+    
+    // Default to '1' (Home) if there is no history (e.g. first visit)
+    if (!activeIndex) {
+      activeIndex = '1';
+    }
+
+    // Apply the w--current class based on the saved index on page load
+    navLinks.forEach(function(link) {
+      if (link.getAttribute('data-nav-index') === activeIndex) {
+        link.classList.add('w--current');
+      } else {
+        link.classList.remove('w--current');
+      }
+
+      // Add click listener to save the new index to storage
+      link.addEventListener('click', function() {
+        var clickedIndex = this.getAttribute('data-nav-index');
+        localStorage.setItem('activeNavIndex', clickedIndex);
+        
+        // Immediately update visuals before page navigates
+        navLinks.forEach(function(l) { l.classList.remove('w--current'); });
+        this.classList.add('w--current');
+      });
+    });
+
+    // Reset active state to '1' if they click the logo to go home
+    if (logoLink) {
+      logoLink.addEventListener('click', function() {
+        localStorage.setItem('activeNavIndex', '1');
+      });
+    }
+  });
+</script>
+{% end_require_js %}

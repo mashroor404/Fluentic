@@ -1,0 +1,339 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .footer-section {
+    background: var(--gradient-1);
+  }
+
+  .footer-container {
+    background-color: var(--bg-primary);
+    border-radius: 20px;
+  }
+
+  .inner-container{
+    max-width: var(--container-max-width);
+    width:90%;
+    margin:0 auto;
+}
+
+  /* Top Section */
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+  }
+
+  .footer-title-btn {
+    max-width: 580px;
+  }
+
+  .footer-title-btn h2 {
+    color: var(--text-primary);
+  }
+
+  .footer-title-btn p {
+    color: var(--text-secondary);
+  }
+
+
+  .footer-img {
+    flex-shrink: 0;
+    max-width: 350px;
+  }
+
+  .footer-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Middle Section */
+  .footer-middle {
+   
+  }
+
+  .middle-title p {
+   color: var(--text-secondary);
+  }
+
+  .middle-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--global-border-width) solid var(--global-border-color);
+  }
+
+  .middle-cta a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+
+  /* Bottom Section */
+  .navigation-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+  }
+
+  .nav-col h6 {
+    color:var(--text-primary);
+  }
+
+  .nav-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 0.8vw, 16px);
+  }
+
+  .nav-col ul li a {
+    color: var( --text-secondary);
+    transition: color .3s cubic-bezier(.445, .05, .55, .95);
+  }
+
+  .nav-col ul li a:hover {
+   color:var(--text-primary);
+  }
+
+  .footer-copyright-social {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: var(--global-border-width) solid var(--global-border-color);
+  }
+
+  .copyright-text p {
+    color:var( --text-secondary) ;
+    margin: 0;
+  }
+
+  .social-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+/*     background-color: #0f172a; */
+/*     color: #ffffff; */
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  
+  .social-icons a svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .social-icons a:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive Mobile Design */
+  @media (max-width: 991px) {
+    .footer-section {
+    padding: 16px;
+}
+
+    .footer-top {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+       padding: 0 16px;
+    }
+
+   .footer-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 16px;
+}
+
+    .middle-cta {
+      flex-direction: column;
+    }
+
+    .navigation-section {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 20px;
+      padding: 0 16px;
+    }
+
+    .footer-copyright-social {
+     flex-direction:column;
+     gap:16px;
+     padding-left: 16px;
+     padding-right: 16px;
+}
+  }
+
+  @media (max-width: 768px) {
+    .inner-container{
+   width:100%;
+}
+}
+
+  @media (max-width: 600px) {
+
+
+    .navigation-section {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-copyright-social {
+      flex-direction: column;
+      gap: 20px;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+
+<footer class="footer-section p-40 footer-start">
+  <div class="footer-container">
+    <div class="inner-container pb-40 pt-80 ">
+
+      <!-- Top Section -->
+      <div class="footer-top gap-24 mb-72">
+        <div class="footer-title-btn">
+          <h2 class="mb-36">{{ module.footer_top.footer_title }}</h2>
+          <p class="mb-36 body">{{ module.footer_top.footer_description }}</p>
+          <div>
+             {{ btn_macros.animated_button(module.footer_top.button_text, module.footer_top.button_link.url.href) }}
+          </div>
+           
+        </div>
+        <div class="footer-img">
+          {% if module.footer_top.footer_image.src %}
+            <img src="{{ module.footer_top.footer_image.src|escape_url }}" alt="{{ module.footer_top.footer_image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Middle Section -->
+      <div class="footer-middle mb-72">
+        <div class="middle-title">
+          <p class="body-2 mb-20">{{ module.footer_middle.footer_middle_title }}</p>
+        </div>
+        <div class="middle-cta pb-36 gap-20">
+          {% for item in module.footer_middle.footer_middle_ctas %}
+            {% set href = item.link_field.url.href %}
+            {% if item.link_field.url.type is equalto "EMAIL_ADDRESS" %}
+              {% set href = "mailto:" + href %}
+            {% elif item.link_field.url.type is equalto "PHONE_NUMBER" %}
+              {% set href = "tel:" + href %}
+            {% endif %}
+            <a 
+              {% if item.link_field.url.type is equalto "CALL_TO_ACTION"  %}
+                href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #}
+              {% else %}
+                href="{{ href|escape_url }}"
+              {% endif %}
+              {% if item.link_field.open_in_new_tab %}
+                target="_blank"
+              {% endif %}
+              {% if item.link_field.rel %}
+                rel="{{ item.link_field.rel|escape_attr }}"
+              {% endif %}
+              >
+              {{ item.cta_text }}
+            </a>
+          {% endfor %}
+        </div> 
+      </div>
+
+      <!-- Bottom Section -->
+      <div class="footer-bottom">
+        <div class="navigation-section mb-36 gap-72">
+          {% for item in module.footer_bottom %}
+            <div class="nav-col">
+              <h6 class="mb-16">{{ item.navigation_title }}</h6>
+              <ul class="body">
+                {% for item2 in item.navigation %}
+                  <li>
+                    {% set href = item2.navigation_link.url.href %}
+                    {% if item2.navigation_link.url.type is equalto "EMAIL_ADDRESS" %}
+                      {% set href = "mailto:" + href %}
+                    {% elif item2.navigation_link.url.type is equalto "PHONE_NUMBER" %}
+                      {% set href = "tel:" + href %}
+                    {% endif %}
+                    <a 
+                      {% if item2.navigation_link.url.type is equalto "CALL_TO_ACTION"  %}
+                        href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #}
+                      {% else %}
+                        href="{{ href|escape_url }}"
+                      {% endif %}
+                      {% if item2.navigation_link.open_in_new_tab %}
+                        target="_blank"
+                      {% endif %}
+                      {% if item2.navigation_link.rel %}
+                        rel="{{ item2.navigation_link.rel|escape_attr }}"
+                      {% endif %}
+                      >
+                      {{ item2.navigation_text }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="footer-copyright-social pt-40">
+          <div class="copyright-text">
+            <p class="body-2">{{ module.copyright_text }}</p>
+          </div>
+          <div class="social-icons">
+            {% for item in module.social_section %}
+              {% set href = item.social_links.url.href %}
+              {% if item.social_links.url.type is equalto "EMAIL_ADDRESS" %}
+                {% set href = "mailto:" + href %}
+              {% elif item.social_links.url.type is equalto "PHONE_NUMBER" %}
+                {% set href = "tel:" + href %}
+              {% endif %}
+              <a
+                {% if item.social_links.url.type is equalto "CALL_TO_ACTION"  %}
+                  href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #}
+                {% else %}
+                  href="{{ href|escape_url }}"
+                {% endif %}
+                {% if item.social_links.open_in_new_tab %}
+                  target="_blank"
+                {% endif %}
+                {% if item.social_links.rel %}
+                  rel="{{ item.social_links.rel|escape_attr }}"
+                {% endif %}
+                >
+                {{ item.social_svg }}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>

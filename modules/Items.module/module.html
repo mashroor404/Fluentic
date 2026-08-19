@@ -1,0 +1,383 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .playbook-section {
+    position: relative;
+    padding: 100px 0;
+    
+  }
+
+  .playbook-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Header (Split Layout)
+     ================================== */
+  .playbook-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 64px;
+    margin-bottom: 48px;
+  }
+
+  .playbook-header-left {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .playbook-header-right {
+    flex: 1;
+    max-width: 500px;
+    padding-bottom: 8px; /* Aligns visually with the baseline of the H2 */
+  }
+
+  .playbook-header h2 {
+    margin: 24px 0 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* Standardized Title Animation Classes */
+  .playbook-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .playbook-header-desc {
+    will-change: transform, opacity;
+  }
+
+  .playbook-header .body {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* ==================================
+     Dividers
+     ================================== */
+  .playbook-divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(1, 16, 50, 0.1); /* Subtle dark line */
+    margin: 0;
+    border: none;
+  }
+
+  /* ==================================
+     Playbook Grid
+     ================================== */
+  .playbook-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 80px;
+    padding: 64px 0;
+  }
+
+  /* New column wrappers for 50/50 split */
+  .playbook-col {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .playbook-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  /* The Number Box */
+  .playbook-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background-color: var(--bg-accent-2);
+    border-radius: 8px;
+    font-family: var(--primary-font);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .playbook-item-content h5 {
+    margin: 0 0 12px;
+  }
+
+  .playbook-item-content .body-2 {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* ==================================
+     Footer
+     ================================== */
+  .playbook-footer {
+    text-align: center;
+    margin: 48px auto 0;
+    color: var(--text-secondary);
+  }
+
+  .playbook-footer p {
+    margin: 0;
+  }
+
+  /* GSAP initial hide states */
+  .gsap-pb-el {
+    opacity: 0;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .playbook-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .playbook-header-right {
+      padding-bottom: 0;
+    }
+    .playbook-grid {
+      column-gap: 40px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .playbook-section {
+      padding: 64px 0;
+    }
+    
+    /* Center align the header content on mobile */
+    .playbook-header {
+      align-items: center;
+      text-align: center;
+    }
+    
+    /* Applying flex to the wrappers ensures the eyebrow macro also centers perfectly */
+    .playbook-header-left,
+    .playbook-header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .playbook-grid {
+      grid-template-columns: 1fr;
+      gap: 48px; /* Spaces out the stacked columns */
+      padding: 48px 0;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<!-- Section with dynamic background image from Style field if applied -->
+<section class="playbook-section" >
+  <div class="container">
+    
+    <!-- Split Header -->
+    <div class="playbook-header">
+      <div class="playbook-header-left">
+        <!-- Eyebrow (Static, No Animation) -->
+        {% if module.section_heading.eyebrow_text %}
+          <div>
+            {{ btn_macros.eyebrow_label(module.section_heading.eyebrow_text) }}
+          </div>
+        {% endif %}
+
+        <!-- Title (Standardized Blur Reveal) -->
+        {% if module.section_heading.title %}
+          <h2 class="gsap-blur-reveal">{{ module.section_heading.title }}</h2>
+        {% endif %}
+      </div>
+      
+      <div class="playbook-header-right">
+        <!-- Description (Delayed Fade Up) -->
+        {% if module.section_heading.description %}
+          <p class="body playbook-header-desc" style="opacity: 0;">{{ module.section_heading.description }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Top Divider -->
+    <hr class="playbook-divider gsap-pb-el">
+
+    <!-- Plays Grid (50/50 Split) -->
+    <div class="playbook-grid">
+      
+      {# Calculate exactly half the items, rounding up so the left column takes the odd extra if needed #}
+      {% set total_items = module.items|length %}
+      {% set mid = (total_items / 2)|round(0, 'ceil')|int %}
+      
+      <!-- First Column (First 50%) -->
+      <div class="playbook-col">
+        {% for item in module.items %}
+          {% if loop.index <= mid %}
+            <div class="playbook-item gsap-pb-item">
+              
+              <!-- Auto-generated Number (adds a '0' if single digit) -->
+              <div class="playbook-number">
+                {% if loop.index < 10 %}0{% endif %}{{ loop.index }}
+              </div>
+              
+              <!-- Content -->
+              <div class="playbook-item-content">
+                {% if item.title %}
+                  <h5>{{ item.title }}</h5>
+                {% endif %}
+                
+                {% if item.description %}
+                  <p class="body-2">{{ item.description }}</p>
+                {% endif %}
+              </div>
+              
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <!-- Second Column (Remaining 50%) -->
+      <div class="playbook-col">
+        {% for item in module.items %}
+          {% if loop.index > mid %}
+            <div class="playbook-item gsap-pb-item">
+              
+              <!-- Auto-generated Number -->
+              <div class="playbook-number">
+                {% if loop.index < 10 %}0{% endif %}{{ loop.index }}
+              </div>
+              
+              <!-- Content -->
+              <div class="playbook-item-content">
+                {% if item.title %}
+                  <h5>{{ item.title }}</h5>
+                {% endif %}
+                
+                {% if item.description %}
+                  <p class="body-2">{{ item.description }}</p>
+                {% endif %}
+              </div>
+              
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+
+    <!-- Bottom Divider -->
+    <hr class="playbook-divider gsap-pb-el">
+
+    <!-- Footer -->
+    <div class="playbook-footer body-2 gsap-pb-el">
+      {{ module.footer_text }}
+    </div>
+
+  </div>
+</section>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".playbook-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         1. Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         2. Description Fade
+      ------------------------------------------------------------------ */
+      const headerDesc = section.querySelector(".playbook-header-desc");
+      if (headerDesc) {
+        gsap.fromTo(headerDesc, 
+          { opacity: 0, y: 15 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            delay: 0.3, // Waits slightly for the title to start 
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section.querySelector('.playbook-header'),
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      /* ------------------------------------------------------------------
+         3. Dividers & Footer Elements
+      ------------------------------------------------------------------ */
+      gsap.utils.toArray(".gsap-pb-el").forEach(el => {
+        gsap.fromTo(el, 
+          { y: 30, opacity: 0 }, 
+          { 
+            y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%" 
+            }
+          }
+        );
+      });
+
+      /* ------------------------------------------------------------------
+         4. Playbook Grid Items Stagger
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-pb-item", 
+        { y: 30, opacity: 0 }, 
+        { 
+          y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".playbook-grid",
+            start: "top 80%"
+          }
+        }
+      );
+
+    }
+  });
+</script>
+{% end_require_js %}

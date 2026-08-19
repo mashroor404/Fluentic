@@ -1,0 +1,194 @@
+<!--
+    templateType: blog_post
+    isAvailableForNewContent: true
+    label: Blog post
+    screenshotPath: /Re-board theme/images/insights_article.png
+-->
+
+{% require_css %}
+<style>
+
+  /* --- Author Profile Card Layout --- */
+  .author-profile-card {
+    display: flex;
+    align-items: flex-start;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    max-width: 60%;
+    margin:0 auto;
+    box-sizing: border-box;
+  }
+
+  /* Avatar Element Handling */
+  .author-avatar-wrapper {
+    flex-shrink: 0;
+  }
+
+  .author-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: var(--border-color);
+    display: block;
+    object-fit:cover;
+  }
+
+  /* Content Blocks */
+  .author-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+
+  }
+
+  .author-title {
+
+    color: var(--tertiary-dark-text-color);
+
+  }
+
+  .author-bio {
+    color: var(--tertiary-dark-text-color);
+  }
+
+  /* Contact Details */
+  .author-contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .author-link {
+    font-size: var(--text-p);
+    font-family: var(--secondary-font); 
+    text-decoration: none;
+    width: fit-content;
+    color: var(--primary-dark-text-color);
+    position: relative; /* Required to anchor the absolute underline */
+    padding-bottom: 2px; /* Creates a clean gap between the text and the line */
+    transition: color 0.2s ease;
+  }
+
+  /* Matches design: Email and LinkedIn have explicit underlines, Phone doesn't */
+  .email-link, 
+  .linkedin-link {
+
+  }
+
+  .author-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1.5px; /* Thickness of your underline */
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-dark-text-color); /* Matches your text color */
+    transform: scaleX(0); /* Starts shrunk down to nothing */
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out; /* Controls the slide speed */
+  }
+
+  .author-header{
+    max-width: 60%;
+    margin: 24px auto;
+    box-sizing: border-box;
+  }
+
+  /* 2. Animate the underline to full width on hover */
+  .author-link:hover::after {
+    transform: scaleX(1); /* Scales up to 100% width smoothly */
+    background-color: var(--primary-dark-text-color); /* Optional: changes line color on hover */
+  }
+
+  .hs-audio-player{
+    background: var(--secondary-bg) !important;
+    font-family: var(--secondary-font) !important;
+    color:var( --primary-dark-text-color) !mportant; 
+  }
+
+  .narration, .post-body{
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  .narration{ margin-bottom: clamp(1rem, 1.5vw, 1.25rem); }
+
+
+  .author-contact-links 
+
+  /* --- Mobile Breakpoint Optimization --- */
+  @media (max-width: 768px) {
+    .author-profile-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 24px;
+      gap: 20px;
+    }
+
+    .author-contact-links {
+      align-items: center;
+    }
+
+    .narration, .post-body{
+      width: 90%;
+    }
+
+    .author-header{
+      width:90%;
+    }
+    .author-profile-card{
+      width:90%;
+    }
+
+  }
+
+</style>
+{% end_require_css %}
+
+{% extends "../layouts/base.html" %}
+
+{% block body %}
+
+<div class="blog-hero">
+  {% module "module_178040958064455" path="/Re-board theme/modules/Blog Hero", label="Blog Hero" %}
+</div>
+
+
+<section class="section">
+  <div class="container">
+    <div class="narration"  data-aos="fade-up"
+
+         data-aos-duration="650"
+
+         >
+      {% module "narration" path="@hubspot/blog_audio",
+  overrideable=False, styles={ groupColors: { override: 'custom', background: { color: 'var(--color-bg-light-accent-1)' }, text: { color: 'var(--color-text-dark-primary)' }, hover: { color: 'var(--color-brand-primary)' }, }, } %}
+    </div>
+    <div class="post-body"  data-aos="fade-up"
+
+         data-aos-duration="700"
+
+         >
+      {{ content.post_body }}
+    </div>
+
+    <div class="author-header">
+      {% module "module_178066681243462" 
+path="@hubspot/rich_text", 
+label="rich_text.module" 
+html="<h2>Author</h2>"%}
+    </div> 
+
+    {% module "module_178057458751112" path="/Re-board theme/modules/Author Details", label="Author Details" %}
+
+    <div class="related-blogs">
+      {% module "module_17804734585235" path="/Re-board theme/modules/Related Blogs", label="Related Blogs" %}
+    </div>
+
+  </div>
+</section>
+{% endblock body %}

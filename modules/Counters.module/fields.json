@@ -1,0 +1,120 @@
+[ {
+  "id" : "65993878-72b3-4fe4-5f6c-1e557a3372d6",
+  "name" : "headign_contents",
+  "label" : "Headign contents",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "5345cd8d-7b63-5c52-90e8-461919b25677",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "why ABR"
+  }, {
+    "id" : "6aa32c9d-d8a4-0cf3-681b-f5c7161e06a5",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "The old playbook is breaking"
+  }, {
+    "id" : "369ad53a-4bb4-74a8-e8dd-57ae5004dce3",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Every number below is why account-based is no longer optional."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "why ABR",
+    "title" : "The old playbook is breaking",
+    "description" : "Every number below is why account-based is no longer optional."
+  }
+}, {
+  "id" : "31b2777b-c7c8-e559-caa9-88d2c59eb5e1",
+  "name" : "card",
+  "label" : "Card",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "32bf2807-792a-5c5d-64d1-af287d43d758",
+    "name" : "card_title",
+    "label" : "Card Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "2.3%"
+  }, {
+    "id" : "0a3236d7-d9f8-32c6-7039-d5ce1289f386",
+    "name" : "card_description",
+    "label" : "Card Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Cold-call success rate — spam warnings and caller ID keep raising the cost of a meeting"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "card_title" : "2.3%",
+    "card_description" : "Cold-call success rate — spam warnings and caller ID keep raising the cost of a meeting"
+  }, {
+    "card_title" : "2.3%",
+    "card_description" : "Cold-call success rate — spam warnings and caller ID keep raising the cost of a meeting"
+  }, {
+    "card_title" : "2.3%",
+    "card_description" : "Cold-call success rate — spam warnings and caller ID keep raising the cost of a meeting"
+  }, {
+    "card_title" : "2.3%",
+    "card_description" : "Cold-call success rate — spam warnings and caller ID keep raising the cost of a meeting"
+  } ]
+}, {
+  "id" : "ed61ab58-c00c-ac07-2c69-60fcaefd20a2",
+  "name" : "background_item",
+  "label" : "Background Item",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/download%201.svg",
+    "alt" : "download 1",
+    "loading" : "lazy",
+    "width" : 937,
+    "height" : 727,
+    "max_width" : 937,
+    "max_height" : 727
+  }
+} ]

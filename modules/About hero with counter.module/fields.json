@@ -1,0 +1,138 @@
+[ {
+  "id" : "9a6df56d-eb10-c5a0-6e41-7ae13be33eec",
+  "name" : "images",
+  "label" : "Images",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "4aa25a77-4243-8314-e59f-7bbd2d89a639",
+    "name" : "image_portrait",
+    "label" : "Image portrait",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a318c440ad0feff91492308_about_img1.webp",
+      "alt" : "6a318c440ad0feff91492308_about_img1",
+      "loading" : "lazy",
+      "width" : 413,
+      "height" : 486,
+      "max_width" : 413,
+      "max_height" : 486
+    }
+  }, {
+    "id" : "d4cf11ff-e662-1cb6-1b2b-0f25ad0842cb",
+    "name" : "image_landscape",
+    "label" : "Image Landscape",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a318c457774897b0773c725_about_img2.webp",
+      "alt" : "6a318c457774897b0773c725_about_img2",
+      "loading" : "lazy",
+      "width" : 848,
+      "height" : 486,
+      "max_width" : 848,
+      "max_height" : 486
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image_portrait" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a318c440ad0feff91492308_about_img1.webp",
+      "alt" : "6a318c440ad0feff91492308_about_img1",
+      "loading" : "lazy",
+      "width" : 413,
+      "height" : 486,
+      "max_width" : 413,
+      "max_height" : 486
+    },
+    "image_landscape" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a318c457774897b0773c725_about_img2.webp",
+      "alt" : "6a318c457774897b0773c725_about_img2",
+      "loading" : "lazy",
+      "width" : 848,
+      "height" : 486,
+      "max_width" : 848,
+      "max_height" : 486
+    }
+  }
+}, {
+  "id" : "3fe6b86f-34a4-2d49-5477-4bf228cc9fb8",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "At CoreAI, we're more than just an AI automation platform—we're a team of builders, innovators, and problem-solvers passionate about transforming the way businesses work. We believe automation should be intelligent, accessible, and built to empower people, not replace them. By combining cutting-edge AI with practical workflows, we help teams eliminate repetitive tasks, boost productivity, and focus on what matters most. Every challenge is an opportunity to innovate."
+}, {
+  "id" : "c73dcf0b-6eb6-5971-266e-ef00a9d609bb",
+  "name" : "counter_cards",
+  "label" : "Counter Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "75d3f48e-2046-7526-90e5-231d9b436c3f",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "100%"
+  }, {
+    "id" : "d36b0fa1-1988-5f9d-8630-1f9e2cf87e74",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Autonomous Task Execution with Precision AI Systems"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "100%",
+    "description" : "Autonomous Task Execution with Precision AI Systems"
+  }, {
+    "title" : "100%",
+    "description" : "Autonomous Task Execution with Precision AI Systems"
+  }, {
+    "title" : "100%",
+    "description" : "Autonomous Task Execution with Precision AI Systems"
+  }, {
+    "title" : "100%",
+    "description" : "Autonomous Task Execution with Precision AI Systems"
+  } ]
+} ]

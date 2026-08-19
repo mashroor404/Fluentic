@@ -1,0 +1,151 @@
+[ {
+  "id" : "bcab356f-b020-69cc-cd6d-fdfd7c3eec00",
+  "name" : "section_heading",
+  "label" : "Section heading",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "8e00e648-bbe8-2901-246d-5d7b0c8b574a",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ABR PLAYBOOK"
+  }, {
+    "id" : "c0aaa494-51ad-32b7-53ed-23dda2193802",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "Ten plays.&nbsp;<br>Circle the one that’s you."
+  }, {
+    "id" : "50f9baa7-76fb-facf-d6d3-df7dd61006f0",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "The ABR playbook breaks account-based down into simple, named motions — so you can see yourself in one and start there."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "ABR PLAYBOOK",
+    "title" : "Ten plays.&nbsp;<br>Circle the one that’s you.",
+    "description" : "The ABR playbook breaks account-based down into simple, named motions — so you can see yourself in one and start there."
+  }
+}, {
+  "id" : "abe067a3-fd2f-aea5-a7f4-3e8afaecafbc",
+  "name" : "items",
+  "label" : "Items",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 8
+  },
+  "children" : [ {
+    "id" : "744edaa9-25b9-2fdd-caca-bdd1428f8aa6",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Traditional ABR"
+  }, {
+    "id" : "6658898d-6530-f053-3659-7868f9f7b38f",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "Traditional ABR",
+    "description" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  }, {
+    "title" : "Traditional ABR",
+    "description" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  }, {
+    "title" : "Traditional ABR",
+    "description" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  }, {
+    "title" : "Traditional ABR",
+    "description" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  }, {
+    "title" : "Traditional ABR",
+    "description" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  }, {
+    "title" : "Traditional ABR",
+    "description" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  }, {
+    "title" : "Traditional ABR",
+    "description" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  }, {
+    "title" : "Traditional ABR",
+    "description" : "Enterprise targets, $100K+ deals, 6–18 month cycles. What the big ABM tools do — without their price tag."
+  } ]
+}, {
+  "id" : "365b8524-b5c3-f2f9-48b3-439f4de90dbf",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "b2f32bc2-43cb-ce45-2617-8f686033e4ee",
+    "name" : "backgroundimage",
+    "label" : "Background image",
+    "required" : false,
+    "locked" : false,
+    "type" : "backgroundimage",
+    "display_width" : null,
+    "default" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/section%20bg.webp"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "backgroundimage" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/section%20bg.webp"
+    }
+  }
+}, {
+  "id" : "dd3638ed-8c33-2139-7ca1-9694228152d4",
+  "name" : "footer_text",
+  "label" : "Footer text",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "Not sure which is yours? That’s exactly what a strategy call is for. <span style=\"color: #2f6bff;\">Book one</span> — or start with the free Persona Agent below."
+} ]

@@ -1,0 +1,183 @@
+[ {
+  "id" : "8089f084-3704-d37c-539d-3af15e148717",
+  "name" : "eyebrow_text",
+  "label" : "Eyebrow Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "PERSONAS"
+}, {
+  "id" : "922da521-a7fc-d330-ddac-f87c4c6f7801",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Which one are you?"
+}, {
+  "id" : "8411131c-2f6e-21d9-ba25-08f99e1f46f6",
+  "name" : "subtitle",
+  "label" : "Subtitle",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Four people land on this page. Each is fighting a different fight. Pick yours."
+}, {
+  "id" : "558464d7-6b1a-50ea-f626-03a5d9a5d279",
+  "name" : "stack_card",
+  "label" : "Stack Card",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 1
+  },
+  "children" : [ {
+    "id" : "760406a4-7909-0039-3cf0-93d485d5d03a",
+    "name" : "card_label",
+    "label" : "Card Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "FOR REVENUE LEADERS"
+  }, {
+    "id" : "bbffcdc2-5391-923b-8cba-0f58cfd1dc07",
+    "name" : "card_title",
+    "label" : "Card Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "“I run marketing at a mid-market B2B.”"
+  }, {
+    "id" : "1c9a484c-3ead-01a2-6e6c-4ca6b282dabb",
+    "name" : "card_description",
+    "label" : "Card Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Your MQLs aren’t converting, the board sees every miss, and the named-account motion everyone agrees should exist still doesn’t because nobody has the bandwidth to run it."
+  }, {
+    "id" : "6e3ec0bf-4fb3-2522-4fde-58dbcd366f87",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "See the Plan for Your Team"
+  }, {
+    "id" : "37014a0a-c9de-87ff-0744-347ce9cfa3e7",
+    "name" : "button_link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "PHONE_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.google.com",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "id" : "1567bbfe-bd2f-31c4-7004-e4b2dd307caf",
+    "name" : "card_image",
+    "label" : "Card Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/56328b66a60fdf216377bee523f3748411f8c382.webp",
+      "alt" : "56328b66a60fdf216377bee523f3748411f8c382",
+      "loading" : "lazy",
+      "width" : 664,
+      "height" : 525,
+      "max_width" : 664,
+      "max_height" : 525
+    }
+  }, {
+    "id" : "d282ac3a-7a64-2ea2-78ce-b2828364b03a",
+    "name" : "use_code_snippet",
+    "label" : "Use Code Snippet",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "9ac4ac74-49c1-30ca-7b8c-d39cc3365700",
+    "name" : "code_snippet",
+    "label" : "Code Snippet",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "stack_card.use_code_snippet",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<span>import { CoreAiAgent } from \"@coreai/node\";<br><br>const agent = new CoreAiAgent({<br>&nbsp;apiKey: process.env.COREAI_API_KEY,<br>&nbsp;model: \"coreai-pro\",<br>});<br><br>// Register event-driven workflow<br>agent.on(\"task:received\", async (task) =&gt; {<br>&nbsp;const result = await agent.run({<br>&nbsp; &nbsp;input: task.payload,<br>&nbsp; &nbsp;tools: [\"web_search\", \"code_exec\"], });<br><br>&nbsp;await agent.respond(task.id, result); });import { CoreAiSandbox } from \"@coreai/node\";<br><br>// Each agent runs in a fully isolated environment<br>const sandbox = await CoreAiSandbox.create({<br>&nbsp;apiKey: process.env.COREAI_API_KEY,<br>&nbsp;memory: \"512mb\",<br>&nbsp;timeout: 300, });<br><br>const output = await sandbox.execute({<br>&nbsp;agentId: \"agent_7x92k\",<br>&nbsp;code: workflowScript,<br>&nbsp;isolate: true, });<br><br>await sandbox.destroy();</span>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "card_label" : "FOR REVENUE LEADERS",
+    "card_title" : "“I run marketing at a mid-market B2B.”",
+    "card_description" : "Your MQLs aren’t converting, the board sees every miss, and the named-account motion everyone agrees should exist still doesn’t because nobody has the bandwidth to run it.",
+    "button_text" : "See the Plan for Your Team",
+    "button_link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.google.com",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    },
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/56328b66a60fdf216377bee523f3748411f8c382.webp",
+      "alt" : "56328b66a60fdf216377bee523f3748411f8c382",
+      "loading" : "lazy",
+      "width" : 664,
+      "height" : 525,
+      "max_width" : 664,
+      "max_height" : 525
+    },
+    "use_code_snippet" : false,
+    "code_snippet" : "<span>import { CoreAiAgent } from \"@coreai/node\";<br><br>const agent = new CoreAiAgent({<br>&nbsp;apiKey: process.env.COREAI_API_KEY,<br>&nbsp;model: \"coreai-pro\",<br>});<br><br>// Register event-driven workflow<br>agent.on(\"task:received\", async (task) =&gt; {<br>&nbsp;const result = await agent.run({<br>&nbsp; &nbsp;input: task.payload,<br>&nbsp; &nbsp;tools: [\"web_search\", \"code_exec\"], });<br><br>&nbsp;await agent.respond(task.id, result); });import { CoreAiSandbox } from \"@coreai/node\";<br><br>// Each agent runs in a fully isolated environment<br>const sandbox = await CoreAiSandbox.create({<br>&nbsp;apiKey: process.env.COREAI_API_KEY,<br>&nbsp;memory: \"512mb\",<br>&nbsp;timeout: 300, });<br><br>const output = await sandbox.execute({<br>&nbsp;agentId: \"agent_7x92k\",<br>&nbsp;code: workflowScript,<br>&nbsp;isolate: true, });<br><br>await sandbox.destroy();</span>"
+  } ]
+} ]

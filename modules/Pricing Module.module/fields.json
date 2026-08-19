@@ -1,0 +1,239 @@
+[ {
+  "id" : "7097c96e-8a97-aa1d-440e-6fefa0268aa4",
+  "name" : "eyebrow_text",
+  "label" : "Eyebrow Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Pricing"
+}, {
+  "id" : "324a9a9c-4670-8027-6eca-df2e5baa1542",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Pricing your CFO will actually like."
+}, {
+  "id" : "5b432c80-4503-a0fa-7230-243c64519453",
+  "name" : "subtitle",
+  "label" : "Subtitle",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "The enterprise ABM platforms run $60K–$250K a year — a realistic mid-market first year lands around $185K. This is not that."
+}, {
+  "id" : "36d8a025-44f9-d9d3-699a-19c9cf353a82",
+  "name" : "pricing_cards",
+  "label" : "Pricing Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 1
+  },
+  "children" : [ {
+    "id" : "4219b822-a289-8f89-11b6-97a8218c2250",
+    "name" : "card_label",
+    "label" : "Card Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Starter"
+  }, {
+    "id" : "b72168d1-6d8e-de70-9949-a1656321c226",
+    "name" : "price",
+    "label" : "Price",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "$499"
+  }, {
+    "id" : "2805c0ca-8bef-c29e-0bbd-62f9d1f101ce",
+    "name" : "duration",
+    "label" : "Duration",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "/month"
+  }, {
+    "id" : "d0b0c6b0-84ac-90d3-18af-8bcd211fecf4",
+    "name" : "is_popular",
+    "label" : "Is Popular",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "70c2a162-14d3-b2de-3b06-4bcb648a5d82",
+    "name" : "popular_badge",
+    "label" : "Popular Badge",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "pricing_cards.is_popular",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "children" : [ {
+      "id" : "a356c2a3-1516-3053-6603-772449f7e322",
+      "name" : "popular_svg",
+      "label" : "Popular SVG",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M7.07514 11.8594C7.67184 10.977 7.72682 10.0239 7.2401 9.00014C7.10474 9.54938 6.85715 9.8827 6.49729 10.0002C6.83146 9.04584 6.55223 8.01478 5.65956 6.90701C5.6403 8.05113 5.36535 8.88457 4.83471 9.40734C4.10369 10.1268 4.11229 10.9388 4.86049 11.8432C1.7546 10.1904 1.31641 7.97355 3.54588 5.19286C3.68416 5.86462 4.01924 6.27705 4.55118 6.43015C3.97136 3.96966 4.58142 1.87315 6.38132 0.140625C6.39239 3.98548 7.57141 4.32722 9.0621 6.04348C10.6716 8.10307 9.72576 10.4799 7.07514 11.8594Z\" fill=\"url(#paint0_linear_19033_36542)\"/><defs><linearGradient id=\"paint0_linear_19033_36542\" x1=\"9.59758\" y1=\"3.35691\" x2=\"2.74089\" y2=\"10.2136\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#EF3E3D\"/><stop offset=\"1\" stop-color=\"#FFC828\"/></linearGradient></defs></svg>"
+    }, {
+      "id" : "b6bd494a-278d-6246-d608-9df12e8d9711",
+      "name" : "popular_text",
+      "label" : "Popular Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Most Popular"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "popular_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M7.07514 11.8594C7.67184 10.977 7.72682 10.0239 7.2401 9.00014C7.10474 9.54938 6.85715 9.8827 6.49729 10.0002C6.83146 9.04584 6.55223 8.01478 5.65956 6.90701C5.6403 8.05113 5.36535 8.88457 4.83471 9.40734C4.10369 10.1268 4.11229 10.9388 4.86049 11.8432C1.7546 10.1904 1.31641 7.97355 3.54588 5.19286C3.68416 5.86462 4.01924 6.27705 4.55118 6.43015C3.97136 3.96966 4.58142 1.87315 6.38132 0.140625C6.39239 3.98548 7.57141 4.32722 9.0621 6.04348C10.6716 8.10307 9.72576 10.4799 7.07514 11.8594Z\" fill=\"url(#paint0_linear_19033_36542)\"/><defs><linearGradient id=\"paint0_linear_19033_36542\" x1=\"9.59758\" y1=\"3.35691\" x2=\"2.74089\" y2=\"10.2136\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#EF3E3D\"/><stop offset=\"1\" stop-color=\"#FFC828\"/></linearGradient></defs></svg>",
+      "popular_text" : "Most Popular"
+    }
+  }, {
+    "id" : "6cfb44d0-106b-a2c0-bf5b-8d371a1d9043",
+    "name" : "feature_title",
+    "label" : "Feature Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "What's included"
+  }, {
+    "id" : "77049f67-028c-46f4-6d8d-f32d55421991",
+    "name" : "features",
+    "label" : "Features",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : null,
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "470cca48-cdf1-aebf-4e5e-728ce3c97d43",
+      "name" : "feature_icon_svg",
+      "label" : "Feature Icon SVG",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 19 19\" fill=\"none\"><g clip-path=\"url(#clip0_19033_36314)\"><path d=\"M16.0764 0.21875H2.9226C1.4293 0.21875 0.21875 1.4293 0.21875 2.9226V15.3457C0.21875 16.839 1.4293 18.0496 2.9226 18.0496H16.0764C17.5697 18.0496 18.7803 16.839 18.7803 15.3457V2.9226C18.7803 1.4293 17.5697 0.21875 16.0764 0.21875Z\" stroke=\"url(#paint0_radial_19033_36314)\" stroke-width=\"0.438462\"/><mask id=\"mask0_19033_36314\" style=\"mask-type:luminance\" maskUnits=\"userSpaceOnUse\" x=\"2\" y=\"1\" width=\"15\" height=\"16\"><path d=\"M13.8876 1.85156H5.11839C3.50402 1.85156 2.19531 3.16027 2.19531 4.77464V13.5439C2.19531 15.1583 3.50402 16.467 5.11839 16.467H13.8876C15.502 16.467 16.8107 15.1583 16.8107 13.5439V4.77464C16.8107 3.16027 15.502 1.85156 13.8876 1.85156Z\" fill=\"white\"/></mask><g mask=\"url(#mask0_19033_36314)\"><path d=\"M16.0772 2.03125C16.3797 2.03137 16.6249 2.27659 16.625 2.5791V15.7334C16.6249 16.036 16.3797 16.2812 16.0772 16.2813H2.92285C2.62033 16.2812 2.37512 16.036 2.375 15.7334V2.5791C2.37512 2.27659 2.62033 2.03137 2.92285 2.03125H16.0772ZM8.36914 10.0108L7.08203 8.72363L6.04883 9.75684L8.41504 12.1241L12.9502 7.17676L11.8731 6.18848L8.36914 10.0108Z\" fill=\"url(#paint1_radial_19033_36314)\"/></g><mask id=\"mask1_19033_36314\" style=\"mask-type:luminance\" maskUnits=\"userSpaceOnUse\" x=\"2\" y=\"1\" width=\"15\" height=\"16\"><path d=\"M13.8876 1.85156H5.11839C3.50402 1.85156 2.19531 3.16027 2.19531 4.77464V13.5439C2.19531 15.1583 3.50402 16.467 5.11839 16.467H13.8876C15.502 16.467 16.8107 15.1583 16.8107 13.5439V4.77464C16.8107 3.16027 15.502 1.85156 13.8876 1.85156Z\" fill=\"white\"/></mask><g mask=\"url(#mask1_19033_36314)\"><path d=\"M16.0772 2.03125C16.3797 2.03137 16.6249 2.27659 16.625 2.5791V15.7334C16.6249 16.036 16.3797 16.2812 16.0772 16.2813H2.92285C2.62033 16.2812 2.37512 16.036 2.375 15.7334V2.5791C2.37512 2.27659 2.62033 2.03137 2.92285 2.03125H16.0772ZM8.36914 10.0108L7.08203 8.72363L6.04883 9.75684L8.41504 12.1241L12.9502 7.17676L11.8731 6.18848L8.36914 10.0108Z\" fill=\"url(#paint2_radial_19033_36314)\"/></g></g><defs><radialGradient id=\"paint0_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(1.84822 3.15462) scale(21.7835 20.9457)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><radialGradient id=\"paint1_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(3.76152 4.49223) scale(16.3376)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><radialGradient id=\"paint2_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(3.76152 4.49223) scale(16.3376)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><clipPath id=\"clip0_19033_36314\"><rect width=\"19\" height=\"19\" fill=\"white\"/></clipPath></defs></svg>"
+    }, {
+      "id" : "388d8668-5855-b8ff-d227-503c1ece7648",
+      "name" : "feature",
+      "label" : "Feature",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "1 ABR agent · 50 target accounts"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "feature_icon_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 19 19\" fill=\"none\"><g clip-path=\"url(#clip0_19033_36314)\"><path d=\"M16.0764 0.21875H2.9226C1.4293 0.21875 0.21875 1.4293 0.21875 2.9226V15.3457C0.21875 16.839 1.4293 18.0496 2.9226 18.0496H16.0764C17.5697 18.0496 18.7803 16.839 18.7803 15.3457V2.9226C18.7803 1.4293 17.5697 0.21875 16.0764 0.21875Z\" stroke=\"url(#paint0_radial_19033_36314)\" stroke-width=\"0.438462\"/><mask id=\"mask0_19033_36314\" style=\"mask-type:luminance\" maskUnits=\"userSpaceOnUse\" x=\"2\" y=\"1\" width=\"15\" height=\"16\"><path d=\"M13.8876 1.85156H5.11839C3.50402 1.85156 2.19531 3.16027 2.19531 4.77464V13.5439C2.19531 15.1583 3.50402 16.467 5.11839 16.467H13.8876C15.502 16.467 16.8107 15.1583 16.8107 13.5439V4.77464C16.8107 3.16027 15.502 1.85156 13.8876 1.85156Z\" fill=\"white\"/></mask><g mask=\"url(#mask0_19033_36314)\"><path d=\"M16.0772 2.03125C16.3797 2.03137 16.6249 2.27659 16.625 2.5791V15.7334C16.6249 16.036 16.3797 16.2812 16.0772 16.2813H2.92285C2.62033 16.2812 2.37512 16.036 2.375 15.7334V2.5791C2.37512 2.27659 2.62033 2.03137 2.92285 2.03125H16.0772ZM8.36914 10.0108L7.08203 8.72363L6.04883 9.75684L8.41504 12.1241L12.9502 7.17676L11.8731 6.18848L8.36914 10.0108Z\" fill=\"url(#paint1_radial_19033_36314)\"/></g><mask id=\"mask1_19033_36314\" style=\"mask-type:luminance\" maskUnits=\"userSpaceOnUse\" x=\"2\" y=\"1\" width=\"15\" height=\"16\"><path d=\"M13.8876 1.85156H5.11839C3.50402 1.85156 2.19531 3.16027 2.19531 4.77464V13.5439C2.19531 15.1583 3.50402 16.467 5.11839 16.467H13.8876C15.502 16.467 16.8107 15.1583 16.8107 13.5439V4.77464C16.8107 3.16027 15.502 1.85156 13.8876 1.85156Z\" fill=\"white\"/></mask><g mask=\"url(#mask1_19033_36314)\"><path d=\"M16.0772 2.03125C16.3797 2.03137 16.6249 2.27659 16.625 2.5791V15.7334C16.6249 16.036 16.3797 16.2812 16.0772 16.2813H2.92285C2.62033 16.2812 2.37512 16.036 2.375 15.7334V2.5791C2.37512 2.27659 2.62033 2.03137 2.92285 2.03125H16.0772ZM8.36914 10.0108L7.08203 8.72363L6.04883 9.75684L8.41504 12.1241L12.9502 7.17676L11.8731 6.18848L8.36914 10.0108Z\" fill=\"url(#paint2_radial_19033_36314)\"/></g></g><defs><radialGradient id=\"paint0_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(1.84822 3.15462) scale(21.7835 20.9457)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><radialGradient id=\"paint1_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(3.76152 4.49223) scale(16.3376)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><radialGradient id=\"paint2_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(3.76152 4.49223) scale(16.3376)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><clipPath id=\"clip0_19033_36314\"><rect width=\"19\" height=\"19\" fill=\"white\"/></clipPath></defs></svg>",
+      "feature" : "1 ABR agent · 50 target accounts"
+    } ]
+  }, {
+    "id" : "ab0ccc9a-0438-2fa2-9113-3cfb0927b18c",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Start with One Play"
+  }, {
+    "id" : "62e6405a-2799-f626-eaad-afdf76779ff3",
+    "name" : "button_link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "PHONE_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.google.com",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "card_label" : "Starter",
+    "price" : "$499",
+    "duration" : "/month",
+    "is_popular" : false,
+    "popular_badge" : {
+      "popular_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M7.07514 11.8594C7.67184 10.977 7.72682 10.0239 7.2401 9.00014C7.10474 9.54938 6.85715 9.8827 6.49729 10.0002C6.83146 9.04584 6.55223 8.01478 5.65956 6.90701C5.6403 8.05113 5.36535 8.88457 4.83471 9.40734C4.10369 10.1268 4.11229 10.9388 4.86049 11.8432C1.7546 10.1904 1.31641 7.97355 3.54588 5.19286C3.68416 5.86462 4.01924 6.27705 4.55118 6.43015C3.97136 3.96966 4.58142 1.87315 6.38132 0.140625C6.39239 3.98548 7.57141 4.32722 9.0621 6.04348C10.6716 8.10307 9.72576 10.4799 7.07514 11.8594Z\" fill=\"url(#paint0_linear_19033_36542)\"/><defs><linearGradient id=\"paint0_linear_19033_36542\" x1=\"9.59758\" y1=\"3.35691\" x2=\"2.74089\" y2=\"10.2136\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#EF3E3D\"/><stop offset=\"1\" stop-color=\"#FFC828\"/></linearGradient></defs></svg>",
+      "popular_text" : "Most Popular"
+    },
+    "feature_title" : "What's included",
+    "features" : [ {
+      "feature_icon_svg" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 19 19\" fill=\"none\"><g clip-path=\"url(#clip0_19033_36314)\"><path d=\"M16.0764 0.21875H2.9226C1.4293 0.21875 0.21875 1.4293 0.21875 2.9226V15.3457C0.21875 16.839 1.4293 18.0496 2.9226 18.0496H16.0764C17.5697 18.0496 18.7803 16.839 18.7803 15.3457V2.9226C18.7803 1.4293 17.5697 0.21875 16.0764 0.21875Z\" stroke=\"url(#paint0_radial_19033_36314)\" stroke-width=\"0.438462\"/><mask id=\"mask0_19033_36314\" style=\"mask-type:luminance\" maskUnits=\"userSpaceOnUse\" x=\"2\" y=\"1\" width=\"15\" height=\"16\"><path d=\"M13.8876 1.85156H5.11839C3.50402 1.85156 2.19531 3.16027 2.19531 4.77464V13.5439C2.19531 15.1583 3.50402 16.467 5.11839 16.467H13.8876C15.502 16.467 16.8107 15.1583 16.8107 13.5439V4.77464C16.8107 3.16027 15.502 1.85156 13.8876 1.85156Z\" fill=\"white\"/></mask><g mask=\"url(#mask0_19033_36314)\"><path d=\"M16.0772 2.03125C16.3797 2.03137 16.6249 2.27659 16.625 2.5791V15.7334C16.6249 16.036 16.3797 16.2812 16.0772 16.2813H2.92285C2.62033 16.2812 2.37512 16.036 2.375 15.7334V2.5791C2.37512 2.27659 2.62033 2.03137 2.92285 2.03125H16.0772ZM8.36914 10.0108L7.08203 8.72363L6.04883 9.75684L8.41504 12.1241L12.9502 7.17676L11.8731 6.18848L8.36914 10.0108Z\" fill=\"url(#paint1_radial_19033_36314)\"/></g><mask id=\"mask1_19033_36314\" style=\"mask-type:luminance\" maskUnits=\"userSpaceOnUse\" x=\"2\" y=\"1\" width=\"15\" height=\"16\"><path d=\"M13.8876 1.85156H5.11839C3.50402 1.85156 2.19531 3.16027 2.19531 4.77464V13.5439C2.19531 15.1583 3.50402 16.467 5.11839 16.467H13.8876C15.502 16.467 16.8107 15.1583 16.8107 13.5439V4.77464C16.8107 3.16027 15.502 1.85156 13.8876 1.85156Z\" fill=\"white\"/></mask><g mask=\"url(#mask1_19033_36314)\"><path d=\"M16.0772 2.03125C16.3797 2.03137 16.6249 2.27659 16.625 2.5791V15.7334C16.6249 16.036 16.3797 16.2812 16.0772 16.2813H2.92285C2.62033 16.2812 2.37512 16.036 2.375 15.7334V2.5791C2.37512 2.27659 2.62033 2.03137 2.92285 2.03125H16.0772ZM8.36914 10.0108L7.08203 8.72363L6.04883 9.75684L8.41504 12.1241L12.9502 7.17676L11.8731 6.18848L8.36914 10.0108Z\" fill=\"url(#paint2_radial_19033_36314)\"/></g></g><defs><radialGradient id=\"paint0_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(1.84822 3.15462) scale(21.7835 20.9457)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><radialGradient id=\"paint1_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(3.76152 4.49223) scale(16.3376)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><radialGradient id=\"paint2_radial_19033_36314\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(3.76152 4.49223) scale(16.3376)\"><stop stop-color=\"#51A2FF\"/><stop offset=\"1\" stop-color=\"#0552FC\"/></radialGradient><clipPath id=\"clip0_19033_36314\"><rect width=\"19\" height=\"19\" fill=\"white\"/></clipPath></defs></svg>",
+      "feature" : "1 ABR agent · 50 target accounts"
+    } ],
+    "button_text" : "Start with One Play",
+    "button_link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.google.com",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ]
+} ]

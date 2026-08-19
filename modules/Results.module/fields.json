@@ -1,0 +1,232 @@
+[ {
+  "id" : "642c6761-64a5-f220-374e-34c87132ebe8",
+  "name" : "heading_contents",
+  "label" : "Heading Contents",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "d50be112-afdb-4738-1f47-36ed900ac7ca",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "RESULTS"
+  }, {
+    "id" : "6741eacb-6474-ead8-769d-4dd89c0a680b",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Measured in your CRM. Not our slides."
+  }, {
+    "id" : "44512e15-27cd-ddcf-275e-8f07263b23c0",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Results from the beta cohort — every number below was pulled from the customer’s own HubSpot reporting, not a vendor dashboard."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "RESULTS",
+    "title" : "Measured in your CRM. Not our slides.",
+    "description" : "Results from the beta cohort — every number below was pulled from the customer’s own HubSpot reporting, not a vendor dashboard."
+  }
+}, {
+  "id" : "3a14d300-ed04-3065-07c7-b0c81eac7528",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "7a8006ac-affa-d91d-9684-7ed7fd5a27f0",
+    "name" : "backgroundimage",
+    "label" : "Background image",
+    "required" : false,
+    "locked" : false,
+    "type" : "backgroundimage",
+    "display_width" : null,
+    "default" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/result%20bg.webp"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "backgroundimage" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/result%20bg.webp"
+    }
+  }
+}, {
+  "id" : "0049d2a1-9f76-a935-e16d-abd7a0ea884e",
+  "name" : "review",
+  "label" : "Review",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : "53771120-2af6-820e-817d-d990caad29f0",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "211f5317-9c2e-b0ad-f533-aec635d828a9",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "$1.2M"
+  }, {
+    "id" : "5ee1475c-7cf2-bdbf-1089-b797f6bc8e3f",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "“We turned on Blended ABR in March. By June we had 41 engaged target accounts and $1.2M in sourced pipeline — reported straight out of HubSpot, where my CFO could audit every deal.”"
+  }, {
+    "id" : "15eaa14c-c146-4457-b26f-6e182b53c838",
+    "name" : "author",
+    "label" : "Author",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Maya K."
+  }, {
+    "id" : "a4af34bd-01a1-6efe-4620-0fc3f0d10e84",
+    "name" : "designation",
+    "label" : "Designation",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "VP Marketing"
+  }, {
+    "id" : "53771120-2af6-820e-817d-d990caad29f0",
+    "name" : "details",
+    "label" : "Details",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Mid-market B2B SaaS · beta cohort"
+  }, {
+    "id" : "9a825c69-07e6-d72e-7569-24ecf74862b9",
+    "name" : "icon",
+    "label" : "Icon",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Vector.svg",
+      "alt" : "Vector",
+      "loading" : "lazy",
+      "width" : 16,
+      "height" : 16,
+      "max_width" : 16,
+      "max_height" : 16
+    }
+  }, {
+    "id" : "63484874-1fd5-1516-0daa-4e83b9d183eb",
+    "name" : "review_number",
+    "label" : "Review Number",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 5
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "$1.2M",
+    "description" : "“We turned on Blended ABR in March. By June we had 41 engaged target accounts and $1.2M in sourced pipeline — reported straight out of HubSpot, where my CFO could audit every deal.”",
+    "author" : "Maya K.",
+    "designation" : "VP Marketing",
+    "details" : "Mid-market B2B SaaS · beta cohort",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Vector.svg",
+      "alt" : "Vector",
+      "loading" : "lazy",
+      "width" : 16,
+      "height" : 16,
+      "max_width" : 16,
+      "max_height" : 16
+    },
+    "review_number" : 5
+  }, {
+    "title" : "$1.2M",
+    "description" : "“We turned on Blended ABR in March. By June we had 41 engaged target accounts and $1.2M in sourced pipeline — reported straight out of HubSpot, where my CFO could audit every deal.”",
+    "author" : "Maya K.",
+    "designation" : "VP Marketing",
+    "details" : "Mid-market B2B SaaS · beta cohort",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Vector.svg",
+      "alt" : "Vector",
+      "loading" : "lazy",
+      "width" : 16,
+      "height" : 16,
+      "max_width" : 16,
+      "max_height" : 16
+    },
+    "review_number" : 5
+  }, {
+    "title" : "$1.2M",
+    "description" : "“We turned on Blended ABR in March. By June we had 41 engaged target accounts and $1.2M in sourced pipeline — reported straight out of HubSpot, where my CFO could audit every deal.”",
+    "author" : "Maya K.",
+    "designation" : "VP Marketing",
+    "details" : "Mid-market B2B SaaS · beta cohort",
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Vector.svg",
+      "alt" : "Vector",
+      "loading" : "lazy",
+      "width" : 16,
+      "height" : 16,
+      "max_width" : 16,
+      "max_height" : 16
+    },
+    "review_number" : 5
+  } ]
+} ]

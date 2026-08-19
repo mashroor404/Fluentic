@@ -1,0 +1,222 @@
+[ {
+  "id" : "7097c96e-8a97-aa1d-440e-6fefa0268aa4",
+  "name" : "eyebrow_text",
+  "label" : "Eyebrow Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Pricing"
+}, {
+  "id" : "324a9a9c-4670-8027-6eca-df2e5baa1542",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Pricing your CFO will actually like."
+}, {
+  "id" : "f1715d10-35ad-df54-b72b-799c4e0ad78a",
+  "name" : "comparison_bar",
+  "label" : "Comparison Bar",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "ed49eebd-0b4f-eb45-c053-17a52141ad51",
+    "name" : "plan_header",
+    "label" : "Plan Header",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Plans"
+  }, {
+    "id" : "911fbe80-23e7-8a9a-b55b-ef96a34f5b51",
+    "name" : "pricing_plan",
+    "label" : "Pricing Plan",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : 3,
+      "sorting_label_field" : null,
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "dcdf5160-2570-6fd3-1473-6a6836107c28",
+      "name" : "plan_name",
+      "label" : "Plan name",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Starter"
+    }, {
+      "id" : "b4680f3e-8d7c-4046-22ab-f25a089d62ce",
+      "name" : "price",
+      "label" : "Price",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "$19/mo"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "plan_name" : "Starter",
+      "price" : "$19/mo"
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "plan_header" : "Plans",
+    "pricing_plan" : [ {
+      "plan_name" : "Starter",
+      "price" : "$19/mo"
+    } ]
+  }
+}, {
+  "id" : "2113a97b-31bf-ab85-e57c-088ab051295f",
+  "name" : "comparison_table",
+  "label" : "Comparison Table",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 1
+  },
+  "children" : [ {
+    "id" : "a6da9534-78c2-12be-8755-96ec00ae4e5a",
+    "name" : "category_header",
+    "label" : "Category Header",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Core Features"
+  }, {
+    "id" : "6aba7a4c-a684-3bec-0157-97f5becc9b69",
+    "name" : "table_row",
+    "label" : "Table Row",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : null,
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "71749bd4-2925-2d4e-5ab5-5323a9350bb9",
+      "name" : "feature_name",
+      "label" : "Feature Name",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "AI agent runs"
+    }, {
+      "id" : "d5748e05-1d96-c62c-bed3-8a41cdacdf9e",
+      "name" : "use_icons",
+      "label" : "Use Icon",
+      "required" : false,
+      "locked" : false,
+      "display" : "toggle",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : false
+    }, {
+      "id" : "2aef6446-5e24-5d1a-833f-1eada54dc663",
+      "name" : "feature_value",
+      "label" : "Feature Value",
+      "required" : false,
+      "locked" : false,
+      "occurrence" : {
+        "min" : 1,
+        "max" : 3,
+        "sorting_label_field" : null,
+        "default" : 3
+      },
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "comparison_table.table_row.use_icons",
+        "controlling_value_regex" : "false",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : [ "100 / mo", "100 / mo", "100 / mo" ]
+    }, {
+      "id" : "a0969d91-6446-a886-a779-192687922862",
+      "name" : "icon_type",
+      "label" : "Icon Type",
+      "required" : false,
+      "locked" : false,
+      "occurrence" : {
+        "min" : 1,
+        "max" : 3,
+        "sorting_label_field" : null,
+        "default" : 1
+      },
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "comparison_table.table_row.use_icons",
+        "controlling_value_regex" : "true",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "display" : "select",
+      "choices" : [ [ "check", "Check" ], [ "cross", "Cross" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "feature_name" : "AI agent runs",
+      "use_icons" : false,
+      "feature_value" : [ "100 / mo", "100 / mo", "100 / mo" ]
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "category_header" : "Core Features",
+    "table_row" : [ {
+      "feature_name" : "AI agent runs",
+      "use_icons" : false,
+      "feature_value" : [ "100 / mo", "100 / mo", "100 / mo" ]
+    } ]
+  } ]
+} ]

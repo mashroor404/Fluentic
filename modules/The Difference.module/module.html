@@ -1,0 +1,549 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .diff-section-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .diff-section {
+    position: relative;
+    padding: 100px 0;
+    
+  }
+
+  .diff-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Header Content (Center Aligned)
+     ================================== */
+  .diff-header {
+    max-width: 680px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .diff-header h2 {
+    margin: 16px 0 24px;
+    letter-spacing: -0.02em;
+  }
+
+  /* Standardized Title Animation Classes */
+  .diff-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .diff-header-desc {
+    will-change: transform, opacity;
+  }
+
+  .diff-header .body {
+    color: var(--text-secondary);
+  }
+
+  /* ==================================
+     Tabs Navigation
+     ================================== */
+  .diff-tabs-nav-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  .diff-tabs-nav {
+    display: inline-flex;
+    background-color: var(--bg-accent-2, rgba(0, 0, 0, 0.05));
+    border-radius: 100px;
+    padding: 6px;
+    gap: 4px;
+  }
+
+  .diff-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-family: var(--primary-font, sans-serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .diff-tab-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .diff-tab-btn.is-active {
+    background-color: var(--bg-primary, #ffffff);
+    color: var(--text-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  /* ==================================
+     Tabs Content Area
+     ================================== */
+  .diff-tab-content-wrap {
+    position: relative;
+  }
+
+  .diff-tab-pane {
+    display: none;
+    opacity: 0;
+  }
+
+  /* When active, show block but let GSAP handle the opacity/transform */
+  .diff-tab-pane.is-active {
+    display: block;
+    opacity: 1; 
+  }
+
+  /* Top Row: Card & Image */
+  .diff-pane-top {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    align-items: stretch;
+    margin-bottom: 48px;
+  }
+
+  /* The Card (Fixed Width) */
+  .diff-card {
+    flex: 0 0 380px; /* Locks the card size */
+    background-color: var(--bg-primary, #ffffff);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 12px 40px rgba(1, 16, 50, 0.04);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .diff-card-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--bg-accent-2, #E0F2FE);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  
+  .diff-card-icon img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .diff-card-tertiary {
+    font-family: var(--tertiary-font);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .diff-card h4 {
+    margin: 0 0 16px 0;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  .diff-card .body-2 {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* The Image (Constrained Width) */
+  .diff-image-wrap {
+    flex: 0 1 680px; /* Allows shrinking, but maxes out at 680px instead of endlessly filling space */
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #E2E8F0;
+  }
+
+  .diff-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ==================================
+     Divider & Reviews
+     ================================== */
+  .diff-divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(1, 16, 50, 0.1);
+    margin: 0 0 48px 0;
+    border: none;
+  }
+
+  .diff-reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+    position: relative;
+  }
+
+  .diff-review-item {
+    position: relative;
+  }
+
+  /* Vertical Divider Line between the 2 reviews (Desktop Only) */
+  @media screen and (min-width: 768px) {
+    .diff-review-item:first-child:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -24px; /* Centers the line exactly in the middle of the 48px gap */
+      width: 1px;
+      height: 100%;
+      background-color: rgba(1, 16, 50, 0.1);
+    }
+  }
+
+  .diff-review-item .body-highlight {
+    margin-bottom: 24px;
+    display: block;
+    color: var(--text-primary);
+  }
+
+  .diff-review-author {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .diff-review-desig,
+  .diff-review-details {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* GSAP Initial States */
+  .gsap-diff-el {
+    opacity: 0;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .diff-pane-top {
+      flex-direction: column;
+    }
+    .diff-card {
+      flex: 1 1 auto;
+      width: 100%;
+      padding: 32px;
+    }
+    .diff-image-wrap {
+      flex: 1 1 auto;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+    .diff-reviews-grid {
+      gap: 32px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .diff-section {
+      padding: 64px 0;
+    }
+    .diff-header {
+      margin-bottom: 32px;
+    }
+    
+    /* Mobile Tabs (Stacked Pill) */
+    .diff-tabs-nav {
+      flex-direction: column;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 400px;
+      padding: 8px;
+    }
+    .diff-tab-btn {
+      width: 100%;
+      text-align: center;
+      border-radius: 12px;
+      padding: 14px 24px;
+    }
+    
+    .diff-reviews-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    /* Center text on mobile */
+    .diff-review-item {
+      text-align: center;
+    }
+
+    /* Horizontal Divider between reviews on mobile (matches reference image) */
+    .diff-review-item:first-child:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; /* Positioned halfway in the 40px gap */
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: rgba(1, 16, 50, 0.1);
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<div class="diff-section-wrapper">
+  <section class="diff-section">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="diff-header">
+        
+        <!-- Eyebrow (Static) -->
+        {% if module.heading_contents.eyebrow_text %}
+          <div>
+            {{ btn_macros.eyebrow_label(module.heading_contents.eyebrow_text) }}
+          </div>
+        {% endif %}
+
+        <!-- Title (Standardized Blur Reveal) -->
+        {% if module.heading_contents.title %}
+          <h2 class="gsap-blur-reveal">{{ module.heading_contents.title }}</h2>
+        {% endif %}
+
+        <!-- Description (Delayed Fade Up) -->
+        {% if module.heading_contents.description %}
+          <p class="body diff-header-desc" style="opacity: 0;">{{ module.heading_contents.description }}</p>
+        {% endif %}
+        
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="diff-tabs-nav-wrap gsap-diff-el">
+        <div class="diff-tabs-nav" role="tablist">
+          {% for tab in module.tabs %}
+            <button 
+              class="diff-tab-btn {% if loop.index == 1 %}is-active{% endif %}" 
+              role="tab" 
+              aria-selected="{% if loop.index == 1 %}true{% else %}false{% endif %}" 
+              data-tab-target="diff-tab-{{ loop.index }}"
+            >
+              {{ tab.tab_name }}
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Tabs Content -->
+      <div class="diff-tab-content-wrap gsap-diff-el">
+        {% for tab in module.tabs %}
+          <div class="diff-tab-pane {% if loop.index == 1 %}is-active{% endif %}" id="diff-tab-{{ loop.index }}" role="tabpanel">
+            
+            <!-- Top Row: Card & Image -->
+            <div class="diff-pane-top">
+              
+              <!-- Card -->
+              <div class="diff-card">
+                {% if tab.cards.card_icon.src %}
+                  <div class="diff-card-icon">
+                    <img src="{{ tab.cards.card_icon.src }}" alt="{{ tab.cards.card_icon.alt }}" loading="lazy">
+                  </div>
+                {% endif %}
+                
+                {% if tab.cards.card_tertiary_text %}
+                  <div class="diff-card-tertiary">{{ tab.cards.card_tertiary_text }}</div>
+                {% endif %}
+                
+                {% if tab.cards.card_title %}
+                  <h4>{{ tab.cards.card_title }}</h4>
+                {% endif %}
+                
+                {% if tab.cards.card_description %}
+                  <p class="body-2">{{ tab.cards.card_description }}</p>
+                {% endif %}
+              </div>
+
+              <!-- Image -->
+              <div class="diff-image-wrap">
+                {% if tab.image.src %}
+                  <img src="{{ tab.image.src }}" alt="{{ tab.image.alt }}" loading="lazy">
+                {% endif %}
+              </div>
+
+            </div>
+
+            <hr class="diff-divider">
+
+            <!-- Bottom Row: Reviews -->
+            <div class="diff-reviews-grid">
+              {% for rev in tab.review %}
+                <div class="diff-review-item">
+                  {% if rev.review_text %}
+                    <span class="body-highlight">{{ rev.review_text }}</span>
+                  {% endif %}
+                  
+                  {% if rev.author_name %}
+                    <span class="body-2 diff-review-author">{{ rev.author_name }}</span>
+                  {% endif %}
+                  
+                  {% if rev.designation %}
+                    <p class="body-2 diff-review-desig">{{ rev.designation }}</p>
+                  {% endif %}
+                  
+                  {% if rev.details %}
+                    <p class="body-2 diff-review-details">{{ rev.details }}</p>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Tabs Logic & GSAP Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Tab Switching Logic & Content Animation
+    const tabBtns = document.querySelectorAll('.diff-tab-btn');
+    const tabPanes = document.querySelectorAll('.diff-tab-pane');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        
+        // Skip if already active
+        if(btn.classList.contains('is-active')) return;
+
+        // Remove active class from all buttons and panes
+        tabBtns.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        tabPanes.forEach(p => p.classList.remove('is-active'));
+
+        // Add active class to clicked button
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+
+        // Target Pane Activation and Animation
+        const targetId = btn.getAttribute('data-tab-target');
+        const targetPane = document.getElementById(targetId);
+        
+        if (targetPane) {
+          targetPane.classList.add('is-active');
+          
+          // GSAP smoothly animates the content in when the tab switches
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(targetPane, 
+              { opacity: 0, y: 15 }, 
+              { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+            );
+          }
+        }
+      });
+    });
+
+    // 2. GSAP Scroll Entrance Animations (for initial page load/scroll)
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".diff-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         Description Fade
+      ------------------------------------------------------------------ */
+      const headerDesc = section.querySelector(".diff-header-desc");
+      if (headerDesc) {
+        gsap.fromTo(headerDesc, 
+          { opacity: 0, y: 15 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            delay: 0.3, // Waits slightly for the title to start 
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section.querySelector('.diff-header'),
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      /* ------------------------------------------------------------------
+         Tabs and Content Area Fade Up
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-diff-el", 
+        { y: 30, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.2, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".diff-section",
+            start: "top 80%" 
+          }
+        }
+      );
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Ensure CDNs are added to base.html.");
+    }
+    
+  });
+</script>
+{% end_require_js %}

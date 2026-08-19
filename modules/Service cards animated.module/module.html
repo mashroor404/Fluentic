@@ -1,0 +1,646 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .integration-section {
+    position: relative;
+    padding: 8.5rem 0;
+    background-color: var(--dark-bg, #0B101E);
+    overflow: hidden;
+  }
+
+  .integration-section .container-large {
+    width: 100%;
+    max-width: var(--container-max-width, 1280px);
+    margin: 0 auto;
+    padding: 0 4%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .integration_flex-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 5.625rem;
+  }
+
+  /* ==================================
+     Header Content
+     ================================== */
+  .integration_header-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .integration_header-wrap h2 {
+    margin: 24px 0 0 0; /* 24px gap between eyebrow and title */
+    color: #ffffff;
+    max-width: 30ch;
+    font-size: 3.125rem;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+
+  .integration_header-wrap h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .integration_header-desc {
+    margin: 36px 0 0 0; /* 36px gap between title and description */
+    color: var(--text-light-primary, #F8F9FA); 
+    max-width: 680px;
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Strict 3-Column Grid Layout
+     ================================== */
+  .integration_grid {
+    display: grid;
+    /* Forces exactly 3 equal columns */
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap: 1.25rem;
+  }
+
+  .integration_grid-item {
+    background-color: var(--card-bg, #0c121e);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1.25rem;
+    padding: 1.75rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.25rem; 
+    overflow: hidden;
+    backdrop-filter: blur(2rem);
+    -webkit-backdrop-filter: blur(2rem);
+    will-change: transform, opacity;
+  }
+
+  .integration_grid-item_content-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 27.5rem;
+    position: relative;
+    z-index: 5;
+  }
+
+  .integration_grid-item_title {
+    color: #ffffff;
+    font-family: var(--primary-font, inherit);
+    font-size: 1.5rem; 
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .integration_grid-item_desc {
+    color: #B5B7BA; /* Requested text color for cards */
+    margin: 0;
+  }
+
+  /* ==================================
+     Graphic Wrappers & Images
+     ================================== */
+  .integration_graphic-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 1.25rem;
+    background-color: #0a0e18;
+    overflow: hidden; 
+    height: 15.5rem;
+  }
+
+  .integration_graphic-wrap.is-graph { justify-content: flex-end; }
+  .integration_graphic-wrap.is-cards { justify-content: center; align-items: center; }
+  .integration_graphic-wrap.is-security { justify-content: flex-start; align-items: center; }
+  .integration_graphic-wrap.is-circles { justify-content: center; align-items: center; }
+  .integration_graphic-wrap.is-automation { justify-content: center; align-items: center; }
+
+  .integration_graphic-img {
+    position: relative;
+    width: 100%;
+    object-fit: contain;
+    display: block; 
+    will-change: transform, opacity;
+  }
+
+  /* 1. Graph Specifics */
+  .integration_graph-collapse-group { position: absolute; inset: 0; transform-origin: 50% 100%; }
+  .integration_graph-wrap { transform-origin: 0 100%; width: 100%; position: absolute; bottom: -1px; left: 0; display: flex; }
+  .integration_graph-wrap img { width: 100%; display: block; }
+  .integration_graph-stats { height: 21%; position: absolute; inset: 5% auto auto 3%; }
+  .integration_graph-value { height: 9%; position: absolute; inset: 5% 11% auto auto; }
+  .integration_graph-line { transform-origin: 50% 100%; height: 78%; position: absolute; bottom: -1px; left: 82.25%; display: flex; }
+
+  /* 2. Cards Specifics */
+  .integration_card-wrap { width: 75%; position: absolute; display: flex; justify-content: center; }
+  .integration_card-wrap.is-middle { z-index: 3; overflow: visible; }
+  .integration_card-wrap.is-top { width: 70%; z-index: 1; }
+  .integration_card-wrap.is-btm { width: 70%; z-index: 1; }
+  
+  .graphic-card_img-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 4; }
+  .graphic-card_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+
+  /* 3. Security Specifics */
+  .integration_security-graphic { height: 51%; position: absolute; top: 15%; width: 100%; display: flex; justify-content: center; }
+  .integration_security-wrap { transform-origin: 50% 100%; height: 100%; position: absolute; inset: 0%; width: 100%; display: flex; justify-content: center; }
+  .integration_security-graphic img, .integration_security-wrap img { position: relative; width: 100%; }
+
+  /* 4. Circles Specifics */
+  .integration_circle-wrap { width: 120%; position: absolute; top: 20%; transform-origin: 50% 50%; }
+  .integration_circle-wrap.is-2 { width: 90%; top: 35%; }
+  .integration_circle-wrap.is-3 { width: 60%; top: 50%; }
+  .integration_circle_logo-wrap { width: 17%; position: absolute; bottom: 1%; }
+
+  .circle_icon-wrap {
+    width: 11%;
+    position: absolute;
+    inset: 17% auto auto 3%;
+  }
+  .circle_icon-wrap.is-1 { top: 23%; left: -1%; transform: rotate(-60deg); }
+  .circle_icon-wrap.is-2 { inset: 44% -5% auto auto; transform: rotate(90deg); }
+  .circle_icon-wrap.is-3 { inset: -2% 30% auto auto; transform: rotate(15deg); }
+  .circle_icon-wrap.is-4 { top: 87%; left: 20%; transform: rotate(210deg); }
+  .circle_icon-wrap img { will-change: transform; }
+
+  /* 5. Automation Specifics */
+  .integration_automation-wrap {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    position: relative;
+    width: 100%;
+  }
+  .automation_wave-wrap { height: 50%; position: absolute; }
+  .automation_wave-wrap.is-top { top: 10%; }
+  .automation_wave-wrap.is-btm { bottom: 10%; }
+  .automation_circle-wrap {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 30%;
+    position: absolute;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .integration_grid { grid-template-columns: repeat(2, 1fr); }
+    .integration_header-wrap h2 { font-size: 2.5rem; }
+  }
+
+  @media screen and (max-width: 767px) {
+    .integration-section { padding: 6.25rem 0; }
+    .integration_flex-wrap { gap: 4.5rem; }
+    .integration_grid { grid-template-columns: 1fr; }
+    .integration_grid-item { padding: 1.25rem 1.25rem 2.25rem; }
+    .integration_grid-item_title { font-size: 1.625rem; }
+    .integration_graphic-wrap { height: 20rem; }
+    .integration_security-graphic { width: 30%; }
+    
+    .integration_header-wrap h2 { 
+      font-size: 2.375rem; 
+      margin-top: 0.75em; /* 12px gap in mobile */
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .integration_graphic-wrap { height: 17.75rem; }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="integration-section">
+  <div class="container-large">
+    <div class="integration_flex-wrap">
+
+      <!-- Section Header -->
+      <div class="integration_header-wrap">
+        {% if module.heading_content.eyebrow_text %}
+          {{ btn_macros.eyebrow_label(module.heading_content.eyebrow_text) }}
+        {% else %}
+          {{ btn_macros.eyebrow_label("Seamless Integration") }}
+        {% endif %}
+
+        <h2 class="gsap-blur-reveal">
+          {{ module.heading_content.title | default("Unlock Scalable Growth, Security, and Efficiency with AI Automation") }}
+        </h2>
+
+        <!-- Re-added Section Description -->
+        {% if module.heading_content.description %}
+          <p class="body integration_header-desc">
+            {{ module.heading_content.description }}
+          </p>
+        
+        {% endif %}
+      </div>
+
+      <!-- Bento Grid (6 Cards, 3 Columns) -->
+      <div class="integration_grid">
+
+        <!-- ITEM 1: GRAPH -->
+        <div data-ani="from-left" class="integration_grid-item is-graph">
+          <div class="integration_graphic-wrap is-graph">
+            <div class="integration_graph-collapse-group">
+              <div class="integration_graph-stats">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c365ec8356f78a927351f_graph-stats.svg" alt="Stats" class="integration_graphic-img">
+              </div>
+              <div class="integration_graph-wrap">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c354674f940c4985a2de0_graphic-graph.svg" alt="Graph Background" class="integration_graphic-img">
+              </div>
+              <div class="integration_graph-value">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c377cca1bff28af376f5d_graph-value.svg" alt="Value" class="integration_graphic-img">
+              </div>
+              <div class="integration_graph-line">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c39c45cc45d2695b5339d_Group%202147225327.svg" alt="Line" class="integration_graphic-img">
+              </div>
+            </div>
+          </div>
+          <div class="integration_grid-item_content-wrap">
+            <h3 class="integration_grid-item_title">{{ module.cards[0].title | default('Accelerated Business Growth') }}</h3>
+            <!-- Added body-2 and specific desc class -->
+            <p class="body-2 integration_grid-item_desc">{{ module.cards[0].description | default('AI-driven automation helps scale operations, increase output.') }}</p>
+          </div>
+        </div>
+
+        <!-- ITEM 2: CARDS -->
+        <div data-ani="from-btm" class="integration_grid-item is-cards">
+          <div class="integration_graphic-wrap is-cards">
+            <div class="integration_card-wrap is-top">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c4ef7030008834a692c90_add-funds-card.svg" alt="Card" class="integration_graphic-img">
+            </div>
+            <div class="integration_card-wrap is-middle">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c4ef76e11224e696ddbaa_7159c347836fabd853cce70b54360bc1_recharge-card.svg" alt="Card" class="integration_graphic-img">
+              <div class="graphic-card_img-overlay">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c52f0d61c00441077753b_85c2c72a316132e6de0a397be752392d_graphic-overlay_cards..svg" alt="Overlay" class="graphic-card_img">
+              </div>
+            </div>
+            <div class="integration_card-wrap is-btm">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c4ef70e3fe860fa585a09_add-on-card.svg" alt="Card" class="integration_graphic-img">
+            </div>
+          </div>
+          <div class="integration_grid-item_content-wrap">
+            <h3 class="integration_grid-item_title">{{ module.cards[1].title | default('Structured Workflow') }}</h3>
+            <!-- Added body-2 and specific desc class -->
+            <p class="body-2 integration_grid-item_desc">{{ module.cards[1].description | default('Keep all tasks, agents, and processes clearly organized for better visibility.') }}</p>
+          </div>
+        </div>
+
+        <!-- ITEM 3: SECURITY -->
+        <div data-ani="from-right" class="integration_grid-item is-security">
+          <div class="integration_graphic-wrap is-security">
+            <div class="integration_security-graphic">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c5a1fbfc5e4abb26ee481_waves.svg" alt="Waves" class="integration_graphic-img">
+            </div>
+            <div class="integration_security-wrap">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c5a1f25ad307c72b53e0f_security.svg" alt="Security Icon" class="integration_graphic-img">
+            </div>
+          </div>
+          <div class="integration_grid-item_content-wrap">
+            <h3 class="integration_grid-item_title">{{ module.cards[2].title | default('Enterprise-Grade Security') }}</h3>
+            <!-- Added body-2 and specific desc class -->
+            <p class="body-2 integration_grid-item_desc">{{ module.cards[2].description | default('Protect your data and workflows with secure AI infrastructure.') }}</p>
+          </div>
+        </div>
+
+        <!-- ITEM 4: CIRCLES -->
+        <div data-ani="from-left" class="integration_grid-item is-circles">
+          <div class="integration_graphic-wrap is-circles">
+            <div class="integration_circle-wrap is-1">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c63a4ad81f7e0355ce359_6c168d806b1a3620ae6ce6cfedd29315_circle-3.svg" alt="Circle" class="integration_graphic-img">
+            </div>
+            <div class="integration_circle-wrap is-2">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c63a4cb36cf9344abf709_e9efd27eb72a5c8a8c61707b2a508018_circle-2.svg" alt="Circle" class="integration_graphic-img">
+              <div class="circle_icon-wrap is-1">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c683d411326aeb24885bd_circle-icon-left.svg" alt="Icon" class="integration_graphic-img">
+              </div>
+              <div class="circle_icon-wrap is-2">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c683dd75ab0b3d86e3b3b_circle-icon-right.svg" alt="Icon" class="integration_graphic-img">
+              </div>
+              <div class="circle_icon-wrap is-3">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c683dca1767d3aabd60e9_circle-icon-top.svg" alt="Icon" class="integration_graphic-img">
+              </div>
+              <div class="circle_icon-wrap is-4">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c683d411326aeb24885bd_circle-icon-left.svg" alt="Icon" class="integration_graphic-img">
+              </div>
+            </div>
+            <div class="integration_circle-wrap is-3">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c63a4c1560f06561ab102_ebc4a987077b5afd18801fe76c87d643_circle-1.svg" alt="Circle" class="integration_graphic-img">
+            </div>
+            <div class="integration_circle_logo-wrap">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c63a5b0577d1604f5a434_c42eff2c55324594f2f6070d6dbc1918_c-logo.svg" alt="Logo" class="integration_graphic-img">
+            </div>
+          </div>
+          <div class="integration_grid-item_content-wrap">
+            <h3 class="integration_grid-item_title">{{ module.cards[3].title | default('Connected AI Ecosystem') }}</h3>
+            <!-- Added body-2 and specific desc class -->
+            <p class="body-2 integration_grid-item_desc">{{ module.cards[3].description | default('Collaborate across teams and agents within a unified, intelligent automation.') }}</p>
+          </div>
+        </div>
+
+        <!-- ITEM 5: AUTOMATION -->
+        <div data-ani="from-btm" class="integration_grid-item is-automation">
+          <div class="integration_graphic-wrap is-automation">
+            <div class="integration_automation-wrap">
+              <div class="automation_wave-wrap is-top">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c73758cbb0108e1200eb8_automation-waves-top.svg" alt="Wave">
+              </div>
+              <div class="automation_wave-wrap is-btm">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c7376b83c091a6b0bc0cc_automation-waves-btm.svg" alt="Wave">
+              </div>
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c73755812eef417c5aa42_automation.svg" alt="Automation Base" class="integration_graphic-img" style="position: relative; width: 100%; opacity: 0.3;">
+              <div class="automation_circle-wrap">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c737668019c9482c72a3c_automation-circle.svg" alt="Circle" class="integration_graphic-img">
+              </div>
+            </div>
+          </div>
+          <div class="integration_grid-item_content-wrap">
+            <h3 class="integration_grid-item_title">{{ module.cards[4].title | default('Complete Automation') }}</h3>
+            <!-- Added body-2 and specific desc class -->
+            <p class="body-2 integration_grid-item_desc">{{ module.cards[4].description | default('Achieve full workflow automation across key business operations.') }}</p>
+          </div>
+        </div>
+
+        <!-- ITEM 6: CARDS (Duplicate of 2) -->
+        <div data-ani="from-right" class="integration_grid-item is-cards">
+          <div class="integration_graphic-wrap is-cards">
+            <div class="integration_card-wrap is-top">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c4ef7030008834a692c90_add-funds-card.svg" alt="Card" class="integration_graphic-img">
+            </div>
+            <div class="integration_card-wrap is-middle">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c4ef76e11224e696ddbaa_7159c347836fabd853cce70b54360bc1_recharge-card.svg" alt="Card" class="integration_graphic-img">
+              <div class="graphic-card_img-overlay">
+                <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c52f0d61c00441077753b_85c2c72a316132e6de0a397be752392d_graphic-overlay_cards..svg" alt="Overlay" class="graphic-card_img">
+              </div>
+            </div>
+            <div class="integration_card-wrap is-btm">
+              <img loading="lazy" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a2c4ef70e3fe860fa585a09_add-on-card.svg" alt="Card" class="integration_graphic-img">
+            </div>
+          </div>
+          <div class="integration_grid-item_content-wrap">
+            <h3 class="integration_grid-item_title">{{ module.cards[5].title | default('Structured Workflow') }}</h3>
+            <!-- Added body-2 and specific desc class -->
+            <p class="body-2 integration_grid-item_desc">{{ module.cards[5].description | default('Keep all tasks, agents, and processes clearly organized for better visibility.') }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GSAP Scroll Reveal & Master Timelines -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      console.warn("GSAP missing. Animations will not load.");
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    const section = document.querySelector(".integration-section");
+    if (!section) return;
+
+    /* ------------------------------------------------------------------
+       1. Heading Reveal
+    ------------------------------------------------------------------ */
+    const heading = section.querySelector(".gsap-blur-reveal");
+    if (heading) {
+      const words = heading.textContent.trim().split(/\s+/);
+      heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+      const wordSpans = heading.querySelectorAll('.word');
+
+      gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+      ScrollTrigger.create({
+        trigger: heading,
+        start: 'top 85%',
+        once: true,
+        onEnter() {
+          gsap.to(wordSpans, {
+            opacity: 1,
+            filter: 'blur(0px)',
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'sine.out'
+          });
+        }
+      });
+    }
+
+    // Reveal for the new description paragraph
+    const headerDesc = section.querySelector(".integration_header-desc");
+    if (headerDesc) {
+      gsap.fromTo(headerDesc, 
+        { opacity: 0, y: 15 }, 
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.8, 
+          delay: 0.3, // Waits slightly for the title to start 
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section.querySelector('.integration_header-wrap'),
+            start: 'top 85%',
+            once: true
+          }
+        }
+      );
+    }
+
+    /* ------------------------------------------------------------------
+       2. Grid Items Scroll Reveal
+    ------------------------------------------------------------------ */
+    gsap.utils.toArray('.integration_grid-item').forEach(item => {
+      let aniType = item.getAttribute('data-ani');
+      let startX = 0, startY = 0;
+      if (aniType === 'from-left') startX = -60;
+      if (aniType === 'from-right') startX = 60;
+      if (aniType === 'from-btm') startY = 60;
+
+      gsap.fromTo(item,
+        { x: startX, y: startY, opacity: 0 },
+        {
+          x: 0, y: 0, opacity: 1, duration: 1, ease: "power3.out",
+          scrollTrigger: { trigger: item, start: "top 85%" }
+        }
+      );
+    });
+
+    const loopTimelines = [];
+
+    /* ------------------------------------------------------------------
+       3. GRAPH CARD
+    ------------------------------------------------------------------ */
+    const graphGroup = section.querySelector(".integration_graph-collapse-group");
+    const graphStats = section.querySelector(".integration_graph-stats");
+    const graphValue = section.querySelector(".integration_graph-value");
+    const graphLine = section.querySelector(".integration_graph-line");
+
+    if (graphGroup && graphLine) {
+      const graphTl = gsap.timeline({ repeat: -1, paused: true });
+      graphTl
+        .set(graphGroup, { scaleY: 1 })
+        .set([graphStats, graphValue], { opacity: 1 })
+        .set(graphLine, { left: "82.25%", opacity: 1 }) 
+        .to({}, { duration: 3.5 }) 
+        .to([graphStats, graphValue, graphLine], { opacity: 0, duration: 0.5 }, 3.5) 
+        .to(graphGroup, { scaleY: 0.05, duration: 1.5, ease: "power3.inOut" }, 3.6) 
+        .to({}, { duration: 0.8 }) 
+        .set(graphLine, { left: "0%", opacity: 1 }) 
+        .to(graphGroup, { scaleY: 1, duration: 2, ease: "elastic.out(1, 0.8)" }, 6) 
+        .to(graphLine, { left: "82.25%", duration: 2, ease: "power2.out" }, 6) 
+        .to([graphStats, graphValue], { opacity: 1, duration: 0.6 }, "-=0.6") 
+        .to({}, { duration: 2 }); 
+      
+      loopTimelines.push(graphTl);
+    }
+
+    /* ------------------------------------------------------------------
+       4. CARDS ITEM
+    ------------------------------------------------------------------ */
+    const cardItems = section.querySelectorAll(".integration_grid-item.is-cards");
+    
+    cardItems.forEach(wrap => {
+      const cardTop = wrap.querySelector(".integration_card-wrap.is-top");
+      const cardBtm = wrap.querySelector(".integration_card-wrap.is-btm");
+
+      if (cardTop && cardBtm) {
+        const cardsTl = gsap.timeline({ repeat: -1, paused: true });
+        
+        gsap.set(cardTop, { yPercent: 0, opacity: 0, scale: 0.85 });
+        gsap.set(cardBtm, { yPercent: 0, opacity: 0, scale: 0.85 });
+        
+        cardsTl
+          .to({}, { duration: 0.5 })
+          .to([cardTop, cardBtm], {
+            yPercent: (i) => i === 0 ? -85 : 85, 
+            scale: 1, 
+            opacity: 1, 
+            duration: 1.5, 
+            ease: "back.out(1.2)"
+          })
+          .to({}, { duration: 3.5 })
+          .to([cardTop, cardBtm], {
+            yPercent: 0, 
+            scale: 0.85, 
+            opacity: 0, 
+            duration: 1, 
+            ease: "power2.inOut"
+          })
+          .to({}, { duration: 1.5 });
+
+        loopTimelines.push(cardsTl);
+      }
+    });
+
+    /* ------------------------------------------------------------------
+       5. SECURITY CARD(S)
+    ------------------------------------------------------------------ */
+    const securityCards = section.querySelectorAll(".integration_grid-item.is-security");
+    
+    securityCards.forEach(card => {
+      const secWaves = card.querySelector(".integration_security-graphic");
+      const secIcon = card.querySelector(".integration_security-wrap");
+
+      if (secWaves && secIcon) {
+        const secTl = gsap.timeline({ repeat: -1, paused: true });
+        secTl
+          .set(secWaves, { scale: 0, yPercent: 20, opacity: 0 })
+          .set(secIcon, { opacity: 0.4 })
+          .to({}, { duration: 0.5 })
+          .to(secWaves, { scale: 1, yPercent: 0, opacity: 1, duration: 1.5, ease: "back.out(1.2)" })
+          .to(secIcon, { opacity: 1, duration: 1 }, "<")
+          .to({}, { duration: 2.5 })
+          .to(secWaves, { scale: 0, yPercent: 20, opacity: 0, duration: 1, ease: "power2.in" })
+          .to(secIcon, { opacity: 0.4, duration: 1 }, "<")
+          .to({}, { duration: 1 });
+          
+        loopTimelines.push(secTl);
+      }
+    });
+
+    /* ------------------------------------------------------------------
+       6. CIRCLES CARD
+    ------------------------------------------------------------------ */
+    const circle1 = section.querySelector(".integration_circle-wrap.is-1");
+    const circle2 = section.querySelector(".integration_circle-wrap.is-2");
+    const circle3 = section.querySelector(".integration_circle-wrap.is-3");
+    
+    const circleIconsImg = section.querySelectorAll(".integration_circle-wrap.is-2 .circle_icon-wrap img");
+
+    if (circle1) loopTimelines.push(gsap.to(circle1, { rotation: 360, repeat: -1, duration: 25, ease: "none", paused: true }));
+    if (circle2) loopTimelines.push(gsap.to(circle2, { rotation: -360, repeat: -1, duration: 30, ease: "none", paused: true }));
+    if (circle3) loopTimelines.push(gsap.to(circle3, { rotation: 360, repeat: -1, duration: 35, ease: "none", paused: true }));
+    
+    if (circleIconsImg.length) {
+      loopTimelines.push(gsap.to(circleIconsImg, { rotation: 360, repeat: -1, duration: 30, ease: "none", paused: true }));
+    }
+
+    /* ------------------------------------------------------------------
+       7. AUTOMATION CARD
+    ------------------------------------------------------------------ */
+    const waveTop = section.querySelector(".automation_wave-wrap.is-top");
+    const waveBtm = section.querySelector(".automation_wave-wrap.is-btm");
+    const autoCircle = section.querySelector(".automation_circle-wrap");
+
+    if (waveTop && waveBtm && autoCircle) {
+      const autoTl = gsap.timeline({ repeat: -1, paused: true });
+      autoTl
+        .set(waveTop, { yPercent: 50, opacity: 0 })
+        .set(waveBtm, { yPercent: -50, opacity: 0 })
+        .set(autoCircle, { scale: 0.8, opacity: 0 })
+        .to({}, { duration: 1 })
+        .to([waveTop, waveBtm], { yPercent: 0, opacity: 1, duration: 1.2, ease: "power2.out" })
+        .to(autoCircle, { scale: 1, opacity: 1, duration: 1.2, ease: "back.out(1.5)" }, "<0.2")
+        .to({}, { duration: 2 })
+        .to([waveTop, waveBtm], { yPercent: (i) => i === 0 ? 50 : -50, opacity: 0, duration: 0.8, ease: "power2.in" })
+        .to(autoCircle, { scale: 0.8, opacity: 0, duration: 0.8, ease: "power2.in" }, "<")
+        .to({}, { duration: 1.5 });
+        
+      loopTimelines.push(autoTl);
+    }
+
+    /* ------------------------------------------------------------------
+       8. Play/Pause Optimization based on Section Visibility
+    ------------------------------------------------------------------ */
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 90%",
+      end: "bottom 10%",
+      onEnter: () => loopTimelines.forEach(tl => tl.play()),
+      onEnterBack: () => loopTimelines.forEach(tl => tl.play()),
+      onLeave: () => loopTimelines.forEach(tl => tl.pause()),
+      onLeaveBack: () => loopTimelines.forEach(tl => tl.pause())
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+  });
+</script>
+{% end_require_js %}

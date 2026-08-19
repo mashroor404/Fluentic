@@ -1,0 +1,304 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Flexbox Layout (50% / 50% Split)
+     ================================== */
+  .feature-layout {
+    display: flex;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center; /* Vertically centers the content block with the image */
+  }
+
+  /* ==================================
+     Left Column: Image (50%)
+     ================================== */
+  .feature-image-wrap {
+    flex: 1; /* Takes up 50% */
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    /* Background Image Styles */
+    background-color: var(--bg-accent-2);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Adding a subtle hover effect */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .feature-image-wrap:hover {
+    transform: scale(1.02);
+  }
+
+  .feature-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 20px;
+  }
+
+  /* ==================================
+     Right Column: Content (50%)
+     ================================== */
+  .feature-content {
+    flex: 1; /* Takes up 50% */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .feature-content h2 {
+    margin: 24px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .feature-desc {
+    color: var(--text-secondary);
+    margin: 0 0 48px 0;
+  }
+
+  /* Standardized Title Animation Classes */
+  .feature-content h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  /* ==================================
+     Feature Items Grid
+     ================================== */
+  .feature-items-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two items per row */
+    gap: 40px 32px;
+    width: 100%;
+  }
+
+  .feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .feature-item-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    width: 100%;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(1, 16, 50, 0.1); /* Subtle divider line */
+  }
+
+  /* Icon Box */
+  .feature-icon-wrap {
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-2); /* Updated to gradient-2 */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .feature-icon-wrap img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    /* Forces SVG icons uploaded via HubSpot to appear white */
+    filter: brightness(0) invert(1); 
+  }
+
+  .feature-item-title {
+    font-family: var(--primary-font);
+    font-size: 1.125rem; /* 18px */
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .feature-item-desc {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-feat-el {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .feature-layout {
+      flex-direction: column;
+      gap: 64px;
+    }
+    
+    .feature-image-wrap {
+      width: 100%;
+      order: 2; /* Pushes image below text on tablet/mobile */
+    }
+
+    .feature-content {
+      width: 100%;
+      order: 1;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .feature-items-grid {
+      grid-template-columns: 1fr; /* Stack feature items vertically */
+      gap: 32px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="section feature-section">
+  <div class="container">
+    <div class="feature-layout">
+      
+      <!-- Left Column: Image with Dynamic BG -->
+      <div class="feature-image-wrap gsap-feat-el"
+           {% if module.style.image_background_image.src %}
+           style="background-image: url('{{ module.style.image_background_image.src }}');"
+           {% endif %}>
+        {% if module.image.src %}
+          <img src="{{ module.image.src }}" alt="{{ module.image.alt|default('Feature Image') }}" loading="{{ module.image.loading }}" width="{{ module.image.width }}" height="{{ module.image.height }}">
+        {% endif %}
+      </div>
+
+      <!-- Right Column: Content -->
+      <div class="feature-content">
+        
+        <!-- Eyebrow (Static) -->
+        {% if module.section_headers.eyebrow_text %}
+          <div class="gsap-feat-el">
+            <div class="eyebrow-custom">
+              <img class="eyebrow-icon" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20fbee52b758d1d52eda94_energy-ellipse.svg" alt="Energy Icon">
+              <div class="eyebrow-content">
+                <p class="eyebrow-text">{{ module.section_headers.eyebrow_text }}</p>
+                <span class="eyebrow-cursor"></span>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Title (Standardized Blur Reveal) -->
+        {% if module.section_headers.title %}
+          <h2 class="gsap-blur-reveal">{{ module.section_headers.title }}</h2>
+        {% endif %}
+
+        <!-- Description (Delayed Fade Up) -->
+        {% if module.section_headers.description %}
+          <p class="body feature-desc gsap-feat-el">{{ module.section_headers.description }}</p>
+        {% endif %}
+
+        <!-- Feature Items Loop -->
+        <div class="feature-items-grid">
+          {% for item in module.item %}
+            <div class="feature-item gsap-feat-el">
+              
+              <div class="feature-item-header">
+                <!-- Icon -->
+                {% if item.icon.src %}
+                  <div class="feature-icon-wrap">
+                    <img src="{{ item.icon.src }}" alt="{{ item.icon.alt|default('Icon') }}" loading="{{ item.icon.loading }}" width="{{ item.icon.width }}" height="{{ item.icon.height }}">
+                  </div>
+                {% endif %}
+                
+                <!-- Item Title -->
+                {% if item.title %}
+                  <h4 class="feature-item-title">{{ item.title }}</h4>
+                {% endif %}
+              </div>
+              
+              <!-- Item Description -->
+              {% if item.details %}
+                <p class="body-2 feature-item-desc">{{ item.details }}</p>
+              {% endif %}
+
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".feature-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         1. Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.05,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         2. Staggered Elements (Eyebrow, Description, Features, Image)
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-feat-el", 
+        { y: 30, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.1, 
+          delay: 0.1, // Wait briefly for the title to start blurring in
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".feature-layout",
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

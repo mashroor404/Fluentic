@@ -1,0 +1,98 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Start From Scratch
+  screenshotPath: ../images/start_from_scratch.png
+-->
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+<style>
+  /* ════════════════════════════════════════════════
+  Override the header module defaults for this
+  template: white header, black text, original logo.
+  These load only on pages using this template.
+  ════════════════════════════════════════════════ */
+
+  
+
+
+  /* Logo: remove the white filter, show original colors */
+  .header-logo img {
+    filter: none !important;
+  }
+
+  /* Desktop nav links: black text + black underline */
+  .nav-link {
+    color: var(--primary-dark-text-color) !important;
+  }
+  .nav-link::after {
+    background: var(--dark-bg) !important;
+  }
+
+  /* CTA button: keep the global class, override to black bg + white text */
+  .header-cta a {
+    background: var(--dark-bg) !important;
+    color: var(--primary-bg) !important;
+    border: 1px solid var(--dark-bg) !important;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+  }
+
+  /* CTA hover: white bg, black text, black border */
+  .header-cta a:hover {
+    background: var(--primary-bg) !important;
+    color: var(--primary-dark-text-color) !important;
+    border-color: var(--primary-dark-text-color) !important;
+  }
+
+  /* Hamburger bars / X: black on the white header */
+  .hamburger span {
+    background: var(--dark-bg) !important;
+  }
+
+  /* Mobile sidebar: white background, black text */
+  @media (max-width: 991px) {
+    .header-nav {
+      background: var(--primary-bg) !important;
+      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12) !important;
+    }
+    .header-nav .nav-link {
+      color: var(--primary-dark-text-color) !important;
+    }
+    .nav-item,
+    .nav-item:first-child {
+      border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+
+  /* Smaller header height on mobile → less padding */
+  @media (max-width: 991px) {
+    body {
+      padding-top: 76px !important;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+
+    .nav-cta a {
+      background-color: var(--dark-bg) !important;
+      border: 2px solid transparent;
+      color: var(--primary-bg) !important;
+    }
+
+    /* CTA hover: white bg, black text, black border */
+    .nav-cta a:hover {
+      background-color: transparent !important;
+      border: 2px solid var(--primary-dark-text-color) !important;
+      color: var(--primary-dark-text-color) !important;
+    }
+
+  }
+</style>
+
+{% dnd_area "dnd_area"
+%}
+
+{% end_dnd_area %}
+{% endblock body %}

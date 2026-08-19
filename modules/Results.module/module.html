@@ -1,0 +1,345 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .results-section-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .results-section {
+    position: relative;
+    padding: 100px 0;
+    
+  }
+
+  .results-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Header Content (Center Aligned)
+     ================================== */
+  .results-header {
+    max-width: 680px;
+    margin: 0 auto 64px;
+    text-align: center;
+  }
+
+  .results-header h2 {
+    margin: 16px 0 24px;
+    letter-spacing: -0.02em;
+  }
+
+  /* Standardized Title Animation Classes */
+  .results-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .results-header-desc {
+    will-change: transform, opacity;
+  }
+
+  .results-header .body {
+    color: var(--text-secondary);
+  }
+
+  /* ==================================
+     Cards Grid
+     ================================== */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .results-card {
+    background-color: var(--bg-primary, #ffffff);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 12px 40px rgba(1, 16, 50, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+  }
+
+  .results-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(1, 16, 50, 0.08);
+  }
+
+  /* Large Blue Stat Title */
+  .results-card-title {
+    font-family: var(--primary-font, system-ui, sans-serif);
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    font-weight: 500;
+    color: var(--primary-color, #2F6BFF);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+  }
+
+  /* Review Quote */
+  .results-card-desc {
+    flex-grow: 1;
+    margin-bottom: 32px;
+    color: var(--text-primary);
+  }
+
+  /* ==================================
+     Card Footer (Author & Stars)
+     ================================== */
+  .results-card-footer {
+    background-color: var(--bg-accent-3, #F1F5F9); /* Soft gray background block */
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .results-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .results-author-name {
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .results-author-desig,
+  .results-author-details {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .results-author-details {
+    font-size: 0.9em; /* Slightly smaller for the bottom detail string */
+    opacity: 0.8;
+  }
+
+  /* Star Icons */
+  .results-stars {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    padding-top: 2px; /* Visual alignment with the author name */
+  }
+
+  .results-stars img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-res-card {
+    opacity: 0;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 1024px) {
+    .results-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .results-section {
+      padding: 64px 0;
+    }
+    .results-header {
+      margin-bottom: 40px;
+    }
+    .results-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .results-card {
+      padding: 24px;
+    }
+    .results-card-footer {
+      padding: 16px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<div class="results-section-wrapper">
+  <section class="results-section">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="results-header">
+        
+        <!-- Eyebrow (Static, no animation) -->
+        <div>
+          {% if module.heading_contents.eyebrow_text %}
+            {{ btn_macros.eyebrow_label(module.heading_contents.eyebrow_text) }}
+          {% endif %}
+        </div>
+
+        <!-- Title (Standardized Blur Reveal) -->
+        {% if module.heading_contents.title %}
+          <h2 class="gsap-blur-reveal">{{ module.heading_contents.title }}</h2>
+        {% endif %}
+
+        <!-- Description (Delayed Fade Up) -->
+        {% if module.heading_contents.description %}
+          <p class="body results-header-desc" style="opacity: 0;">{{ module.heading_contents.description }}</p>
+        {% endif %}
+        
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="results-grid">
+        {% for item in module.review %}
+          <div class="results-card gsap-res-card">
+            
+            <!-- Card Large Blue Stat -->
+            {% if item.title %}
+              <div class="results-card-title">{{ item.title }}</div>
+            {% endif %}
+
+            <!-- Card Review/Quote (Global .body-highlight) -->
+            {% if item.description %}
+              <p class="body-highlight results-card-desc">{{ item.description }}</p>
+            {% endif %}
+
+            <!-- Card Footer Block -->
+            <div class="results-card-footer">
+              <div class="results-author-info">
+                
+                {% if item.author %}
+                  <span class="body-2 results-author-name">{{ item.author }}</span>
+                {% endif %}
+                
+                {% if item.designation %}
+                  <span class="body-2 results-author-desig">{{ item.designation }}</span>
+                {% endif %}
+                
+                {% if item.details %}
+                  <span class="body-2 results-author-details">{{ item.details }}</span>
+                {% endif %}
+                
+              </div>
+
+              <!-- Dynamic Star Rating -->
+              {% if item.review_number and item.icon.src %}
+                <div class="results-stars">
+                  {% for i in range(item.review_number) %}
+                    <img src="{{ item.icon.src }}" alt="{{ item.icon.alt|default('Star') }}" loading="lazy">
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+            
+          </div>
+        {% endfor %}
+      </div>
+      
+    </div>
+  </section>
+</div>
+
+<!-- GSAP Scroll Entrance Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".results-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         1. Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         2. Description Fade
+      ------------------------------------------------------------------ */
+      const headerDesc = section.querySelector(".results-header-desc");
+      if (headerDesc) {
+        gsap.fromTo(headerDesc, 
+          { opacity: 0, y: 15 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            delay: 0.3, // Waits slightly for the title to start 
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section.querySelector('.results-header'),
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      /* ------------------------------------------------------------------
+         3. Cards Grid (Staggered fade in)
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-res-card", 
+        { y: 40, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.15, 
+          delay: 0.4, // Delays card entrance slightly so header reveals first
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".results-grid",
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

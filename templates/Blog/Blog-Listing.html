@@ -1,0 +1,779 @@
+<!--
+    templateType: blog_listing
+    isAvailableForNewContent: true
+    label: Blog listing
+    screenshotPath: /Re-board theme/images/insights.png
+-->
+{% extends "../layouts/base.html" %}
+
+{% block body %}
+
+
+{# --- Area to add Drag & Drop modules #}
+{% dnd_area "body-area" label="Body", class="body-area" %}
+{% dnd_section %}
+{% dnd_column offset=0,width=12 %}
+{% dnd_row %}
+{% end_dnd_row %}
+{% end_dnd_column %}
+{% end_dnd_section %}
+{% end_dnd_area %}
+
+{% require_css %}
+<style>
+  /* ════════════════════════════════════════════════
+  Override the header module defaults for this
+  template: white header, black text, original logo.
+  These load only on pages using this template.
+  ════════════════════════════════════════════════ */
+
+  /* Reserve space for the fixed header so the hero starts below it */
+  body {
+    padding-top: 97px !important; /* ≈ header height; adjust if needed */
+  }
+
+  /* Header: solid white in every state (kills scroll-to-dark) */
+  .site-header,
+  .site-header.is-fixed,
+  .site-header.is-scrolled {
+    background: var(--primary-bg) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Logo: remove the white filter, show original colors */
+  .header-logo img {
+    filter: none !important;
+  }
+
+  /* Desktop nav links: black text + black underline */
+  .nav-link {
+    color: var(--primary-dark-text-color) !important;
+  }
+  .nav-link::after {
+    background: var(--dark-bg) !important;
+  }
+
+  /* CTA button: keep the global class, override to black bg + white text */
+  .header-cta a {
+    background: var(--dark-bg) !important;
+    color: var(--primary-bg) !important;
+    border: 1px solid var(--dark-bg) !important;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+  }
+
+  /* CTA hover: white bg, black text, black border */
+  .header-cta a:hover {
+    background: var(--primary-bg) !important;
+    color: var(--primary-dark-text-color) !important;
+    border-color: var(--primary-dark-text-color) !important;
+  }
+
+  /* Hamburger bars / X: black on the white header */
+  .hamburger span {
+    background: var(--dark-bg) !important;
+  }
+
+  /* Mobile sidebar: white background, black text */
+  @media (max-width: 991px) {
+    .header-nav {
+      background: var(--primary-bg) !important;
+      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12) !important;
+    }
+    .header-nav .nav-link {
+      color: var(--primary-dark-text-color) !important;
+    }
+    .nav-item,
+    .nav-item:first-child {
+      border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+
+  /* Smaller header height on mobile → less padding */
+  @media (max-width: 991px) {
+    body {
+      padding-top: 76px !important;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+
+    .nav-cta a {
+      background-color: var(--dark-bg) !important;
+      border: 2px solid transparent;
+      color: var(--primary-bg) !important;
+    }
+
+    /* CTA hover: white bg, black text, black border */
+    .nav-cta a:hover {
+      background-color: transparent !important;
+      border: 2px solid var(--primary-dark-text-color) !important;
+      color: var(--primary-dark-text-color) !important;
+    }
+
+  }
+
+  
+  .card-content{
+   display:flex;
+   flex-direction:column;
+}
+
+
+
+/* BLog CSS */
+  .container{
+   display:flex;
+   flex-direction:column;
+}
+
+  .filter-section{
+  display:flex;
+   flex-direction:column;
+}
+
+  .topic-filters .widget-module ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(12px, 1vw, 20px);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+
+  .topic-filters{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+
+
+
+  .topic-filters .widget-module a {
+    display: inline-block;
+    font-family: var(--secondary-font); 
+    font-size: var(--text-p);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+    background: var(--secondary-bg);
+    color: var(--tertiary-dark-text-color);
+    border-radius:100px;
+    padding:0.2rem 1.2rem;
+  }
+
+  .topic-filters .widget-module a:hover {
+    background-color: color-mix(in srgb, var(--dark-bg) 10%, transparent);
+  }
+
+  /* Underline for Active Filter */
+  .topic-filters .widget-module a.active {
+    color: var(--light-text-color);
+    background: var(--dark-bg);
+
+  }
+
+  .filter-tab{
+   display:flex;
+   align-items:center;
+}
+
+
+  .filter-tab p{
+    color: var(--secondary-dark-text-color);
+    font-size: var(--text-p) !important;
+    font-family: var(--secondary-font) !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+   
+}
+
+   .blog-desscription p{
+  color: var(--tertiary-dark-text-color);
+  font-size: var(--text-p);
+    font-family: var(--secondary-font);
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+ /* Container for the grid of cards */
+.blog-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Main Card Wrapper */
+.webinar-card {
+  border: var(--border-width) solid var(--border-color);
+  background-color: var(--primary-bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+ flex:1;
+ justify-content:space-between;
+}
+
+/* Image */
+.webinar-img-wrapper {
+  display: block;
+}
+
+.webinar-img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height:158px;
+}
+
+/* Content Padding */
+.webinar-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tags Container */
+.webinar-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Base Tag Style */
+.webinar-tag {
+  padding:0.2rem 1.2rem;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+/* First Tag Style (Blue) */
+.webinar-tag:nth-child(1) {
+  background-color: var(--blue-background);
+  color: var(--blue-text);
+}
+
+/* Second Tag Style (Gray) */
+.webinar-tag {
+  background: var(--secondary-bg);
+  color: var(--secondary-dark-text-color);
+}
+
+  .webinar-tag p{
+  margin:0;
+}
+
+/* Title */
+.webinar-title {
+  line-height: 1.2;
+  margin: 0;
+}
+
+.webinar-title a {
+  text-decoration: none;
+
+}
+
+.webinar-title a:hover {
+
+}
+
+/* Excerpt / Subtitle */
+  .webinar-excerpt p {
+    color: var(--secondary-dark-text-color);
+    font-size:var(--text-p);
+    margin:0;
+  }
+
+.webinar-excerpt .clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.webinar-link  {
+  color: var(--secondary-dark-text-color);
+  text-decoration: none; 
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0px;
+  transition: color 0.3s ease;
+  margin-bottom:0;
+  font-size:var(--text-p);
+  font-family:var(--secondary-font);
+}
+
+/* The animated line matching the text color variable */
+.webinar-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--secondary-dark-text-color);
+  transition: width 0.3s ease;
+}
+
+/* Trigger line expansion when hovering directly over the link */
+.webinar-link:hover::after {
+  width: 100%;
+}
+
+
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+  margin: 0!important;
+}
+
+
+ul li, ol li {
+    margin: 0rem !important;
+}
+
+
+/* ========================================= */
+/* --- Pagination                            */
+/* ========================================= */
+.pagination-wrapper {
+  margin: clamp(40px, 4vw, 60px) 0 0 0;
+}
+
+.pagination-wrapper .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8px, 1vw, 12px);
+}
+
+.pagination-wrapper .pagination__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px !important;
+  height: 40px !important;
+  flex: 0 0 40px !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  border-radius: 50% !important;
+  text-decoration: none;
+  font-family: var(--font-family-secondary);
+  font-size: var(--text-p);
+  font-weight: 500;
+  color: var(--color-text-dark-primary);
+  background-color: transparent;
+  transition: all 0.2s ease;
+  border: none !important;
+}
+
+.pagination-wrapper .pagination__link:hover {
+  background-color: var(--color-bg-light);
+}
+
+/* Active Page - Brand Primary Circle */
+.pagination-wrapper .pagination__link--active {
+  background-color: var(--color-brand-primary) !important;
+  color: var(--color-text-light) !important;
+  font-weight:600;
+}
+
+.pagination-wrapper .pagination__link--first,
+.pagination-wrapper .pagination__link--last,
+.pagination-wrapper .pagination__link-text,
+.pagination-wrapper .show-for-sr--mobile {
+  display: none !important;
+}
+
+
+/*   .questions .container{
+       margin: 0;
+    width: 100%;
+    max-width: none;
+} */
+
+  .block h3{
+   display:none;
+}
+
+  .footer-links li{
+       margin-bottom: clamp(12px, 0.8vw, 16px) !important;
+}
+
+
+  @media(max-width:768px){
+    .blog-container{
+    flex-direction:column;  
+}
+
+     .webinar-card{
+   width: 100%;
+    box-sizing: border-box;
+}
+
+}
+
+
+@media (max-width: 768px) {
+  .filter-tab {
+    align-items: center;
+    gap:3rem;
+  }
+
+  #blog_all_tags,
+  #blog_all_tags > div,
+  #blog_all_tags > div > span,
+  #blog_all_tags > div > span > div,
+  .topic-filters .widget-module {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* STABILIZE PARENT (Updated to your 40px height) */
+  .topic-filters .widget-module {
+    position: relative;
+    width: 100%;
+    height: 40px; 
+  }
+
+  .topic-filters {
+    width: 100%;
+  }
+
+  /* THE UL BASE STATE */
+  .topic-filters .widget-module ul {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 0;
+    
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    
+    box-sizing: border-box;
+    /* padding: 6px removed per your update */
+    background: transparent;
+    border: 0.5px solid transparent;
+    border-radius: 20px;
+    
+    max-height: 40px; /* Updated to your 40px height */
+    overflow: hidden; /* Keeps things contained */
+    transition: max-height 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* HIDE NON-ACTIVE TAGS VISUALLY WHEN CLOSED */
+  /* This prevents them from awkwardly lingering or clipping during the transition */
+  .topic-filters .widget-module ul li:not(:has(> a.active)) {
+    opacity: 0;
+    transition: opacity 0.15s ease; /* Fast fade-out when closing */
+  }
+
+  /* ALWAYS SHOW ACTIVE LI */
+  .topic-filters .widget-module ul li:has(> a.active) {
+    order: -1;
+    display: block;
+    width: 100%;
+  }
+
+  /* Active item styled as dropdown trigger */
+  .topic-filters .widget-module ul li:has(> a.active) a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 100px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 40px; /* Ensures text vertical alignment stays centered */
+  }
+
+  /* Chevron on the active trigger */
+  .topic-filters .widget-module ul li:has(> a.active) a::after {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.2s ease;
+    margin-left: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Flip chevron when open */
+  .topic-filters .widget-module ul.is-open li:has(> a.active) a::after {
+    transform: rotate(-135deg) translateY(2px);
+  }
+
+  /* OPEN STATE */
+  .topic-filters .widget-module ul.is-open {
+    background: var(--color-background-primary, #fff);
+    border: 0.5px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    
+    /* FIX 1: Changed overflow to hidden to eliminate the scrollbar flash entirely */
+    overflow: hidden; 
+    
+    /* FIX 2: Reduced max-height closer to actual content size to eliminate the closing delay */
+    max-height: 220px; 
+  }
+
+  /* REVEAL NON-ACTIVE TAGS WHEN OPEN */
+  .topic-filters .widget-module ul.is-open li:not(:has(> a.active)) {
+    opacity: 1;
+    /* Dynamic fade-in that waits a split second for the dropdown box to begin expanding */
+    transition: opacity 0.2s ease 0.05s; 
+  }
+
+  /* Non-active items layout inside open panel */
+  .topic-filters .widget-module ul.is-open a {
+    display: block;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 22px; /* Add custom padding directly to links if needed since UL padding is gone */
+  }
+
+  /* Active item header styling when open */
+  .topic-filters .widget-module ul.is-open li:has(> a.active) {
+    margin-bottom: 4px;
+    background:var (--secondary-bg);
+  }
+}
+
+</style>
+{% end_require_css %}
+
+<section class="section">
+    <div class="filter-section container">
+
+  
+      <h6 class="mb-10" data-aos="fade-right"
+
+         data-aos-duration="600"
+
+          
+           style="color: var(--secondary-dark-text-color)">
+        {% module "module_178066681243462" 
+path="@hubspot/rich_text", 
+label="rich_text.module" 
+html="INSIGHTS"%}
+        
+      </h6>
+      <h1 class="mb-16" style="font-size:var(--text-h2)" data-aos="fade-right"
+
+         data-aos-duration="800"
+
+         >
+        {% module "module_178066681243452" 
+path="@hubspot/rich_text", 
+label="rich_text.module" 
+html="Get to know Re-board"%}
+      </h1>
+      <div class=" mb-36" data-aos="fade-right"
+
+         data-aos-duration="1000"
+
+         > 
+        
+        {% module "module_178066681245462" 
+path="@hubspot/rich_text", 
+label="rich_text.module" 
+html="<p class='body-2'>Webinars, guides, case studies and industry news — all in one place</p>"%}
+      </div>
+
+      <div class="filter-tab gap-16">
+        
+           
+          {% module "module_178066681543462" 
+path="@hubspot/rich_text", 
+label="rich_text.module" 
+html="<p>FILTER BY:</p>"%}
+        
+              <div id="blog_all_tags" class="topic-filters">
+        {% module "module_178031525389131" path="/Re-board theme/modules/Blog Listing Post Filter", label="Blog Listing Post Filter" %}
+      </div>
+      </div>
+
+
+
+
+    </div>
+</section>
+
+    <div class="form">
+     {% module "module_17803296152793" path="/Re-board theme/modules/Upcoming Webinar", label="Upcoming Webinar" %}
+    </div>
+
+
+   <div class="featured-section">
+     {% module "module_178032548068260" path="/Re-board theme/modules/Featured Blog", label="Featured Blog" %}
+    </div>
+
+ <section class="section" style="background:var(--secondary-bg)">
+   <div class="card-section container">
+      {% set posts = contents %}
+
+<div class="blog-container gap-24" data-aos="fade-up"
+
+         data-aos-duration="650"
+
+         >
+  {% if posts %}
+    {% for post in posts %}
+      <div class="webinar-card rounded">
+<div class="card-content">
+  
+        
+        <a href="{{ post.absolute_url }}" class="webinar-img-wrapper px-32 pt-32 pb-24">
+          <img class="rounded" src="{{ post.featured_image }}" alt="{{ post.name }}" loading="lazy">
+        </a>
+
+        <div class="webinar-content pb-32 px-32">
+<div class="webinar-tags body-1 gap-16 mb-16">
+  {% if post.topic_list %}
+    {% for topic in post.topic_list %}
+      {# Restricts the output to only the first 2 tags #}
+      {% if loop.index <= 2 %}
+        <div class="webinar-tag">
+          <p>{{ topic.name }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
+
+          <a href="{{ post.absolute_url }}">
+            <h4 class="webinar-title clamp-2">{{ post.name }}</h4>
+          </a>
+
+<div class="webinar-excerpt mb-10">
+  {# Strips out all HTML structure and limits the body text to 120 characters #}
+  <p class='clamp-2'>{{ post.post_body|striptags }}</p>
+</div>
+
+
+        </div>
+</div>
+
+  <div class="web-link px-32 pb-32">
+       <a href="{{ post.absolute_url }}" class="webinar-link mt-10">
+             Read More
+         
+            </a>
+          </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<div class="mt-32">
+  
+
+   
+        {% module "module_178040486066647" path="/Re-board theme/modules/Blog Listing pagination", label="Blog Listing pagination" %}
+
+     </div>
+    </div>
+</section>
+
+
+
+
+    <div class="questions">
+      {% module "module_178039199073030" path="/Re-board theme/modules/Still Have Question", label="Still Have Question" %}
+    </div>
+
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const widgetModules = document.querySelectorAll('.topic-filters .widget-module');
+
+    widgetModules.forEach(module => {
+      const ul = module.querySelector('ul');
+      if (!ul) return; 
+
+      const links = ul.querySelectorAll('a');
+      let baseBlogUrl = '';
+
+      // Clean texts and find base URL
+      links.forEach(link => {
+        let span = link.querySelector('span.filter-link-count');
+        if (span) link.removeChild(span); 
+        link.textContent = link.textContent.trim(); 
+
+        if (link.href.includes('/tag/')) {
+          baseBlogUrl = link.href.split('/tag/')[0];
+        }
+      });
+
+      // Ensure "View All" button exists
+      let allLink = Array.from(links).find(link => !link.href.includes('/tag/'));
+
+      if (!allLink && baseBlogUrl) {
+        let allLi = document.createElement('li');
+        allLink = document.createElement('a');
+        allLink.href = baseBlogUrl;
+        allLink.textContent = 'All';
+        allLi.appendChild(allLink);
+        ul.insertBefore(allLi, ul.firstChild);
+      } else if (allLink) {
+        allLink.textContent = 'View All';
+      }
+
+      // Determine active tag
+      let currentUrl = window.location.href.split('?')[0]; 
+      let anyActive = false;
+
+      ul.querySelectorAll('a').forEach(link => {
+        if (link.href === currentUrl) {
+          link.classList.add('active');
+          anyActive = true;
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      if (!anyActive && allLink) {
+        allLink.classList.add('active');
+      }
+    });
+
+   const filterMenu = document.querySelector(".topic-filters .widget-module ul");
+  
+  if (!filterMenu) return;
+
+  filterMenu.addEventListener("click", function (e) {
+    const targetLink = e.target.closest("a");
+    if (!targetLink) return;
+
+    // If clicking the top active option, toggle the dropdown states without reloading
+    if (targetLink.classList.contains("active")) {
+      e.preventDefault();
+      this.classList.toggle("is-open");
+    }
+  });
+
+  // Closes the dropdown automatically if a user clicks anywhere else on the screen
+  document.addEventListener("click", function (e) {
+    if (!filterMenu.contains(e.target)) {
+      filterMenu.classList.remove("is-open");
+    }
+  });
+
+  });
+</script>
+
+{% endblock body %}

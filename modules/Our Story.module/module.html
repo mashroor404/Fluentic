@@ -1,0 +1,369 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout & Background
+     ================================== */
+  .story-section-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .story-section {
+    position: relative;
+    padding: 100px 0;
+  }
+
+  .story-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Header (Split Layout)
+     ================================== */
+  .story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 64px;
+    margin-bottom: 48px;
+  }
+
+  .story-header-left {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .story-header-right {
+    flex: 1;
+    max-width: 540px;
+    padding-bottom: 8px; /* Aligns visually with the baseline of the H2 */
+  }
+
+  .story-header h2 {
+    margin: 24px 0 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* Standardized Title Animation Classes */
+  .story-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .story-header-desc {
+    will-change: transform, opacity;
+    color: var(--text-secondary, #6B738B);
+    margin: 0;
+  }
+
+  /* ==================================
+     Divider
+     ================================== */
+  .story-divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(1, 16, 50, 0.1);
+    margin: 0 0 64px 0;
+    border: none;
+  }
+
+  /* ==================================
+     Content Area (Split Grid)
+     ================================== */
+  .story-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  /* Left Column: List Items & Button */
+  .story-content-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .story-list-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .story-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .story-list-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    background-color: var(--bg-accent-2, #E0F2FE);
+    border-radius: 12px;
+  }
+
+  .story-list-icon img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .story-list-text h5 {
+    margin: 0 0 8px 0;
+    color: var(--text-primary, #011032);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .story-list-text .body-2 {
+    color: var(--text-secondary, #6B738B);
+    margin: 0;
+  }
+
+  .story-btn-wrap {
+    margin-top: 48px;
+  }
+
+  /* Right Column: Image */
+  .story-image-wrap {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--bg-accent-2, #E2E8F0);
+    width: 100%;
+  }
+
+  .story-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* GSAP initial hide states */
+  .gsap-story-el {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .story-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .story-header-right {
+      padding-bottom: 0;
+    }
+    .story-content-grid {
+      gap: 48px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .story-section {
+      padding: 64px 0;
+    }
+    
+    .story-content-grid {
+      grid-template-columns: 1fr;
+      /* Image on top, list and button on bottom for mobile flow */
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 48px;
+    }
+
+    .story-divider {
+      margin: 0 0 48px 0;
+    }
+
+    .story-list-wrap {
+      gap: 32px;
+    }
+
+    .story-btn-wrap {
+      margin-top: 40px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<div class="story-section-wrapper">
+  <section class="story-section">
+    <div class="container">
+      
+      <!-- Split Header -->
+      <div class="story-header">
+        <div class="story-header-left">
+          <!-- Eyebrow (Static, No Animation) -->
+          {% if module.heading_content.eyebrow_text %}
+            <div>
+              {{ btn_macros.eyebrow_label(module.heading_content.eyebrow_text) }}
+            </div>
+          {% endif %}
+
+          <!-- Title (Standardized Blur Reveal) -->
+          {% if module.heading_content.title %}
+            <h2 class="gsap-blur-reveal">{{ module.heading_content.title }}</h2>
+          {% endif %}
+        </div>
+        
+        <div class="story-header-right">
+          <!-- Description (Delayed Fade Up) -->
+          {% if module.heading_content.description %}
+            <p class="body story-header-desc" style="opacity: 0;">{{ module.heading_content.description }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <hr class="story-divider gsap-story-el">
+
+      <!-- Main Content Grid -->
+      <div class="story-content-grid">
+        
+        <!-- Left: List Items & CTA Button -->
+        <div class="story-content-left">
+          <div class="story-list-wrap">
+            {% for item in module.list_items %}
+              <div class="story-list-item gsap-story-el">
+                
+                <!-- Icon -->
+                <div class="story-list-icon">
+                  {% if item.icon.src %}
+                    <img src="{{ item.icon.src }}" alt="{{ item.icon.alt|default('Icon') }}" loading="{{ item.icon.loading }}" width="{{ item.icon.width }}" height="{{ item.icon.height }}">
+                  {% endif %}
+                </div>
+                
+                <!-- Text -->
+                <div class="story-list-text">
+                  {% if item.title %}
+                    <h5>{{ item.title }}</h5>
+                  {% endif %}
+                  {% if item.description %}
+                    <p class="body-2">{{ item.description }}</p>
+                  {% endif %}
+                </div>
+
+              </div>
+            {% endfor %}
+          </div>
+          
+          <!-- CTA Button -->
+          {% if module.button_text %}
+            <div class="story-btn-wrap gsap-story-el">
+              {{ btn_macros.animated_button(module.button_text, module.button_link.url.href) }}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Right: Image -->
+        <div class="story-image-wrap gsap-story-el">
+          {% if module.image.src %}
+            <img src="{{ module.image.src }}" alt="{{ module.image.alt|default('Our Story Image') }}" loading="{{ module.image.loading }}" width="{{ module.image.width }}" height="{{ module.image.height }}">
+          {% endif %}
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".story-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         1. Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         2. Description Fade
+      ------------------------------------------------------------------ */
+      const headerDesc = section.querySelector(".story-header-desc");
+      if (headerDesc) {
+        gsap.fromTo(headerDesc, 
+          { opacity: 0, y: 15 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            delay: 0.3, // Waits slightly for the title to start 
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section.querySelector('.story-header'),
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      /* ------------------------------------------------------------------
+         3. Divider, List Items, Button, and Image (Staggered Fade Up)
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-story-el", 
+        { y: 30, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.15, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".story-divider",
+            start: "top 85%" 
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

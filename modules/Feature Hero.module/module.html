@@ -1,0 +1,288 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Flexbox Layout (60% / 40% Split)
+     ================================== */
+  .testimonial-layout {
+    display: flex;
+    gap: 32px;
+    align-items: stretch; /* Forces both columns to be equal height */
+    max-height: 80vh; /* Takes up 80% of the viewport height on desktop */
+  }
+
+  /* ==================================
+     Left Column: Image (60%)
+     ================================== */
+  .testimonial-image-wrap {
+    flex: 6.5; 
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .testimonial-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .testimonial-image-wrap:hover img {
+    transform: scale(1.05);
+  }
+
+  /* ==================================
+     Right Column: Testimonial Card (40%)
+     ================================== */
+  .testimonial-card {
+    flex: 3.5; 
+    background-color: #F1F5F6;
+    border-radius: 20px;
+    padding: 2rem 1.125rem 10px 1.125rem;
+    display: flex;
+    flex-direction: column;
+    /* Adding auto overflow prevents text from breaking out if screen is very short horizontally */
+    overflow-y: auto; 
+  }
+
+  /* Quote Icon Badge */
+  .testimonial-quote-icon {
+    width: 20px;
+    height: 20px;
+    background: var(--gradient-2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+  }
+
+  .testimonial-quote-icon img {
+    width: 6px;
+    height: 6px;
+    object-fit: contain;
+  }
+
+  /* Testimonial Text */
+  .testimonial-details {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 500;
+    flex-grow: 1; 
+  }
+
+  /* ==================================
+     Author & Rating Box
+     ================================== */
+  .testimonial-author-box {
+    background-color: #E2E6E9;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0; /* Prevents the author box from squishing on short screens */
+  }
+
+  /* Author Avatar Image */
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .author-name {
+    font-family: var(--primary-font);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .author-designation {
+    font-family: var(--secondary-font);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Stars */
+  .author-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    margin-left: auto; /* Pushes the stars to the far right */
+  }
+
+  .rating-star {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rating-star svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-testi-el {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    .testimonial-layout {
+      flex-direction: column;
+      /* RESET MAX HEIGHT SO IT STACKS PROPERLY ON TABLET/MOBILE */
+      max-height: none; 
+      height: auto; 
+    }
+    
+    .testimonial-image-wrap {
+      flex: none;
+      width: 100%;
+      aspect-ratio: 16 / 9; /* Creates a nice landscape ratio for tablet/mobile */
+    }
+    
+    .testimonial-card {
+      flex: none;
+      width: 100%;
+      /* Reset overflow for mobile so it behaves like a normal block */
+      overflow-y: visible; 
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .testimonial-image-wrap {
+      aspect-ratio: 4 / 3; 
+    }
+
+    .testimonial-card {
+      padding: 32px 24px;
+    }
+
+    .testimonial-author-box {
+      padding: 16px;
+      flex-wrap: wrap; /* Allows stars to drop below if name is very long */
+      gap: 12px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="section testimonial-section">
+  <div class="container">
+    <div class="testimonial-layout">
+      
+      <!-- Left Column: Image (60%) -->
+      <div class="testimonial-image-wrap gsap-testi-el">
+        {% if module.image.src %}
+          <img src="{{ module.image.src }}" alt="{{ module.image.alt|default('Feature Image') }}" loading="{{ module.image.loading }}">
+        {% endif %}
+      </div>
+
+      <!-- Right Column: Text & Author (40%) -->
+      <div class="testimonial-card gsap-testi-el">
+        
+        <!-- Quote Icon (Dynamic from JSON) -->
+        <div class="testimonial-quote-icon">
+          {% if module.author_and_rating.qoute_icon.src %}
+            <img src="{{ module.author_and_rating.qoute_icon.src }}" alt="{{ module.author_and_rating.qoute_icon.alt|default('Quote') }}" loading="{{ module.author_and_rating.qoute_icon.loading }}" width="{{ module.author_and_rating.qoute_icon.width }}" height="{{ module.author_and_rating.qoute_icon.height }}">
+          {% endif %}
+        </div>
+
+        <!-- Main Testimonial Details -->
+        {% if module.details %}
+          <p class="testimonial-details body">{{ module.details }}</p>
+        {% endif %}
+
+        <!-- Inner Author & Rating Box -->
+        <div class="testimonial-author-box">
+          
+          <!-- Author Image -->
+          {% if module.author_and_rating.author_image.src %}
+            <img class="author-avatar" src="{{ module.author_and_rating.author_image.src }}" alt="{{ module.author_and_rating.author_name|default('Author') }}" loading="{{ module.author_and_rating.author_image.loading }}">
+          {% endif %}
+
+          <div class="author-info">
+            {% if module.author_and_rating.author_name %}
+              <h4 class="author-name">{{ module.author_and_rating.author_name }}</h4>
+            {% endif %}
+            
+            {% if module.author_and_rating.author_details %}
+              <span class="author-designation">{{ module.author_and_rating.author_details }}</span>
+            {% endif %}
+          </div>
+          
+          <!-- Loop through Rating value to duplicate SVG stars -->
+          {% if module.author_and_rating.rating and module.author_and_rating.rating_icon %}
+            <div class="author-rating">
+              {% for i in range(module.author_and_rating.rating) %}
+                <div class="rating-star">
+                  {{ module.author_and_rating.rating_icon|safe }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Staggered Slide Up for Image and Card
+      gsap.fromTo(".gsap-testi-el", 
+        { y: 40, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.2, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".testimonial-section",
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}

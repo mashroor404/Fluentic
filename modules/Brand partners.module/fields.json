@@ -1,0 +1,74 @@
+[ {
+  "id" : "fdd965b3-cce1-2994-3360-3b3f2c339867",
+  "name" : "partners",
+  "label" : "Partners",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 5
+  },
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : [ {
+    "size_type" : "auto",
+    "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Mask%20group.svg",
+    "alt" : "Mask group",
+    "loading" : "lazy",
+    "width" : 152,
+    "height" : 36,
+    "max_width" : 152,
+    "max_height" : 36
+  }, {
+    "size_type" : "auto",
+    "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Mask%20group.svg",
+    "alt" : "Mask group",
+    "loading" : "lazy",
+    "width" : 152,
+    "height" : 36,
+    "max_width" : 152,
+    "max_height" : 36
+  }, {
+    "size_type" : "auto",
+    "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Mask%20group.svg",
+    "alt" : "Mask group",
+    "loading" : "lazy",
+    "width" : 152,
+    "height" : 36,
+    "max_width" : 152,
+    "max_height" : 36
+  }, {
+    "size_type" : "auto",
+    "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Mask%20group.svg",
+    "alt" : "Mask group",
+    "loading" : "lazy",
+    "width" : 152,
+    "height" : 36,
+    "max_width" : 152,
+    "max_height" : 36
+  }, {
+    "size_type" : "auto",
+    "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Mask%20group.svg",
+    "alt" : "Mask group",
+    "loading" : "lazy",
+    "width" : 152,
+    "height" : 36,
+    "max_width" : 152,
+    "max_height" : 36
+  } ]
+}, {
+  "id" : "1aafb2e0-23c1-732f-3563-b90acb93eda6",
+  "name" : "eyebrow_text",
+  "label" : "Eyebrow text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Orchestrated across the stack you already own"
+} ]

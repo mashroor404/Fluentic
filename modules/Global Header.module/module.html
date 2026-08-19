@@ -1,0 +1,135 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .section {
+   padding-top: 10em;
+   padding-bottom:0;
+  }
+
+  /* Pricing Header */
+  .pricing-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pricing-header h1 {
+    color: var(--text-primary);
+    max-width:{{ module.style.title_width}}px; 
+  }
+
+  .header-p {
+    color: var(--text-secondary);
+    max-width: 650px;
+    margin-bottom: 0;
+  }
+  
+  /* Optional: Standard Mobile scaling for the header */
+  @media (max-width: 768px) {
+    .pricing-header h1 {
+      font-size: clamp(32px, 8vw, 48px);
+    }
+  }
+
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="section">
+  <div class="container">
+         
+    <!-- Header Section -->
+    <div class="pricing-header">
+      {% if module.eyebrow_text %}
+        <div data-blur-reveal>
+          {{ btn_macros.eyebrow_label(module.eyebrow_text) }}
+        </div>
+      {% endif %}
+      
+      {% if module.title %}
+        <!-- Changed data-blur-reveal to class="title-split-reveal" -->
+        <h1 class="title-split-reveal mt-24 mb-36">{{ module.title }}</h1>
+      {% endif %}
+      
+      {% if module.subtitle %}
+        <p data-blur-reveal class="body header-p">{{ module.subtitle }}</p>
+      {% endif %}
+        
+      <!-- Button Container with Conditional Rendering -->
+      {% if module.button_text %}
+        <div class="button-container mt-36" data-blur-reveal>
+          {{ btn_macros.animated_button(module.button_text, module.button_link.url.href) }}
+        </div>
+      {% endif %}
+         
+    </div>
+  </div>
+</section>
+
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 1. Blur Reveal for Header Elements (Eyebrow, Subtitle, Button)
+      gsap.fromTo("[data-blur-reveal]", 
+        { 
+          opacity: 0, 
+          filter: "blur(12px)", 
+          y: 25 
+        }, 
+        { 
+          opacity: 1, 
+          filter: "blur(0px)", 
+          y: 0, 
+          duration: 1, 
+          stagger: 0.15, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".pricing-header",
+            start: "top 85%"
+          }
+        }
+      );
+
+      // 2. Character-by-Character Reveal for the Title
+      const titleEl = document.querySelector(".title-split-reveal");
+      if (titleEl) {
+        const text = titleEl.innerText;
+        titleEl.innerHTML = ""; 
+        
+        text.split("").forEach(char => {
+          const span = document.createElement("span");
+          span.innerText = char === " " ? "\u00A0" : char;
+          span.style.display = "inline-block";
+          titleEl.appendChild(span);
+        });
+
+        gsap.fromTo(".title-split-reveal span", 
+          { 
+            opacity: 0, 
+            y: 15,
+            filter: "blur(4px)"
+          }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            filter: "blur(0px)",
+            duration: 0.4, 
+            stagger: 0.03, 
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".pricing-header",
+              start: "top 85%"
+            }
+          }
+        );
+      }
+    }
+  });
+</script>
+{% end_require_js %}

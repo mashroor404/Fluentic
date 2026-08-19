@@ -1,0 +1,384 @@
+[ {
+  "id" : "4ac0d822-f265-a2b7-4d2b-a824781e4504",
+  "name" : "eyebrow_text",
+  "label" : "Eyebrow text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Driven by intelligent AI agents"
+}, {
+  "id" : "02cfdfc8-2300-58c8-a93e-1ecb892c76c9",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Trusted by Teams Building the Future with AI Automation"
+}, {
+  "id" : "361acbc0-42b3-7384-7234-0b064c9b0a71",
+  "name" : "review",
+  "label" : "Review",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "c8267886-2d20-093a-45fd-59e3b4ccaf35",
+    "name" : "review",
+    "label" : "Review",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ABR streamlined our support workflow and reduced response times significantly. It's easy to use, dependable, and has improved team efficiency across the board."
+  }, {
+    "id" : "b4fd8d2a-3940-10de-228c-46f9f51274e6",
+    "name" : "author_name",
+    "label" : "Author name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "James Anderson"
+  }, {
+    "id" : "99aa5f95-37d8-227e-c009-2aecb718c953",
+    "name" : "author_details",
+    "label" : "Author details",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "COO, Nexora"
+  }, {
+    "id" : "8959479a-3a4d-dd5d-6566-e9a96154b952",
+    "name" : "author_image",
+    "label" : "Author image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }
+  }, {
+    "id" : "e0f1afc3-79fe-0e10-43d4-a0e5c8ed1fe3",
+    "name" : "qoute_icon",
+    "label" : "Qoute icon",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32185a14039013e0c03964_quote.svg",
+      "alt" : "6a32185a14039013e0c03964_quote",
+      "loading" : "lazy",
+      "width" : 7,
+      "height" : 7,
+      "max_width" : 7,
+      "max_height" : 7
+    }
+  }, {
+    "id" : "155522d4-726f-5452-d83c-2c0a4cdd0b71",
+    "name" : "rating",
+    "label" : "Rating",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 5
+  }, {
+    "id" : "3d420735-881c-ff85-6cbb-3d99538e4348",
+    "name" : "rating_icon",
+    "label" : "Rating icon",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><script xmlns=\"\" id=\"eppiocemhmnlbhjplcgkofciiegomcon\"/><script xmlns=\"\"/><script xmlns=\"\"/><path d=\"M7.62194 0C8.36603 0 8.95214 0.562021 9.32633 1.32037L10.5759 3.84014C10.6138 3.91812 10.7036 4.02794 10.8386 4.12839C10.9735 4.22874 11.1056 4.2841 11.1925 4.29871L13.4544 4.67762C14.2714 4.81491 14.9563 5.21541 15.1786 5.91279C15.4007 6.60959 15.0752 7.33371 14.4877 7.92233L14.4871 7.9229L12.7299 9.69464C12.6603 9.76486 12.5823 9.89714 12.5333 10.0695C12.4847 10.2407 12.4804 10.3966 12.5025 10.4973L12.5028 10.4987L13.0055 12.6904C13.214 13.6027 13.1449 14.5072 12.5016 14.9801C11.856 15.4547 10.9738 15.2443 10.1723 14.767L8.05201 13.5014C7.96297 13.4482 7.81005 13.4052 7.62548 13.4052C7.44227 13.4052 7.28614 13.4477 7.1913 13.5028L7.18996 13.5036L5.07383 14.7667C4.27332 15.2457 3.3922 15.4523 2.74657 14.9773C2.10364 14.5043 2.03106 13.6014 2.24024 12.69L2.74287 10.4987L2.74318 10.4973C2.76522 10.3966 2.76091 10.2407 2.71231 10.0695C2.66338 9.89714 2.58536 9.76486 2.51572 9.69464L0.757229 7.92162C0.173457 7.33302 -0.150935 6.60953 0.069426 5.91375C0.290429 5.21594 0.973928 4.81496 1.7915 4.67757L4.05155 4.29898L4.05226 4.29886C4.13512 4.28448 4.26527 4.22974 4.39985 4.12913C4.53468 4.02834 4.62473 3.91828 4.66269 3.84014L4.6646 3.83625L5.91256 1.3197L5.91305 1.31871C6.29078 0.560989 6.87871 0 7.62194 0Z\" fill=\"#FFCC00\"/><script xmlns=\"\"/></svg>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "review" : "ABR streamlined our support workflow and reduced response times significantly. It's easy to use, dependable, and has improved team efficiency across the board.",
+    "author_name" : "James Anderson",
+    "author_details" : "COO, Nexora",
+    "author_image" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    },
+    "qoute_icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32185a14039013e0c03964_quote.svg",
+      "alt" : "6a32185a14039013e0c03964_quote",
+      "loading" : "lazy",
+      "width" : 7,
+      "height" : 7,
+      "max_width" : 7,
+      "max_height" : 7
+    },
+    "rating" : 5,
+    "rating_icon" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><script xmlns=\"\" id=\"eppiocemhmnlbhjplcgkofciiegomcon\"/><script xmlns=\"\"/><script xmlns=\"\"/><path d=\"M7.62194 0C8.36603 0 8.95214 0.562021 9.32633 1.32037L10.5759 3.84014C10.6138 3.91812 10.7036 4.02794 10.8386 4.12839C10.9735 4.22874 11.1056 4.2841 11.1925 4.29871L13.4544 4.67762C14.2714 4.81491 14.9563 5.21541 15.1786 5.91279C15.4007 6.60959 15.0752 7.33371 14.4877 7.92233L14.4871 7.9229L12.7299 9.69464C12.6603 9.76486 12.5823 9.89714 12.5333 10.0695C12.4847 10.2407 12.4804 10.3966 12.5025 10.4973L12.5028 10.4987L13.0055 12.6904C13.214 13.6027 13.1449 14.5072 12.5016 14.9801C11.856 15.4547 10.9738 15.2443 10.1723 14.767L8.05201 13.5014C7.96297 13.4482 7.81005 13.4052 7.62548 13.4052C7.44227 13.4052 7.28614 13.4477 7.1913 13.5028L7.18996 13.5036L5.07383 14.7667C4.27332 15.2457 3.3922 15.4523 2.74657 14.9773C2.10364 14.5043 2.03106 13.6014 2.24024 12.69L2.74287 10.4987L2.74318 10.4973C2.76522 10.3966 2.76091 10.2407 2.71231 10.0695C2.66338 9.89714 2.58536 9.76486 2.51572 9.69464L0.757229 7.92162C0.173457 7.33302 -0.150935 6.60953 0.069426 5.91375C0.290429 5.21594 0.973928 4.81496 1.7915 4.67757L4.05155 4.29898L4.05226 4.29886C4.13512 4.28448 4.26527 4.22974 4.39985 4.12913C4.53468 4.02834 4.62473 3.91828 4.66269 3.84014L4.6646 3.83625L5.91256 1.3197L5.91305 1.31871C6.29078 0.560989 6.87871 0 7.62194 0Z\" fill=\"#FFCC00\"/><script xmlns=\"\"/></svg>"
+  }, {
+    "review" : "ABR streamlined our support workflow and reduced response times significantly. It's easy to use, dependable, and has improved team efficiency across the board.",
+    "author_name" : "James Anderson",
+    "author_details" : "COO, Nexora",
+    "author_image" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    },
+    "qoute_icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32185a14039013e0c03964_quote.svg",
+      "alt" : "6a32185a14039013e0c03964_quote",
+      "loading" : "lazy",
+      "width" : 7,
+      "height" : 7,
+      "max_width" : 7,
+      "max_height" : 7
+    },
+    "rating" : 5,
+    "rating_icon" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><script xmlns=\"\" id=\"eppiocemhmnlbhjplcgkofciiegomcon\"/><script xmlns=\"\"/><script xmlns=\"\"/><path d=\"M7.62194 0C8.36603 0 8.95214 0.562021 9.32633 1.32037L10.5759 3.84014C10.6138 3.91812 10.7036 4.02794 10.8386 4.12839C10.9735 4.22874 11.1056 4.2841 11.1925 4.29871L13.4544 4.67762C14.2714 4.81491 14.9563 5.21541 15.1786 5.91279C15.4007 6.60959 15.0752 7.33371 14.4877 7.92233L14.4871 7.9229L12.7299 9.69464C12.6603 9.76486 12.5823 9.89714 12.5333 10.0695C12.4847 10.2407 12.4804 10.3966 12.5025 10.4973L12.5028 10.4987L13.0055 12.6904C13.214 13.6027 13.1449 14.5072 12.5016 14.9801C11.856 15.4547 10.9738 15.2443 10.1723 14.767L8.05201 13.5014C7.96297 13.4482 7.81005 13.4052 7.62548 13.4052C7.44227 13.4052 7.28614 13.4477 7.1913 13.5028L7.18996 13.5036L5.07383 14.7667C4.27332 15.2457 3.3922 15.4523 2.74657 14.9773C2.10364 14.5043 2.03106 13.6014 2.24024 12.69L2.74287 10.4987L2.74318 10.4973C2.76522 10.3966 2.76091 10.2407 2.71231 10.0695C2.66338 9.89714 2.58536 9.76486 2.51572 9.69464L0.757229 7.92162C0.173457 7.33302 -0.150935 6.60953 0.069426 5.91375C0.290429 5.21594 0.973928 4.81496 1.7915 4.67757L4.05155 4.29898L4.05226 4.29886C4.13512 4.28448 4.26527 4.22974 4.39985 4.12913C4.53468 4.02834 4.62473 3.91828 4.66269 3.84014L4.6646 3.83625L5.91256 1.3197L5.91305 1.31871C6.29078 0.560989 6.87871 0 7.62194 0Z\" fill=\"#FFCC00\"/><script xmlns=\"\"/></svg>"
+  }, {
+    "review" : "ABR streamlined our support workflow and reduced response times significantly. It's easy to use, dependable, and has improved team efficiency across the board.",
+    "author_name" : "James Anderson",
+    "author_details" : "COO, Nexora",
+    "author_image" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    },
+    "qoute_icon" : {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a32185a14039013e0c03964_quote.svg",
+      "alt" : "6a32185a14039013e0c03964_quote",
+      "loading" : "lazy",
+      "width" : 7,
+      "height" : 7,
+      "max_width" : 7,
+      "max_height" : 7
+    },
+    "rating" : 5,
+    "rating_icon" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><script xmlns=\"\" id=\"eppiocemhmnlbhjplcgkofciiegomcon\"/><script xmlns=\"\"/><script xmlns=\"\"/><path d=\"M7.62194 0C8.36603 0 8.95214 0.562021 9.32633 1.32037L10.5759 3.84014C10.6138 3.91812 10.7036 4.02794 10.8386 4.12839C10.9735 4.22874 11.1056 4.2841 11.1925 4.29871L13.4544 4.67762C14.2714 4.81491 14.9563 5.21541 15.1786 5.91279C15.4007 6.60959 15.0752 7.33371 14.4877 7.92233L14.4871 7.9229L12.7299 9.69464C12.6603 9.76486 12.5823 9.89714 12.5333 10.0695C12.4847 10.2407 12.4804 10.3966 12.5025 10.4973L12.5028 10.4987L13.0055 12.6904C13.214 13.6027 13.1449 14.5072 12.5016 14.9801C11.856 15.4547 10.9738 15.2443 10.1723 14.767L8.05201 13.5014C7.96297 13.4482 7.81005 13.4052 7.62548 13.4052C7.44227 13.4052 7.28614 13.4477 7.1913 13.5028L7.18996 13.5036L5.07383 14.7667C4.27332 15.2457 3.3922 15.4523 2.74657 14.9773C2.10364 14.5043 2.03106 13.6014 2.24024 12.69L2.74287 10.4987L2.74318 10.4973C2.76522 10.3966 2.76091 10.2407 2.71231 10.0695C2.66338 9.89714 2.58536 9.76486 2.51572 9.69464L0.757229 7.92162C0.173457 7.33302 -0.150935 6.60953 0.069426 5.91375C0.290429 5.21594 0.973928 4.81496 1.7915 4.67757L4.05155 4.29898L4.05226 4.29886C4.13512 4.28448 4.26527 4.22974 4.39985 4.12913C4.53468 4.02834 4.62473 3.91828 4.66269 3.84014L4.6646 3.83625L5.91256 1.3197L5.91305 1.31871C6.29078 0.560989 6.87871 0 7.62194 0Z\" fill=\"#FFCC00\"/><script xmlns=\"\"/></svg>"
+  } ]
+}, {
+  "id" : "d30d56fc-0d58-be33-dad1-de27beab89b3",
+  "name" : "footer_card",
+  "label" : "Footer card",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "7416b2fb-0f01-8a6b-4826-d4d936d25ff2",
+    "name" : "stories",
+    "label" : "Stories",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "300+ HAPPY CLIENTS SHARED STORIES"
+  }, {
+    "id" : "5df208e3-7b97-afc5-42c8-8dcc0963b2a9",
+    "name" : "clients",
+    "label" : "Clients",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : null,
+      "max" : null,
+      "sorting_label_field" : null,
+      "default" : 5
+    },
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : [ {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    } ]
+  }, {
+    "id" : "8a0908b0-19ca-048c-70d8-b8618d33f379",
+    "name" : "button_text",
+    "label" : "Button text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Get Started Free"
+  }, {
+    "id" : "98c7267b-2249-8347-aa23-7afdee486f57",
+    "name" : "link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "stories" : "300+ HAPPY CLIENTS SHARED STORIES",
+    "clients" : [ {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    }, {
+      "size_type" : "auto",
+      "src" : "https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3.webp",
+      "alt" : "6a268288d265329f70a3c879_2e2209864f1c3602d4b7ea375bee2282_t-person-img-3",
+      "loading" : "lazy",
+      "width" : 92,
+      "height" : 92,
+      "max_width" : 92,
+      "max_height" : 92
+    } ],
+    "button_text" : "Get Started Free",
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+} ]

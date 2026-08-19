@@ -1,0 +1,386 @@
+{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout
+     ================================== */
+  .team-section {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .team-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ==================================
+     Header Content (Center Aligned)
+     ================================== */
+  .team-header {
+    max-width: 680px;
+    margin: 0 auto 64px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-header h2 {
+    margin: 24px 0 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* Standardized Title Animation Classes */
+  .team-header h2 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  /* ==================================
+     Cards Grid (4 Columns)
+     ================================== */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+
+  .team-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4; /* Maintains standard portrait proportions */
+    background-color: var(--bg-accent-2);
+    transform-style: preserve-3d;
+    will-change: transform;
+    /* Smooth hover lift */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+  }
+
+  .team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(1, 16, 50, 0.12);
+  }
+
+  /* Member Image */
+  .team-card > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .team-card:hover > img {
+    transform: scale(1.2); /* Increased scale on hover */
+  }
+
+  /* ==================================
+     Social Pill (Top Right)
+     ================================== */
+  .team-social-pill {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    padding: 0; /* Removed padding so hover bg touches edges */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 3;
+    overflow: hidden; /* Clips the hover background to the rounded corners */
+  }
+
+  .team-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 32px;
+    border-radius: 0; /* Parent handles the corners */
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .team-social-link svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  /* SVG & Background Colors (Inherits via currentColor) */
+  .team-social-link.is-insta { 
+    color: #E1306C; 
+  }
+  .team-social-link.is-insta:hover { 
+    background-color: #E1306C; 
+    color: var(--bg-primary); 
+  }
+
+  .team-social-link.is-linkedin { 
+    color: #0077B5; 
+  }
+  .team-social-link.is-linkedin:hover { 
+    background-color: #0077B5; 
+    color: var(--bg-primary); 
+  }
+
+  /* Divider line between icons */
+  .team-social-pill::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 14px;
+    background-color: rgba(1, 16, 50, 0.1);
+    pointer-events: none; /* Prevents divider from interfering with hover */
+  }
+
+  /* ==================================
+     Bottom Info Overlay (Glassmorphism)
+     ================================== */
+  .team-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 64px 20px 32px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+  }
+
+  /* The actual blur background isolated on a pseudo-element */
+  .team-info-overlay::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* More transparent dark gradient */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+    /* More transparent blur effect */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(6px);
+    /* Fades out the blur at the top so it doesn't leave a harsh line */
+    -webkit-mask-image: linear-gradient(to top, black 0%, black 60%, transparent 100%);
+    mask-image: linear-gradient(to top, black 0%, black 30%, transparent 100%);
+    z-index: -1;
+  }
+
+  .team-desig {
+    font-family: var(--tertiary-font);
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgb(200, 227, 243);
+    margin-bottom: 1.125rem;
+  }
+
+  .team-name {
+    font-family: var(--primary-font);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-light-primary);
+    margin: 0;
+  }
+
+  /* ==================================
+     GSAP Initial States
+     ================================== */
+  .gsap-team-card {
+    opacity: 0;
+  }
+
+  /* ==================================
+     Mobile Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    /* 2 Columns on Tablet */
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .team-card {
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .team-section {
+      padding: 64px 0;
+    }
+    
+    .team-header {
+      margin-bottom: 40px;
+    }
+
+    /* 1 Column on Mobile */
+    .team-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .team-card {
+      aspect-ratio: 1 / 1.1;
+    }
+    
+    .team-name {
+      font-size: 1.5rem; /* Slightly larger for single-column mobile view */
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="team-section">
+  <div class="container">
+    
+    <!-- Section Header -->
+    <div class="team-header">
+      
+      <!-- Eyebrow (Static) -->
+      {% if module.heading_content.eyebrow_text %}
+        <div>
+          {{ btn_macros.eyebrow_label(module.heading_content.eyebrow_text) }}
+        </div>
+      {% endif %}
+
+      <!-- Title (Standardized Blur Reveal) -->
+      {% if module.heading_content.title %}
+        <h2 class="gsap-blur-reveal">{{ module.heading_content.title }}</h2>
+      {% endif %}
+      
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="team-grid">
+      {% for member in module.teams %}
+        <div class="team-card gsap-team-card">
+          
+          <!-- Profile Image -->
+          {% if member.image.src %}
+            <img src="{{ member.image.src }}" alt="{{ member.user_name|default('Team Member') }}" loading="{{ member.image.loading }}">
+          {% endif %}
+
+          <!-- Social Links Pill -->
+          <div class="team-social-pill">
+            <!-- Instagram -->
+            {% if member.instagram.instagram_svg %}
+              <a href="{{ member.instagram.link.url.href }}" 
+                 class="team-social-link is-insta" 
+                 aria-label="Instagram"
+                 {% if member.instagram.link.open_in_new_tab %}target="_blank"{% endif %}
+                 {% if member.instagram.link.no_follow %}rel="nofollow"{% endif %}>
+                {{ member.instagram.instagram_svg|safe }}
+              </a>
+            {% endif %}
+            
+            <!-- LinkedIn -->
+            {% if member.linkedin.linkedin_svg  %}
+              <a href="{{ member.linkedin.link.url.href }}" 
+                 class="team-social-link is-linkedin" 
+                 aria-label="LinkedIn"
+                 {% if member.linkedin.link.open_in_new_tab %}target="_blank"{% endif %}
+                 {% if member.linkedin.link.no_follow %}rel="nofollow"{% endif %}>
+                {{ member.linkedin.linkedin_svg|safe }}
+              </a>
+            {% endif %}
+          </div>
+
+          <!-- Bottom Text Overlay (Glassmorphism) -->
+          <div class="team-info-overlay">
+            {% if member.designation %}
+              <span class="team-desig">{{ member.designation }}</span>
+            {% endif %}
+            
+            {% if member.user_name %}
+              <h4 class="team-name">{{ member.user_name }}</h4>
+            {% endif %}
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- GSAP Scroll Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".team-section");
+      if (!section) return;
+
+      /* ------------------------------------------------------------------
+         1. Heading Blur Reveal
+      ------------------------------------------------------------------ */
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------
+         2. Team Cards (Staggered Fade Up from further below)
+      ------------------------------------------------------------------ */
+      gsap.fromTo(".gsap-team-card", 
+        { y: 80, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.15, 
+          delay: 0.2, // Small delay so the header reveals first
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".team-grid",
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}
