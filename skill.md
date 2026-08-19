@@ -5,7 +5,7 @@ This is the project playbook for building future HubSpot modules and templates i
 ## Before editing
 
 1. Read `memory.md` and inspect `theme.json`, root `fields.json`, `templates/layouts/base.html`, `css/main.css`, and `css/elements/global.css`.
-2. Confirm the deployed theme folder name. Existing files use both `/CoreAI theme` and `/Re-board theme`; do not invent a third path.
+2. Use `/Fluentic` as the deployed theme folder. The remaining `/Re-board theme` references belong to unresolved legacy blog dependencies.
 3. Check the actual case of global module folders and paths.
 4. Reuse existing tokens and macros before adding new colors, fonts, button markup, or layout conventions.
 
@@ -26,7 +26,7 @@ Use a unique module label and the correct HubSpot `content_types` and `host_temp
 Preferred `module.html` shape:
 
 ```html
-{% import '/CoreAI theme/Macros/Button.html' as btn_macros %}
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
 
 {% require_css %}
 <style>
@@ -67,7 +67,7 @@ Start from the shared shell:
 {% endblock body %}
 ```
 
-Use `/CoreAI theme/modules/<Module name>` in `dnd_module` declarations only after confirming that `/CoreAI theme` is still the remote theme folder. Keep global header/footer rendering in the base layout unless a page intentionally overrides the blocks.
+Use `/Fluentic/modules/<Module name>` in `dnd_module` declarations. Keep global header/footer rendering in the base layout unless a page intentionally overrides the blocks.
 
 ## Change theme-wide design settings
 
@@ -110,7 +110,7 @@ Example:
 - `theme.json` metadata alone does not style a page. The settings become visible in rendered output only when a stylesheet reads them through HubL's `theme` object.
 - `base.html` is the most important integration point: it loads the global CSS/JS and owns the reusable header/footer partials.
 - `require_css`/`scope_css` and `require_js` are the established module conventions here.
-- Existing hard-coded remote paths and stale theme names are deployment dependencies; resolve them before copying patterns into new modules.
+- Theme-owned absolute paths must start with `/Fluentic`. Do not copy the remaining `/Re-board theme` blog paths into new modules.
 
 ## Match the live Fluentic visual system
 
@@ -123,3 +123,10 @@ When converting or extending the Webflow design, use the live reference values c
 - For the signature gradient, use `linear-gradient(120deg, #F0E9F7, #D588FC 61%, #FF49D4)`.
 
 If these values should become editable HubSpot theme settings, add them to root `fields.json`, map them through the `theme` object in the global stylesheet, and then consume the resulting CSS variables from modules. Do not scatter the Webflow hex values through module markup.
+
+## Reuse the downloaded reference assets
+
+- Look in `css/elements/Assets/images`, `css/elements/Assets/icons`, and `css/elements/Assets/video` before downloading or recreating Fluentic media.
+- Consult `css/elements/Assets/asset-manifest.csv` when the original Webflow CDN source is needed.
+- Prefer the original asset listed in the manifest over a responsive Webflow `srcset` rendition.
+- When adding new downloaded reference media, preserve a clear filename, place it in the matching type folder, and add its source URL to the manifest.

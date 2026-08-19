@@ -1,7 +1,7 @@
 {
   "label" : "Fluentic",
   "preview_path" : null,
-  "screenshot_path" : "/CoreAI theme/images/TransparentHeader.png",
+  "screenshot_path" : "/Fluentic/images/TransparentHeader.png",
   "enable_domain_stylesheets" : false,
   "is_available_for_new_content" : true,
   "responsive_breakpoints" : [ {
