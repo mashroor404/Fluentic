@@ -73,10 +73,20 @@ button:disabled,
 .button-primary:hover,
 .button-primary:focus-visible {
   color: var(--btn-primary-text-color, #FFFFFF);
-  background-color: var(--text-secondary, #5D6C7B);
-  border-color: var(--text-secondary, #5D6C7B);
+  background-color: var(--btn-primary-bg-color, #1B0C27);
+  border-color: var(--btn-primary-bg-color, #1B0C27);
   text-decoration: none;
-  transform: translateY(-2px);
+}
+
+/* The primary CTA stays visually unchanged on hover. */
+.button-primary[data-wf--button-primary--variant='base'] .button-text.hover {
+  display: none;
+}
+
+.button-primary[data-wf--button-primary--variant='base']:hover .button-text:not(.hover),
+.button-primary[data-wf--button-primary--variant='base']:focus-visible .button-text:not(.hover) {
+  opacity: 1;
+  transform: none;
 }
 
 /* The fixed-height viewport clips the two vertically stacked text labels. */
@@ -114,16 +124,19 @@ button:disabled,
 /* Webflow's v2 component variant: light surface, dark label and subtle border. */
 .button-primary[data-wf--button-primary--variant='v2'] {
   color: var(--btn-secondary-text-color, #1B0C27);
-  background-color: var(--btn-secondary-bg-color, rgba(255, 255, 255, 0.5));
-  border-color: var(--bg-accent-3, #EDECEF);
+  background-color: rgba(255, 255, 255, 0.46);
+  border-color: rgba(255, 255, 255, 0.72);
   border-radius: var(--btn-secondary-border-radius, 8px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 
 .button-primary[data-wf--button-primary--variant='v2']:hover,
 .button-primary[data-wf--button-primary--variant='v2']:focus-visible {
-  color: var(--text-light-primary, #FFFFFF);
-  background-color: var(--dark-bg, #1B0C27);
-  border-color: var(--dark-bg, #1B0C27);
+  color: var(--btn-secondary-text-color, #1B0C27);
+  background-color: rgba(255, 255, 255, 0.46);
+  border-color: rgba(255, 255, 255, 0.72);
 }
 
 .button-primary:focus-visible {
