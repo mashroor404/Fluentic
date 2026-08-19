@@ -1,0 +1,203 @@
+.hero-content-block {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title-block {
+  display: flex;
+  width: min(100%, var(--hero-content-width, 800px));
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-title-block .eyebrow-custom {
+  margin-bottom: 24px;
+}
+
+.hero-title-wrap {
+  width: 100%;
+}
+
+.hero-heading {
+  margin: 0;
+  color: var(--text-primary, #1b0c27);
+  font-size: clamp(3rem, 6.25vw, 6rem);
+  font-weight: var(--font-weight-medium, 500);
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.hero-description-wrap {
+  width: min(100%, 660px);
+  margin-top: 28px;
+}
+
+.hero-description-wrap .text-medium {
+  margin: 0;
+  color: var(--text-secondary, #5d6c7b);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.hero-button-wrapper {
+  display: flex;
+  margin-top: 36px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-image-block {
+  position: relative;
+  width: min(100%, 1280px);
+  margin: clamp(56px, 7vw, 96px) auto 0;
+}
+
+.hero-image-wrap {
+  position: relative;
+  min-height: 300px;
+}
+
+.hero-image-02 {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-message-block {
+  position: absolute;
+  z-index: 3;
+  top: 11%;
+  left: 50%;
+  display: flex;
+  width: min(50%, 590px);
+  transform: translateX(-50%);
+  flex-direction: column;
+  gap: clamp(8px, 1vw, 16px);
+}
+
+.hero-message-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.hero-message-wrapper--user {
+  justify-content: flex-end;
+  padding-left: 18%;
+}
+
+.hero-message-wrapper--agent {
+  justify-content: flex-start;
+  padding-right: 10%;
+}
+
+.message-text-wrap {
+  padding: clamp(9px, 1vw, 14px) clamp(12px, 1.3vw, 18px);
+  color: var(--text-primary, #1b0c27);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(27, 12, 39, 0.08);
+  border-radius: 14px 14px 14px 4px;
+  box-shadow: 0 12px 30px rgba(27, 12, 39, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.hero-message-wrapper--user .message-text-wrap {
+  color: var(--text-light-primary, #fff);
+  background: var(--dark-bg, #1b0c27);
+  border-radius: 14px 14px 4px 14px;
+}
+
+.message-text {
+  margin: 0;
+  font-size: clamp(0.65rem, 0.85vw, 0.875rem);
+  line-height: 1.45;
+}
+
+.message-avatar-wrap {
+  width: clamp(24px, 2.5vw, 38px);
+  height: clamp(24px, 2.5vw, 38px);
+  overflow: hidden;
+  flex: 0 0 auto;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 5px 16px rgba(27, 12, 39, 0.12);
+}
+
+.message-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-particle {
+  position: absolute;
+  z-index: 0;
+  width: clamp(120px, 21vw, 330px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-particle--one {
+  top: -10%;
+  left: -8%;
+}
+
+.hero-particle--two {
+  top: -13%;
+  right: -9%;
+}
+
+.hero-video {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(248, 247, 248, 0.82), rgba(248, 247, 248, 0.28) 55%, rgba(248, 247, 248, 0.92));
+}
+
+@media (max-width: 991px) {
+  .hero-message-block { width: 60%; }
+}
+
+@media (max-width: 767px) {
+  .hero-section { --hero-spacing: 96px; }
+  .hero-heading { font-size: clamp(2.65rem, 13vw, 4.25rem); }
+  .hero-description-wrap { margin-top: 22px; }
+  .hero-button-wrapper { margin-top: 28px; }
+  .hero-button-wrap, .hero-button-wrap .button-primary { width: 100%; }
+  .hero-image-block { margin-top: 56px; width: 120%; left: -10%; }
+  .hero-message-block { top: 8%; width: 66%; }
+  .hero-message-wrapper--user { padding-left: 5%; }
+  .hero-message-wrapper--agent { padding-right: 3%; }
+  .hero-message-wrapper:nth-child(n + 3) { display: none; }
+}
+
+@media (max-width: 479px) {
+  .hero-message-block { width: 72%; }
+  .message-text { font-size: 0.55rem; }
+  .message-avatar-wrap { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video video { display: none; }
+}
