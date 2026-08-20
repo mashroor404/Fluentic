@@ -202,4 +202,12 @@ Its GSAP sequence matches the existing module language: eyebrow at 0s, split hea
 
 Desktop text panels are 1215px wide with 212px icon circles. The module follows the reference's 991px, 767px, and 479px steps (800/600/400px text and 160/140/120px icons). Typography and surfaces use the theme's global font and color tokens.
 
-GSAP ScrollTrigger scrubs the complete track from `xPercent: 0` to `xPercent: -10` between `top bottom` and `bottom top`. Scrolling down therefore moves the track left, while scrolling upward naturally reverses it to the right. The track uses `will-change: transform`, `transform-style: preserve-3d`, and `force3D`; motion is disabled under `prefers-reduced-motion`.
+GSAP ScrollTrigger scrubs the complete track from `xPercent: 0` to `xPercent: -6` between `top bottom` and `bottom top`, with `scrub: 1.2` for a slower, smoother response. Scrolling down therefore moves the track gently left, while scrolling upward naturally reverses it to the right. The track uses `will-change: transform`, `transform-style: preserve-3d`, and `force3D`; motion is disabled under `prefers-reduced-motion`.
+
+## Pricing Comparison module
+
+`modules/Pricing Comparison.module/` recreates the Fluentic pricing section as an editable HubSpot DnD module. Its field model is `plans` repeating group → nested `cards` repeating group → repeating `features` text field. Defaults provide Monthly and Yearly tabs, each with Free, Plus, and Pro cards.
+
+Every card has editable name, description, price, billing period, features heading/list, button text/link, popular toggle, popular label, and popular background image. Popular cards use the highlighted inset-header design, the base/black global button macro, and the selected background image or bundled `Pricing Card Particle.svg` fallback. Regular cards use the white/variant-2 global button macro.
+
+Plan filtering uses semantic tabs and tabpanels with synchronized `aria-selected`, keyboard Left/Right/Home/End navigation, and instance-scoped IDs. The first plan is active initially. The header uses the established eyebrow and split-word GSAP reveal; the tab/card area rises from 50px, and newly selected plan cards receive a short staggered reveal. Reduced-motion mode preserves filtering without animation.

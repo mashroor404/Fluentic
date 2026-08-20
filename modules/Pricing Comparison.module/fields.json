@@ -1,0 +1,510 @@
+[
+  {
+    "id": "3be65042-f166-4927-81e6-9a2c17405cc2",
+    "name": "section_content",
+    "label": "Section content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "80721946-78e1-4662-a342-05527174c4f7",
+        "name": "eyebrow_text",
+        "label": "Eyebrow text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Pricing"
+      },
+      {
+        "id": "f629071c-e02d-49b7-963d-431039331bf0",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Simple, Flexible Pricing"
+      },
+      {
+        "id": "2c129713-e5b6-44f7-bd3c-9c83f0d39f44",
+        "name": "description",
+        "label": "Description",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Pricing plans for businesses at every stage of growth."
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "eyebrow_text": "Pricing",
+      "heading": "Simple, Flexible Pricing",
+      "description": "Pricing plans for businesses at every stage of growth."
+    }
+  },
+  {
+    "id": "b6709639-522f-4c30-9c8c-06614fa9e9ae",
+    "name": "plans",
+    "label": "Plans",
+    "help_text": "Each plan becomes a filter tab and contains its own repeatable pricing cards.",
+    "required": false,
+    "locked": false,
+    "occurrence": {
+      "min": 1,
+      "max": 4,
+      "sorting_label_field": null,
+      "default": 2
+    },
+    "children": [
+      {
+        "id": "df4d04dc-8f4e-469b-b9fd-1575c14a85c6",
+        "name": "plan_name",
+        "label": "Plan name",
+        "required": true,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Monthly"
+      },
+      {
+        "id": "c8f79471-e5b8-48cc-b5a2-4348bd006de2",
+        "name": "cards",
+        "label": "Pricing cards",
+        "required": false,
+        "locked": false,
+        "occurrence": {
+          "min": 1,
+          "max": 4,
+          "sorting_label_field": null,
+          "default": 3
+        },
+        "children": [
+          {
+            "id": "10c6aac0-2239-42ee-9727-10259879b2d0",
+            "name": "card_name",
+            "label": "Card name",
+            "required": true,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "Free"
+          },
+          {
+            "id": "fc451fb4-4b21-4de8-a2ea-6dfcab9d8168",
+            "name": "description",
+            "label": "Description",
+            "required": false,
+            "locked": false,
+            "allow_new_line": true,
+            "type": "text",
+            "display_width": null,
+            "default": "Get started with Fluentic AI at no cost"
+          },
+          {
+            "id": "c2bdc28e-92ee-41f8-9233-69650c670cad",
+            "name": "is_popular",
+            "label": "Popular plan",
+            "help_text": "Enables the highlighted card design and background artwork.",
+            "required": false,
+            "locked": false,
+            "display": "toggle",
+            "type": "boolean",
+            "display_width": null,
+            "default": false
+          },
+          {
+            "id": "c997452b-5691-45b5-98fe-d9816da6ef5b",
+            "name": "popular_label",
+            "label": "Popular label",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "visibility": {
+              "controlling_field": null,
+              "controlling_field_path": "plans.cards.is_popular",
+              "controlling_value_regex": "true",
+              "property": null,
+              "operator": "EQUAL",
+              "access": null
+            },
+            "type": "text",
+            "display_width": null,
+            "default": "Popular"
+          },
+          {
+            "id": "4ae7fec6-e261-43a9-886f-746599fbcfe7",
+            "name": "popular_background_image",
+            "label": "Popular card background image",
+            "help_text": "The bundled Fluentic pricing particle is used when this field is empty.",
+            "required": false,
+            "locked": false,
+            "responsive": true,
+            "resizable": true,
+            "show_loading": false,
+            "visibility": {
+              "controlling_field": null,
+              "controlling_field_path": "plans.cards.is_popular",
+              "controlling_value_regex": "true",
+              "property": null,
+              "operator": "EQUAL",
+              "access": null
+            },
+            "type": "image",
+            "display_width": null
+          },
+          {
+            "id": "8e098c28-219d-47c4-ac9a-da531be15978",
+            "name": "price",
+            "label": "Price",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "$0"
+          },
+          {
+            "id": "6b621e85-e48f-4cef-988f-49de126a034f",
+            "name": "billing_period",
+            "label": "Billing period",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "/month, per user"
+          },
+          {
+            "id": "bbab4844-83d8-4fba-9bd3-02cdd72d0ec1",
+            "name": "included_title",
+            "label": "Features heading",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "What’s Included"
+          },
+          {
+            "id": "7117f697-868c-41a0-a93c-b8a27bb60abd",
+            "name": "features",
+            "label": "Features",
+            "required": false,
+            "locked": false,
+            "occurrence": {
+              "min": 1,
+              "max": 8,
+              "sorting_label_field": null,
+              "default": 4
+            },
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": [
+              "400 AI credits at signup",
+              "20,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ]
+          },
+          {
+            "id": "747dd622-034d-4429-9d8e-e708dd3f24f4",
+            "name": "button_text",
+            "label": "Button text",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "Book a Demo"
+          },
+          {
+            "id": "81df7d0e-9d7d-46c7-9e75-fda6cad7b34a",
+            "name": "button_link",
+            "label": "Button link",
+            "required": false,
+            "locked": false,
+            "supported_types": [
+              "EXTERNAL",
+              "CONTENT",
+              "EMAIL_ADDRESS",
+              "PHONE_NUMBER"
+            ],
+            "show_advanced_rel_options": false,
+            "type": "link",
+            "display_width": null,
+            "default": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          }
+        ],
+        "tab": "CONTENT",
+        "expanded": false,
+        "group_occurrence_meta": null,
+        "type": "group",
+        "display_width": null,
+        "default": [
+          {
+            "card_name": "Free",
+            "description": "Get started with Fluentic AI at no cost",
+            "is_popular": false,
+            "popular_label": "Popular",
+            "price": "$0",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "400 AI credits at signup",
+              "20,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Book a Demo",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          },
+          {
+            "card_name": "Plus",
+            "description": "Unlock more powerful features",
+            "is_popular": true,
+            "popular_label": "Popular",
+            "price": "$22",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "Unlimited AI credits",
+              "50,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Get started",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          },
+          {
+            "card_name": "Pro",
+            "description": "Take your business to the next level",
+            "is_popular": false,
+            "popular_label": "Popular",
+            "price": "$69",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "Unlimited AI creation",
+              "100,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Book a Demo",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          }
+        ]
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": [
+      {
+        "plan_name": "Monthly",
+        "cards": [
+          {
+            "card_name": "Free",
+            "description": "Get started with Fluentic AI at no cost",
+            "is_popular": false,
+            "popular_label": "Popular",
+            "price": "$0",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "400 AI credits at signup",
+              "20,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Book a Demo",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          },
+          {
+            "card_name": "Plus",
+            "description": "Unlock more powerful features",
+            "is_popular": true,
+            "popular_label": "Popular",
+            "price": "$22",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "Unlimited AI credits",
+              "50,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Get started",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          },
+          {
+            "card_name": "Pro",
+            "description": "Take your business to the next level",
+            "is_popular": false,
+            "popular_label": "Popular",
+            "price": "$69",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "Unlimited AI creation",
+              "100,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Book a Demo",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          }
+        ]
+      },
+      {
+        "plan_name": "Yearly",
+        "cards": [
+          {
+            "card_name": "Free",
+            "description": "Get started with Fluentic AI at no cost",
+            "is_popular": false,
+            "popular_label": "Popular",
+            "price": "$0",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "400 AI credits at signup",
+              "20,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Book a Demo",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          },
+          {
+            "card_name": "Plus",
+            "description": "Unlock more powerful features",
+            "is_popular": true,
+            "popular_label": "Popular",
+            "price": "$29",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "Unlimited AI credits",
+              "50,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Get started",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          },
+          {
+            "card_name": "Pro",
+            "description": "Take your business to the next level",
+            "is_popular": false,
+            "popular_label": "Popular",
+            "price": "$49",
+            "billing_period": "/month, per user",
+            "included_title": "What’s Included",
+            "features": [
+              "Unlimited AI creation",
+              "100,000 AI token inputs",
+              "Calendar integration & syncing",
+              "Guest sharing and links"
+            ],
+            "button_text": "Book a Demo",
+            "button_link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
