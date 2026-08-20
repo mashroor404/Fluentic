@@ -1,0 +1,179 @@
+[
+  {
+    "id": "2315242e-4f47-4c10-a2aa-031d48a664d1",
+    "name": "section_content",
+    "label": "Section content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "60e721bd-99ae-4d84-9dbf-67923a00a36c",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Explore Our Blog"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "heading": "Explore Our Blog"
+    }
+  },
+  {
+    "id": "d865bc6e-005e-4e25-8f62-8822f0dc6e50",
+    "name": "button",
+    "label": "Explore all button",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "cbe8aa9c-2cc9-4216-8844-616d74376ae5",
+        "name": "show_button",
+        "label": "Show button",
+        "required": false,
+        "locked": false,
+        "display": "toggle",
+        "type": "boolean",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "4364157b-6548-42c0-b789-b442766475f7",
+        "name": "text",
+        "label": "Button text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "button.show_button",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "text",
+        "display_width": null,
+        "default": "Explore All"
+      },
+      {
+        "id": "4bb41bd0-c65b-41db-a525-b355632f6ec2",
+        "name": "link",
+        "label": "Button link",
+        "required": false,
+        "locked": false,
+        "supported_types": [
+          "EXTERNAL",
+          "CONTENT",
+          "BLOG"
+        ],
+        "show_advanced_rel_options": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "button.show_button",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "link",
+        "display_width": null,
+        "default": {
+          "url": {
+            "content_id": null,
+            "href": "/blog",
+            "type": "EXTERNAL"
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        }
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_button": true,
+      "text": "Explore All",
+      "link": {
+        "url": {
+          "content_id": null,
+          "href": "/blog",
+          "type": "EXTERNAL"
+        },
+        "open_in_new_tab": false,
+        "no_follow": false
+      }
+    }
+  },
+  {
+    "id": "394cd2a0-d448-4803-8624-09f790554503",
+    "name": "cards",
+    "label": "Blog cards",
+    "required": false,
+    "locked": false,
+    "occurrence": {
+      "min": 1,
+      "max": 3,
+      "sorting_label_field": null,
+      "default": 3
+    },
+    "children": [
+      {
+        "id": "2acdf18a-5741-4dc9-995a-b789453380cb",
+        "name": "blog",
+        "label": "Blog",
+        "help_text": "Select the HubSpot blog that contains the post.",
+        "required": false,
+        "locked": false,
+        "type": "blog",
+        "display_width": null,
+        "default": "default"
+      },
+      {
+        "id": "fa111255-a3d9-484c-9673-f14c740949cc",
+        "name": "post_position",
+        "label": "Post position",
+        "help_text": "Choose the post by recency: 1 is the newest published post, 2 is the second newest, and so on.",
+        "required": false,
+        "locked": false,
+        "display": "text",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "type": "number",
+        "display_width": null,
+        "default": 1
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": [
+      {
+        "blog": "default",
+        "post_position": 1
+      },
+      {
+        "blog": "default",
+        "post_position": 2
+      },
+      {
+        "blog": "default",
+        "post_position": 3
+      }
+    ]
+  }
+]

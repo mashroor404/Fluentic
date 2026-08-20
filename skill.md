@@ -141,9 +141,18 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Reference bundled theme media through `get_asset_url` and allow an image field to override the bundled default.
 - Scope module CSS with `{% require_css %}` and `{% scope_css %}` so multiple DnD instances can coexist safely.
 - Import `/Fluentic/Macros/Button.html` as `btn_macros` and use `btn_macros.eyebrow_label(...)` for module eyebrow badges instead of recreating their markup or styles.
+- Render every module button through `/Fluentic/Macros/Button.html`; never hand-code module button markup. Use `btn_macros.animated_button(...)` for black buttons (base variant) and `btn_macros.secondary_button(...)` for white buttons (variant 2).
 - For dark reference CTA panels, use the shared eyebrow macro and the light `btn_macros.secondary_button(...)` variant, with editor-controlled content and links.
 - Consume global CSS variables for colors, fonts, typography sizes, font weights, borders, and container width. Keep section-specific measurements local to the module.
 - Add JavaScript only when required for the requested behavior. The first `solution-section.module` implementation deliberately uses none.
+
+## Build blog-card modules
+
+- Use a repeater group for editor-controlled cards and set its `occurrence.max` to the requested card limit.
+- HubSpot's `blog` field selects a blog source, not an individual post. For a live-content card picker, pair the blog field with a bounded post-position number (`1` = newest) and retrieve that item with `blog_recent_posts(blog_id, position)`.
+- Pull the card URL, featured image and alt text, first topic, publish date, and title from the returned post object so published blog content remains the source of truth.
+- Use the current `format_datetime` filter for publish dates; do not add new uses of the deprecated `datetimeformat` filter.
+- Keep image hover effects in CSS, include keyboard focus behavior, and respect `prefers-reduced-motion`; do not add JavaScript for a simple zoom effect.
 
 ## Replace global modules safely
 
