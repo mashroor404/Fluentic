@@ -166,9 +166,11 @@ The editable schema now covers the brand logo/link/description, four selectable 
 
 ## CTA module
 
-`modules/CTA.module/` recreates the Webflow `<section class="cta-section">` as an editable HubSpot DnD page module. Editor fields control the eyebrow, heading, button visibility/text/link, illustration visibility/image/alt text, and background-image visibility/image.
+`modules/CTA.module/` recreates the Webflow `<section class="cta-section">` as an editable HubSpot DnD page module. Editor fields control the eyebrow, heading, button visibility/text/link, illustration visibility/image/alt text, and the panel's Background Image.
 
-The module imports `/Fluentic/Macros/Button.html`, uses `btn_macros.eyebrow_label` and the light `btn_macros.secondary_button`, and resolves the bundled `CTA BG.webp` and `CTA Image.webp` files through `get_asset_url` when editors have not selected replacements. Its scoped responsive CSS consumes global background, text, font, weight, border-radius, and container variables. It intentionally has no JavaScript dependency.
+The module imports `/Fluentic/Macros/Button.html`, uses `btn_macros.eyebrow_label` and the light `btn_macros.secondary_button`, and resolves the bundled `CTA BG.webp` and `CTA Image.webp` files through `get_asset_url` when editors have not selected replacements. The editor's image field is labeled `Background Image`; `.cta-content-block` uses that selected/fallback artwork as its background and no longer uses `var(--text-primary)` as a background-color fallback.
+
+Its scoped GSAP timeline follows the solution-section timing: badge at 0s, heading words at 0.12s, and the macro button at 0.3s. The illustration continuously rotates clockwise through positive Z rotation over 12 seconds with `transform-style: preserve-3d`, `will-change: transform`, and GSAP `force3D`. GSAP/ScrollTrigger still come only from `templates/layouts/base.html`, and all CTA motion is disabled for reduced-motion users.
 
 ## Blog cards module
 

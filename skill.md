@@ -157,6 +157,13 @@ If these values should become editable HubSpot theme settings, add them to root 
 - For header elements that should feel nearly simultaneous but ordered, overlap their GSAP timeline positions with short offsets instead of waiting for each tween to finish before starting the next one.
 - Guard motion with `prefers-reduced-motion: no-preference`; the unanimated HTML/CSS state must remain fully visible when animation is unavailable.
 
+## Animate CTA modules
+
+- Reuse `btn_macros.eyebrow_label` and the appropriate global button macro; wrap macro output with scoped data attributes when it needs to participate in a module timeline.
+- Use an editable HubSpot image field for CTA panel artwork and apply its URL through a scoped CSS custom property. Do not substitute a text-color token as the panel background when artwork is the intended design.
+- Reuse the solution-section split-word timing for CTA copy: badge first, words shortly after, then the button, with overlapping absolute timeline positions.
+- For continuously rotating CTA artwork, use positive GSAP Z rotation (`rotation: "+=360"`) with linear easing, `force3D`, `transform-style: preserve-3d`, and `will-change: transform`.
+
 ## Build blog-card modules
 
 - Use a repeater group for editor-controlled cards and set its `occurrence.max` to the requested card limit.
