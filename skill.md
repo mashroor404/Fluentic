@@ -144,7 +144,17 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Render every module button through `/Fluentic/Macros/Button.html`; never hand-code module button markup. Use `btn_macros.animated_button(...)` for black buttons (base variant) and `btn_macros.secondary_button(...)` for white buttons (variant 2).
 - For dark reference CTA panels, use the shared eyebrow macro and the light `btn_macros.secondary_button(...)` variant, with editor-controlled content and links.
 - Consume global CSS variables for colors, fonts, typography sizes, font weights, borders, and container width. Keep section-specific measurements local to the module.
-- Add JavaScript only when required for the requested behavior. The first `solution-section.module` implementation deliberately uses none.
+- Use `var(--text-primary)` for module paragraph text by default. Only use secondary/muted paragraph colors when the user explicitly requests that hierarchy.
+- Add JavaScript only when required for the requested behavior; prefer CSS for purely visual states and use scoped module scripts for scroll-driven sequences.
+
+## Refine image cards and GSAP reveals
+
+- Prevent uploaded image dimensions from changing card geometry by setting an explicit `aspect-ratio` on the image wrapper and `width: 100%; height: 100%; object-fit: cover` on the image.
+- GSAP core and ScrollTrigger are already loaded in `templates/layouts/base.html`; module scripts should register and use them without adding another CDN import.
+- Scope animation queries to each module instance and mark initialized instances to avoid duplicate timelines in DnD pages.
+- For split-word headings without GSAP SplitText, preserve the escaped heading text and wrap its words with DOM-created spans before applying a staggered reveal.
+- Reveal visual card rows with separate ScrollTriggers so later rows wait until they reach the viewport. Treat each card as a row on mobile where the grid is one column.
+- Guard motion with `prefers-reduced-motion: no-preference`; the unanimated HTML/CSS state must remain fully visible when animation is unavailable.
 
 ## Build blog-card modules
 

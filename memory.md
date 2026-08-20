@@ -68,6 +68,8 @@ Most modules are folders named `*.module` with `meta.json`, `fields.json`, `modu
 
 All buttons added to modules must come from `/Fluentic/Macros/Button.html`; do not recreate button markup in a module. Use `btn_macros.animated_button(...)` for the black/base button (`data-wf--button-primary--variant="base"`) and `btn_macros.secondary_button(...)` for the white/variant-2 button (`data-wf--button-primary--variant="v2"`).
 
+Use `var(--text-primary)` for paragraph text in new and refined modules unless the user explicitly requests a secondary/muted treatment.
+
 The global header is inserted from `templates/partials/header.html`. The user changed `templates/layouts/base.html` to render the footer from `templates/partials/Footer2.html`; preserve that wiring unless they explicitly request another footer partial.
 
 **HubSpot `fields.json` reserved name:** a group/repeater child field cannot be named `"label"` — HubSpot's upload validator rejects the whole theme upload with `field name cannot be 'label'` (only caught at `hs upload`/CI deploy time, not by local JSON validation). It collides with the field schema's own `label` property. Use `text` (or any other name) for a repeater's display-text child field instead, and match it in `occurrence.sorting_label_field` and the HubL that reads it. Hit this in [[Hero.module]]'s `chat_demo.suggestions` repeater on 2026-08-20.
@@ -130,7 +132,9 @@ Responsive `srcset` renditions were excluded when an original source asset was a
 
 `modules/solution-section.module/` recreates the second section of the Fluentic Webflow homepage as an editable HubSpot DnD module. Its editor fields control the eyebrow, heading, description, and a repeatable list of one to eight solution cards. Each card has editable title, description, image visibility, and image selection.
 
-The four default cards use the downloaded local Solution Image assets through `get_asset_url`. The eyebrow is rendered with `btn_macros.eyebrow_label` from `/Fluentic/Macros/Button.html`, keeping it consistent with other theme modules. Desktop cards follow the reference's asymmetric 5/7 then 8/4 column layout, becoming two equal columns on tablet and one column on mobile. Styling is scoped per module instance and consumes the project's global color, typography, border, and container variables. The initial module intentionally has no animation or external JavaScript dependency.
+The four default cards use the downloaded local Solution Image assets through `get_asset_url`. The eyebrow is rendered with `btn_macros.eyebrow_label` from `/Fluentic/Macros/Button.html`, keeping it consistent with other theme modules. Desktop cards follow the reference's asymmetric 5/7 then 8/4 column layout, becoming two equal columns on tablet and one column on mobile. Styling is scoped per module instance and consumes the project's global color, typography, border, and container variables.
+
+The image wrapper now enforces a 16:9 aspect ratio at every breakpoint and the image fills it with `object-fit: cover`, so editor-uploaded image dimensions cannot change card sizing. GSAP and ScrollTrigger are supplied by `templates/layouts/base.html` and must not be loaded again in this module. The scoped module animation reveals the eyebrow upward first, then splits and reveals the heading word by word, then reveals the description. Card rows reveal independently from 50px below as they reach the viewport; desktop/tablet rows contain two cards and mobile cards reveal individually. Reduced-motion users receive the fully visible static layout.
 
 ## Hero module
 
