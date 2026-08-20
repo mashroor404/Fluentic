@@ -35,6 +35,11 @@
     margin: 0;
   }
 
+  .blog-section__word {
+    display: inline-block;
+    will-change: opacity, transform;
+  }
+
   .blog-button-wrap {
     flex: none;
   }
@@ -185,17 +190,17 @@
   {% set button_href = "tel:" + button_href %}
 {% endif %}
 
-<section id="Blog" class="blog-section">
+<section id="Blog" class="blog-section" data-blog-section>
   <div class="container blog-section__container">
     <div class="blog-title-row">
       <div class="blog-title-wrap">
         {% if module.section_content.heading %}
-          <h2 class="blog-section__title">{{ module.section_content.heading|escape_html }}</h2>
+          <h2 class="blog-section__title gsap_split_word" data-blog-heading>{{ module.section_content.heading|escape_html }}</h2>
         {% endif %}
       </div>
 
       {% if module.button.show_button and module.button.text and button_href %}
-        <div class="blog-button-wrap">
+        <div class="blog-button-wrap" data-blog-button>
           {{ btn_macros.secondary_button(
             module.button.text,
             button_href,
@@ -223,7 +228,7 @@
           {% if not publish_date %}
             {% set publish_date = post.publish_date %}
           {% endif %}
-          <a class="blog-card" href="{{ post.absolute_url|escape_url }}">
+          <a class="blog-card" data-blog-card href="{{ post.absolute_url|escape_url }}">
             {% if post.featured_image %}
               <div class="blog-image-wrap">
                 <img
@@ -255,3 +260,118 @@
     </div>
   </div>
 </section>
+
+{% require_js %}
+<script>
+  (() => {
+    const initBlogSections = () => {
+      if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+
+      window.gsap.registerPlugin(window.ScrollTrigger);
+
+      document.querySelectorAll("[data-blog-section]").forEach((section) => {
+        if (section.dataset.blogAnimationInitialized === "true") return;
+        section.dataset.blogAnimationInitialized = "true";
+
+        const heading = section.querySelector("[data-blog-heading]");
+        const headingWords = [];
+
+        if (heading) {
+          const words = heading.textContent.trim().split(/\s+/);
+          const fragment = document.createDocumentFragment();
+
+          words.forEach((word, index) => {
+            const wordElement = document.createElement("span");
+            wordElement.className = "blog-section__word gsap_split_word1";
+            wordElement.textContent = word;
+            fragment.appendChild(wordElement);
+            headingWords.push(wordElement);
+
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(" "));
+            }
+          });
+
+          heading.replaceChildren(fragment);
+        }
+
+        const media = window.gsap.matchMedia();
+
+        media.add(
+          {
+            animate: "(prefers-reduced-motion: no-preference)",
+            desktop: "(min-width: 992px)",
+            mobile: "(max-width: 767px)"
+          },
+          (context) => {
+            if (!context.conditions.animate) return;
+
+            const button = section.querySelector("[data-blog-button]");
+            const titleRow = section.querySelector(".blog-title-row");
+            const cards = Array.from(section.querySelectorAll("[data-blog-card]"));
+
+            if (titleRow) {
+              const headerTimeline = window.gsap.timeline({
+                defaults: { ease: "power3.out" },
+                scrollTrigger: {
+                  trigger: titleRow,
+                  start: "top 82%",
+                  once: true
+                }
+              });
+
+              if (headingWords.length) {
+                headerTimeline.fromTo(
+                  headingWords,
+                  { autoAlpha: 0, y: 32 },
+                  { autoAlpha: 1, duration: 0.6, stagger: 0.06, y: 0 },
+                  0
+                );
+              }
+
+              if (button) {
+                headerTimeline.fromTo(
+                  button,
+                  { autoAlpha: 0, filter: "blur(1px)", y: 50 },
+                  { autoAlpha: 1, duration: 0.7, filter: "blur(0px)", y: 0 },
+                  0.18
+                );
+              }
+            }
+
+            const rowSize = context.conditions.desktop ? 3 : context.conditions.mobile ? 1 : 2;
+
+            for (let index = 0; index < cards.length; index += rowSize) {
+              const row = cards.slice(index, index + rowSize);
+
+              window.gsap.fromTo(
+                row,
+                { autoAlpha: 0, filter: "blur(1px)", y: 50 },
+                {
+                  autoAlpha: 1,
+                  duration: 0.8,
+                  ease: "power3.out",
+                  filter: "blur(0px)",
+                  stagger: 0.12,
+                  y: 0,
+                  scrollTrigger: {
+                    trigger: row[0],
+                    start: "top 86%",
+                    once: true
+                  }
+                }
+              );
+            }
+          }
+        );
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initBlogSections, { once: true });
+    } else {
+      initBlogSections();
+    }
+  })();
+</script>
+{% end_require_js %}
