@@ -1,0 +1,590 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* Header */
+  .po-header p {
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin: 0;
+  }
+
+  .po-heading span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .po-desc {
+    will-change: transform, opacity;
+  }
+
+  /* Cards */
+  .po-cards {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 3vw, 60px);
+  }
+
+  .po-card {
+    position: sticky;
+    top: 140px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: clamp(16px, 2vw, 32px);
+    background-color: var(--bg-primary, #fff);
+    border-radius: 16px;
+    padding: clamp(16px, 2vw, 40px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 20px 40px rgba(27, 12, 39, 0.06);
+    will-change: transform, opacity, filter;
+  }
+
+  .po-card--reversed {
+    flex-direction: row-reverse;
+  }
+
+  .po-card-text {
+    flex: 1 1 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(20px, 2vw, 32px);
+    max-width: 620px;
+    margin: auto 0;
+  }
+
+  .po-card-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 477px;
+  }
+
+  .po-bullet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .po-bullet-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .po-bullet-icon {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(#fff, #f0eaf6);
+    border-radius: 8px;
+    box-shadow: 0 1px 8px rgba(83, 44, 102, 0.1), inset 0 1px 1px #fff, inset 0 -1px 2px rgba(157, 33, 219, 0.15);
+    color: var(--accent-purple, #9D21DB);
+  }
+
+  .po-bullet-item p {
+    margin: 0;
+  }
+
+  .po-card-media {
+    position: relative;
+    flex: 0 0 44%;
+    max-width: 527px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .po-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  /* Card 3's "automation cluster" flourish: a soft panel with two rows of
+     looping logos above the illustration, standing in for the live site's
+     bespoke background artwork (not part of the downloaded asset set). */
+  .po-card-media.has-automation {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: clamp(24px, 3vw, 40px);
+    padding: clamp(28px, 3vw, 52px) clamp(20px, 4vw, 60px);
+    background: var(--gradient-icon, linear-gradient(var(--bg-primary), var(--bg-accent-2)));
+  }
+
+  .po-card-media.has-automation .po-card-image {
+    width: auto;
+    max-width: 70%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .po-automation-cluster {
+    position: relative;
+    width: 100%;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .po-automation-row-mask {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .po-automation-row {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: po-marquee-left 26s linear infinite;
+  }
+
+  .po-automation-row-mask:nth-child(2) .po-automation-row {
+    animation-name: po-marquee-right;
+    animation-duration: 30s;
+  }
+
+  .po-automation-logo {
+    flex: none;
+    width: 56px;
+    margin-right: 28px;
+  }
+
+  .po-automation-main-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 72px;
+    z-index: 2;
+    filter: drop-shadow(0 8px 16px rgba(27, 12, 39, 0.18));
+  }
+
+  @keyframes po-marquee-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes po-marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+
+  /* Video banner */
+  .po-video-banner {
+    position: relative;
+    margin-top: clamp(24px, 3vw, 60px);
+    height: clamp(110px, 11vw, 150px);
+    border-radius: 16px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .po-video-banner video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .po-video-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.02);
+    z-index: 1;
+  }
+
+  .po-video-blend {
+    position: absolute;
+    inset: 0;
+    background-color: var(--accent-blue, #80AAFD);
+    mix-blend-mode: hard-light;
+    opacity: 0.55;
+    z-index: 1;
+  }
+
+  .po-tag-marquee {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .po-tag-row-mask {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .po-tag-row {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: po-marquee-left 40s linear infinite;
+  }
+
+  .po-tag-row-mask:nth-child(2) .po-tag-row {
+    animation-name: po-marquee-right;
+    animation-duration: 46s;
+  }
+
+  .po-tag-row-mask:nth-child(3) .po-tag-row {
+    animation-duration: 34s;
+  }
+
+  .po-tag {
+    flex: none;
+    margin-right: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: inset 0 0 0 1px #fff;
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+  }
+
+  .po-tag p {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .po-video-toggle {
+    position: absolute;
+    z-index: 5;
+    right: 16px;
+    bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    color: #fff;
+    background-color: rgba(27, 12, 39, 0.35);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background-color 0.2s ease;
+  }
+
+  .po-video-toggle:hover,
+  .po-video-toggle:focus-visible {
+    background-color: rgba(27, 12, 39, 0.55);
+  }
+
+  .po-video-toggle .icon-play {
+    display: none;
+  }
+
+  .po-video-toggle.is-paused .icon-pause {
+    display: none;
+  }
+
+  .po-video-toggle.is-paused .icon-play {
+    display: block;
+  }
+
+  /* Mobile / tablet: drop the sticky stack, revert to a simple column with
+     the media above the copy, matching the live site's mobile layout. */
+  @media (max-width: 768px) {
+    .po-card,
+    .po-card--reversed {
+      position: static;
+      top: 0;
+      flex-direction: column;
+    }
+
+    .po-card-media {
+      order: -1;
+      flex: 0 0 auto;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .po-card-text {
+      max-width: 100%;
+    }
+
+    .po-video-banner {
+      height: clamp(90px, 24vw, 120px);
+    }
+
+    .po-tag {
+      margin-right: 12px;
+      padding: 8px 14px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .po-automation-row,
+    .po-tag-row {
+      animation: none;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="section po-section" data-product-overview>
+  <div class="container">
+
+    <div class="section-header po-header mb-72">
+      {% if module.eyebrow_text %}
+        <div>{{ btn_macros.eyebrow_label(module.eyebrow_text, module.eyebrow_icon.src) }}</div>
+      {% endif %}
+
+      {% if module.heading %}
+        <h2 class="po-heading mt-24 mb-24">{{ module.heading }}</h2>
+      {% endif %}
+
+      {% if module.description %}
+        <p class="po-desc body" style="opacity: 0;">{{ module.description }}</p>
+      {% endif %}
+    </div>
+
+    {% if module.overview_card|length %}
+      <div class="po-cards">
+        {% for card in module.overview_card %}
+          <div class="po-card{% if loop.index is even %} po-card--reversed{% endif %}">
+            <div class="po-card-text">
+              <div class="po-card-title-wrap">
+                {% if card.card_title %}<h3>{{ card.card_title }}</h3>{% endif %}
+                {% if card.card_description %}<p class="body">{{ card.card_description }}</p>{% endif %}
+              </div>
+
+              {% if card.bullet_item|length %}
+                <ul role="list" class="po-bullet-list">
+                  {% for bullet in card.bullet_item %}
+                    {% if bullet.bullet_text %}
+                      <li class="po-bullet-item">
+                        <span class="po-bullet-icon" aria-hidden="true">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M13.5 4.5L6.25 11.75L2.5 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                        <p class="body-2-highlight">{{ bullet.bullet_text }}</p>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+
+            <div class="po-card-media{% if card.show_automation_cluster %} has-automation{% endif %}">
+              {% if card.show_automation_cluster %}
+                <div class="po-automation-cluster" aria-hidden="true">
+                  {% for row in range(2) %}
+                    <div class="po-automation-row-mask">
+                      <div class="po-automation-row">
+                        {% for i in range(3) %}
+                          <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0bbb4798f4dffcac23_Automation%20Logo.svg" alt="" class="po-automation-logo" loading="lazy">
+                          <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0b787d8c22dcd5cbb7_Automation%20Logo%20(1).svg" alt="" class="po-automation-logo" loading="lazy">
+                          <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0b65c3bf792b024738_Automation%20Logo%20(2).svg" alt="" class="po-automation-logo" loading="lazy">
+                          <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0b2887c37c8a032cee_Automation%20Logo%20(3).svg" alt="" class="po-automation-logo" loading="lazy">
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endfor %}
+                  <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0c32730c6594ae31a7_Automation%20Logo%20(4).svg" alt="" class="po-automation-main-logo" loading="lazy">
+                </div>
+              {% endif %}
+
+              {% if card.card_image.src %}
+                <img
+                  src="{{ card.card_image.src|escape_url }}"
+                  alt="{{ card.card_image.alt|escape_attr }}"
+                  class="po-card-image"
+                  loading="lazy"
+                  {% if card.card_image.width %}width="{{ card.card_image.width }}"{% endif %}
+                  {% if card.card_image.height %}height="{{ card.card_image.height }}"{% endif %}
+                >
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if module.video_banner.show and (module.video_banner.mp4_url or module.video_banner.webm_url) %}
+      <div class="po-video-banner">
+        <video autoplay loop muted playsinline poster="{{ module.video_banner.poster.src|escape_url }}">
+          {% if module.video_banner.webm_url %}<source src="{{ module.video_banner.webm_url|escape_url }}" type="video/webm">{% endif %}
+          {% if module.video_banner.mp4_url %}<source src="{{ module.video_banner.mp4_url|escape_url }}" type="video/mp4">{% endif %}
+        </video>
+        <div class="po-video-overlay"></div>
+        <div class="po-video-blend"></div>
+
+        {% if module.video_banner.tag|length %}
+          <div class="po-tag-marquee" aria-hidden="true">
+            {% for row in range(3) %}
+              <div class="po-tag-row-mask">
+                <div class="po-tag-row">
+                  {% for i in range(2) %}
+                    {% for tag in module.video_banner.tag %}
+                      {% if tag.tag_text %}
+                        <div class="po-tag"><p class="body-2-highlight">{{ tag.tag_text }}</p></div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <button type="button" class="po-video-toggle" data-po-video-toggle aria-pressed="false" aria-label="Pause background video">
+          <svg class="icon-pause" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+            <rect x="3" y="2" width="3.4" height="12" rx="1.2" fill="currentColor"/>
+            <rect x="9.6" y="2" width="3.4" height="12" rx="1.2" fill="currentColor"/>
+          </svg>
+          <svg class="icon-play" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+            <path d="M4 2.6c0-.9 1-1.4 1.7-.9l8 5.4c.6.4.6 1.3 0 1.8l-8 5.4c-.7.5-1.7 0-1.7-.9V2.6Z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- Word-split blur reveal on the heading, a delayed fade-up on the
+     description, and a staggered blur/slide reveal per card as each one
+     scrolls into view (matches the live site's entrance animation). The
+     sticky "stack" effect itself is pure CSS (position: sticky on
+     .po-card), so no scroll-driven JS is needed for that part. -->
+{% require_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('[data-product-overview]').forEach((section) => {
+      const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+      if (hasGsap && !reduceMotion) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const heading = section.querySelector('.po-heading');
+        if (heading) {
+          const words = heading.textContent.trim().split(/\s+/);
+          heading.innerHTML = words.map((w) => `<span class="word">${w}</span>`).join(' ');
+          const wordSpans = heading.querySelectorAll('.word');
+
+          gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+          ScrollTrigger.create({
+            trigger: heading,
+            start: 'top 85%',
+            once: true,
+            onEnter() {
+              gsap.to(wordSpans, {
+                opacity: 1,
+                filter: 'blur(0px)',
+                y: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'sine.out'
+              });
+            }
+          });
+        }
+
+        const desc = section.querySelector('.po-desc');
+        if (desc) {
+          gsap.fromTo(desc,
+            { opacity: 0, y: 15 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              delay: 0.3,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: section.querySelector('.po-header'),
+                start: 'top 85%',
+                once: true
+              }
+            }
+          );
+        }
+
+        const cards = section.querySelectorAll('.po-card');
+        cards.forEach((card, index) => {
+          // Hidden state is applied here (not in the stylesheet) so the
+          // card stays fully visible for anyone without JS, and only gets
+          // hidden right before ScrollTrigger reveals it.
+          gsap.set(card, { opacity: 0, filter: 'blur(6px)', y: 40 });
+
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top 85%',
+            once: true,
+            onEnter() {
+              gsap.to(card, {
+                opacity: 1,
+                filter: 'blur(0px)',
+                y: 0,
+                duration: 0.9,
+                delay: index * 0.08,
+                ease: 'power2.out'
+              });
+            }
+          });
+        });
+      } else if (reduceMotion) {
+        // Reduced motion: leave the server-rendered, fully-visible
+        // description in place instead of leaving it stuck at opacity 0.
+        const desc = section.querySelector('.po-desc');
+        if (desc) desc.style.opacity = '1';
+      }
+
+      // Background video play/pause toggle.
+      const video = section.querySelector('.po-video-banner video');
+      const toggle = section.querySelector('[data-po-video-toggle]');
+      if (video && toggle) {
+        const setToggleState = (isPaused) => {
+          toggle.classList.toggle('is-paused', isPaused);
+          toggle.setAttribute('aria-pressed', String(isPaused));
+          toggle.setAttribute('aria-label', isPaused ? 'Play background video' : 'Pause background video');
+        };
+
+        if (reduceMotion) {
+          video.pause();
+          setToggleState(true);
+        }
+
+        toggle.addEventListener('click', () => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+
+        video.addEventListener('play', () => setToggleState(false));
+        video.addEventListener('pause', () => setToggleState(true));
+      }
+    });
+  });
+</script>
+{% end_require_js %}
