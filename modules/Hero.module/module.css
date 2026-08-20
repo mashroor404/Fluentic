@@ -1,16 +1,21 @@
-/* Rounded, inset "card" shell — the hero-section padding above reveals this
-   radius as a frame, matching the live Fluentic hero. */
+/* Inset, rounded "card" shell — the hero-section padding above reveals this
+   radius as a frame on every side, matching the live Fluentic hero. The
+   video lives *inside* this element so it gets clipped to the rounding. */
 .hero-content-block {
   position: relative;
   z-index: 2;
   overflow: hidden;
+  width: 90%;
   max-width: 1920px;
   margin: 0 auto;
   padding-top: var(--hero-spacing, 168px);
-  border-radius: 16px;
+  padding-bottom: clamp(40px, 6vw, 96px);
+  border-radius: 24px;
 }
 
 .hero-container {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: min(100%, var(--hero-content-width, 1240px));
   margin: 0 auto;
@@ -69,7 +74,7 @@
   min-width: 180px;
 }
 
-/* Frosted glass shell wrapping the dashboard mockup. */
+/* Frosted glass shell wrapping the dashboard visual. */
 .hero-image-block {
   position: relative;
   z-index: 5;
@@ -101,7 +106,7 @@
   height: auto;
 }
 
-/* Floating chat window sitting above the dashboard image. */
+/* Floating chat window sitting above the interactive input card. */
 .hero-message-block {
   position: relative;
   z-index: 2;
@@ -121,6 +126,7 @@
 .hero-message-wrapper {
   display: flex;
   width: 100%;
+  min-width: 0;
   align-items: flex-start;
   justify-content: flex-end;
   gap: 10px;
@@ -132,7 +138,7 @@
 }
 
 .message-text-wrap {
-  max-width: 383px;
+  max-width: min(383px, 100%);
   padding: 12px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.9);
@@ -141,17 +147,28 @@
   transform-origin: 100% 0;
   opacity: 0;
   transform: scale(0.4);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
 }
 
 .hero-message-wrapper--agent .message-text-wrap {
   transform-origin: 0 0;
 }
 
-.hero-message-wrapper.is-active .message-text-wrap {
+/* Bubbles pop in one after another, in order, the first time the panel
+   scrolls into view — then stay visible. Live bubbles added by the chat
+   demo pick up this same rule (their parent already carries .is-visible),
+   so they animate in immediately with no extra delay. */
+.hero-message-block.is-visible .message-text-wrap {
   opacity: 1;
   transform: scale(1);
 }
+
+.hero-message-block.is-visible .hero-message-wrapper:nth-child(1) .message-text-wrap { transition-delay: 0.05s; }
+.hero-message-block.is-visible .hero-message-wrapper:nth-child(2) .message-text-wrap { transition-delay: 0.35s; }
+.hero-message-block.is-visible .hero-message-wrapper:nth-child(3) .message-text-wrap { transition-delay: 0.65s; }
+.hero-message-block.is-visible .hero-message-wrapper:nth-child(4) .message-text-wrap { transition-delay: 0.95s; }
+.hero-message-block.is-visible .hero-message-wrapper:nth-child(5) .message-text-wrap { transition-delay: 1.25s; }
+.hero-message-block.is-visible .hero-message-wrapper:nth-child(6) .message-text-wrap { transition-delay: 1.55s; }
 
 .message-text {
   margin: 0;
@@ -174,23 +191,172 @@
   object-fit: cover;
 }
 
+/* Typing indicator shown briefly before a canned reply lands. */
+.hero-typing-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 40px;
+  padding: 14px 12px;
+}
+
+.hero-typing-dots span {
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-secondary, #8a8090);
+  border-radius: 50%;
+  animation: hero-typing-bounce 1.1s ease-in-out infinite;
+}
+
+.hero-typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+.hero-typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes hero-typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Interactive "ask anything" input card. */
+.hero-chat-card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgba(27, 12, 39, 0.1);
+}
+
+.hero-chat-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero-chat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  color: var(--text-secondary, #6b6470);
+  font-family: var(--secondary-font);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium, 500);
+  background-color: var(--bg-accent-2, #f4f2f6);
+  border: 0;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.hero-chat-chevron {
+  opacity: 0.7;
+}
+
+.hero-chat-inputbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-chat-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 4px 0;
+  color: var(--text-primary);
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  background: transparent;
+  border: 0;
+}
+
+.hero-chat-input::placeholder {
+  color: var(--text-secondary, #9a92a1);
+}
+
+.hero-chat-input:focus {
+  outline: none;
+}
+
+.hero-chat-send {
+  display: flex;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: var(--gradient-brand, linear-gradient(120deg, #f0e9f7, #d588fc 61%, #ff49d4));
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.hero-chat-send:hover {
+  transform: scale(1.06);
+}
+
+.hero-chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1px solid var(--global-border-color, #ece8ef);
+}
+
+.hero-chat-suggestion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  color: var(--text-primary);
+  font-family: var(--secondary-font);
+  font-size: 13px;
+  background-color: #fff;
+  border: 1px solid var(--global-border-color, #ece8ef);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-chat-suggestion svg {
+  color: var(--accent-purple, #d37bff);
+}
+
+.hero-chat-suggestion:hover {
+  background-color: var(--bg-accent-2, #f4f2f6);
+  border-color: transparent;
+}
+
 .hero-particle {
   position: absolute;
   height: auto;
   pointer-events: none;
   user-select: none;
+  animation: hero-particle-float 6s ease-in-out infinite;
 }
 
 .hero-particle--one {
   z-index: 0;
   max-width: 159px;
   inset: auto auto 27% -2%;
+  animation-duration: 6s;
 }
 
 .hero-particle--two {
   z-index: -1;
   max-width: 208px;
   inset: 0 0 auto auto;
+  animation-duration: 7.5s;
+  animation-delay: -3s;
+}
+
+@keyframes hero-particle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
 }
 
 .hero-video {
@@ -215,20 +381,63 @@
   backdrop-filter: blur(2px);
 }
 
+/* A direct child of .hero-content-block (not .hero-video), so it renders
+   above the clipped video and the page content regardless of paint order. */
+.hero-video-toggle {
+  position: absolute;
+  z-index: 10;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(27, 12, 39, 0.1);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-video-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.78);
+  transform: scale(1.05);
+}
+
+.hero-video-toggle .icon-play {
+  display: none;
+}
+
+.hero-video-toggle.is-paused .icon-pause {
+  display: none;
+}
+
+.hero-video-toggle.is-paused .icon-play {
+  display: block;
+}
+
 @media (max-width: 991px) {
-  .hero-section { padding: 10px 10px 0; }
-  .hero-content-block { padding-top: min(var(--hero-spacing, 168px), 140px); }
+  .hero-section { padding: 12px 0; }
+  .hero-content-block { padding-top: min(var(--hero-spacing, 168px), 140px); border-radius: 20px; }
   .hero-title-block { margin-bottom: 40px; }
   .hero-heading { font-size: 54px; }
   .hero-image-block { border-radius: 32px 32px 0 0; }
   .hero-image-wrap { padding-left: 40px; padding-right: 40px; }
+  .hero-message-block { min-height: 280px; }
   .hero-particle--one { max-width: 130px; left: 0; }
   .hero-particle--two { max-width: 170px; }
+  .hero-video-toggle { right: 16px; bottom: 16px; }
 }
 
 @media (max-width: 767px) {
   .hero-container { padding-left: 16px; padding-right: 16px; }
-  .hero-content-block { padding-top: min(var(--hero-spacing, 168px), 120px); }
+  .hero-content-block { width: 94%; padding-top: min(var(--hero-spacing, 168px), 120px); border-radius: 16px; }
   .hero-title-block { margin-bottom: 32px; }
   .hero-heading { font-size: 40px; }
   .hero-description-wrap { margin-top: 16px; margin-bottom: 24px; }
@@ -236,23 +445,35 @@
   .hero-button-wrap, .hero-button-wrap .button-primary { width: 100%; }
   .hero-image-block { padding-left: 20px; padding-right: 20px; border-radius: 24px 24px 0 0; }
   .hero-image-wrap { padding-left: 40px; padding-right: 40px; }
+  .hero-message-block { min-height: 240px; gap: 12px; }
+  .message-text-wrap { max-width: min(320px, 100%); }
+  .hero-chat-card { padding: 16px; gap: 12px; }
   .hero-particle--one { max-width: 100px; }
   .hero-particle--two { max-width: 140px; }
+  .hero-video-toggle { width: 42px; height: 42px; right: 14px; bottom: 14px; }
 }
 
 @media (max-width: 479px) {
-  .hero-content-block { padding-top: min(var(--hero-spacing, 168px), 100px); }
+  .hero-content-block { width: 96%; padding-top: min(var(--hero-spacing, 168px), 100px); }
   .hero-image-block { padding: 10px; }
   .hero-image-wrap { padding: 10px 0 0; }
-  .hero-message-block { padding: 10px; }
-  .message-text-wrap { padding: 8px; }
+  .hero-message-block { padding: 10px; min-height: 200px; gap: 10px; }
+  .message-text-wrap { padding: 8px; max-width: min(240px, 100%); }
   .message-text { font-size: 12px; }
   .message-avatar-wrap { display: none; }
+  .hero-chat-toolbar { gap: 6px; }
+  .hero-chat-pill { padding: 6px 10px; font-size: 12px; }
+  .hero-chat-input { font-size: 14px; }
+  .hero-chat-suggestions { gap: 6px; }
+  .hero-chat-suggestion { padding: 6px 10px; font-size: 12px; }
   .hero-particle--one { max-width: 50px; }
   .hero-particle--two { max-width: 100px; }
+  .hero-video-toggle { width: 36px; height: 36px; right: 10px; bottom: 10px; border-radius: 11px; }
+  .hero-video-toggle svg { width: 13px; height: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-video video { display: none; }
+  .hero-particle { animation: none; }
+  .hero-typing-dots span { animation: none; opacity: 1; }
   .message-text-wrap { opacity: 1; transform: none; transition: none; }
 }
