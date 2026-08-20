@@ -45,10 +45,10 @@
   /* Cards — "stacking cards on scroll", ported from the reference build
      (github.com/TahaSh/aat, codepen.io/tahazsh/pen/WNYKage): each card is
      position:sticky and pins at the top of the viewport in turn; as the
-     next card scrolls up over it, its .po-card-inner is scaled down and
-     dimmed (via po-stack.js below) so it visibly recedes underneath. */
+     next card scrolls up over it, its .po-card-inner is scaled down so
+     it visibly recedes underneath (no dimming overlay). */
   .po-cards-space {
-    height: 90vh;
+    height: clamp(24px, 6vw, 80px);
   }
 
   .po-cards {
@@ -72,7 +72,7 @@
     padding: clamp(16px, 2vw, 40px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 20px 40px rgba(27, 12, 39, 0.06);
     transform-origin: center top;
-    will-change: transform, filter;
+    will-change: transform;
   }
 
   .po-card--reversed .po-card-inner {
@@ -284,30 +284,38 @@
     white-space: nowrap;
   }
 
+  /* Same glass-button treatment as the Hero module's video toggle. */
   .po-video-toggle {
     position: absolute;
     z-index: 5;
-    right: 16px;
-    bottom: 16px;
+    right: 12px;
+    bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     padding: 0;
     color: #fff;
-    background-color: rgba(27, 12, 39, 0.35);
-    border: none;
-    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 9px;
+    box-shadow: 0 6px 16px rgba(27, 12, 39, 0.12);
     cursor: pointer;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    transition: background-color 0.2s ease;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .po-video-toggle svg {
+    width: 11px;
+    height: 11px;
   }
 
   .po-video-toggle:hover,
   .po-video-toggle:focus-visible {
-    background-color: rgba(27, 12, 39, 0.55);
+    background-color: rgba(255, 255, 255, 0.34);
+    transform: scale(1.05);
   }
 
   .po-video-toggle .icon-play {
@@ -323,7 +331,7 @@
   }
 
   /* Mobile / tablet: drop the sticky stack entirely (the scroll-scrubbed
-     scale/dim effect isn't a good fit for small screens), revert to a
+     scale effect isn't a good fit for small screens), revert to a
      simple column with the media above the copy. */
   @media (max-width: 768px) {
     .po-cards-space {
@@ -344,10 +352,6 @@
 
     .po-card-inner {
       transform: none !important;
-      filter: none !important;
-    }
-
-    .po-card-inner {
       flex-direction: column;
     }
 
@@ -375,7 +379,6 @@
   @media (prefers-reduced-motion: reduce) {
     .po-card-inner {
       transform: none !important;
-      filter: none !important;
     }
 
     .po-automation-row,
@@ -581,10 +584,11 @@
       // Stacking cards on scroll. Ported from the reference implementation:
       // each card is `position: sticky`. As the *next* card scrolls up
       // through the viewport, we track its progress (0 → 1) and use it to
-      // scale down + darken the *current* card's `.po-card-inner`, so it
-      // visibly recedes underneath the incoming card instead of just being
-      // abruptly covered. Skipped for prefers-reduced-motion — the cards
-      // still stack via plain CSS sticky, they just don't scale/dim.
+      // scale down the *current* card's `.po-card-inner`, so it visibly
+      // recedes underneath the incoming card instead of just being
+      // abruptly covered (no darkening overlay). Skipped for
+      // prefers-reduced-motion — the cards still stack via plain CSS
+      // sticky, they just don't scale.
       const cardsWrap = section.querySelector('[data-po-cards]');
       const cards = cardsWrap ? Array.from(cardsWrap.querySelectorAll('.po-card')) : [];
       if (cardsWrap && cards.length > 1 && !reduceMotion) {
@@ -621,7 +625,6 @@
             const { card, inner, offsetTop, toScale } = entries[i];
             const progress = progressOf(entries[i + 1].card, card, offsetTop);
             inner.style.scale = String(valueAtPercentage(1, toScale, progress));
-            inner.style.filter = `brightness(${valueAtPercentage(1, 0.6, progress)})`;
           }
         };
 
