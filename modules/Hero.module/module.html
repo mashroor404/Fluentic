@@ -137,12 +137,12 @@
                 {% if module.chat_demo.suggestions|length %}
                   <div class="hero-chat-suggestions">
                     {% for s in module.chat_demo.suggestions %}
-                      {% if s.label %}
-                        <button type="button" class="hero-chat-suggestion" data-hero-chat-suggestion="{{ s.label|escape_attr }}">
+                      {% if s.text %}
+                        <button type="button" class="hero-chat-suggestion" data-hero-chat-suggestion="{{ s.text|escape_attr }}">
                           <svg viewBox="0 0 12 12" width="11" height="11" fill="currentColor" aria-hidden="true">
                             <path d="M6 0c.3 1.9 1 3.2 2.9 3.6-1.9.4-2.6 1.7-2.9 3.6-.3-1.9-1-3.2-2.9-3.6C5 3.2 5.7 1.9 6 0Z"/>
                           </svg>
-                          <span>{{ s.label }}</span>
+                          <span>{{ s.text }}</span>
                         </button>
                       {% endif %}
                     {% endfor %}

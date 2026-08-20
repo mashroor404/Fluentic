@@ -48,11 +48,10 @@ Eyebrow badge START
   <div class="eyebrow-custom">
     <!-- Eyebrow Icon -->
     {% if icon_src %}<img loading="lazy" src="{{ icon_src|escape_url }}" alt="" class="eyebrow-icon">{% endif %}
-    
-    <!-- Eyebrow Content & Cursor -->
+
+    <!-- Eyebrow Content (no blinking cursor — matches the live site) -->
     <div class="eyebrow-content">
       <p class="eyebrow-text">{{ text }}</p>
-      <span class="eyebrow-cursor"></span>
     </div>
   </div>
 {% endmacro %}
