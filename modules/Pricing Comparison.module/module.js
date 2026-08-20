@@ -1,0 +1,1 @@
+/* Module behavior is scoped in module.html. */

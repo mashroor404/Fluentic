@@ -198,8 +198,16 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Match the reference track composition and responsive item dimensions before tuning motion. Fluentic's demo ribbon uses six text panels, seven icon separators, 1215px/212px desktop sizing, and 800/600/400px plus 160/140/120px responsive steps.
 - Keep the displayed text, destination link, and separator image editable. Use the bundled Fluentic `Vector.svg` as the fallback separator.
 - Apply `will-change: transform` and `transform-style: preserve-3d` to the complete horizontal track, not to every repeated child.
-- Use one reversible ScrollTrigger scrub from `xPercent: 0` to approximately `-10`, with `start: "top bottom"` and `end: "bottom top"`. Scroll progress then moves left on the way down and right on the way up without a separate direction listener.
+- Use one reversible ScrollTrigger scrub from `xPercent: 0` to `-6`, with `scrub: 1.2`, `start: "top bottom"`, and `end: "bottom top"`. Scroll progress then moves gently left on the way down and right on the way up without a separate direction listener.
 - Mark repeated visual content as decorative and give the wrapping link one useful accessible label. Disable the transform under `prefers-reduced-motion`.
+
+## Build nested pricing comparison modules
+
+- Model billing filters as a repeating `plans` group. Nest a repeating `cards` group inside each plan, then use a repeating text field for each card's features. Keep group nesting within HubSpot's supported depth and loop through the resulting arrays directly in HubL.
+- Give every card a boolean popular toggle plus an editable popular label and background image. Render the selected image only for popular cards and use the bundled Fluentic pricing particle as its fallback.
+- Render every pricing CTA through `/Fluentic/Macros/Button.html`: `animated_button` for popular/base-black cards and `secondary_button` for regular/variant-2 cards.
+- Build filter controls as semantic tabs with unique module-instance IDs, `aria-selected`, `aria-controls`, tabpanels, and Left/Right/Home/End keyboard navigation. Keep all filter behavior available without GSAP.
+- Scope the header reveal, initial pricing-content reveal, and tab-change card reveal to the module instance. Skip only the motion when reduced motion is requested.
 
 ## Replace global modules safely
 

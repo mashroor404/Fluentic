@@ -1,0 +1,643 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  .pricing-section {
+    background-color: var(--page-bg);
+    padding: clamp(4rem, 7.5vw, 8.75rem) 0;
+  }
+
+  .pricing-comparison__inner {
+    margin: 0 auto;
+    max-width: 77.5rem;
+  }
+
+  .pricing-comparison__header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 3.75rem;
+    text-align: center;
+  }
+
+  .pricing-comparison__heading {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.12;
+    margin: 1rem auto 0;
+    max-width: 49.9375rem;
+  }
+
+  .pricing-comparison__word {
+    display: inline-block;
+    will-change: opacity, transform;
+  }
+
+  .pricing-comparison__description {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.55;
+    margin: 1.5rem auto 0;
+    max-width: 43.75rem;
+  }
+
+  .pricing-comparison__tabs {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .pricing-comparison__tablist {
+    align-items: center;
+    background-color: color-mix(in srgb, var(--global-border-color) 72%, var(--page-bg));
+    border-radius: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 0.25rem;
+  }
+
+  .pricing-comparison__tab {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-radius: 0.25rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    padding: 0.375rem 1.25rem;
+    transition: background-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .pricing-comparison__tab[aria-selected="true"] {
+    background-color: var(--bg-primary);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--text-primary) 6%, transparent);
+  }
+
+  .pricing-comparison__tab:focus-visible {
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 2px;
+  }
+
+  .pricing-comparison__panels,
+  .pricing-comparison__panel {
+    width: 100%;
+  }
+
+  .pricing-comparison__panel[hidden] {
+    display: none;
+  }
+
+  .pricing-card-wrapper {
+    align-items: stretch;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pricing-card {
+    background-color: var(--bg-primary);
+    border: var(--global-border-width) solid color-mix(in srgb, var(--global-border-color) 35%, transparent);
+    border-radius: max(var(--global-border-radius), 0.625rem);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--text-primary) 6%, transparent);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .pricing-card.is-popular {
+    padding: 0.5rem 0.5rem 1.5rem;
+  }
+
+  .pricing-card__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    min-height: 7.75rem;
+  }
+
+  .pricing-card.is-popular .pricing-head {
+    background-color: var(--page-bg);
+    border: var(--global-border-width) solid color-mix(in srgb, var(--global-border-color) 26%, transparent);
+    border-radius: 0.75rem;
+    box-shadow: 0 3px 4px color-mix(in srgb, var(--text-primary) 4%, transparent);
+    padding: 1rem;
+  }
+
+  .pricing-card-title {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .pricing-card-icon {
+    color: var(--accent-blue);
+    display: block;
+    flex: 0 0 1.375rem;
+    height: 1.375rem;
+    width: 1.375rem;
+  }
+
+  .pricing-card:nth-child(3n + 2) .pricing-card-icon {
+    color: var(--accent-purple);
+  }
+
+  .pricing-card:nth-child(3n + 3) .pricing-card-icon {
+    color: var(--accent-pink);
+  }
+
+  .pricing-card__name {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h4);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .popular-badge {
+    background-color: var(--text-primary);
+    border-radius: 999px;
+    color: var(--text-light-primary);
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+    margin-left: auto;
+    padding: 0.125rem 0.5rem;
+    white-space: nowrap;
+  }
+
+  .pricing-card__description {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .pricing-card-price-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .pricing-card.is-popular .pricing-card-price-block {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .price {
+    align-items: flex-end;
+    color: var(--text-primary);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .pricing-card__price {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h3);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+  }
+
+  .pricing-card__period {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2);
+    line-height: 1.5;
+  }
+
+  .pricing-comparison__button .button-primary {
+    width: 100%;
+  }
+
+  .pricing-card:not(.is-popular) .pricing-comparison__button .button-primary[data-wf--button-primary--variant="v2"] {
+    background-color: var(--page-bg);
+    border-color: color-mix(in srgb, var(--global-border-color) 65%, transparent);
+  }
+
+  .pricing-text-block {
+    color: var(--text-primary);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.9375rem;
+    padding-top: 2rem;
+  }
+
+  .pricing-card.is-popular .pricing-text-block {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .pricing-text-block__title {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+  }
+
+  .pricing-list {
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pricing-list-item {
+    align-items: flex-start;
+    color: var(--text-primary);
+    display: flex;
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2);
+    gap: 0.625rem;
+    line-height: 1.5;
+  }
+
+  .pricing-list-item__icon {
+    color: var(--text-primary);
+    flex: 0 0 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.0625rem;
+    width: 1.25rem;
+  }
+
+  .pricing-card-gradient {
+    height: auto;
+    inset: 0 0 auto auto;
+    max-width: 13.3125rem;
+    pointer-events: none;
+    position: absolute;
+    width: 58%;
+    z-index: 0;
+  }
+
+  @media screen and (max-width: 991px) {
+    .pricing-card-wrapper {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .pricing-section {
+      padding: 4rem 0;
+    }
+
+    .pricing-comparison__header {
+      margin-bottom: 2.5rem;
+    }
+
+    .pricing-card-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .pricing-card {
+      padding: 1.25rem;
+    }
+
+    .pricing-card.is-popular {
+      padding: 0.5rem 0.5rem 1.25rem;
+    }
+
+    .pricing-head {
+      min-height: 0;
+    }
+
+    .pricing-text-block {
+      padding-top: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .pricing-comparison__tab {
+      padding-left: 0.875rem;
+      padding-right: 0.875rem;
+    }
+
+    .pricing-card {
+      padding: 1rem;
+    }
+
+    .pricing-card.is-popular {
+      padding: 0.5rem 0.5rem 1rem;
+    }
+
+    .pricing-card.is-popular .pricing-card-price-block,
+    .pricing-card.is-popular .pricing-text-block {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-comparison__tab {
+      transition: none;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section id="Pricing" class="pricing-section" data-pricing-comparison>
+  <div class="container">
+    <div class="pricing-comparison__inner">
+      <header class="pricing-comparison__header">
+        {% if module.section_content.eyebrow_text %}
+          <div data-pricing-eyebrow>
+            {{ btn_macros.eyebrow_label(module.section_content.eyebrow_text) }}
+          </div>
+        {% endif %}
+
+        {% if module.section_content.heading %}
+          <h2 class="pricing-comparison__heading gsap_split_word" data-pricing-heading>{{ module.section_content.heading|escape_html }}</h2>
+        {% endif %}
+
+        {% if module.section_content.description %}
+          <p class="pricing-comparison__description" data-pricing-description>{{ module.section_content.description|escape_html }}</p>
+        {% endif %}
+      </header>
+
+      {% if module.plans %}
+        <div class="pricing-comparison__tabs" data-pricing-content>
+          {% if module.plans|length > 1 %}
+            <div class="pricing-comparison__tablist" role="tablist" aria-label="Pricing frequency">
+              {% for plan in module.plans %}
+                <button
+                  class="pricing-comparison__tab"
+                  type="button"
+                  id="pricing-tab-{{ name|escape_attr }}-{{ loop.index }}"
+                  role="tab"
+                  aria-controls="pricing-panel-{{ name|escape_attr }}-{{ loop.index }}"
+                  aria-selected="{% if loop.first %}true{% else %}false{% endif %}"
+                  tabindex="{% if loop.first %}0{% else %}-1{% endif %}"
+                  data-pricing-tab
+                >{{ plan.plan_name|escape_html }}</button>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <div class="pricing-comparison__panels">
+            {% for plan in module.plans %}
+              <section
+                class="pricing-comparison__panel"
+                id="pricing-panel-{{ name|escape_attr }}-{{ loop.index }}"
+                role="tabpanel"
+                {% if module.plans|length > 1 %}aria-labelledby="pricing-tab-{{ name|escape_attr }}-{{ loop.index }}"{% endif %}
+                {% if not loop.first %}hidden{% endif %}
+                data-pricing-panel
+              >
+                <div class="pricing-card-wrapper">
+                  {% for card in plan.cards %}
+                    {% set button_href = card.button_link.url.href %}
+                    {% if card.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+                      {% set button_href = "mailto:" ~ button_href %}
+                    {% elif card.button_link.url.type is equalto "PHONE_NUMBER" %}
+                      {% set button_href = "tel:" ~ button_href %}
+                    {% endif %}
+                    {% if not button_href %}
+                      {% set button_href = "/contact-us" %}
+                    {% endif %}
+
+                    {% set popular_background = card.popular_background_image.src %}
+                    {% if card.is_popular and not popular_background %}
+                      {% set popular_background = get_asset_url('../../css/elements/Assets/icons/6983b58bea0cb3b62a9bdbb7_Pricing Card Particle.svg') %}
+                    {% endif %}
+
+                    <article class="pricing-card{% if card.is_popular %} is-popular{% endif %}" data-pricing-card>
+                      <div class="pricing-card__content">
+                        <div class="pricing-head">
+                          <div class="pricing-card-title">
+                            <svg class="pricing-card-icon" viewBox="0 0 22 22" aria-hidden="true">
+                              <path d="M11 1.5 13.7 7l6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L2.2 7.9 8.3 7 11 1.5Z" fill="currentColor"/>
+                            </svg>
+                            <h3 class="pricing-card__name">{{ card.card_name|escape_html }}</h3>
+                            {% if card.is_popular and card.popular_label %}
+                              <span class="popular-badge">{{ card.popular_label|escape_html }}</span>
+                            {% endif %}
+                          </div>
+
+                          {% if card.description %}
+                            <p class="pricing-card__description">{{ card.description|escape_html }}</p>
+                          {% endif %}
+                        </div>
+
+                        <div class="pricing-card-price-block">
+                          <div class="price">
+                            {% if card.price %}<span class="pricing-card__price">{{ card.price|escape_html }}</span>{% endif %}
+                            {% if card.billing_period %}<span class="pricing-card__period">{{ card.billing_period|escape_html }}</span>{% endif %}
+                          </div>
+
+                          {% if card.button_text %}
+                            <div class="pricing-comparison__button">
+                              {% if card.is_popular %}
+                                {{ btn_macros.animated_button(card.button_text, button_href, card.button_link.open_in_new_tab, card.button_link.no_follow) }}
+                              {% else %}
+                                {{ btn_macros.secondary_button(card.button_text, button_href, card.button_link.open_in_new_tab, card.button_link.no_follow) }}
+                              {% endif %}
+                            </div>
+                          {% endif %}
+                        </div>
+
+                        {% if card.features %}
+                          <div class="pricing-text-block">
+                            {% if card.included_title %}
+                              <p class="pricing-text-block__title">{{ card.included_title|escape_html }}</p>
+                            {% endif %}
+                            <ul class="pricing-list" role="list">
+                              {% for feature in card.features %}
+                                <li class="pricing-list-item">
+                                  <svg class="pricing-list-item__icon" viewBox="0 0 20 20" aria-hidden="true">
+                                    <path d="M18.75 10a1.25 1.25 0 0 1-.82 1.17l-4.96 1.8-1.8 4.96a1.25 1.25 0 0 1-2.34 0l-1.8-4.96-4.96-1.8a1.25 1.25 0 0 1 0-2.34l4.96-1.8 1.8-4.96a1.25 1.25 0 0 1 2.34 0l1.8 4.96 4.96 1.8c.5.18.82.65.82 1.17Z" fill="currentColor"/>
+                                  </svg>
+                                  <span>{{ feature|escape_html }}</span>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        {% endif %}
+                      </div>
+
+                      {% if card.is_popular and popular_background %}
+                        <img class="pricing-card-gradient" src="{{ popular_background|escape_url }}" alt="" loading="lazy" aria-hidden="true">
+                      {% endif %}
+                    </article>
+                  {% endfor %}
+                </div>
+              </section>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% require_js %}
+<script>
+  (() => {
+    const initPricingComparisons = () => {
+      document.querySelectorAll("[data-pricing-comparison]").forEach((section) => {
+        if (section.dataset.pricingInitialized === "true") return;
+        section.dataset.pricingInitialized = "true";
+
+        const tabs = Array.from(section.querySelectorAll("[data-pricing-tab]"));
+        const panels = Array.from(section.querySelectorAll("[data-pricing-panel]"));
+        const prefersMotion = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+        const canAnimate = prefersMotion && typeof window.gsap !== "undefined";
+
+        const activateTab = (activeIndex, moveFocus = false) => {
+          tabs.forEach((tab, index) => {
+            const isActive = index === activeIndex;
+            tab.setAttribute("aria-selected", String(isActive));
+            tab.tabIndex = isActive ? 0 : -1;
+            if (isActive && moveFocus) tab.focus();
+          });
+
+          panels.forEach((panel, index) => {
+            const isActive = index === activeIndex;
+            panel.hidden = !isActive;
+
+            if (isActive && canAnimate) {
+              const cards = panel.querySelectorAll("[data-pricing-card]");
+              window.gsap.fromTo(
+                cards,
+                { autoAlpha: 0, y: 24 },
+                { autoAlpha: 1, duration: 0.45, ease: "power3.out", stagger: 0.06, y: 0, overwrite: true }
+              );
+            }
+          });
+        };
+
+        tabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => activateTab(index));
+          tab.addEventListener("keydown", (event) => {
+            let nextIndex = index;
+
+            if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+            else if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+            else if (event.key === "Home") nextIndex = 0;
+            else if (event.key === "End") nextIndex = tabs.length - 1;
+            else return;
+
+            event.preventDefault();
+            activateTab(nextIndex, true);
+          });
+        });
+
+        if (!canAnimate || typeof window.ScrollTrigger === "undefined") return;
+
+        window.gsap.registerPlugin(window.ScrollTrigger);
+
+        const heading = section.querySelector("[data-pricing-heading]");
+        const headingWords = [];
+
+        if (heading) {
+          const words = heading.textContent.trim().split(/\s+/);
+          const fragment = document.createDocumentFragment();
+
+          words.forEach((word, index) => {
+            const wordElement = document.createElement("span");
+            wordElement.className = "pricing-comparison__word gsap_split_word2";
+            wordElement.textContent = word;
+            fragment.appendChild(wordElement);
+            headingWords.push(wordElement);
+
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(" "));
+            }
+          });
+
+          heading.replaceChildren(fragment);
+        }
+
+        const eyebrow = section.querySelector("[data-pricing-eyebrow]");
+        const description = section.querySelector("[data-pricing-description]");
+        const content = section.querySelector("[data-pricing-content]");
+        const header = section.querySelector(".pricing-comparison__header");
+
+        if (header) {
+          const timeline = window.gsap.timeline({
+            defaults: { ease: "power3.out" },
+            scrollTrigger: {
+              trigger: header,
+              start: "top 82%",
+              once: true
+            }
+          });
+
+          if (eyebrow) {
+            timeline.fromTo(eyebrow, { autoAlpha: 0, y: 22 }, { autoAlpha: 1, duration: 0.45, y: 0 }, 0);
+          }
+
+          if (headingWords.length) {
+            timeline.fromTo(
+              headingWords,
+              { autoAlpha: 0, y: 28 },
+              { autoAlpha: 1, duration: 0.5, stagger: 0.05, y: 0 },
+              0.12
+            );
+          }
+
+          if (description) {
+            timeline.fromTo(description, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, duration: 0.5, y: 0 }, 0.3);
+          }
+        }
+
+        if (content) {
+          window.gsap.fromTo(
+            content,
+            { autoAlpha: 0, y: 50 },
+            {
+              autoAlpha: 1,
+              duration: 0.6,
+              ease: "power3.out",
+              y: 0,
+              scrollTrigger: {
+                trigger: content,
+                start: "top 88%",
+                once: true
+              }
+            }
+          );
+        }
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initPricingComparisons, { once: true });
+    } else {
+      initPricingComparisons();
+    }
+  })();
+</script>
+{% end_require_js %}
