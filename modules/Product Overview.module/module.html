@@ -352,6 +352,7 @@
 
     .po-card-inner {
       transform: none !important;
+      scale: none !important;
       flex-direction: column;
     }
 
@@ -379,6 +380,7 @@
   @media (prefers-reduced-motion: reduce) {
     .po-card-inner {
       transform: none !important;
+      scale: none !important;
     }
 
     .po-automation-row,
@@ -620,7 +622,21 @@
           return clamp((containerBottom - next.getBoundingClientRect().top) / range, 0, 1);
         };
 
+        // Matches the CSS breakpoint below that drops the sticky stack on
+        // mobile/tablet. Below it, cards render as a plain static column —
+        // no stacking, no scaling — so skip the effect entirely there.
+        const isStackViewport = () => window.matchMedia('(min-width: 769px)').matches;
+
         const update = () => {
+          if (!isStackViewport()) {
+            // Clear any inline scale left over from a wider viewport (e.g.
+            // after a resize/orientation change) so mobile cards render at
+            // their natural size.
+            entries.forEach(({ inner }) => {
+              inner.style.scale = '';
+            });
+            return;
+          }
           for (let i = 0; i < entries.length - 1; i += 1) {
             const { card, inner, offsetTop, toScale } = entries[i];
             const progress = progressOf(entries[i + 1].card, card, offsetTop);
