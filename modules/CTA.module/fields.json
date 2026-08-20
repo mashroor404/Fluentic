@@ -199,33 +199,14 @@
     "locked": false,
     "children": [
       {
-        "id": "de37ced9-536e-460e-ab22-c75112fdf88c",
-        "name": "show_background_image",
-        "label": "Show background image",
-        "required": false,
-        "locked": false,
-        "display": "toggle",
-        "type": "boolean",
-        "display_width": null,
-        "default": true
-      },
-      {
         "id": "f1e789f5-1297-48a0-9df3-46bd9e880156",
         "name": "image",
-        "label": "Background image",
+        "label": "Background Image",
         "required": false,
         "locked": false,
         "responsive": true,
         "resizable": true,
         "show_loading": false,
-        "visibility": {
-          "controlling_field": null,
-          "controlling_field_path": "background.show_background_image",
-          "controlling_value_regex": "true",
-          "property": null,
-          "operator": "EQUAL",
-          "access": null
-        },
         "type": "image",
         "display_width": null
       }
@@ -235,8 +216,6 @@
     "group_occurrence_meta": null,
     "type": "group",
     "display_width": null,
-    "default": {
-      "show_background_image": true
-    }
+    "default": {}
   }
 ]

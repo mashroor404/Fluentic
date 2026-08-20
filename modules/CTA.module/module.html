@@ -11,7 +11,6 @@
 
   .cta-content-block {
     align-items: center;
-    background-color: var(--text-primary);
     background-image: var(--cta-background-image, none);
     background-position: center;
     background-repeat: no-repeat;
@@ -61,6 +60,11 @@
     margin: 0 0 1rem;
   }
 
+  .cta-title__word {
+    display: inline-block;
+    will-change: opacity, transform;
+  }
+
   .cta-button {
     display: flex;
     flex-direction: column;
@@ -77,6 +81,8 @@
     flex: 0 0 auto;
     height: auto;
     max-width: 15.375rem;
+    transform-style: preserve-3d;
+    will-change: transform;
     width: 21%;
   }
 
@@ -149,10 +155,10 @@
   {% set button_href = "tel:" + button_href %}
 {% endif %}
 
-<section class="cta-section">
+<section class="cta-section" data-cta-section>
   <div
     class="cta-content-block"
-    {% if module.background.show_background_image and background_image %}
+    {% if background_image %}
       style="--cta-background-image: url('{{ background_image|escape_url }}');"
     {% endif %}
   >
@@ -160,16 +166,23 @@
       <div class="cta-content-wrapper">
         <div class="cta-title-block">
           {% if module.content.eyebrow_text %}
-            {{ btn_macros.eyebrow_label(module.content.eyebrow_text) }}
+            <div data-cta-eyebrow>
+              {{ btn_macros.eyebrow_label(module.content.eyebrow_text) }}
+            </div>
           {% endif %}
 
           {% if module.content.heading %}
-            <h2 class="cta-title">{{ module.content.heading|escape_html }}</h2>
+            <h2 class="cta-title gsap_split_word" data-cta-heading>{{ module.content.heading|escape_html }}</h2>
           {% endif %}
 
-          {% if module.button.show_button and module.button.text %}
-            <div class="cta-button">
-              {{ btn_macros.secondary_button(module.button.text, button_href|escape_url) }}
+          {% if module.button.show_button and module.button.text and button_href %}
+            <div class="cta-button" data-cta-button>
+              {{ btn_macros.secondary_button(
+                module.button.text,
+                button_href,
+                module.button.link.open_in_new_tab,
+                module.button.link.no_follow
+              ) }}
             </div>
           {% endif %}
         </div>
@@ -177,6 +190,7 @@
         {% if module.illustration.show_image and illustration_src %}
           <img
             class="cta-image"
+            data-cta-illustration
             src="{{ illustration_src|escape_url }}"
             alt="{{ module.illustration.image.alt|default(module.illustration.alt_text)|escape_attr }}"
             width="{{ illustration_width }}"
@@ -188,3 +202,106 @@
     </div>
   </div>
 </section>
+
+{% require_js %}
+<script>
+  (() => {
+    const initCtaSections = () => {
+      if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+
+      window.gsap.registerPlugin(window.ScrollTrigger);
+
+      document.querySelectorAll("[data-cta-section]").forEach((section) => {
+        if (section.dataset.ctaAnimationInitialized === "true") return;
+        section.dataset.ctaAnimationInitialized = "true";
+
+        const heading = section.querySelector("[data-cta-heading]");
+        const headingWords = [];
+
+        if (heading) {
+          const words = heading.textContent.trim().split(/\s+/);
+          const fragment = document.createDocumentFragment();
+
+          words.forEach((word, index) => {
+            const wordElement = document.createElement("span");
+            wordElement.className = "cta-title__word gsap_split_word2";
+            wordElement.textContent = word;
+            fragment.appendChild(wordElement);
+            headingWords.push(wordElement);
+
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(" "));
+            }
+          });
+
+          heading.replaceChildren(fragment);
+        }
+
+        const media = window.gsap.matchMedia();
+
+        media.add("(prefers-reduced-motion: no-preference)", () => {
+          const eyebrow = section.querySelector("[data-cta-eyebrow]");
+          const button = section.querySelector("[data-cta-button]");
+          const illustration = section.querySelector("[data-cta-illustration]");
+          const titleBlock = section.querySelector(".cta-title-block");
+
+          if (titleBlock) {
+            const contentTimeline = window.gsap.timeline({
+              defaults: { ease: "power3.out" },
+              scrollTrigger: {
+                trigger: titleBlock,
+                start: "top 82%",
+                once: true
+              }
+            });
+
+            if (eyebrow) {
+              contentTimeline.fromTo(
+                eyebrow,
+                { autoAlpha: 0, y: 22 },
+                { autoAlpha: 1, duration: 0.55, y: 0 },
+                0
+              );
+            }
+
+            if (headingWords.length) {
+              contentTimeline.fromTo(
+                headingWords,
+                { autoAlpha: 0, y: 28 },
+                { autoAlpha: 1, duration: 0.6, stagger: 0.06, y: 0 },
+                0.12
+              );
+            }
+
+            if (button) {
+              contentTimeline.fromTo(
+                button,
+                { autoAlpha: 0, y: 24 },
+                { autoAlpha: 1, duration: 0.55, y: 0 },
+                0.3
+              );
+            }
+          }
+
+          if (illustration) {
+            window.gsap.to(illustration, {
+              duration: 12,
+              ease: "none",
+              force3D: true,
+              repeat: -1,
+              rotation: "+=360",
+              transformOrigin: "50% 50%"
+            });
+          }
+        });
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initCtaSections, { once: true });
+    } else {
+      initCtaSections();
+    }
+  })();
+</script>
+{% end_require_js %}
