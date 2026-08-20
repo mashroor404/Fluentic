@@ -124,9 +124,8 @@
 
 /* Default (no-JS/reduced-motion fallback): the whole conversation is
    visible statically. The require_js block plays it back as a loop by
-   hiding every bubble on load (`.is-pending`) and revealing each in turn,
-   with a cloned "typing…" bubble inserted just ahead of it — like a
-   product-demo clip replaying, not a real chat you type into. */
+   hiding every bubble on load (`.is-pending`) and revealing each in turn —
+   like a product-demo clip replaying, not a real chat you type into. */
 .hero-message-wrapper {
   display: flex;
   width: 100%;
@@ -183,31 +182,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* Typing indicator briefly shown ahead of each bubble during playback. */
-.hero-typing-dots {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  min-width: 40px;
-  padding: 14px 12px;
-}
-
-.hero-typing-dots span {
-  width: 6px;
-  height: 6px;
-  background-color: var(--text-secondary, #8a8090);
-  border-radius: 50%;
-  animation: hero-typing-bounce 1.1s ease-in-out infinite;
-}
-
-.hero-typing-dots span:nth-child(2) { animation-delay: 0.15s; }
-.hero-typing-dots span:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes hero-typing-bounce {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-  30% { transform: translateY(-4px); opacity: 1; }
 }
 
 .hero-particle {
@@ -352,6 +326,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero-particle { animation: none; }
-  .hero-typing-dots span { animation: none; opacity: 1; }
   .message-text-wrap { transition: none; }
 }

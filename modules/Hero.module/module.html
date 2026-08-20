@@ -117,10 +117,9 @@
   </div>
 </section>
 
-<!-- Plays the example conversation on a loop (typing beat, then each bubble
-     appears in turn), like a looping product-demo clip — then resets and
-     replays. Also floats the particles (CSS-only) and drives the video
-     play/pause toggle. -->
+<!-- Plays the example conversation on a loop (each bubble appears in turn),
+     like a looping product-demo clip — then resets and replays. Also floats
+     the particles (CSS-only) and drives the video play/pause toggle. -->
 {% require_js %}
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -168,40 +167,14 @@
       }
 
       const HOLD_MS = 1500;
-      const TYPING_MS = 750;
       const LOOP_PAUSE_MS = 2600;
       const RESET_PAUSE_MS = 900;
 
-      const buildTypingBubble = (referenceWrapper) => {
-        const isAgent = referenceWrapper.classList.contains('hero-message-wrapper--agent');
-        const bubble = document.createElement('div');
-        bubble.className = 'hero-message-wrapper hero-message-wrapper--typing ' +
-          (isAgent ? 'hero-message-wrapper--agent' : 'hero-message-wrapper--user');
-
-        const avatarSource = referenceWrapper.querySelector('.message-avatar-wrap');
-        const textWrap = document.createElement('div');
-        textWrap.className = 'message-text-wrap hero-typing-dots';
-        textWrap.innerHTML = '<span></span><span></span><span></span>';
-
-        if (isAgent) {
-          if (avatarSource) bubble.appendChild(avatarSource.cloneNode(true));
-          bubble.appendChild(textWrap);
-        } else {
-          bubble.appendChild(textWrap);
-          if (avatarSource) bubble.appendChild(avatarSource.cloneNode(true));
-        }
-        return bubble;
-      };
-
-      // One full play-through: type + reveal each bubble in turn, hold on the
+      // One full play-through: reveal each bubble in turn, hold on the
       // finished conversation so it can be read, then hide everything again
       // ready for the next cycle — like a looping product-demo clip.
       const playOnce = async () => {
         for (const wrapper of wrappers) {
-          const typing = buildTypingBubble(wrapper);
-          wrapper.before(typing);
-          await sleep(TYPING_MS);
-          typing.remove();
           wrapper.classList.remove('is-pending');
           await sleep(HOLD_MS);
         }
