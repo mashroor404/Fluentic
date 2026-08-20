@@ -546,7 +546,7 @@
       {
         "id": "77577d38-bd65-415d-989c-dab6642a420a",
         "name": "content_max_width",
-        "label": "Content maximum width",
+        "label": "Hero container max width",
         "required": false,
         "locked": false,
         "type": "number",
@@ -554,12 +554,12 @@
         "display": "text",
         "step": 10,
         "suffix": "px",
-        "default": 960
+        "default": 1240
       },
       {
         "id": "f83e7126-6aa1-479f-9b47-4ccf3e5880bf",
         "name": "section_spacing",
-        "label": "Section vertical spacing",
+        "label": "Section top spacing",
         "required": false,
         "locked": false,
         "type": "number",
@@ -567,7 +567,7 @@
         "display": "text",
         "step": 4,
         "suffix": "px",
-        "default": 120
+        "default": 168
       }
     ],
     "tab": "STYLE",
@@ -578,8 +578,8 @@
         "color": "#F8F7F8",
         "opacity": 100
       },
-      "content_max_width": 960,
-      "section_spacing": 120
+      "content_max_width": 1240,
+      "section_spacing": 168
     }
   }
 ]
