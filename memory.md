@@ -134,7 +134,9 @@ Responsive `srcset` renditions were excluded when an original source asset was a
 
 The four default cards use the downloaded local Solution Image assets through `get_asset_url`. The eyebrow is rendered with `btn_macros.eyebrow_label` from `/Fluentic/Macros/Button.html`, keeping it consistent with other theme modules. Desktop cards follow the reference's asymmetric 5/7 then 8/4 column layout, becoming two equal columns on tablet and one column on mobile. Styling is scoped per module instance and consumes the project's global color, typography, border, and container variables.
 
-The image wrapper now enforces a 16:9 aspect ratio at every breakpoint and the image fills it with `object-fit: cover`, so editor-uploaded image dimensions cannot change card sizing. GSAP and ScrollTrigger are supplied by `templates/layouts/base.html` and must not be loaded again in this module. The scoped module animation reveals the eyebrow upward first, then splits and reveals the heading word by word, then reveals the description. Card rows reveal independently from 50px below as they reach the viewport; desktop/tablet rows contain two cards and mobile cards reveal individually. Reduced-motion users receive the fully visible static layout.
+The solution images render at their natural proportions rather than through a shared aspect-ratio crop. This is intentional: the reference assets have different intrinsic widths but the same 1336px height, and those proportions correspond to the asymmetric 5/7 and 8/4 desktop card widths. The grid stretches items and each card uses a full-height flex column so both cards in each visual row remain equal in outer height.
+
+GSAP and ScrollTrigger are supplied by `templates/layouts/base.html` and must not be loaded again in this module. The scoped module animation reveals the eyebrow, heading words, and description in a tightly overlapped sequence beginning at 0s, 0.12s, and 0.3s respectively. Card rows reveal independently from 50px below as they reach the viewport; desktop/tablet rows contain two cards and mobile cards reveal individually. Reduced-motion users receive the fully visible static layout.
 
 ## Hero module
 
