@@ -66,6 +66,8 @@ Most modules are folders named `*.module` with `meta.json`, `fields.json`, `modu
 - uses shared tokens such as `var(--text-primary)`, `var(--bg-primary)`, `var(--gradient-4)`, and `var(--container-max-width)`;
 - uses `btn_macros.animated_button`, `btn_macros.secondary_button`, and `btn_macros.eyebrow_label` for shared UI.
 
+All buttons added to modules must come from `/Fluentic/Macros/Button.html`; do not recreate button markup in a module. Use `btn_macros.animated_button(...)` for the black/base button (`data-wf--button-primary--variant="base"`) and `btn_macros.secondary_button(...)` for the white/variant-2 button (`data-wf--button-primary--variant="v2"`).
+
 The global header is inserted from `templates/partials/header.html`. The user changed `templates/layouts/base.html` to render the footer from `templates/partials/Footer2.html`; preserve that wiring unless they explicitly request another footer partial.
 
 ## Things to verify before deployment
@@ -151,3 +153,9 @@ The editable schema now covers the brand logo/link/description, four selectable 
 `modules/CTA.module/` recreates the Webflow `<section class="cta-section">` as an editable HubSpot DnD page module. Editor fields control the eyebrow, heading, button visibility/text/link, illustration visibility/image/alt text, and background-image visibility/image.
 
 The module imports `/Fluentic/Macros/Button.html`, uses `btn_macros.eyebrow_label` and the light `btn_macros.secondary_button`, and resolves the bundled `CTA BG.webp` and `CTA Image.webp` files through `get_asset_url` when editors have not selected replacements. Its scoped responsive CSS consumes global background, text, font, weight, border-radius, and container variables. It intentionally has no JavaScript dependency.
+
+## Blog cards module
+
+`modules/Blog cards.module/` recreates the reference `<section id="Blog" class="blog-section">` as an editable HubSpot DnD module. Its card group is repeatable from one to three items. HubSpot does not provide a native individual-blog-post picker field, so each card combines a supported `blog` field with a post-position field (`1` is newest, `2` is second newest, and so on). The module uses `blog_recent_posts` to pull the selected post's live URL, featured image, first topic, publish date, and title.
+
+The heading and Explore All link are editable. The white Explore All button uses `btn_macros.secondary_button` (variant 2). The responsive card grid changes from three columns to two and then one, and featured images scale slightly on card hover/focus. Styling is scoped, uses global Fluentic color/font/border/container variables, and requires no JavaScript.
