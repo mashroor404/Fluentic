@@ -171,6 +171,9 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Pull the card URL, featured image and alt text, first topic, publish date, and title from the returned post object so published blog content remains the source of truth.
 - Use the current `format_datetime` filter for publish dates; do not add new uses of the deprecated `datetimeformat` filter.
 - Keep image hover effects in CSS, include keyboard focus behavior, and respect `prefers-reduced-motion`; do not add JavaScript for a simple zoom effect.
+- For the Fluentic Blog-section heading reveal, put `gsap_split_word` on the heading and `gsap_split_word1` on its generated word spans, then stagger those words upward from below.
+- Keep the Explore All control macro-driven and animate its wrapper rather than modifying the shared button markup.
+- Derive reveal row size from the responsive grid: three cards at desktop, two at tablet, and one at mobile. Give each visual row its own ScrollTrigger.
 
 ## Replace global modules safely
 
