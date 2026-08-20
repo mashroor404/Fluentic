@@ -1,0 +1,242 @@
+[
+  {
+    "id": "75b17773-c8e6-4843-9bfe-8300b9106290",
+    "name": "content",
+    "label": "Content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "ed4dc874-c453-4002-8b2e-84c095bdd6df",
+        "name": "eyebrow_text",
+        "label": "Eyebrow text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Join the AI Revolution"
+      },
+      {
+        "id": "57d033de-bc51-49da-9437-4c895a074828",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Ready to Launch your AI Agents with us?"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "eyebrow_text": "Join the AI Revolution",
+      "heading": "Ready to Launch your AI Agents with us?"
+    }
+  },
+  {
+    "id": "c68e1d96-0b24-471b-a255-0cd3aee24b7b",
+    "name": "button",
+    "label": "Button",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "d0f51c58-98fa-43b1-9860-6f380951c0ab",
+        "name": "show_button",
+        "label": "Show button",
+        "required": false,
+        "locked": false,
+        "display": "toggle",
+        "type": "boolean",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "0ac2a57f-94b9-4040-be73-4d9e2219fbef",
+        "name": "text",
+        "label": "Button text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "button.show_button",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "text",
+        "display_width": null,
+        "default": "Get Started"
+      },
+      {
+        "id": "cdef07ab-41d2-4570-986b-8105b7fbdce5",
+        "name": "link",
+        "label": "Button link",
+        "required": false,
+        "locked": false,
+        "supported_types": [
+          "EXTERNAL",
+          "CONTENT",
+          "FILE",
+          "EMAIL_ADDRESS",
+          "BLOG",
+          "PHONE_NUMBER"
+        ],
+        "show_advanced_rel_options": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "button.show_button",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "link",
+        "display_width": null,
+        "default": {
+          "url": {
+            "content_id": null,
+            "href": "/contact-us",
+            "type": "EXTERNAL"
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        }
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_button": true,
+      "text": "Get Started",
+      "link": {
+        "url": {
+          "content_id": null,
+          "href": "/contact-us",
+          "type": "EXTERNAL"
+        },
+        "open_in_new_tab": false,
+        "no_follow": false
+      }
+    }
+  },
+  {
+    "id": "3f706958-9e45-4adf-9bff-3ac33ad479a6",
+    "name": "illustration",
+    "label": "Illustration",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "e4d3469f-e848-4ca3-b37f-1184b1f663ce",
+        "name": "show_image",
+        "label": "Show illustration",
+        "required": false,
+        "locked": false,
+        "display": "toggle",
+        "type": "boolean",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "58ea681c-b973-4c36-b029-353677888b79",
+        "name": "image",
+        "label": "Illustration image",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "illustration.show_image",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "image",
+        "display_width": null
+      },
+      {
+        "id": "f5e7b1dd-dc50-455a-8185-a1af37719897",
+        "name": "alt_text",
+        "label": "Illustration alt text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "AI agent interface illustration"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_image": true,
+      "alt_text": "AI agent interface illustration"
+    }
+  },
+  {
+    "id": "507ebdef-66e1-48e2-82f1-704c55048758",
+    "name": "background",
+    "label": "Background",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "de37ced9-536e-460e-ab22-c75112fdf88c",
+        "name": "show_background_image",
+        "label": "Show background image",
+        "required": false,
+        "locked": false,
+        "display": "toggle",
+        "type": "boolean",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "f1e789f5-1297-48a0-9df3-46bd9e880156",
+        "name": "image",
+        "label": "Background image",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "background.show_background_image",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "image",
+        "display_width": null
+      }
+    ],
+    "tab": "STYLE",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_background_image": true
+    }
+  }
+]

@@ -1,6 +1,6 @@
 # Fluentic HubSpot Theme Memory
 
-Last reviewed: 2026-08-19
+Last reviewed: 2026-08-20
 
 ## What this project is
 
@@ -66,7 +66,7 @@ Most modules are folders named `*.module` with `meta.json`, `fields.json`, `modu
 - uses shared tokens such as `var(--text-primary)`, `var(--bg-primary)`, `var(--gradient-4)`, and `var(--container-max-width)`;
 - uses `btn_macros.animated_button`, `btn_macros.secondary_button`, and `btn_macros.eyebrow_label` for shared UI.
 
-The global header and footer are inserted by `templates/partials/header.html` and `templates/partials/footer.html`, which are rendered from `base.html` using `global_partial`.
+The global header is inserted from `templates/partials/header.html`. The user changed `templates/layouts/base.html` to render the footer from `templates/partials/Footer2.html`; preserve that wiring unless they explicitly request another footer partial.
 
 ## Things to verify before deployment
 
@@ -130,6 +130,12 @@ The four default cards use the downloaded local Solution Image assets through `g
 
 ## Global Footer module
 
-`modules/Global/Footer.module/` was rebuilt from the Fluentic Webflow footer reference while preserving its existing folder name, `Footer` label, and HubSpot module ID `383963363024`. `templates/partials/footer.html` remains the only template reader and still loads the module from `../../modules/Global/Footer.module`.
+`modules/Global/Footer.module/` was rebuilt from the Fluentic Webflow footer reference while preserving its existing folder name, `Footer` label, and HubSpot module ID `383963363024`. Both footer partial files may reference this module, but `templates/layouts/base.html` currently renders `templates/partials/Footer2.html`; do not revert it to the older footer partial.
 
 The editable schema now covers the brand logo/link/description, four selectable social platforms, repeatable navigation columns and links, optional oversized wordmark, copyright rich text, and repeatable legal links. The bundled Fluentic logo and large Logo Text SVGs are local `get_asset_url` fallbacks. The module renders a section with the required `footer` class inside the existing global `<footer>` partial, avoiding invalid nested footer landmarks. Styling uses global theme variables and follows the reference's desktop, tablet, and mobile layout without adding JavaScript.
+
+## CTA module
+
+`modules/CTA.module/` recreates the Webflow `<section class="cta-section">` as an editable HubSpot DnD page module. Editor fields control the eyebrow, heading, button visibility/text/link, illustration visibility/image/alt text, and background-image visibility/image.
+
+The module imports `/Fluentic/Macros/Button.html`, uses `btn_macros.eyebrow_label` and the light `btn_macros.secondary_button`, and resolves the bundled `CTA BG.webp` and `CTA Image.webp` files through `get_asset_url` when editors have not selected replacements. Its scoped responsive CSS consumes global background, text, font, weight, border-radius, and container variables. It intentionally has no JavaScript dependency.
