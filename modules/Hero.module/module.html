@@ -4,12 +4,11 @@
 <style>
   {% scope_css %}
   .hero-section {
-    --hero-content-width: {{ module.style.content_max_width|default(960) }}px;
-    --hero-spacing: {{ module.style.section_spacing|default(120) }}px;
+    --hero-content-width: {{ module.style.content_max_width|default(1240) }}px;
+    --hero-spacing: {{ module.style.section_spacing|default(168) }}px;
     position: relative;
     isolation: isolate;
-    overflow: hidden;
-    padding-top: var(--hero-spacing);
+    padding: 16px 16px 0;
     background-color: {{ module.style.background_color.color|default('#F8F7F8') }};
   }
   {% end_scope_css %}
@@ -18,7 +17,7 @@
 
 <section class="hero-section" data-fluentic-hero>
   <div class="hero-content-block">
-    <div class="container">
+    <div class="hero-container">
       <div class="hero-title-block">
         {% if module.content.show_eyebrow and module.content.eyebrow_text %}
           {{ btn_macros.eyebrow_label(module.content.eyebrow_text, module.content.eyebrow_icon.src) }}
@@ -54,16 +53,16 @@
         <div class="hero-image-block">
           <div class="hero-image-wrap">
             {% if module.messages|length %}
-              <div class="hero-message-block" aria-label="Example AI agent conversation">
+              <div class="hero-message-block" data-hero-messages aria-label="Example AI agent conversation">
                 {% for item in module.messages %}
-                  <div class="hero-message-wrapper hero-message-wrapper--{{ item.sender }}">
+                  <div class="hero-message-wrapper hero-message-wrapper--{{ item.sender }}{% if loop.first %} is-active{% endif %}"{% if not loop.first %} style="display:none;"{% endif %}>
                     {% if item.sender == 'agent' and item.avatar.src %}
                       <div class="message-avatar-wrap">
                         <img src="{{ item.avatar.src|escape_url }}" alt="{{ item.avatar.alt|escape_attr }}" loading="lazy">
                       </div>
                     {% endif %}
                     <div class="message-text-wrap">
-                      <p class="message-text body-2">{{ item.text }}</p>
+                      <p class="message-text">{{ item.text }}</p>
                     </div>
                     {% if item.sender != 'agent' and item.avatar.src %}
                       <div class="message-avatar-wrap">
@@ -108,3 +107,42 @@
     </div>
   {% endif %}
 </section>
+
+<!-- Cycles the example chat bubbles one at a time, like the live Fluentic hero. -->
+{% require_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('[data-fluentic-hero] [data-hero-messages]').forEach((block) => {
+      const wrappers = Array.from(block.querySelectorAll('.hero-message-wrapper'));
+      if (reduceMotion || wrappers.length < 2) return;
+
+      const HOLD_MS = 2600;
+      const ENTER_MS = 450;
+      let index = wrappers.findIndex((el) => el.classList.contains('is-active'));
+      if (index < 0) index = 0;
+
+      const showNext = () => {
+        const current = wrappers[index];
+        const nextIndex = (index + 1) % wrappers.length;
+        const next = wrappers[nextIndex];
+
+        current.classList.remove('is-active');
+        window.setTimeout(() => {
+          current.style.display = 'none';
+
+          next.style.display = 'flex';
+          // Force reflow so the enter transition restarts every cycle.
+          void next.offsetWidth;
+          next.classList.add('is-active');
+        }, ENTER_MS);
+
+        index = nextIndex;
+      };
+
+      window.setInterval(showNext, HOLD_MS);
+    });
+  });
+</script>
+{% end_require_js %}
