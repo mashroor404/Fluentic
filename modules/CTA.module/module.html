@@ -1,0 +1,190 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  .cta-section {
+    background-color: var(--page-bg);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .cta-content-block {
+    align-items: center;
+    background-color: var(--text-primary);
+    background-image: var(--cta-background-image, none);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: max(var(--global-border-radius), 1rem);
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 120rem;
+    overflow: hidden;
+    padding-bottom: 8.75rem;
+    padding-top: 8.75rem;
+    position: relative;
+  }
+
+  .cta-section__container {
+    box-sizing: border-box;
+    max-width: min(var(--container-max-width), 77.5rem);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    width: 100%;
+  }
+
+  .cta-content-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 2.5rem;
+    justify-content: space-between;
+  }
+
+  .cta-title-block {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 49.9375rem;
+  }
+
+  .cta-title {
+    color: var(--text-light-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h1);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.03em;
+    line-height: 1.07;
+    margin: 0 0 1rem;
+  }
+
+  .cta-button {
+    display: flex;
+    flex-direction: column;
+    max-width: 11.25rem;
+    width: 100%;
+  }
+
+  .cta-button .button-primary {
+    width: 100%;
+  }
+
+  .cta-image {
+    display: block;
+    flex: 0 0 auto;
+    height: auto;
+    max-width: 15.375rem;
+    width: 21%;
+  }
+
+  @media screen and (max-width: 991px) {
+    .cta-content-block {
+      padding-bottom: 5rem;
+      padding-top: 5rem;
+    }
+
+    .cta-image {
+      max-width: 10.375rem;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .cta-content-block {
+      padding-bottom: 3.75rem;
+      padding-top: 3.75rem;
+    }
+
+    .cta-content-wrapper {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .cta-image {
+      order: -1;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .cta-section {
+      padding-left: 0.625rem;
+      padding-right: 0.625rem;
+    }
+
+    .cta-content-block {
+      padding-bottom: 2.5rem;
+      padding-top: 2.5rem;
+    }
+
+    .cta-section__container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% set background_image = module.background.image.src %}
+{% if not background_image %}
+  {% set background_image = get_asset_url("../../css/elements/Assets/images/698105c2811b645119062f2e_CTA BG.webp") %}
+{% endif %}
+
+{% set illustration_src = module.illustration.image.src %}
+{% set illustration_width = module.illustration.image.width %}
+{% set illustration_height = module.illustration.image.height %}
+{% if not illustration_src %}
+  {% set illustration_src = get_asset_url("../../css/elements/Assets/images/6981069199145e96a3d4f97b_CTA Image.webp") %}
+  {% set illustration_width = 986 %}
+  {% set illustration_height = 991 %}
+{% endif %}
+
+{% set button_href = module.button.link.url.href %}
+{% if module.button.link.url.type is equalto "EMAIL_ADDRESS" %}
+  {% set button_href = "mailto:" + button_href %}
+{% elif module.button.link.url.type is equalto "PHONE_NUMBER" %}
+  {% set button_href = "tel:" + button_href %}
+{% endif %}
+
+<section class="cta-section">
+  <div
+    class="cta-content-block"
+    {% if module.background.show_background_image and background_image %}
+      style="--cta-background-image: url('{{ background_image|escape_url }}');"
+    {% endif %}
+  >
+    <div class="container cta-section__container">
+      <div class="cta-content-wrapper">
+        <div class="cta-title-block">
+          {% if module.content.eyebrow_text %}
+            {{ btn_macros.eyebrow_label(module.content.eyebrow_text) }}
+          {% endif %}
+
+          {% if module.content.heading %}
+            <h2 class="cta-title">{{ module.content.heading|escape_html }}</h2>
+          {% endif %}
+
+          {% if module.button.show_button and module.button.text %}
+            <div class="cta-button">
+              {{ btn_macros.secondary_button(module.button.text, button_href|escape_url) }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if module.illustration.show_image and illustration_src %}
+          <img
+            class="cta-image"
+            src="{{ illustration_src|escape_url }}"
+            alt="{{ module.illustration.image.alt|default(module.illustration.alt_text)|escape_attr }}"
+            width="{{ illustration_width }}"
+            height="{{ illustration_height }}"
+            {% if module.illustration.image.loading and module.illustration.image.loading != "disabled" %}loading="{{ module.illustration.image.loading }}"{% else %}loading="lazy"{% endif %}
+          >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

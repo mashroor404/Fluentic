@@ -109,6 +109,7 @@ Example:
 - Root `fields.json` is for theme-wide editor settings; a module's own `fields.json` is for module content/style controls.
 - `theme.json` metadata alone does not style a page. The settings become visible in rendered output only when a stylesheet reads them through HubL's `theme` object.
 - `base.html` is the most important integration point: it loads the global CSS/JS and owns the reusable header/footer partials.
+- The current `base.html` intentionally renders `templates/partials/Footer2.html`. Preserve this user-selected footer wiring unless the user explicitly asks to change it.
 - `require_css`/`scope_css` and `require_js` are the established module conventions here.
 - Theme-owned absolute paths must start with `/Fluentic`. Do not copy the remaining `/Re-board theme` blog paths into new modules.
 
@@ -140,6 +141,7 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Reference bundled theme media through `get_asset_url` and allow an image field to override the bundled default.
 - Scope module CSS with `{% require_css %}` and `{% scope_css %}` so multiple DnD instances can coexist safely.
 - Import `/Fluentic/Macros/Button.html` as `btn_macros` and use `btn_macros.eyebrow_label(...)` for module eyebrow badges instead of recreating their markup or styles.
+- For dark reference CTA panels, use the shared eyebrow macro and the light `btn_macros.secondary_button(...)` variant, with editor-controlled content and links.
 - Consume global CSS variables for colors, fonts, typography sizes, font weights, borders, and container width. Keep section-specific measurements local to the module.
 - Add JavaScript only when required for the requested behavior. The first `solution-section.module` implementation deliberately uses none.
 

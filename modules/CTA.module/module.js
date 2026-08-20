@@ -1,0 +1,1 @@
+/* The reference CTA does not require JavaScript. */
