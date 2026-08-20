@@ -1,0 +1,7 @@
+# Local development and repository files that do not belong in Design Manager.
+.github/
+*.md
+field-watcher.js
+package.json
+package-lock.json
+

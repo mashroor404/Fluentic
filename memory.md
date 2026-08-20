@@ -28,6 +28,14 @@ images/          Theme preview/static image assets
 6. Pages and blog templates extend `templates/layouts/base.html`. A new page uses a template with `templateType: page`; blog listing and post templates use their corresponding HubSpot template types.
 7. In HubSpot, sync/upload the complete theme folder, publish it, then create/edit content with one of the theme's page or blog templates. Theme settings are then available from the theme editor and flow into the rendered CSS.
 
+## Local HubSpot draft watcher
+
+Run `npm run watch:hubspot` from the theme root to perform an initial upload and then continuously sync local theme changes to `/Fluentic` in HubSpot account `246817745`. The wrapper delegates to the installed native command `hs watch . /Fluentic --account 246817745 --initial-upload --cms-publish-mode draft`; draft mode makes changes available in Design Manager and HubSpot preview without publishing them to live pages.
+
+This repository stores module schemas directly as `fields.json`, so no `fields.js` compiler or npm watcher dependency is needed. The watcher covers module HTML, fields JSON, CSS, JavaScript, templates, macros, assets, and root theme settings. Stop it with `Ctrl+C`. Run `npm run watch:hubspot:check` to verify the resolved command without uploading anything.
+
+Environment overrides are available when needed: `HUBSPOT_ACCOUNT`, `HUBSPOT_WATCH_DEST`, and `HUBSPOT_WATCH_MODE` (`draft` or `publish`). Publish mode can affect live pages and should only be used intentionally. `.hsignore` prevents GitHub configuration, Markdown notes, and local watcher/package files from being uploaded. The watcher intentionally does not use `--remove`, so it will not delete remote files that are absent locally.
+
 ## Theme setting to CSS mapping
 
 The important mapping is in `css/elements/global.css` (also duplicated in `css/main.css`):

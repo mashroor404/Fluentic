@@ -1,0 +1,8 @@
+{
+  "name": "fluentic-hubspot-theme",
+  "private": true,
+  "scripts": {
+    "watch:hubspot": "node field-watcher.js",
+    "watch:hubspot:check": "node field-watcher.js --dry-run"
+  }
+}
