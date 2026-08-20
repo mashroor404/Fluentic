@@ -5,12 +5,11 @@
   position: relative;
   z-index: 2;
   overflow: hidden;
-  width: 90%;
+  width: 100%;
   max-width: 1920px;
   margin: 0 auto;
   padding-top: var(--hero-spacing, 168px);
-  padding-bottom: clamp(40px, 6vw, 96px);
-  border-radius: 24px;
+  border-radius: 16px;
 }
 
 .hero-container {
@@ -74,7 +73,7 @@
   min-width: 180px;
 }
 
-/* Frosted glass shell wrapping the dashboard visual. */
+/* Frosted glass shell wrapping the dashboard image. */
 .hero-image-block {
   position: relative;
   z-index: 5;
@@ -106,7 +105,7 @@
   height: auto;
 }
 
-/* Floating chat window sitting above the interactive input card. */
+/* Floating chat window sitting above the dashboard image. */
 .hero-message-block {
   position: relative;
   z-index: 2;
@@ -123,6 +122,11 @@
   backdrop-filter: blur(50px);
 }
 
+/* Default (no-JS/reduced-motion fallback): the whole conversation is
+   visible statically. The require_js block plays it back as a loop by
+   hiding every bubble on load (`.is-pending`) and revealing each in turn,
+   with a cloned "typing…" bubble inserted just ahead of it — like a
+   product-demo clip replaying, not a real chat you type into. */
 .hero-message-wrapper {
   display: flex;
   width: 100%;
@@ -145,30 +149,20 @@
   border-radius: 8px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
   transform-origin: 100% 0;
-  opacity: 0;
-  transform: scale(0.4);
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
 }
 
 .hero-message-wrapper--agent .message-text-wrap {
   transform-origin: 0 0;
 }
 
-/* Bubbles pop in one after another, in order, the first time the panel
-   scrolls into view — then stay visible. Live bubbles added by the chat
-   demo pick up this same rule (their parent already carries .is-visible),
-   so they animate in immediately with no extra delay. */
-.hero-message-block.is-visible .message-text-wrap {
-  opacity: 1;
-  transform: scale(1);
+/* JS-only hidden state: applied to a wrapper right before its "turn" in the
+   playback loop. Nothing carries this class without JS, so the conversation
+   stays fully visible as a static fallback when JS doesn't run. */
+.hero-message-wrapper.is-pending .message-text-wrap {
+  opacity: 0;
+  transform: scale(0.4);
 }
-
-.hero-message-block.is-visible .hero-message-wrapper:nth-child(1) .message-text-wrap { transition-delay: 0.05s; }
-.hero-message-block.is-visible .hero-message-wrapper:nth-child(2) .message-text-wrap { transition-delay: 0.35s; }
-.hero-message-block.is-visible .hero-message-wrapper:nth-child(3) .message-text-wrap { transition-delay: 0.65s; }
-.hero-message-block.is-visible .hero-message-wrapper:nth-child(4) .message-text-wrap { transition-delay: 0.95s; }
-.hero-message-block.is-visible .hero-message-wrapper:nth-child(5) .message-text-wrap { transition-delay: 1.25s; }
-.hero-message-block.is-visible .hero-message-wrapper:nth-child(6) .message-text-wrap { transition-delay: 1.55s; }
 
 .message-text {
   margin: 0;
@@ -191,7 +185,7 @@
   object-fit: cover;
 }
 
-/* Typing indicator shown briefly before a canned reply lands. */
+/* Typing indicator briefly shown ahead of each bubble during playback. */
 .hero-typing-dots {
   display: flex;
   align-items: center;
@@ -214,121 +208,6 @@
 @keyframes hero-typing-bounce {
   0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
   30% { transform: translateY(-4px); opacity: 1; }
-}
-
-/* Interactive "ask anything" input card. */
-.hero-chat-card {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  width: 100%;
-  padding: 20px;
-  flex-direction: column;
-  gap: 16px;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 20px 45px rgba(27, 12, 39, 0.1);
-}
-
-.hero-chat-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.hero-chat-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 12px;
-  color: var(--text-secondary, #6b6470);
-  font-family: var(--secondary-font);
-  font-size: 13px;
-  font-weight: var(--font-weight-medium, 500);
-  background-color: var(--bg-accent-2, #f4f2f6);
-  border: 0;
-  border-radius: 99px;
-  cursor: pointer;
-}
-
-.hero-chat-chevron {
-  opacity: 0.7;
-}
-
-.hero-chat-inputbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.hero-chat-input {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding: 4px 0;
-  color: var(--text-primary);
-  font-family: var(--secondary-font);
-  font-size: 16px;
-  background: transparent;
-  border: 0;
-}
-
-.hero-chat-input::placeholder {
-  color: var(--text-secondary, #9a92a1);
-}
-
-.hero-chat-input:focus {
-  outline: none;
-}
-
-.hero-chat-send {
-  display: flex;
-  flex: 0 0 auto;
-  width: 36px;
-  height: 36px;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  background: var(--gradient-brand, linear-gradient(120deg, #f0e9f7, #d588fc 61%, #ff49d4));
-  border: 0;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.hero-chat-send:hover {
-  transform: scale(1.06);
-}
-
-.hero-chat-suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 4px;
-  border-top: 1px solid var(--global-border-color, #ece8ef);
-}
-
-.hero-chat-suggestion {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 12px;
-  color: var(--text-primary);
-  font-family: var(--secondary-font);
-  font-size: 13px;
-  background-color: #fff;
-  border: 1px solid var(--global-border-color, #ece8ef);
-  border-radius: 99px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.hero-chat-suggestion svg {
-  color: var(--accent-purple, #d37bff);
-}
-
-.hero-chat-suggestion:hover {
-  background-color: var(--bg-accent-2, #f4f2f6);
-  border-color: transparent;
 }
 
 .hero-particle {
@@ -389,24 +268,29 @@
   right: 20px;
   bottom: 20px;
   display: flex;
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: var(--text-primary);
-  background-color: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(27, 12, 39, 0.1);
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 11px;
+  box-shadow: 0 6px 16px rgba(27, 12, 39, 0.12);
   cursor: pointer;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
+.hero-video-toggle svg {
+  width: 13px;
+  height: 13px;
+}
+
 .hero-video-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.78);
+  background-color: rgba(255, 255, 255, 0.34);
   transform: scale(1.05);
 }
 
@@ -423,8 +307,8 @@
 }
 
 @media (max-width: 991px) {
-  .hero-section { padding: 12px 0; }
-  .hero-content-block { padding-top: min(var(--hero-spacing, 168px), 140px); border-radius: 20px; }
+  .hero-section { padding: 10px 10px 0; }
+  .hero-content-block { padding-top: min(var(--hero-spacing, 168px), 140px); }
   .hero-title-block { margin-bottom: 40px; }
   .hero-heading { font-size: 54px; }
   .hero-image-block { border-radius: 32px 32px 0 0; }
@@ -437,7 +321,7 @@
 
 @media (max-width: 767px) {
   .hero-container { padding-left: 16px; padding-right: 16px; }
-  .hero-content-block { width: 94%; padding-top: min(var(--hero-spacing, 168px), 120px); border-radius: 16px; }
+  .hero-content-block { padding-top: min(var(--hero-spacing, 168px), 120px); }
   .hero-title-block { margin-bottom: 32px; }
   .hero-heading { font-size: 40px; }
   .hero-description-wrap { margin-top: 16px; margin-bottom: 24px; }
@@ -447,33 +331,27 @@
   .hero-image-wrap { padding-left: 40px; padding-right: 40px; }
   .hero-message-block { min-height: 240px; gap: 12px; }
   .message-text-wrap { max-width: min(320px, 100%); }
-  .hero-chat-card { padding: 16px; gap: 12px; }
   .hero-particle--one { max-width: 100px; }
   .hero-particle--two { max-width: 140px; }
-  .hero-video-toggle { width: 42px; height: 42px; right: 14px; bottom: 14px; }
+  .hero-video-toggle { width: 32px; height: 32px; right: 14px; bottom: 14px; border-radius: 10px; }
 }
 
 @media (max-width: 479px) {
-  .hero-content-block { width: 96%; padding-top: min(var(--hero-spacing, 168px), 100px); }
+  .hero-content-block { padding-top: min(var(--hero-spacing, 168px), 100px); }
   .hero-image-block { padding: 10px; }
   .hero-image-wrap { padding: 10px 0 0; }
   .hero-message-block { padding: 10px; min-height: 200px; gap: 10px; }
   .message-text-wrap { padding: 8px; max-width: min(240px, 100%); }
   .message-text { font-size: 12px; }
   .message-avatar-wrap { display: none; }
-  .hero-chat-toolbar { gap: 6px; }
-  .hero-chat-pill { padding: 6px 10px; font-size: 12px; }
-  .hero-chat-input { font-size: 14px; }
-  .hero-chat-suggestions { gap: 6px; }
-  .hero-chat-suggestion { padding: 6px 10px; font-size: 12px; }
   .hero-particle--one { max-width: 50px; }
   .hero-particle--two { max-width: 100px; }
-  .hero-video-toggle { width: 36px; height: 36px; right: 10px; bottom: 10px; border-radius: 11px; }
-  .hero-video-toggle svg { width: 13px; height: 13px; }
+  .hero-video-toggle { width: 28px; height: 28px; right: 10px; bottom: 10px; border-radius: 9px; }
+  .hero-video-toggle svg { width: 11px; height: 11px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-particle { animation: none; }
   .hero-typing-dots span { animation: none; opacity: 1; }
-  .message-text-wrap { opacity: 1; transform: none; transition: none; }
+  .message-text-wrap { transition: none; }
 }
