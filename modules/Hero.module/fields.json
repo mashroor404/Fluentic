@@ -1,146 +1,585 @@
-[ {
-  "id" : "85d74fbc-7fe5-4849-903a-70c2c8450998",
-  "name" : "eyebrow_text",
-  "label" : "Eyebrow-Text",
-  "required" : false,
-  "locked" : false,
-  "allow_new_line" : false,
-  "type" : "text",
-  "display_width" : null,
-  "default" : "Account-Based RevOps · Centered in HubSpot"
-}, {
-  "id" : "c17bb3f1-c383-f9ab-8976-f73690c992f6",
-  "name" : "title",
-  "label" : "Title",
-  "required" : false,
-  "locked" : false,
-  "children" : [ {
-    "id" : "4e7c70c1-e925-7ae5-6648-a0961ef23bd4",
-    "name" : "title_prefix",
-    "label" : "Title Prefix",
-    "required" : false,
-    "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
-    "display_width" : null,
-    "default" : "The Last Playbook was"
-  }, {
-    "id" : "e5e3cfa1-2d3e-fb2b-4d2d-87413c1a60e7",
-    "name" : "text_middle_icon",
-    "label" : "Text middle icon",
-    "required" : false,
-    "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
-    "display_width" : null,
-    "default" : "<svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M31.3341 0.429497C31.306 0.302934 31.2076 0.204497 31.088 0.169341C26.9677 -0.836128 17.4544 2.74981 12.3005 7.90372C11.3794 8.81778 10.5427 9.80918 9.79741 10.8639C8.20835 10.7232 6.61929 10.8428 5.26226 11.4334C1.43726 13.1139 0.326319 17.5084 0.00991292 19.3928C-0.0533683 19.7584 0.192726 20.11 0.565382 20.1732C0.628663 20.1803 0.691944 20.1873 0.755226 20.1803L6.89351 19.5053C6.90054 19.9693 6.92866 20.4334 6.97788 20.8904C7.00601 21.2068 7.15366 21.5092 7.37866 21.7342L9.75523 24.1037C9.98023 24.3287 10.2826 24.4764 10.599 24.5045C11.056 24.5537 11.513 24.5818 11.9771 24.5889L11.3021 30.7201C11.2599 31.0928 11.5341 31.4303 11.9068 31.4654C11.9701 31.4725 12.0333 31.4725 12.0896 31.4584C13.974 31.1561 18.3755 30.0451 20.049 26.2201C20.6396 24.8631 20.7591 23.2811 20.6255 21.699C21.6873 20.9537 22.6787 20.11 23.5927 19.1959C28.7607 14.0561 32.3255 4.75372 31.3341 0.429497ZM23.199 13.0576C21.8841 14.3725 19.7466 14.3795 18.4318 13.0576C17.1099 11.7428 17.1099 9.60528 18.4318 8.2834C19.7466 6.96153 21.8841 6.96153 23.206 8.2834C24.5209 9.60528 24.5208 11.7428 23.199 13.0576Z\" fill=\"white\"/><path d=\"M9.59062 25.8202C9.20391 26.207 8.58516 26.3546 7.83984 26.4882C6.16641 26.7695 4.68984 25.3281 4.99219 23.6406C5.10469 23.0007 5.44922 22.1007 5.66016 21.8898C5.77969 21.7702 5.78672 21.5734 5.66719 21.4538C5.59687 21.3835 5.50547 21.3484 5.40703 21.3624C4.47188 21.4749 3.6 21.9038 2.93906 22.5648C1.27969 24.2241 1.125 30.3624 1.125 30.3624C1.125 30.3624 7.27031 30.2077 8.92266 28.5484C9.59062 27.8804 10.0125 27.0156 10.125 26.0734C10.1531 25.7851 9.79453 25.6093 9.59062 25.8202Z\" fill=\"white\"/></svg>"
-  }, {
-    "id" : "b72db37e-9992-e6cb-d212-d646518f2071",
-    "name" : "rest_title_",
-    "label" : "Rest Title ",
-    "required" : false,
-    "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
-    "display_width" : null,
-    "default" : "Inbound."
-  }, {
-    "id" : "347ca6cf-f5b8-9573-2214-099ca0dbf067",
-    "name" : "bottom_title",
-    "label" : "Bottom Title",
-    "required" : false,
-    "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
-    "display_width" : null,
-    "default" : "The Next One is ABR."
-  } ],
-  "tab" : "CONTENT",
-  "expanded" : false,
-  "group_occurrence_meta" : null,
-  "type" : "group",
-  "display_width" : null,
-  "default" : {
-    "title_prefix" : "The Last Playbook was",
-    "text_middle_icon" : "<svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M31.3341 0.429497C31.306 0.302934 31.2076 0.204497 31.088 0.169341C26.9677 -0.836128 17.4544 2.74981 12.3005 7.90372C11.3794 8.81778 10.5427 9.80918 9.79741 10.8639C8.20835 10.7232 6.61929 10.8428 5.26226 11.4334C1.43726 13.1139 0.326319 17.5084 0.00991292 19.3928C-0.0533683 19.7584 0.192726 20.11 0.565382 20.1732C0.628663 20.1803 0.691944 20.1873 0.755226 20.1803L6.89351 19.5053C6.90054 19.9693 6.92866 20.4334 6.97788 20.8904C7.00601 21.2068 7.15366 21.5092 7.37866 21.7342L9.75523 24.1037C9.98023 24.3287 10.2826 24.4764 10.599 24.5045C11.056 24.5537 11.513 24.5818 11.9771 24.5889L11.3021 30.7201C11.2599 31.0928 11.5341 31.4303 11.9068 31.4654C11.9701 31.4725 12.0333 31.4725 12.0896 31.4584C13.974 31.1561 18.3755 30.0451 20.049 26.2201C20.6396 24.8631 20.7591 23.2811 20.6255 21.699C21.6873 20.9537 22.6787 20.11 23.5927 19.1959C28.7607 14.0561 32.3255 4.75372 31.3341 0.429497ZM23.199 13.0576C21.8841 14.3725 19.7466 14.3795 18.4318 13.0576C17.1099 11.7428 17.1099 9.60528 18.4318 8.2834C19.7466 6.96153 21.8841 6.96153 23.206 8.2834C24.5209 9.60528 24.5208 11.7428 23.199 13.0576Z\" fill=\"white\"/><path d=\"M9.59062 25.8202C9.20391 26.207 8.58516 26.3546 7.83984 26.4882C6.16641 26.7695 4.68984 25.3281 4.99219 23.6406C5.10469 23.0007 5.44922 22.1007 5.66016 21.8898C5.77969 21.7702 5.78672 21.5734 5.66719 21.4538C5.59687 21.3835 5.50547 21.3484 5.40703 21.3624C4.47188 21.4749 3.6 21.9038 2.93906 22.5648C1.27969 24.2241 1.125 30.3624 1.125 30.3624C1.125 30.3624 7.27031 30.2077 8.92266 28.5484C9.59062 27.8804 10.0125 27.0156 10.125 26.0734C10.1531 25.7851 9.79453 25.6093 9.59062 25.8202Z\" fill=\"white\"/></svg>",
-    "rest_title_" : "Inbound.",
-    "bottom_title" : "The Next One is ABR."
-  }
-}, {
-  "id" : "375039c3-ee85-aa3c-dd37-25ebca15bff0",
-  "name" : "description",
-  "label" : "Description",
-  "required" : false,
-  "locked" : false,
-  "children" : [ {
-    "id" : "63dfdc73-ecc7-ebdb-bcd3-0f7d5ca24b83",
-    "name" : "description",
-    "label" : "Description",
-    "required" : false,
-    "locked" : false,
-    "type" : "richtext",
-    "display_width" : null,
-    "default" : "AI agents that execute ten proven account-based plays inside the HubSpot, Apollo, and Instantly stack you already own — omni-channel, all the way around the flywheel, from $499 a month. No six-figure platform contract."
-  } ],
-  "tab" : "CONTENT",
-  "expanded" : false,
-  "group_occurrence_meta" : null,
-  "type" : "group",
-  "display_width" : null,
-  "default" : {
-    "description" : "AI agents that execute ten proven account-based plays inside the HubSpot, Apollo, and Instantly stack you already own — omni-channel, all the way around the flywheel, from $499 a month. No six-figure platform contract."
-  }
-}, {
-  "id" : "08d3f258-73aa-3f8e-b72c-551e568801f5",
-  "name" : "style",
-  "label" : "Style",
-  "required" : false,
-  "locked" : false,
-  "children" : [ {
-    "id" : "f204bb41-bc33-cd21-d3bc-30e2900e5cd7",
-    "name" : "backgroundimage_field",
-    "label" : "Background image",
-    "required" : false,
-    "locked" : false,
-    "type" : "backgroundimage",
-    "display_width" : null,
-    "default" : {
-      "background_position" : "MIDDLE_CENTER",
-      "background_size" : "cover",
-      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/hero%20background.webp"
+[
+  {
+    "id": "e8559bd2-1926-4139-9607-1882a55721f4",
+    "name": "content",
+    "label": "Hero content",
+    "required": false,
+    "locked": false,
+    "type": "group",
+    "display_width": null,
+    "children": [
+      {
+        "id": "71e51533-81fa-4a46-a73a-2b9ea6951b16",
+        "name": "show_eyebrow",
+        "label": "Show eyebrow",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display_width": null,
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "id": "97ef2351-e612-4265-b0c3-d37d6efa6535",
+        "name": "eyebrow_text",
+        "label": "Eyebrow text",
+        "required": false,
+        "locked": false,
+        "type": "text",
+        "display_width": null,
+        "allow_new_line": false,
+        "default": "Automate Your Workflows"
+      },
+      {
+        "id": "8d9c3edc-9daf-4c81-8a33-52fc645e77a3",
+        "name": "eyebrow_icon",
+        "label": "Eyebrow icon",
+        "required": false,
+        "locked": false,
+        "type": "image",
+        "display_width": null,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "default": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/6984fc2e00e2222da1035dca_Star.svg",
+          "alt": "Star",
+          "loading": "lazy"
+        }
+      },
+      {
+        "id": "7bee5e19-14f6-4a8e-88d5-c8cc03fbff98",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "type": "text",
+        "display_width": null,
+        "allow_new_line": false,
+        "default": "The AI Agent Platform for Modern Teams"
+      },
+      {
+        "id": "240d2b71-f875-4e38-ba74-400a5d4bb054",
+        "name": "description",
+        "label": "Description",
+        "required": false,
+        "locked": false,
+        "type": "text",
+        "display_width": null,
+        "allow_new_line": false,
+        "default": "Fluentic lets you build, deploy, and manage AI agents that automate complex workflows, eliminate repetitive tasks, and deliver results around the clock."
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "default": {
+      "show_eyebrow": true,
+      "eyebrow_text": "Automate Your Workflows",
+      "eyebrow_icon": {
+        "size_type": "auto",
+        "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/6984fc2e00e2222da1035dca_Star.svg",
+        "alt": "Star",
+        "loading": "lazy"
+      },
+      "heading": "The AI Agent Platform for Modern Teams",
+      "description": "Fluentic lets you build, deploy, and manage AI agents that automate complex workflows, eliminate repetitive tasks, and deliver results around the clock."
     }
-  } ],
-  "tab" : "STYLE",
-  "expanded" : false,
-  "group_occurrence_meta" : null,
-  "type" : "group",
-  "display_width" : null,
-  "default" : {
-    "backgroundimage_field" : {
-      "background_position" : "MIDDLE_CENTER",
-      "background_size" : "cover",
-      "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/hero%20background.webp"
+  },
+  {
+    "id": "55704a2e-91f8-4202-975f-109702fe4fdf",
+    "name": "primary_button",
+    "label": "Primary button",
+    "required": false,
+    "locked": false,
+    "type": "group",
+    "display_width": null,
+    "children": [
+      {
+        "id": "42e9040f-65ba-423a-a74a-a6efb00af9b1",
+        "name": "show",
+        "label": "Show button",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display_width": null,
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "id": "e470f350-286b-411f-8c33-ad8952cb7448",
+        "name": "text",
+        "label": "Button text",
+        "required": false,
+        "locked": false,
+        "type": "text",
+        "display_width": null,
+        "allow_new_line": false,
+        "default": "Get Started"
+      },
+      {
+        "id": "764927ee-3968-4456-a232-637c0dc0bc00",
+        "name": "link",
+        "label": "Button link",
+        "required": false,
+        "locked": false,
+        "type": "link",
+        "display_width": null,
+        "supported_types": [
+          "EXTERNAL",
+          "CONTENT",
+          "FILE",
+          "EMAIL_ADDRESS",
+          "BLOG",
+          "CALL_TO_ACTION",
+          "PHONE_NUMBER",
+          "WHATSAPP_NUMBER"
+        ],
+        "show_advanced_rel_options": true,
+        "default": {
+          "url": {
+            "content_id": null,
+            "type": "EXTERNAL",
+            "href": "/contact-us"
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        }
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "default": {
+      "show": true,
+      "text": "Get Started",
+      "link": {
+        "url": {
+          "content_id": null,
+          "type": "EXTERNAL",
+          "href": "/contact-us"
+        },
+        "open_in_new_tab": false,
+        "no_follow": false
+      }
+    }
+  },
+  {
+    "id": "247d6825-7094-45e8-bec0-5c83a4b1c752",
+    "name": "secondary_button",
+    "label": "Secondary button",
+    "required": false,
+    "locked": false,
+    "type": "group",
+    "display_width": null,
+    "children": [
+      {
+        "id": "3d609d15-bcc9-4651-a1b6-fb4e319455c8",
+        "name": "show",
+        "label": "Show button",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display_width": null,
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "id": "c1b6ce4c-d71d-4a24-b252-47d84d93a061",
+        "name": "text",
+        "label": "Button text",
+        "required": false,
+        "locked": false,
+        "type": "text",
+        "display_width": null,
+        "allow_new_line": false,
+        "default": "Book a Demo"
+      },
+      {
+        "id": "6f6b73ef-7334-4a67-8c9b-158d66895c68",
+        "name": "link",
+        "label": "Button link",
+        "required": false,
+        "locked": false,
+        "type": "link",
+        "display_width": null,
+        "supported_types": [
+          "EXTERNAL",
+          "CONTENT",
+          "FILE",
+          "EMAIL_ADDRESS",
+          "BLOG",
+          "CALL_TO_ACTION",
+          "PHONE_NUMBER",
+          "WHATSAPP_NUMBER"
+        ],
+        "show_advanced_rel_options": true,
+        "default": {
+          "url": {
+            "content_id": null,
+            "type": "EXTERNAL",
+            "href": "/contact-us"
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        }
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "default": {
+      "show": true,
+      "text": "Book a Demo",
+      "link": {
+        "url": {
+          "content_id": null,
+          "type": "EXTERNAL",
+          "href": "/contact-us"
+        },
+        "open_in_new_tab": false,
+        "no_follow": false
+      }
+    }
+  },
+  {
+    "id": "cc123571-aa0d-42c5-a485-a0bdbf44395e",
+    "name": "messages",
+    "label": "Conversation messages",
+    "required": false,
+    "locked": false,
+    "type": "group",
+    "display_width": null,
+    "children": [
+      {
+        "id": "a5926ab4-6f11-4b43-90c9-86acdf34fb8b",
+        "name": "text",
+        "label": "Message",
+        "required": false,
+        "locked": false,
+        "type": "text",
+        "display_width": null,
+        "allow_new_line": false,
+        "default": "Enter a message"
+      },
+      {
+        "id": "c0bacff1-ae8b-47de-a98b-6ad42f09e927",
+        "name": "sender",
+        "label": "Sender",
+        "required": false,
+        "locked": false,
+        "type": "choice",
+        "display_width": null,
+        "choices": [
+          [
+            "user",
+            "User (right)"
+          ],
+          [
+            "agent",
+            "AI agent (left)"
+          ]
+        ],
+        "display": "select",
+        "default": "user"
+      },
+      {
+        "id": "96ba2bf2-e3ac-440c-b117-cd54c8d12984",
+        "name": "avatar",
+        "label": "Avatar",
+        "required": false,
+        "locked": false,
+        "type": "image",
+        "display_width": null,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "default": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a740c409459b00f84b31b5_Message%20Avatar.png",
+          "alt": "Message avatar",
+          "loading": "lazy"
+        }
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "default": [
+      {
+        "text": "Hey, I need help sending out a campaign to all new subscribers. Can you set that up?",
+        "sender": "user",
+        "avatar": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a740c409459b00f84b31b5_Message%20Avatar.png",
+          "alt": "User",
+          "loading": "lazy"
+        }
+      },
+      {
+        "text": "Of course! I’ll prepare a personalized campaign for your new subscribers. Would you like me to schedule it now or review it first?",
+        "sender": "agent",
+        "avatar": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/698b27c7157f0b46c816e0ee_Logo%20Icon.svg",
+          "alt": "Fluentic AI",
+          "loading": "lazy"
+        }
+      },
+      {
+        "text": "Yes, You can schedule it.",
+        "sender": "user",
+        "avatar": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a740c409459b00f84b31b5_Message%20Avatar.png",
+          "alt": "User",
+          "loading": "lazy"
+        }
+      }
+    ],
+    "occurrence": {
+      "min": 0,
+      "max": 6,
+      "sorting_label_field": "text",
+      "default": 3
+    }
+  },
+  {
+    "id": "21493a1e-68a0-49ac-bbd3-718c883765c3",
+    "name": "visual",
+    "label": "Hero visual",
+    "required": false,
+    "locked": false,
+    "type": "group",
+    "display_width": null,
+    "children": [
+      {
+        "id": "bf687c42-5cfd-4544-95f8-1e8e7f2e31e9",
+        "name": "main_image",
+        "label": "Main dashboard image",
+        "required": false,
+        "locked": false,
+        "type": "image",
+        "display_width": null,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "default": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec7340ab968abbbb6ef14_Hero%20Image%20(2).png",
+          "alt": "Fluentic AI agent dashboard",
+          "loading": "lazy"
+        }
+      },
+      {
+        "id": "a8f5e570-9097-4e00-b45e-c6e767a3ec79",
+        "name": "show_particles",
+        "label": "Show decorative particles",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display_width": null,
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "id": "9cd41199-aa04-41d1-9f1b-8d2e23c7c9dd",
+        "name": "particle_one",
+        "label": "Particle one",
+        "required": false,
+        "locked": false,
+        "type": "image",
+        "display_width": null,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "default": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec8512f822b9cd5150241_Hero%20Particle.png",
+          "alt": "",
+          "loading": "lazy"
+        }
+      },
+      {
+        "id": "a0b5fdbe-420a-4d02-8511-ac69b4e75193",
+        "name": "particle_two",
+        "label": "Particle two",
+        "required": false,
+        "locked": false,
+        "type": "image",
+        "display_width": null,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "default": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec85193596baf58ebfa6f_Hero%20Particle%20(1).png",
+          "alt": "",
+          "loading": "lazy"
+        }
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "default": {
+      "main_image": {
+        "size_type": "auto",
+        "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec7340ab968abbbb6ef14_Hero%20Image%20(2).png",
+        "alt": "Fluentic AI agent dashboard",
+        "loading": "lazy"
+      },
+      "show_particles": true,
+      "particle_one": {
+        "size_type": "auto",
+        "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec8512f822b9cd5150241_Hero%20Particle.png",
+        "alt": "",
+        "loading": "lazy"
+      },
+      "particle_two": {
+        "size_type": "auto",
+        "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/697ec85193596baf58ebfa6f_Hero%20Particle%20(1).png",
+        "alt": "",
+        "loading": "lazy"
+      }
+    }
+  },
+  {
+    "id": "8b4fcc67-8388-45ca-bbfa-2fef3cf2e203",
+    "name": "background_video",
+    "label": "Background video",
+    "required": false,
+    "locked": false,
+    "type": "group",
+    "display_width": null,
+    "children": [
+      {
+        "id": "804f7f7f-b514-43e2-88d7-074ff633ec15",
+        "name": "enabled",
+        "label": "Show background video",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display_width": null,
+        "display": "toggle",
+        "default": true
+      },
+      {
+        "id": "1b840f7e-5130-47c6-a9b1-60322a53082f",
+        "name": "mp4_url",
+        "label": "MP4 URL",
+        "required": false,
+        "locked": false,
+        "type": "text",
+        "display_width": null,
+        "allow_new_line": false,
+        "default": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_mp4.mp4"
+      },
+      {
+        "id": "54cab3ec-ccd0-4bd8-8d8b-cb25c655a0fe",
+        "name": "webm_url",
+        "label": "WebM URL",
+        "required": false,
+        "locked": false,
+        "type": "text",
+        "display_width": null,
+        "allow_new_line": false,
+        "default": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_webm.webm"
+      },
+      {
+        "id": "201d9be4-0a82-4de1-b0a3-5bff9e1733d3",
+        "name": "poster",
+        "label": "Poster image",
+        "required": false,
+        "locked": false,
+        "type": "image",
+        "display_width": null,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "default": {
+          "size_type": "auto",
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_poster.0000000.jpg",
+          "alt": "",
+          "loading": "lazy"
+        }
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "default": {
+      "enabled": true,
+      "mp4_url": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_mp4.mp4",
+      "webm_url": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_webm.webm",
+      "poster": {
+        "size_type": "auto",
+        "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_poster.0000000.jpg",
+        "alt": "",
+        "loading": "lazy"
+      }
+    }
+  },
+  {
+    "id": "ec77f646-85e8-4af6-9ba4-40d2628e7e00",
+    "name": "style",
+    "label": "Style",
+    "required": false,
+    "locked": false,
+    "type": "group",
+    "display_width": null,
+    "children": [
+      {
+        "id": "90eae82a-7199-4314-9738-7002d8bcd17e",
+        "name": "background_color",
+        "label": "Background color",
+        "required": false,
+        "locked": false,
+        "type": "color",
+        "display_width": null,
+        "default": {
+          "color": "#F8F7F8",
+          "opacity": 100
+        }
+      },
+      {
+        "id": "77577d38-bd65-415d-989c-dab6642a420a",
+        "name": "content_max_width",
+        "label": "Hero container max width",
+        "required": false,
+        "locked": false,
+        "type": "number",
+        "display_width": null,
+        "display": "text",
+        "step": 10,
+        "suffix": "px",
+        "default": 1240
+      },
+      {
+        "id": "f83e7126-6aa1-479f-9b47-4ccf3e5880bf",
+        "name": "section_spacing",
+        "label": "Section top spacing",
+        "required": false,
+        "locked": false,
+        "type": "number",
+        "display_width": null,
+        "display": "text",
+        "step": 4,
+        "suffix": "px",
+        "default": 168
+      }
+    ],
+    "tab": "STYLE",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "default": {
+      "background_color": {
+        "color": "#F8F7F8",
+        "opacity": 100
+      },
+      "content_max_width": 1240,
+      "section_spacing": 168
     }
   }
-}, {
-  "id" : "5bd0bfb9-0ed1-6280-5c21-606618dacb47",
-  "name" : "hero_image",
-  "label" : "Hero Image",
-  "required" : false,
-  "locked" : false,
-  "responsive" : true,
-  "resizable" : true,
-  "show_loading" : false,
-  "type" : "image",
-  "display_width" : null,
-  "default" : {
-    "size_type" : "auto",
-    "src" : "https://246829912.fs1.hubspotusercontent-na2.net/hubfs/246829912/Hero%20banner.webp",
-    "alt" : "Hero banner",
-    "loading" : "lazy",
-    "width" : 1280,
-    "height" : 781,
-    "max_width" : 1280,
-    "max_height" : 781
-  }
-} ]
+]

@@ -128,6 +128,18 @@ Responsive `srcset` renditions were excluded when an original source asset was a
 
 The four default cards use the downloaded local Solution Image assets through `get_asset_url`. The eyebrow is rendered with `btn_macros.eyebrow_label` from `/Fluentic/Macros/Button.html`, keeping it consistent with other theme modules. Desktop cards follow the reference's asymmetric 5/7 then 8/4 column layout, becoming two equal columns on tablet and one column on mobile. Styling is scoped per module instance and consumes the project's global color, typography, border, and container variables. The initial module intentionally has no animation or external JavaScript dependency.
 
+## Hero module
+
+`modules/Hero.module/` was rebuilt on 2026-08-20 to match the live Fluentic Webflow hero pixel-for-pixel, using values read directly from the deployed stylesheet (`https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/css/fluentic.webflow.shared.793a05b7f.css`) and page markup rather than guessed proportions:
+
+- `.hero-section` is a thin 16px (10px ≤991px) frame with `background_color`; the real card is `.hero-content-block` — `border-radius:16px`, `overflow:hidden`, `padding-top:168px` stepping down to 140/120/100px at 991/767/479px breakpoints.
+- Hero copy sits in a `.hero-container` capped at 1240px (module field `content_max_width`, default now 1240 not the old 960), independent of the theme's own `--container-max-width` (~1920px) so the hero doesn't inherit the site-wide container width.
+- `h1.hero-heading` needed an explicit size: the theme's global `--text-h1` token (`css/elements/_typography.css`) caps out at 62px, but the live hero h1 is 76px desktop / 54px ≤991px / 40px ≤767px, line-height 1.07, weight 500, letter-spacing 0 — set locally in the module, not by touching the shared token.
+- The dashboard visual is a *glass shell* (`.hero-image-block`: `backdrop-filter:blur(90px)`, gradient `rgba(255,255,255,.2)→rgba(255,255,255,.6)`, top-only radius 40/32/24px, padding 32px→10px at 479px) wrapping an inner flex column (`.hero-image-wrap`, max-width 840px, padding 60px 100px 0 desktop) that holds, in document order: the chat panel, then the dashboard `<img>`, then the two particle images.
+- The example conversation is **not** three static stacked bubbles — only one `.hero-message-wrapper` is visible at a time and the live site cycles through them with a scale/opacity pop-in. The rebuilt module reproduces this with a small vanilla-JS interval (`data-hero-messages`, `.is-active`) instead of static overlay bubbles, and skips cycling under `prefers-reduced-motion`.
+- Message avatars are `border-radius:5px` (squared, not circular); particles are absolutely positioned inside `.hero-image-wrap` (`--one`: bottom -27%/-2% left, max-width 159→50px; `--two`: top-right, `z-index:-1`, max-width 208→100px) so they peek from behind the glass panel edges.
+- The eyebrow badge keeps the project's existing shared `.eyebrow-custom` macro styling (flat pill, blinking cursor) rather than the live site's separate frosted `.sub-title` pill component — that component is shared site-wide via `Macros/Button.html`/`global.css`, so it was intentionally left alone; revisit only if asked to redo eyebrows globally.
+
 ## Global Footer module
 
 `modules/Global/Footer.module/` was rebuilt from the Fluentic Webflow footer reference while preserving its existing folder name, `Footer` label, and HubSpot module ID `383963363024`. Both footer partial files may reference this module, but `templates/layouts/base.html` currently renders `templates/partials/Footer2.html`; do not revert it to the older footer partial.

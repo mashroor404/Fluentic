@@ -73,10 +73,9 @@ button:disabled,
 .button-primary:hover,
 .button-primary:focus-visible {
   color: var(--btn-primary-text-color, #FFFFFF);
-  background-color: var(--text-secondary, #5D6C7B);
-  border-color: var(--text-secondary, #5D6C7B);
+  background-color: var(--btn-primary-bg-color, #1B0C27);
+  border-color: var(--btn-primary-bg-color, #1B0C27);
   text-decoration: none;
-  transform: translateY(-2px);
 }
 
 /* The fixed-height viewport clips the two vertically stacked text labels. */
@@ -114,16 +113,19 @@ button:disabled,
 /* Webflow's v2 component variant: light surface, dark label and subtle border. */
 .button-primary[data-wf--button-primary--variant='v2'] {
   color: var(--btn-secondary-text-color, #1B0C27);
-  background-color: var(--btn-secondary-bg-color, rgba(255, 255, 255, 0.5));
-  border-color: var(--bg-accent-3, #EDECEF);
+  background-color: rgba(255, 255, 255, 0.46);
+  border-color: rgba(255, 255, 255, 0.72);
   border-radius: var(--btn-secondary-border-radius, 8px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 
 .button-primary[data-wf--button-primary--variant='v2']:hover,
 .button-primary[data-wf--button-primary--variant='v2']:focus-visible {
-  color: var(--text-light-primary, #FFFFFF);
-  background-color: var(--dark-bg, #1B0C27);
-  border-color: var(--dark-bg, #1B0C27);
+  color: var(--btn-secondary-text-color, #1B0C27);
+  background-color: rgba(255, 255, 255, 0.46);
+  border-color: rgba(255, 255, 255, 0.72);
 }
 
 .button-primary:focus-visible {
@@ -154,3 +156,65 @@ button:disabled,
 }
 
 /****** Fluentic animated buttons END *********/
+
+
+/****** Fluentic eyebrow badge START *********/
+
+/* Shared eyebrow treatment used by the hero and other marketing modules. */
+.eyebrow-custom {
+  display: inline-flex;
+  box-sizing: border-box;
+  min-height: 36px;
+  padding: 7px 14px;
+  align-items: center;
+  gap: 9px;
+  color: var(--eyebrow-text-color, var(--text-primary, #1B0C27));
+  font-family: var(--secondary-font, 'General Sans', sans-serif);
+  font-size: var(--eyebrow-font-size, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+  background: var(--eyebrow-bg-color, rgba(255, 255, 255, 0.72));
+  border: 1px solid var(--eyebrow-border-color, rgba(27, 12, 39, 0.1));
+  border-radius: var(--eyebrow-border-radius, 999px);
+  box-shadow: 0 8px 24px rgba(27, 12, 39, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.eyebrow-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.eyebrow-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.eyebrow-text {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: 0.01em;
+}
+
+.eyebrow-cursor {
+  width: 2px;
+  height: 1em;
+  background: currentColor;
+  border-radius: 2px;
+  animation: fluentic-cursor-blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes fluentic-cursor-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow-cursor { animation: none; }
+}
+
+/****** Fluentic eyebrow badge END *********/
