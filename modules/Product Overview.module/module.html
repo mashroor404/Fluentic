@@ -1,9 +1,32 @@
 {% import '/Fluentic/Macros/Button.html' as btn_macros %}
 
+{# Exact bullet-icon artwork lifted from the live site, in the same order
+   they appear there (card 1's 3 bullets, then card 2's, then card 3's).
+   Indexed with a running counter below so content editors can add/reorder
+   cards or bullets and it just wraps instead of breaking. #}
+{% set po_bullet_icon_paths = [
+  'M16.25 10.625H3.75C3.41848 10.625 3.10054 10.7567 2.86612 10.9911C2.6317 11.2255 2.5 11.5435 2.5 11.875V15.625C2.5 15.9565 2.6317 16.2745 2.86612 16.5089C3.10054 16.7433 3.41848 16.875 3.75 16.875H16.25C16.5815 16.875 16.8995 16.7433 17.1339 16.5089C17.3683 16.2745 17.5 15.9565 17.5 15.625V11.875C17.5 11.5435 17.3683 11.2255 17.1339 10.9911C16.8995 10.7567 16.5815 10.625 16.25 10.625ZM16.25 15.625H3.75V11.875H16.25V15.625ZM16.25 3.125H3.75C3.41848 3.125 3.10054 3.2567 2.86612 3.49112C2.6317 3.72554 2.5 4.04348 2.5 4.375V8.125C2.5 8.45652 2.6317 8.77446 2.86612 9.00888C3.10054 9.2433 3.41848 9.375 3.75 9.375H16.25C16.5815 9.375 16.8995 9.2433 17.1339 9.00888C17.3683 8.77446 17.5 8.45652 17.5 8.125V4.375C17.5 4.04348 17.3683 3.72554 17.1339 3.49112C16.8995 3.2567 16.5815 3.125 16.25 3.125ZM16.25 8.125H3.75V4.375H16.25V8.125ZM15 6.25C15 6.43542 14.945 6.61668 14.842 6.77085C14.739 6.92502 14.5926 7.04518 14.4213 7.11614C14.25 7.18709 14.0615 7.20566 13.8796 7.16949C13.6977 7.13331 13.5307 7.04402 13.3996 6.91291C13.2685 6.7818 13.1792 6.61475 13.143 6.4329C13.1068 6.25104 13.1254 6.06254 13.1964 5.89123C13.2673 5.71993 13.3875 5.57351 13.5417 5.4705C13.6958 5.36748 13.8771 5.3125 14.0625 5.3125C14.3111 5.3125 14.5496 5.41127 14.7254 5.58709C14.9012 5.7629 15 6.00136 15 6.25ZM15 13.75C15 13.9354 14.945 14.1167 14.842 14.2708C14.739 14.425 14.5926 14.5452 14.4213 14.6161C14.25 14.6871 14.0615 14.7057 13.8796 14.6695C13.6977 14.6333 13.5307 14.544 13.3996 14.4129C13.2685 14.2818 13.1792 14.1148 13.143 13.9329C13.1068 13.751 13.1254 13.5625 13.1964 13.3912C13.2673 13.2199 13.3875 13.0735 13.5417 12.9705C13.6958 12.8675 13.8771 12.8125 14.0625 12.8125C14.3111 12.8125 14.5496 12.9113 14.7254 13.0871C14.9012 13.2629 15 13.5014 15 13.75Z',
+  'M18.125 16.25C18.125 16.4158 18.0592 16.5747 17.9419 16.6919C17.8247 16.8092 17.6658 16.875 17.5 16.875H2.5C2.33424 16.875 2.17527 16.8092 2.05806 16.6919C1.94085 16.5747 1.875 16.4158 1.875 16.25V3.75C1.875 3.58424 1.94085 3.42527 2.05806 3.30806C2.17527 3.19085 2.33424 3.125 2.5 3.125C2.66576 3.125 2.82473 3.19085 2.94194 3.30806C3.05915 3.42527 3.125 3.58424 3.125 3.75V12.2414L7.05781 8.30781C7.11586 8.2497 7.18479 8.2036 7.26066 8.17215C7.33654 8.1407 7.41787 8.12451 7.5 8.12451C7.58213 8.12451 7.66346 8.1407 7.73934 8.17215C7.81521 8.2036 7.88414 8.2497 7.94219 8.30781L10 10.3664L14.1164 6.25H12.5C12.3342 6.25 12.1753 6.18415 12.0581 6.06694C11.9408 5.94973 11.875 5.79076 11.875 5.625C11.875 5.45924 11.9408 5.30027 12.0581 5.18306C12.1753 5.06585 12.3342 5 12.5 5H15.625C15.7908 5 15.9497 5.06585 16.0669 5.18306C16.1842 5.30027 16.25 5.45924 16.25 5.625V8.75C16.25 8.91576 16.1842 9.07473 16.0669 9.19194C15.9497 9.30915 15.7908 9.375 15.625 9.375C15.4592 9.375 15.3003 9.30915 15.1831 9.19194C15.0658 9.07473 15 8.91576 15 8.75V7.13359L10.4422 11.6922C10.3841 11.7503 10.3152 11.7964 10.2393 11.8279C10.1635 11.8593 10.0821 11.8755 10 11.8755C9.91787 11.8755 9.83654 11.8593 9.76066 11.8279C9.68479 11.7964 9.61586 11.7503 9.55781 11.6922L7.5 9.63359L3.125 14.0086V15.625H17.5C17.6658 15.625 17.8247 15.6908 17.9419 15.8081C18.0592 15.9253 18.125 16.0842 18.125 16.25Z',
+  'M13.9187 13.7501H8.69684C8.60224 14.3099 8.38178 14.8409 8.05206 15.3031C7.72235 15.7652 7.29199 16.1465 6.79346 16.4181C6.29492 16.6898 5.74122 16.8447 5.17411 16.8711C4.60699 16.8976 4.04127 16.795 3.5196 16.571C2.99793 16.3469 2.53393 16.0074 2.1626 15.5779C1.79127 15.1485 1.5223 14.6403 1.37597 14.0918C1.22964 13.5432 1.20977 12.9686 1.31786 12.4112C1.42596 11.8539 1.65919 11.3284 1.99997 10.8743C2.09953 10.7417 2.24769 10.6541 2.41186 10.6307C2.57602 10.6073 2.74275 10.6501 2.87536 10.7497C3.00797 10.8492 3.09559 10.9974 3.11896 11.1616C3.14233 11.3257 3.09953 11.4925 2.99997 11.6251C2.67383 12.057 2.4982 12.5839 2.49997 13.1251C2.49997 13.7881 2.76336 14.424 3.2322 14.8928C3.70104 15.3617 4.33693 15.6251 4.99997 15.6251C5.66301 15.6251 6.2989 15.3617 6.76774 14.8928C7.23658 14.424 7.49997 13.7881 7.49997 13.1251C7.49997 12.9593 7.56582 12.8003 7.68303 12.6831C7.80024 12.5659 7.95921 12.5001 8.12497 12.5001H13.9187C14.0563 12.2618 14.2687 12.0755 14.5229 11.9702C14.7771 11.8649 15.059 11.8464 15.3248 11.9177C15.5906 11.9889 15.8254 12.1458 15.9929 12.3641C16.1605 12.5824 16.2513 12.8499 16.2513 13.1251C16.2513 13.4002 16.1605 13.6677 15.9929 13.886C15.8254 14.1043 15.5906 14.2613 15.3248 14.3325C15.059 14.4037 14.7771 14.3852 14.5229 14.2799C14.2687 14.1746 14.0563 13.9884 13.9187 13.7501ZM4.99997 14.3751C5.21647 14.3751 5.42928 14.319 5.61755 14.2121C5.80582 14.1052 5.96311 13.9513 6.074 13.7653C6.18489 13.5794 6.24558 13.3678 6.25013 13.1514C6.25469 12.9349 6.20294 12.721 6.09997 12.5305L8.8945 7.98835C8.98123 7.84722 9.00839 7.67744 8.97001 7.5163C8.93163 7.35516 8.83085 7.21585 8.68981 7.12897C8.35575 6.92332 8.07478 6.64194 7.86961 6.30758C7.66444 5.97323 7.54083 5.59528 7.50878 5.2043C7.47673 4.81333 7.53714 4.4203 7.68512 4.05699C7.8331 3.69369 8.0645 3.3703 8.3606 3.11299C8.65671 2.85568 9.00922 2.67166 9.38962 2.57582C9.77001 2.47997 10.1676 2.47499 10.5503 2.56128C10.933 2.64756 11.29 2.82269 11.5925 3.0725C11.8949 3.32232 12.1343 3.6398 12.2914 3.99929C12.3577 4.15127 12.4816 4.27068 12.636 4.33127C12.7903 4.39185 12.9624 4.38864 13.1144 4.32233C13.2664 4.25603 13.3858 4.13207 13.4464 3.97771C13.507 3.82336 13.5038 3.65127 13.4375 3.49929C13.2123 2.98462 12.8744 2.52711 12.4488 2.16055C12.0231 1.794 11.5205 1.52776 10.9781 1.38151C10.4357 1.23526 9.8674 1.21274 9.31515 1.3156C8.76289 1.41846 8.2408 1.64409 7.78744 1.9758C7.33408 2.30752 6.96104 2.73685 6.69588 3.23208C6.43071 3.72731 6.2802 4.27579 6.25545 4.837C6.2307 5.39821 6.33236 5.95781 6.55291 6.47446C6.77345 6.99111 7.10725 7.45161 7.52966 7.82194L5.03434 11.8751C5.02262 11.8751 5.01169 11.8751 4.99997 11.8751C4.66845 11.8751 4.35051 12.0068 4.11609 12.2412C3.88166 12.4756 3.74997 12.7935 3.74997 13.1251C3.74997 13.4566 3.88166 13.7745 4.11609 14.009C4.35051 14.2434 4.66845 14.3751 4.99997 14.3751ZM15 9.37507C14.5181 9.3751 14.0407 9.46766 13.5937 9.64772L11.1 5.59382C11.2299 5.35302 11.2773 5.07623 11.2348 4.80591C11.1923 4.5356 11.0623 4.2867 10.8647 4.09741C10.6671 3.90812 10.4128 3.7889 10.1409 3.75804C9.86906 3.72718 9.59455 3.7864 9.35956 3.92659C9.12457 4.06678 8.94207 4.28022 8.84007 4.53413C8.73807 4.78805 8.72221 5.06841 8.79492 5.33221C8.86763 5.59601 9.0249 5.82866 9.24258 5.99447C9.46026 6.16027 9.72633 6.25006 9.99997 6.25007H10.0343L12.8297 10.793C12.9167 10.9339 13.056 11.0346 13.2172 11.0728C13.3783 11.111 13.548 11.0837 13.689 10.9969C14.0181 10.7941 14.3897 10.6703 14.7747 10.6353C15.1596 10.6003 15.5475 10.6551 15.9077 10.7953C16.2679 10.9355 16.5907 11.1573 16.8508 11.4434C17.1108 11.7294 17.301 12.0718 17.4063 12.4437C17.5116 12.8157 17.5293 13.2069 17.4579 13.5868C17.3865 13.9667 17.228 14.3249 16.9948 14.6332C16.7616 14.9415 16.4601 15.1915 16.114 15.3636C15.7678 15.5357 15.3865 15.6252 15 15.6251C14.8342 15.6251 14.6752 15.6909 14.558 15.8081C14.4408 15.9253 14.375 16.0843 14.375 16.2501C14.375 16.4158 14.4408 16.5748 14.558 16.692C14.6752 16.8092 14.8342 16.8751 15 16.8751C15.9945 16.8751 16.9484 16.48 17.6516 15.7767C18.3549 15.0735 18.75 14.1196 18.75 13.1251C18.75 12.1305 18.3549 11.1767 17.6516 10.4734C16.9484 9.77015 15.9945 9.37507 15 9.37507Z',
+  'M18.125 16.25C18.125 16.4158 18.0592 16.5747 17.9419 16.6919C17.8247 16.8092 17.6658 16.875 17.5 16.875H2.5C2.33424 16.875 2.17527 16.8092 2.05806 16.6919C1.94085 16.5747 1.875 16.4158 1.875 16.25V3.75C1.875 3.58424 1.94085 3.42527 2.05806 3.30806C2.17527 3.19085 2.33424 3.125 2.5 3.125C2.66576 3.125 2.82473 3.19085 2.94194 3.30806C3.05915 3.42527 3.125 3.58424 3.125 3.75V12.2414L7.05781 8.30781C7.11586 8.2497 7.18479 8.2036 7.26066 8.17215C7.33654 8.1407 7.41787 8.12451 7.5 8.12451C7.58213 8.12451 7.66346 8.1407 7.73934 8.17215C7.81521 8.2036 7.88414 8.2497 7.94219 8.30781L10 10.3664L14.1164 6.25H12.5C12.3342 6.25 12.1753 6.18415 12.0581 6.06694C11.9408 5.94973 11.875 5.79076 11.875 5.625C11.875 5.45924 11.9408 5.30027 12.0581 5.18306C12.1753 5.06585 12.3342 5 12.5 5H15.625C15.7908 5 15.9497 5.06585 16.0669 5.18306C16.1842 5.30027 16.25 5.45924 16.25 5.625V8.75C16.25 8.91576 16.1842 9.07473 16.0669 9.19194C15.9497 9.30915 15.7908 9.375 15.625 9.375C15.4592 9.375 15.3003 9.30915 15.1831 9.19194C15.0658 9.07473 15 8.91576 15 8.75V7.13359L10.4422 11.6922C10.3841 11.7503 10.3152 11.7964 10.2393 11.8279C10.1635 11.8593 10.0821 11.8755 10 11.8755C9.91787 11.8755 9.83654 11.8593 9.76066 11.8279C9.68479 11.7964 9.61586 11.7503 9.55781 11.6922L7.5 9.63359L3.125 14.0086V15.625H17.5C17.6658 15.625 17.8247 15.6908 17.9419 15.8081C18.0592 15.9253 18.125 16.0842 18.125 16.25Z',
+  'M10 1.875C8.39303 1.875 6.82214 2.35152 5.486 3.24431C4.14985 4.1371 3.10844 5.40605 2.49348 6.8907C1.87852 8.37535 1.71762 10.009 2.03112 11.5851C2.34463 13.1612 3.11846 14.6089 4.25476 15.7452C5.39106 16.8815 6.8388 17.6554 8.4149 17.9689C9.99099 18.2824 11.6247 18.1215 13.1093 17.5065C14.594 16.8916 15.8629 15.8502 16.7557 14.514C17.6485 13.1779 18.125 11.607 18.125 10C18.1227 7.84581 17.266 5.78051 15.7427 4.25727C14.2195 2.73403 12.1542 1.87727 10 1.875ZM15.6148 6.03672L10.625 8.91719V3.15391C11.6158 3.24474 12.5751 3.54954 13.4366 4.04726C14.2981 4.54498 15.0413 5.22376 15.6148 6.03672ZM9.375 3.15391V9.63828L3.7586 12.8805C3.29753 11.8811 3.08313 10.7857 3.1334 9.68628C3.18368 8.58685 3.49716 7.51556 4.04751 6.56247C4.59785 5.60938 5.36896 4.80234 6.29603 4.2092C7.22309 3.61606 8.27901 3.25415 9.375 3.15391ZM10 16.875C8.89937 16.8745 7.81493 16.6099 6.83786 16.1032C5.86079 15.5965 5.01965 14.8626 4.38516 13.9633L16.2414 7.11875C16.7249 8.16621 16.937 9.3185 16.8582 10.4695C16.7795 11.6204 16.4123 12.7331 15.7906 13.7049C15.1689 14.6767 14.3126 15.4765 13.3007 16.0305C12.2888 16.5844 11.1537 16.8749 10 16.875Z',
+  'M16.875 3.125H10.625V1.875C10.625 1.70924 10.5592 1.55027 10.4419 1.43306C10.3247 1.31585 10.1658 1.25 10 1.25C9.83424 1.25 9.67527 1.31585 9.55806 1.43306C9.44085 1.55027 9.375 1.70924 9.375 1.875V3.125H3.125C2.79348 3.125 2.47554 3.2567 2.24112 3.49112C2.0067 3.72554 1.875 4.04348 1.875 4.375V13.75C1.875 14.0815 2.0067 14.3995 2.24112 14.6339C2.47554 14.8683 2.79348 15 3.125 15H6.2L4.51172 17.1094C4.40812 17.2389 4.36021 17.4042 4.37852 17.5691C4.39683 17.7339 4.47987 17.8847 4.60938 17.9883C4.73888 18.0919 4.90423 18.1398 5.06905 18.1215C5.23388 18.1032 5.38468 18.0201 5.48828 17.8906L7.8 15H12.2L14.5117 17.8906C14.563 17.9547 14.6264 18.0081 14.6984 18.0477C14.7703 18.0874 14.8493 18.1124 14.9309 18.1215C15.0126 18.1305 15.0952 18.1235 15.174 18.1006C15.2529 18.0777 15.3265 18.0396 15.3906 17.9883C15.4547 17.937 15.5081 17.8736 15.5477 17.8016C15.5874 17.7297 15.6124 17.6507 15.6215 17.5691C15.6305 17.4874 15.6235 17.4048 15.6006 17.326C15.5777 17.2471 15.5396 17.1735 15.4883 17.1094L13.8 15H16.875C17.2065 15 17.5245 14.8683 17.7589 14.6339C17.9933 14.3995 18.125 14.0815 18.125 13.75V4.375C18.125 4.04348 17.9933 3.72554 17.7589 3.49112C17.5245 3.2567 17.2065 3.125 16.875 3.125ZM16.875 13.75H3.125V4.375H16.875V13.75ZM8.125 9.375V11.25C8.125 11.4158 8.05915 11.5747 7.94194 11.6919C7.82473 11.8092 7.66576 11.875 7.5 11.875C7.33424 11.875 7.17527 11.8092 7.05806 11.6919C6.94085 11.5747 6.875 11.4158 6.875 11.25V9.375C6.875 9.20924 6.94085 9.05027 7.05806 8.93306C7.17527 8.81585 7.33424 8.75 7.5 8.75C7.66576 8.75 7.82473 8.81585 7.94194 8.93306C8.05915 9.05027 8.125 9.20924 8.125 9.375ZM10.625 8.125V11.25C10.625 11.4158 10.5592 11.5747 10.4419 11.6919C10.3247 11.8092 10.1658 11.875 10 11.875C9.83424 11.875 9.67527 11.8092 9.55806 11.6919C9.44085 11.5747 9.375 11.4158 9.375 11.25V8.125C9.375 7.95924 9.44085 7.80027 9.55806 7.68306C9.67527 7.56585 9.83424 7.5 10 7.5C10.1658 7.5 10.3247 7.56585 10.4419 7.68306C10.5592 7.80027 10.625 7.95924 10.625 8.125ZM13.125 6.875V11.25C13.125 11.4158 13.0592 11.5747 12.9419 11.6919C12.8247 11.8092 12.6658 11.875 12.5 11.875C12.3342 11.875 12.1753 11.8092 12.0581 11.6919C11.9408 11.5747 11.875 11.4158 11.875 11.25V6.875C11.875 6.70924 11.9408 6.55027 12.0581 6.43306C12.1753 6.31585 12.3342 6.25 12.5 6.25C12.6658 6.25 12.8247 6.31585 12.9419 6.43306C13.0592 6.55027 13.125 6.70924 13.125 6.875Z',
+  'M11.6923 10.8078C11.6342 10.7497 11.5653 10.7036 11.4894 10.6722C11.4136 10.6407 11.3322 10.6245 11.2501 10.6245C11.168 10.6245 11.0866 10.6407 11.0108 10.6722C10.9349 10.7036 10.866 10.7497 10.8079 10.8078L9.3751 12.2414L7.7587 10.625L9.19229 9.19219C9.30957 9.07492 9.37545 8.91586 9.37545 8.75C9.37545 8.58415 9.30957 8.42509 9.19229 8.30782C9.07502 8.19054 8.91596 8.12466 8.7501 8.12466C8.58425 8.12466 8.42519 8.19054 8.30792 8.30782L6.8751 9.74141L5.44229 8.30782C5.32502 8.19054 5.16596 8.12466 5.0001 8.12466C4.83425 8.12466 4.67519 8.19054 4.55792 8.30782C4.44064 8.42509 4.37476 8.58415 4.37476 8.75C4.37476 8.91586 4.44064 9.07492 4.55792 9.19219L5.05401 9.6875L3.23213 11.5086C2.99993 11.7408 2.81573 12.0164 2.69006 12.3197C2.56438 12.6231 2.4997 12.9482 2.4997 13.2766C2.4997 13.6049 2.56438 13.9301 2.69006 14.2334C2.81573 14.5368 2.99993 14.8124 3.23213 15.0445L3.65245 15.4641L1.43292 17.6828C1.37485 17.7409 1.32878 17.8098 1.29736 17.8857C1.26593 17.9616 1.24976 18.0429 1.24976 18.125C1.24976 18.2071 1.26593 18.2884 1.29736 18.3643C1.32878 18.4402 1.37485 18.5091 1.43292 18.5672C1.55019 18.6845 1.70925 18.7504 1.8751 18.7504C1.95723 18.7504 2.03854 18.7342 2.11441 18.7027C2.19028 18.6713 2.25922 18.6253 2.31729 18.5672L4.53604 16.3477L4.95557 16.768C5.18773 17.0002 5.46335 17.1844 5.7667 17.3101C6.07005 17.4357 6.39519 17.5004 6.72354 17.5004C7.05189 17.5004 7.37703 17.4357 7.68038 17.3101C7.98373 17.1844 8.25936 17.0002 8.49151 16.768L10.3126 14.9461L10.8079 15.4422C10.866 15.5003 10.9349 15.5463 11.0108 15.5777C11.0867 15.6092 11.168 15.6254 11.2501 15.6254C11.3322 15.6254 11.4135 15.6092 11.4894 15.5777C11.5653 15.5463 11.6342 15.5003 11.6923 15.4422C11.7504 15.3841 11.7964 15.3152 11.8278 15.2393C11.8593 15.1634 11.8755 15.0821 11.8755 15C11.8755 14.9179 11.8593 14.8366 11.8278 14.7607C11.7964 14.6848 11.7504 14.6159 11.6923 14.5578L10.2587 13.125L11.6923 11.6922C11.7504 11.6341 11.7965 11.5652 11.828 11.4893C11.8594 11.4135 11.8756 11.3321 11.8756 11.25C11.8756 11.1679 11.8594 11.0865 11.828 11.0107C11.7965 10.9348 11.7504 10.8659 11.6923 10.8078ZM7.60713 15.8859C7.37274 16.1202 7.05492 16.2518 6.72354 16.2518C6.39216 16.2518 6.07434 16.1202 5.83995 15.8859L4.11651 14.1602C3.88227 13.9258 3.75068 13.6079 3.75068 13.2766C3.75068 12.9452 3.88227 12.6274 4.11651 12.393L5.9376 10.5711L9.42901 14.0625L7.60713 15.8859ZM18.5673 1.43282C18.5092 1.37471 18.4403 1.32861 18.3644 1.29715C18.2886 1.2657 18.2072 1.24951 18.1251 1.24951C18.043 1.24951 17.9616 1.2657 17.8858 1.29715C17.8099 1.32861 17.741 1.37471 17.6829 1.43282L15.4642 3.65235L15.0446 3.23203C14.5753 2.76403 13.9395 2.50121 13.2767 2.50121C12.6138 2.50121 11.9781 2.76403 11.5087 3.23203L9.6876 5.05391L9.19229 4.55782C9.07502 4.44054 8.91596 4.37466 8.7501 4.37466C8.58425 4.37466 8.42519 4.44054 8.30792 4.55782C8.19064 4.67509 8.12476 4.83415 8.12476 5C8.12476 5.16586 8.19064 5.32492 8.30792 5.44219L14.5579 11.6922C14.616 11.7503 14.6849 11.7963 14.7608 11.8277C14.8367 11.8592 14.918 11.8754 15.0001 11.8754C15.0822 11.8754 15.1635 11.8592 15.2394 11.8277C15.3153 11.7963 15.3842 11.7503 15.4423 11.6922C15.5004 11.6341 15.5464 11.5652 15.5778 11.4893C15.6093 11.4134 15.6255 11.3321 15.6255 11.25C15.6255 11.1679 15.6093 11.0866 15.5778 11.0107C15.5464 10.9348 15.5004 10.8659 15.4423 10.8078L14.9462 10.3125L16.7681 8.49141C17.0003 8.25926 17.1845 7.98363 17.3102 7.68028C17.4358 7.37693 17.5005 7.05179 17.5005 6.72344C17.5005 6.39509 17.4358 6.06995 17.3102 5.7666C17.1845 5.46325 17.0003 5.18763 16.7681 4.95547L16.3478 4.53594L18.5673 2.31719C18.6254 2.25915 18.6715 2.19021 18.703 2.11434C18.7344 2.03847 18.7506 1.95714 18.7506 1.875C18.7506 1.79287 18.7344 1.71154 18.703 1.63567C18.6715 1.55979 18.6254 1.49086 18.5673 1.43282ZM15.8837 7.60469L14.0626 9.42891L10.5712 5.9375L12.3931 4.11641C12.6275 3.88217 12.9453 3.75058 13.2767 3.75058C13.608 3.75058 13.9259 3.88217 14.1603 4.11641L15.8837 5.83516C16.0004 5.95131 16.093 6.08936 16.1562 6.2414C16.2193 6.39344 16.2519 6.55646 16.2519 6.7211C16.2519 6.88574 16.2193 7.04876 16.1562 7.20079C16.093 7.35283 16.0004 7.49089 15.8837 7.60703V7.60469Z',
+  'M11.6884 6.69613L4.68837 13.5711C4.57147 13.6861 4.41407 13.7506 4.25009 13.7506C4.08612 13.7506 3.92871 13.6861 3.81181 13.5711L0.811812 10.625C0.753282 10.5675 0.706661 10.499 0.674611 10.4234C0.642562 10.3478 0.625711 10.2667 0.625022 10.1846C0.624333 10.1025 0.639818 10.0211 0.670594 9.94498C0.70137 9.86888 0.746834 9.79958 0.80439 9.74105C0.861946 9.68252 0.930467 9.6359 1.00604 9.60385C1.08161 9.5718 1.16276 9.55495 1.24485 9.55426C1.32693 9.55357 1.40835 9.56906 1.48445 9.59984C1.56055 9.63061 1.62984 9.67608 1.68837 9.73363L4.25009 12.2493L10.8126 5.80394C10.9309 5.6877 11.0905 5.62323 11.2564 5.62469C11.3385 5.62542 11.4197 5.64231 11.4953 5.67441C11.5709 5.7065 11.6394 5.75317 11.697 5.81176C11.7545 5.87034 11.8 5.93968 11.8307 6.01583C11.8615 6.09198 11.8769 6.17344 11.8762 6.25556C11.8755 6.33768 11.8586 6.41886 11.8265 6.49445C11.7944 6.57004 11.7477 6.63858 11.6892 6.69613H11.6884ZM19.1962 5.81176C19.1387 5.75313 19.0701 5.70642 18.9945 5.6743C18.9189 5.64217 18.8378 5.62526 18.7556 5.62454C18.6735 5.62381 18.592 5.63928 18.5159 5.67007C18.4397 5.70085 18.3704 5.74634 18.3118 5.80394L11.7493 12.2493L10.2782 10.8039C10.1599 10.6878 10.0003 10.6234 9.83453 10.625C9.66875 10.6265 9.51037 10.6938 9.39423 10.8121C9.2781 10.9305 9.21372 11.0901 9.21526 11.2558C9.21679 11.4216 9.28413 11.58 9.40244 11.6961L11.311 13.5711C11.4279 13.6861 11.5853 13.7506 11.7493 13.7506C11.9133 13.7506 12.0707 13.6861 12.1876 13.5711L19.1876 6.69613C19.2463 6.63865 19.293 6.57017 19.3252 6.4946C19.3574 6.41903 19.3744 6.33786 19.3752 6.25573C19.376 6.17359 19.3606 6.0921 19.3299 6.01592C19.2992 5.93974 19.2537 5.87037 19.1962 5.81176Z',
+  'M16.25 7.5C16.5815 7.5 16.8995 7.3683 17.1339 7.13388C17.3683 6.89946 17.5 6.58152 17.5 6.25V3.75C17.5 3.41848 17.3683 3.10054 17.1339 2.86612C16.8995 2.6317 16.5815 2.5 16.25 2.5H13.75C13.4185 2.5 13.1005 2.6317 12.8661 2.86612C12.6317 3.10054 12.5 3.41848 12.5 3.75V4.375H7.5V3.75C7.5 3.41848 7.3683 3.10054 7.13388 2.86612C6.89946 2.6317 6.58152 2.5 6.25 2.5H3.75C3.41848 2.5 3.10054 2.6317 2.86612 2.86612C2.6317 3.10054 2.5 3.41848 2.5 3.75V6.25C2.5 6.58152 2.6317 6.89946 2.86612 7.13388C3.10054 7.3683 3.41848 7.5 3.75 7.5H4.375V12.5H3.75C3.41848 12.5 3.10054 12.6317 2.86612 12.8661C2.6317 13.1005 2.5 13.4185 2.5 13.75V16.25C2.5 16.5815 2.6317 16.8995 2.86612 17.1339C3.10054 17.3683 3.41848 17.5 3.75 17.5H6.25C6.58152 17.5 6.89946 17.3683 7.13388 17.1339C7.3683 16.8995 7.5 16.5815 7.5 16.25V15.625H12.5V16.25C12.5 16.5815 12.6317 16.8995 12.8661 17.1339C13.1005 17.3683 13.4185 17.5 13.75 17.5H16.25C16.5815 17.5 16.8995 17.3683 17.1339 17.1339C17.3683 16.8995 17.5 16.5815 17.5 16.25V13.75C17.5 13.4185 17.3683 13.1005 17.1339 12.8661C16.8995 12.6317 16.5815 12.5 16.25 12.5H15.625V7.5H16.25ZM13.75 3.75H16.25V6.25H13.75V3.75ZM3.75 3.75H6.25V4.99219C6.24897 4.99734 6.24897 5.00266 6.25 5.00781V6.25H3.75V3.75ZM6.25 16.25H3.75V13.75H6.25V14.9922C6.24897 14.9973 6.24897 15.0027 6.25 15.0078V16.25ZM16.25 16.25H13.75V13.75H16.25V16.25ZM14.375 12.5H13.75C13.4185 12.5 13.1005 12.6317 12.8661 12.8661C12.6317 13.1005 12.5 13.4185 12.5 13.75V14.375H7.5V13.75C7.5 13.4185 7.3683 13.1005 7.13388 12.8661C6.89946 12.6317 6.58152 12.5 6.25 12.5H5.625V7.5H6.25C6.58152 7.5 6.89946 7.3683 7.13388 7.13388C7.3683 6.89946 7.5 6.58152 7.5 6.25V5.625H12.5V6.25C12.5 6.58152 12.6317 6.89946 12.8661 7.13388C13.1005 7.3683 13.4185 7.5 13.75 7.5H14.375V12.5Z'
+] %}
+
 {% require_css %}
 <style>
   {% scope_css %}
   /* Header */
+  .po-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .po-header p {
     color: var(--text-secondary);
     max-width: 680px;
@@ -19,16 +42,27 @@
     will-change: transform, opacity;
   }
 
-  /* Cards */
+  /* Cards — "stacking cards on scroll", ported from the reference build
+     (github.com/TahaSh/aat, codepen.io/tahazsh/pen/WNYKage): each card is
+     position:sticky and pins at the top of the viewport in turn; as the
+     next card scrolls up over it, its .po-card-inner is scaled down and
+     dimmed (via po-stack.js below) so it visibly recedes underneath. */
+  .po-cards-space {
+    height: 90vh;
+  }
+
   .po-cards {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(24px, 3vw, 60px);
+    display: grid;
+    grid-template-rows: repeat(var(--po-cards-count, 1), var(--po-card-height, auto));
+    gap: 40px 0;
   }
 
   .po-card {
     position: sticky;
-    top: 140px;
+    top: 0;
+  }
+
+  .po-card-inner {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
@@ -37,10 +71,11 @@
     border-radius: 16px;
     padding: clamp(16px, 2vw, 40px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 20px 40px rgba(27, 12, 39, 0.06);
-    will-change: transform, opacity, filter;
+    transform-origin: center top;
+    will-change: transform, filter;
   }
 
-  .po-card--reversed {
+  .po-card--reversed .po-card-inner {
     flex-direction: row-reverse;
   }
 
@@ -85,9 +120,14 @@
     align-items: center;
     justify-content: center;
     background-image: linear-gradient(#fff, #f0eaf6);
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0 1px 8px rgba(83, 44, 102, 0.1), inset 0 1px 1px #fff, inset 0 -1px 2px rgba(157, 33, 219, 0.15);
-    color: var(--accent-purple, #9D21DB);
+    color: var(--text-primary, #1B0C27);
+  }
+
+  .po-bullet-icon svg {
+    width: 20px;
+    height: 20px;
   }
 
   .po-bullet-item p {
@@ -112,15 +152,17 @@
     border-radius: 12px;
   }
 
-  /* Card 3's "automation cluster" flourish: a soft panel with two rows of
-     looping logos above the illustration, standing in for the live site's
-     bespoke background artwork (not part of the downloaded asset set). */
+  /* Card 3's "automation cluster" flourish: a single line of looping logos
+     above the illustration, on the live site's own background artwork. */
   .po-card-media.has-automation {
     flex-direction: column;
     justify-content: flex-start;
     gap: clamp(24px, 3vw, 40px);
     padding: clamp(28px, 3vw, 52px) clamp(20px, 4vw, 60px);
-    background: var(--gradient-icon, linear-gradient(var(--bg-primary), var(--bg-accent-2)));
+    background-image: url("https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75b8cd9e1ef5db37a6cca_Overview%20BG%20(1).png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .po-card-media.has-automation .po-card-image {
@@ -136,9 +178,7 @@
     width: 100%;
     min-height: 90px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
+    align-items: center;
   }
 
   .po-automation-row-mask {
@@ -150,12 +190,7 @@
     display: flex;
     align-items: center;
     width: max-content;
-    animation: po-marquee-left 26s linear infinite;
-  }
-
-  .po-automation-row-mask:nth-child(2) .po-automation-row {
-    animation-name: po-marquee-right;
-    animation-duration: 30s;
+    animation: po-marquee-left 24s linear infinite;
   }
 
   .po-automation-logo {
@@ -177,11 +212,6 @@
   @keyframes po-marquee-left {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
-  }
-
-  @keyframes po-marquee-right {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
   }
 
   /* Video banner */
@@ -214,7 +244,6 @@
     inset: 0;
     background-color: var(--accent-blue, #80AAFD);
     mix-blend-mode: hard-light;
-    opacity: 0.55;
     z-index: 1;
   }
 
@@ -223,10 +252,7 @@
     z-index: 2;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
-    padding: 12px 0;
+    align-items: center;
   }
 
   .po-tag-row-mask {
@@ -238,16 +264,7 @@
     display: flex;
     align-items: center;
     width: max-content;
-    animation: po-marquee-left 40s linear infinite;
-  }
-
-  .po-tag-row-mask:nth-child(2) .po-tag-row {
-    animation-name: po-marquee-right;
-    animation-duration: 46s;
-  }
-
-  .po-tag-row-mask:nth-child(3) .po-tag-row {
-    animation-duration: 34s;
+    animation: po-marquee-left 36s linear infinite;
   }
 
   .po-tag {
@@ -305,13 +322,32 @@
     display: block;
   }
 
-  /* Mobile / tablet: drop the sticky stack, revert to a simple column with
-     the media above the copy, matching the live site's mobile layout. */
+  /* Mobile / tablet: drop the sticky stack entirely (the scroll-scrubbed
+     scale/dim effect isn't a good fit for small screens), revert to a
+     simple column with the media above the copy. */
   @media (max-width: 768px) {
-    .po-card,
-    .po-card--reversed {
+    .po-cards-space {
+      height: 0;
+    }
+
+    .po-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .po-card {
       position: static;
       top: 0;
+      padding-top: 0 !important;
+    }
+
+    .po-card-inner {
+      transform: none !important;
+      filter: none !important;
+    }
+
+    .po-card-inner {
       flex-direction: column;
     }
 
@@ -337,6 +373,11 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .po-card-inner {
+      transform: none !important;
+      filter: none !important;
+    }
+
     .po-automation-row,
     .po-tag-row {
       animation: none;
@@ -364,40 +405,42 @@
     </div>
 
     {% if module.overview_card|length %}
-      <div class="po-cards">
+      <div class="po-cards" data-po-cards>
+        {% set po_icon_i = namespace(n=0) %}
         {% for card in module.overview_card %}
-          <div class="po-card{% if loop.index is even %} po-card--reversed{% endif %}">
-            <div class="po-card-text">
-              <div class="po-card-title-wrap">
-                {% if card.card_title %}<h3>{{ card.card_title }}</h3>{% endif %}
-                {% if card.card_description %}<p class="body">{{ card.card_description }}</p>{% endif %}
+          <div class="po-card{% if loop.index is even %} po-card--reversed{% endif %}" style="padding-top: {{ 20 + loop.index0 * 20 }}px; z-index: {{ loop.index }};">
+            <div class="po-card-inner">
+              <div class="po-card-text">
+                <div class="po-card-title-wrap">
+                  {% if card.card_title %}<h3>{{ card.card_title }}</h3>{% endif %}
+                  {% if card.card_description %}<p class="body">{{ card.card_description }}</p>{% endif %}
+                </div>
+
+                {% if card.bullet_item|length %}
+                  <ul role="list" class="po-bullet-list">
+                    {% for bullet in card.bullet_item %}
+                      {% if bullet.bullet_text %}
+                        <li class="po-bullet-item">
+                          <span class="po-bullet-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                              <path d="{{ po_bullet_icon_paths[po_icon_i.n % po_bullet_icon_paths|length] }}" fill="currentColor"/>
+                            </svg>
+                          </span>
+                          <p class="body-2-highlight">{{ bullet.bullet_text }}</p>
+                        </li>
+                        {% set po_icon_i.n = po_icon_i.n + 1 %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
 
-              {% if card.bullet_item|length %}
-                <ul role="list" class="po-bullet-list">
-                  {% for bullet in card.bullet_item %}
-                    {% if bullet.bullet_text %}
-                      <li class="po-bullet-item">
-                        <span class="po-bullet-icon" aria-hidden="true">
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                            <path d="M13.5 4.5L6.25 11.75L2.5 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </span>
-                        <p class="body-2-highlight">{{ bullet.bullet_text }}</p>
-                      </li>
-                    {% endif %}
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </div>
-
-            <div class="po-card-media{% if card.show_automation_cluster %} has-automation{% endif %}">
-              {% if card.show_automation_cluster %}
-                <div class="po-automation-cluster" aria-hidden="true">
-                  {% for row in range(2) %}
+              <div class="po-card-media{% if card.show_automation_cluster %} has-automation{% endif %}">
+                {% if card.show_automation_cluster %}
+                  <div class="po-automation-cluster" aria-hidden="true">
                     <div class="po-automation-row-mask">
                       <div class="po-automation-row">
-                        {% for i in range(3) %}
+                        {% for i in range(6) %}
                           <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0bbb4798f4dffcac23_Automation%20Logo.svg" alt="" class="po-automation-logo" loading="lazy">
                           <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0b787d8c22dcd5cbb7_Automation%20Logo%20(1).svg" alt="" class="po-automation-logo" loading="lazy">
                           <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0b65c3bf792b024738_Automation%20Logo%20(2).svg" alt="" class="po-automation-logo" loading="lazy">
@@ -405,25 +448,26 @@
                         {% endfor %}
                       </div>
                     </div>
-                  {% endfor %}
-                  <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0c32730c6594ae31a7_Automation%20Logo%20(4).svg" alt="" class="po-automation-main-logo" loading="lazy">
-                </div>
-              {% endif %}
+                    <img src="https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75c0c32730c6594ae31a7_Automation%20Logo%20(4).svg" alt="" class="po-automation-main-logo" loading="lazy">
+                  </div>
+                {% endif %}
 
-              {% if card.card_image.src %}
-                <img
-                  src="{{ card.card_image.src|escape_url }}"
-                  alt="{{ card.card_image.alt|escape_attr }}"
-                  class="po-card-image"
-                  loading="lazy"
-                  {% if card.card_image.width %}width="{{ card.card_image.width }}"{% endif %}
-                  {% if card.card_image.height %}height="{{ card.card_image.height }}"{% endif %}
-                >
-              {% endif %}
+                {% if card.card_image.src %}
+                  <img
+                    src="{{ card.card_image.src|escape_url }}"
+                    alt="{{ card.card_image.alt|escape_attr }}"
+                    class="po-card-image"
+                    loading="lazy"
+                    {% if card.card_image.width %}width="{{ card.card_image.width }}"{% endif %}
+                    {% if card.card_image.height %}height="{{ card.card_image.height }}"{% endif %}
+                  >
+                {% endif %}
+              </div>
             </div>
           </div>
         {% endfor %}
       </div>
+      <div class="po-cards-space" aria-hidden="true"></div>
     {% endif %}
 
     {% if module.video_banner.show and (module.video_banner.mp4_url or module.video_banner.webm_url) %}
@@ -437,19 +481,17 @@
 
         {% if module.video_banner.tag|length %}
           <div class="po-tag-marquee" aria-hidden="true">
-            {% for row in range(3) %}
-              <div class="po-tag-row-mask">
-                <div class="po-tag-row">
-                  {% for i in range(2) %}
-                    {% for tag in module.video_banner.tag %}
-                      {% if tag.tag_text %}
-                        <div class="po-tag"><p class="body-2-highlight">{{ tag.tag_text }}</p></div>
-                      {% endif %}
-                    {% endfor %}
+            <div class="po-tag-row-mask">
+              <div class="po-tag-row">
+                {% for i in range(2) %}
+                  {% for tag in module.video_banner.tag %}
+                    {% if tag.tag_text %}
+                      <div class="po-tag"><p class="body-2-highlight">{{ tag.tag_text }}</p></div>
+                    {% endif %}
                   {% endfor %}
-                </div>
+                {% endfor %}
               </div>
-            {% endfor %}
+            </div>
           </div>
         {% endif %}
 
@@ -468,11 +510,12 @@
   </div>
 </section>
 
-<!-- Word-split blur reveal on the heading, a delayed fade-up on the
-     description, and a staggered blur/slide reveal per card as each one
-     scrolls into view (matches the live site's entrance animation). The
-     sticky "stack" effect itself is pure CSS (position: sticky on
-     .po-card), so no scroll-driven JS is needed for that part. -->
+<!-- Word-split blur reveal on the heading and a delayed fade-up on the
+     description. The card-stacking effect itself (position: sticky per
+     card, with the card underneath scaling down and dimming as the next
+     one arrives) is a faithful port of the "Stacking Cards on Scroll"
+     technique (github.com/TahaSh/aat, codepen.io/tahazsh/pen/WNYKage) —
+     reimplemented here in plain JS instead of pulling in that library. -->
 {% require_js %}
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -528,34 +571,76 @@
           );
         }
 
-        const cards = section.querySelectorAll('.po-card');
-        cards.forEach((card, index) => {
-          // Hidden state is applied here (not in the stylesheet) so the
-          // card stays fully visible for anyone without JS, and only gets
-          // hidden right before ScrollTrigger reveals it.
-          gsap.set(card, { opacity: 0, filter: 'blur(6px)', y: 40 });
-
-          ScrollTrigger.create({
-            trigger: card,
-            start: 'top 85%',
-            once: true,
-            onEnter() {
-              gsap.to(card, {
-                opacity: 1,
-                filter: 'blur(0px)',
-                y: 0,
-                duration: 0.9,
-                delay: index * 0.08,
-                ease: 'power2.out'
-              });
-            }
-          });
-        });
       } else if (reduceMotion) {
         // Reduced motion: leave the server-rendered, fully-visible
         // description in place instead of leaving it stuck at opacity 0.
         const desc = section.querySelector('.po-desc');
         if (desc) desc.style.opacity = '1';
+      }
+
+      // Stacking cards on scroll. Ported from the reference implementation:
+      // each card is `position: sticky`. As the *next* card scrolls up
+      // through the viewport, we track its progress (0 → 1) and use it to
+      // scale down + darken the *current* card's `.po-card-inner`, so it
+      // visibly recedes underneath the incoming card instead of just being
+      // abruptly covered. Skipped for prefers-reduced-motion — the cards
+      // still stack via plain CSS sticky, they just don't scale/dim.
+      const cardsWrap = section.querySelector('[data-po-cards]');
+      const cards = cardsWrap ? Array.from(cardsWrap.querySelectorAll('.po-card')) : [];
+      if (cardsWrap && cards.length > 1 && !reduceMotion) {
+        const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+        const valueAtPercentage = (from, to, percentage) => from + (to - from) * percentage;
+
+        const setSizeVars = () => {
+          cardsWrap.style.setProperty('--po-cards-count', cards.length);
+          cardsWrap.style.setProperty('--po-card-height', `${cards[0].offsetHeight}px`);
+        };
+        setSizeVars();
+
+        const entries = cards.map((card, index) => ({
+          card,
+          inner: card.querySelector('.po-card-inner'),
+          offsetTop: 20 + index * 20,
+          toScale: 1 - (cards.length - 1 - index) * 0.1
+        }));
+
+        // Mirrors aat.js's ScrollObserver percentageY calculation, with
+        // offsetBottom fixed at `window.innerHeight - card.clientHeight`
+        // (as the reference does) — which reduces to just `card.clientHeight`
+        // as the reference point. 0 once `next`'s top reaches the bottom of
+        // `card`'s own height, 1 once it has scrolled up to `card`'s offset.
+        const progressOf = (next, card, offsetTop) => {
+          const containerBottom = card.clientHeight;
+          const range = containerBottom - offsetTop;
+          if (range <= 0) return 1;
+          return clamp((containerBottom - next.getBoundingClientRect().top) / range, 0, 1);
+        };
+
+        const update = () => {
+          for (let i = 0; i < entries.length - 1; i += 1) {
+            const { card, inner, offsetTop, toScale } = entries[i];
+            const progress = progressOf(entries[i + 1].card, card, offsetTop);
+            inner.style.scale = String(valueAtPercentage(1, toScale, progress));
+            inner.style.filter = `brightness(${valueAtPercentage(1, 0.6, progress)})`;
+          }
+        };
+
+        let ticking = false;
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            update();
+            ticking = false;
+          });
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', () => {
+          setSizeVars();
+          update();
+        });
+        update();
       }
 
       // Background video play/pause toggle.

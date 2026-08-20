@@ -44,14 +44,16 @@
         pointer-events: none;
       }
 
-      /* Progressive Blur Wrapper (Pure Glass Method) */
+      /* Progressive Blur Wrapper (Pure Glass Method) — disabled, not needed
+         (this fixed, bottom-anchored backdrop-blur band was covering page
+         content on shorter viewports)
       .progressive-blur_wrap {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 140px; 
-        pointer-events: none; 
+        height: 140px;
+        pointer-events: none;
         z-index: 9999;
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
@@ -59,18 +61,15 @@
         mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
         background: transparent;
       }
-      
+      */
+
       body {
-        background-image: url('https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a361996f438ba184407d6e0_BG%20IMG%20UPDATED%203x-p-2000.webp');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        background-attachment: fixed;
+        background-color: var(--page-bg, #F8F7F8);
       }
 
       /* =======================================
-         PAGE LOADER STYLES
-         ======================================= */
+         PAGE LOADER STYLES — disabled, not needed
+         =======================================
       #page-loader {
         position: fixed;
         top: 0;
@@ -151,30 +150,31 @@
      align-items:center;
     text-align:center;
         }
-    
+
 }
+      */
     </style>
   </head>
 
   <body>
 
-    <!-- PAGE LOADER OVERLAY -->
+    <!-- PAGE LOADER OVERLAY — disabled, not needed
     <div id="page-loader">
       <div class="loader-center-content">
         <div class="loader-brand">
-<!--           <img src="https://246817745.fs1.hubspotusercontent-na2.net/hubfs/246817745/6a361996f438ba184407d6e0_BG%20IMG%20UPDATED%203x-p-2000.webp" alt="Logo" class="loader-logo-icon"> -->
           <span>Account Based RevOps</span>
         </div>
         <div class="loader-percentage" id="loader-counter">0%</div>
       </div>
-      
-      <!-- Elevated progress bar with gap -->
+
+      <!- Elevated progress bar with gap ->
       <div class="loader-progress-wrapper">
         <div class="loader-progress-track">
           <div class="loader-progress-bar" id="loader-bar"></div>
         </div>
       </div>
     </div>
+    -->
 
     <div class="body-wrapper {{ builtin_body_classes }}">
       {% block header %}
@@ -195,16 +195,17 @@
       </div>
     </div>
 
-    <!-- Progressive Blur Element -->
+    <!-- Progressive Blur Element — disabled, not needed
     <div class="progressive-blur_wrap" bis_skin_checked="1">
     </div>
+    -->
 
     {{ require_js(get_asset_url("../../js/main.js")) }}
     
     {# To see a full list of what is included via standard_footer_includes please reference this article: https://developers.hubspot.com/docs/cms/hubl/variables#required-page-template-variables #}
     {{ standard_footer_includes }}
 
-    <!-- Constant Speed Loader JS -->
+    <!-- Constant Speed Loader JS — disabled, not needed
     <script>
       (function() {
         const progressBar = document.getElementById('loader-bar');
@@ -254,6 +255,7 @@
         requestAnimationFrame(animateLoader);
       })();
     </script>
+    -->
 
     <!-- Lenis Initialization & GSAP Sync -->
     <script>
@@ -281,20 +283,21 @@
 
           gsap.ticker.lagSmoothing(0);
 
-          // FADE OUT BLUR WHEN REACHING FOOTER
-          const footerTrigger = document.querySelector('.footer-start');
-          if (footerTrigger) {
-            gsap.to('.progressive-blur_wrap', {
-              opacity: 0,
-              duration: 0.3,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: footerTrigger,
-                start: "top bottom",
-                toggleActions: "play none none reverse"
-              }
-            });
-          }
+          // FADE OUT BLUR WHEN REACHING FOOTER — disabled along with
+          // .progressive-blur_wrap above, not needed
+          // const footerTrigger = document.querySelector('.footer-start');
+          // if (footerTrigger) {
+          //   gsap.to('.progressive-blur_wrap', {
+          //     opacity: 0,
+          //     duration: 0.3,
+          //     ease: "power2.out",
+          //     scrollTrigger: {
+          //       trigger: footerTrigger,
+          //       start: "top bottom",
+          //       toggleActions: "play none none reverse"
+          //     }
+          //   });
+          // }
 
         } else {
           // Fallback if GSAP isn't loaded
