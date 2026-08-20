@@ -36,6 +36,7 @@
   }
 
   .solution-section__grid {
+    align-items: stretch;
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -48,7 +49,10 @@
     border: var(--global-border-width) solid color-mix(in srgb, var(--global-border-color) 45%, transparent);
     border-radius: max(var(--global-border-radius), 1rem);
     box-shadow: 0 1px 2px color-mix(in srgb, var(--text-primary) 6%, transparent);
+    display: flex;
+    flex-direction: column;
     grid-column: span 6;
+    height: 100%;
     min-width: 0;
     overflow: hidden;
     padding: 0.5rem;
@@ -71,7 +75,6 @@
   }
 
   .solution-card__image-wrap {
-    aspect-ratio: 16 / 9;
     border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.75rem);
     overflow: hidden;
     width: 100%;
@@ -79,9 +82,7 @@
 
   .solution-card__image {
     display: block;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
     width: 100%;
   }
 
@@ -291,7 +292,8 @@
                 headerTimeline.fromTo(
                   eyebrow,
                   { autoAlpha: 0, y: 22 },
-                  { autoAlpha: 1, duration: 0.55, y: 0 }
+                  { autoAlpha: 1, duration: 0.55, y: 0 },
+                  0
                 );
               }
 
@@ -299,7 +301,8 @@
                 headerTimeline.fromTo(
                   headingWords,
                   { autoAlpha: 0, y: 28 },
-                  { autoAlpha: 1, duration: 0.65, stagger: 0.075, y: 0 }
+                  { autoAlpha: 1, duration: 0.6, stagger: 0.06, y: 0 },
+                  0.12
                 );
               }
 
@@ -307,7 +310,8 @@
                 headerTimeline.fromTo(
                   description,
                   { autoAlpha: 0, y: 24 },
-                  { autoAlpha: 1, duration: 0.6, y: 0 }
+                  { autoAlpha: 1, duration: 0.55, y: 0 },
+                  0.3
                 );
               }
             }

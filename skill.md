@@ -149,11 +149,12 @@ If these values should become editable HubSpot theme settings, add them to root 
 
 ## Refine image cards and GSAP reveals
 
-- Prevent uploaded image dimensions from changing card geometry by setting an explicit `aspect-ratio` on the image wrapper and `width: 100%; height: 100%; object-fit: cover` on the image.
+- Use a fixed wrapper `aspect-ratio` plus `object-fit: cover` when arbitrary uploads must share one crop. Exception: preserve natural image proportions when reference assets were deliberately exported with matching heights and different widths for an asymmetric card grid; explicitly stretch grid items and cards so each row still has equal outer card heights.
 - GSAP core and ScrollTrigger are already loaded in `templates/layouts/base.html`; module scripts should register and use them without adding another CDN import.
 - Scope animation queries to each module instance and mark initialized instances to avoid duplicate timelines in DnD pages.
 - For split-word headings without GSAP SplitText, preserve the escaped heading text and wrap its words with DOM-created spans before applying a staggered reveal.
 - Reveal visual card rows with separate ScrollTriggers so later rows wait until they reach the viewport. Treat each card as a row on mobile where the grid is one column.
+- For header elements that should feel nearly simultaneous but ordered, overlap their GSAP timeline positions with short offsets instead of waiting for each tween to finish before starting the next one.
 - Guard motion with `prefers-reduced-motion: no-preference`; the unanimated HTML/CSS state must remain fully visible when animation is unavailable.
 
 ## Build blog-card modules
