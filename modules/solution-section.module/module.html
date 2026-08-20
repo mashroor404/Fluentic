@@ -21,14 +21,12 @@
     font-family: var(--primary-font);
     font-size: var(--text-h2);
     font-weight: var(--font-weight-medium);
-    letter-spacing: -0.03em;
-    line-height: 1.1;
     margin: 1rem auto 0;
     max-width: 49.9375rem;
   }
 
   .solution-section__description {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-family: var(--secondary-font);
     font-size: var(--text-body);
     font-weight: var(--font-weight-regular);
@@ -73,15 +71,23 @@
   }
 
   .solution-card__image-wrap {
+    aspect-ratio: 16 / 9;
     border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.75rem);
     overflow: hidden;
+    width: 100%;
   }
 
   .solution-card__image {
     display: block;
-    height: auto;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     width: 100%;
+  }
+
+  .solution-section__word {
+    display: inline-block;
+    will-change: opacity, transform;
   }
 
   .solution-card__body {
@@ -102,7 +108,7 @@
   }
 
   .solution-card__description {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-family: var(--secondary-font);
     font-size: var(--text-body-2);
     font-weight: var(--font-weight-regular);
@@ -146,19 +152,21 @@
 </style>
 {% end_require_css %}
 
-<section class="solution-section">
+<section class="solution-section" data-solution-section>
   <div class="container">
     <header class="solution-section__header">
       {% if module.section_content.eyebrow_text %}
-        {{ btn_macros.eyebrow_label(module.section_content.eyebrow_text) }}
+        <div data-solution-eyebrow>
+          {{ btn_macros.eyebrow_label(module.section_content.eyebrow_text) }}
+        </div>
       {% endif %}
 
       {% if module.section_content.heading %}
-        <h2 class="solution-section__heading">{{ module.section_content.heading|escape_html }}</h2>
+        <h2 class="solution-section__heading gsap_split_word" data-solution-heading>{{ module.section_content.heading|escape_html }}</h2>
       {% endif %}
 
       {% if module.section_content.description %}
-        <p class="solution-section__description">{{ module.section_content.description|escape_html }}</p>
+        <p class="solution-section__description" data-solution-description>{{ module.section_content.description|escape_html }}</p>
       {% endif %}
     </header>
 
@@ -189,7 +197,7 @@
             {% endif %}
           {% endif %}
 
-          <article class="solution-card">
+          <article class="solution-card" data-solution-card>
             {% if item.show_image and image_src %}
               <div class="solution-card__image-wrap">
                 <img
@@ -219,3 +227,124 @@
     {% endif %}
   </div>
 </section>
+
+{% require_js %}
+<script>
+  (() => {
+    const initSolutionSections = () => {
+      if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+
+      window.gsap.registerPlugin(window.ScrollTrigger);
+
+      document.querySelectorAll("[data-solution-section]").forEach((section) => {
+        if (section.dataset.solutionAnimationInitialized === "true") return;
+        section.dataset.solutionAnimationInitialized = "true";
+
+        const heading = section.querySelector("[data-solution-heading]");
+        const headingWords = [];
+
+        if (heading) {
+          const words = heading.textContent.trim().split(/\s+/);
+          const fragment = document.createDocumentFragment();
+
+          words.forEach((word, index) => {
+            const wordElement = document.createElement("span");
+            wordElement.className = "solution-section__word gsap_split_word2";
+            wordElement.textContent = word;
+            fragment.appendChild(wordElement);
+            headingWords.push(wordElement);
+
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(" "));
+            }
+          });
+
+          heading.replaceChildren(fragment);
+        }
+
+        const media = window.gsap.matchMedia();
+
+        media.add(
+          {
+            animate: "(prefers-reduced-motion: no-preference)",
+            mobile: "(max-width: 767px)"
+          },
+          (context) => {
+            if (!context.conditions.animate) return;
+
+            const eyebrow = section.querySelector("[data-solution-eyebrow]");
+            const description = section.querySelector("[data-solution-description]");
+            const header = section.querySelector(".solution-section__header");
+            const cards = Array.from(section.querySelectorAll("[data-solution-card]"));
+
+            if (header) {
+              const headerTimeline = window.gsap.timeline({
+                defaults: { ease: "power3.out" },
+                scrollTrigger: {
+                  trigger: header,
+                  start: "top 82%",
+                  once: true
+                }
+              });
+
+              if (eyebrow) {
+                headerTimeline.fromTo(
+                  eyebrow,
+                  { autoAlpha: 0, y: 22 },
+                  { autoAlpha: 1, duration: 0.55, y: 0 }
+                );
+              }
+
+              if (headingWords.length) {
+                headerTimeline.fromTo(
+                  headingWords,
+                  { autoAlpha: 0, y: 28 },
+                  { autoAlpha: 1, duration: 0.65, stagger: 0.075, y: 0 }
+                );
+              }
+
+              if (description) {
+                headerTimeline.fromTo(
+                  description,
+                  { autoAlpha: 0, y: 24 },
+                  { autoAlpha: 1, duration: 0.6, y: 0 }
+                );
+              }
+            }
+
+            const rowSize = context.conditions.mobile ? 1 : 2;
+
+            for (let index = 0; index < cards.length; index += rowSize) {
+              const row = cards.slice(index, index + rowSize);
+
+              window.gsap.fromTo(
+                row,
+                { autoAlpha: 0, filter: "blur(1px)", y: 50 },
+                {
+                  autoAlpha: 1,
+                  duration: 0.8,
+                  ease: "power3.out",
+                  filter: "blur(0px)",
+                  stagger: 0.12,
+                  y: 0,
+                  scrollTrigger: {
+                    trigger: row[0],
+                    start: "top 86%",
+                    once: true
+                  }
+                }
+              );
+            }
+          }
+        );
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initSolutionSections, { once: true });
+    } else {
+      initSolutionSections();
+    }
+  })();
+</script>
+{% end_require_js %}

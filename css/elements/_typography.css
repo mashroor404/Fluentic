@@ -139,7 +139,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight-medium, 500);
   margin: 0;
   line-height: 1.2;
+  letter-spacing: 0;
 }
+
 
 h1 { font-size: var(--text-h1);}
 h2 { font-size: var(--text-h2); }
