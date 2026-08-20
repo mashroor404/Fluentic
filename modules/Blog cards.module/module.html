@@ -1,0 +1,257 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  .blog-section {
+    background-color: var(--page-bg);
+    padding: 10rem 0 5rem;
+  }
+
+  .blog-section__container {
+    box-sizing: border-box;
+    max-width: min(var(--container-max-width), 77.5rem);
+  }
+
+  .blog-title-row {
+    align-items: center;
+    display: flex;
+    gap: 3.75rem;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  .blog-title-wrap {
+    max-width: 36.8125rem;
+    width: 100%;
+  }
+
+  .blog-section__title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .blog-button-wrap {
+    flex: none;
+  }
+
+  .blog-cl-list {
+    display: grid;
+    gap: 1.5rem 2.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .blog-card {
+    background-color: var(--bg-primary);
+    border-radius: max(var(--global-border-radius), 1rem);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    overflow: hidden;
+    padding: 0.5rem 0.5rem 1.5rem;
+    text-decoration: none;
+  }
+
+  .blog-image-wrap {
+    aspect-ratio: 1392 / 1000;
+    border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.5rem);
+    overflow: hidden;
+  }
+
+  .blog-card__image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 420ms ease;
+    width: 100%;
+  }
+
+  .blog-card:hover .blog-card__image,
+  .blog-card:focus-visible .blog-card__image {
+    transform: scale(1.045);
+  }
+
+  .blog-card:focus-visible {
+    outline: 0.125rem solid var(--accent-purple);
+    outline-offset: 0.25rem;
+  }
+
+  .blog-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 1rem 1rem;
+  }
+
+  .blog-info-wrap {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    text-transform: uppercase;
+  }
+
+  .blog-tag,
+  .blog-card__date {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  .blog-tag {
+    border: var(--global-border-width) solid var(--accent-pink);
+    border-radius: 999px;
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+  }
+
+  .blog-card__date {
+    margin-left: auto;
+  }
+
+  .blog-card__title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h5);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 991px) {
+    .blog-section {
+      padding-top: 5rem;
+    }
+
+    .blog-cl-list {
+      gap: 2rem 2.5rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .blog-card {
+      padding-bottom: 1.25rem;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .blog-section {
+      padding: 3.75rem 0;
+    }
+
+    .blog-title-row {
+      gap: 2rem;
+    }
+
+    .blog-cl-list {
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .blog-title-row {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .blog-info-wrap {
+      gap: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blog-card__image {
+      transition: none;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% set button_href = module.button.link.url.href %}
+{% if module.button.link.url.type is equalto "EMAIL_ADDRESS" %}
+  {% set button_href = "mailto:" + button_href %}
+{% elif module.button.link.url.type is equalto "PHONE_NUMBER" %}
+  {% set button_href = "tel:" + button_href %}
+{% endif %}
+
+<section id="Blog" class="blog-section">
+  <div class="container blog-section__container">
+    <div class="blog-title-row">
+      <div class="blog-title-wrap">
+        {% if module.section_content.heading %}
+          <h2 class="blog-section__title">{{ module.section_content.heading|escape_html }}</h2>
+        {% endif %}
+      </div>
+
+      {% if module.button.show_button and module.button.text and button_href %}
+        <div class="blog-button-wrap">
+          {{ btn_macros.secondary_button(
+            module.button.text,
+            button_href,
+            module.button.link.open_in_new_tab,
+            module.button.link.no_follow
+          ) }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="blog-cl-list">
+      {% for card in module.cards %}
+        {% set selected_blog = "default" %}
+        {% if card.blog %}
+          {% set selected_blog = card.blog %}
+        {% endif %}
+        {% set post_position = card.post_position|default(1)|int %}
+        {% set post_index = post_position - 1 %}
+        {% set recent_posts = blog_recent_posts(selected_blog, post_position) %}
+        {% set post = recent_posts[post_index] %}
+
+        {% if post %}
+          {% set first_topic = post.topic_list|first %}
+          {% set publish_date = post.publish_date_local_time %}
+          {% if not publish_date %}
+            {% set publish_date = post.publish_date %}
+          {% endif %}
+          <a class="blog-card" href="{{ post.absolute_url|escape_url }}">
+            {% if post.featured_image %}
+              <div class="blog-image-wrap">
+                <img
+                  class="blog-card__image"
+                  src="{{ post.featured_image|escape_url }}"
+                  alt="{{ post.featured_image_alt_text|default(post.name)|escape_attr }}"
+                  loading="lazy"
+                >
+              </div>
+            {% endif %}
+
+            <div class="blog-card-body">
+              <div class="blog-info-wrap">
+                {% if first_topic %}
+                  <span class="blog-tag">{{ first_topic.name|escape_html }}</span>
+                {% endif %}
+                {% if publish_date %}
+                  <time class="blog-card__date" datetime="{{ publish_date|escape_attr }}">
+                    {{ publish_date|format_datetime("MMMM d, yyyy") }}
+                  </time>
+                {% endif %}
+              </div>
+
+              <h3 class="blog-card__title">{{ post.name|escape_html }}</h3>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
