@@ -8,7 +8,7 @@
     --hero-spacing: {{ module.style.section_spacing|default(168) }}px;
     position: relative;
     isolation: isolate;
-    padding: 16px 16px 0;
+    padding: 16px 0;
     background-color: {{ module.style.background_color.color|default('#F8F7F8') }};
   }
   {% end_scope_css %}
@@ -17,6 +17,25 @@
 
 <section class="hero-section" data-fluentic-hero>
   <div class="hero-content-block">
+    {% if module.background_video.enabled and (module.background_video.mp4_url or module.background_video.webm_url) %}
+      <div class="hero-video" aria-hidden="true">
+        <video autoplay loop muted playsinline poster="{{ module.background_video.poster.src|escape_url }}">
+          {% if module.background_video.webm_url %}<source src="{{ module.background_video.webm_url|escape_url }}" type="video/webm">{% endif %}
+          {% if module.background_video.mp4_url %}<source src="{{ module.background_video.mp4_url|escape_url }}" type="video/mp4">{% endif %}
+        </video>
+        <div class="hero-video-overlay"></div>
+      </div>
+      <button type="button" class="hero-video-toggle" data-hero-video-toggle aria-pressed="false" aria-label="Pause background video">
+        <svg class="icon-pause" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+          <rect x="3" y="2" width="3.4" height="12" rx="1.2" fill="currentColor"/>
+          <rect x="9.6" y="2" width="3.4" height="12" rx="1.2" fill="currentColor"/>
+        </svg>
+        <svg class="icon-play" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+          <path d="M4 2.6c0-.9 1-1.4 1.7-.9l8 5.4c.6.4.6 1.3 0 1.8l-8 5.4c-.7.5-1.7 0-1.7-.9V2.6Z" fill="currentColor"/>
+        </svg>
+      </button>
+    {% endif %}
+
     <div class="hero-container">
       <div class="hero-title-block">
         {% if module.content.show_eyebrow and module.content.eyebrow_text %}
@@ -49,13 +68,13 @@
         </div>
       </div>
 
-      {% if module.visual.main_image.src %}
+      {% if module.visual.main_image.src or module.chat_demo.enabled %}
         <div class="hero-image-block">
           <div class="hero-image-wrap">
             {% if module.messages|length %}
               <div class="hero-message-block" data-hero-messages aria-label="Example AI agent conversation">
                 {% for item in module.messages %}
-                  <div class="hero-message-wrapper hero-message-wrapper--{{ item.sender }}{% if loop.first %} is-active{% endif %}"{% if not loop.first %} style="display:none;"{% endif %}>
+                  <div class="hero-message-wrapper hero-message-wrapper--{{ item.sender }}">
                     {% if item.sender == 'agent' and item.avatar.src %}
                       <div class="message-avatar-wrap">
                         <img src="{{ item.avatar.src|escape_url }}" alt="{{ item.avatar.alt|escape_attr }}" loading="lazy">
@@ -74,14 +93,80 @@
               </div>
             {% endif %}
 
-            <img
-              src="{{ module.visual.main_image.src|escape_url }}"
-              alt="{{ module.visual.main_image.alt|escape_attr }}"
-              class="hero-image-02"
-              loading="eager"
-              {% if module.visual.main_image.width %}width="{{ module.visual.main_image.width }}"{% endif %}
-              {% if module.visual.main_image.height %}height="{{ module.visual.main_image.height }}"{% endif %}
-            >
+            {% if module.chat_demo.enabled %}
+              <div
+                class="hero-chat-card"
+                data-hero-chat
+                data-user-avatar-src="{{ module.chat_demo.user_avatar.src|escape_attr }}"
+                data-user-avatar-alt="{{ module.chat_demo.user_avatar.alt|default('You')|escape_attr }}"
+                data-agent-avatar-src="{{ module.chat_demo.agent_avatar.src|escape_attr }}"
+                data-agent-avatar-alt="{{ module.chat_demo.agent_avatar.alt|default('Fluentic AI')|escape_attr }}"
+              >
+                <div class="hero-chat-toolbar">
+                  <button type="button" class="hero-chat-pill">
+                    <span>{{ module.chat_demo.model_label|default('GPT 4.5') }}</span>
+                    <svg class="hero-chat-chevron" viewBox="0 0 10 6" width="10" height="6" fill="none" aria-hidden="true">
+                      <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="hero-chat-pill">
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+                      <circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M1.8 8h12.4M8 1.8c1.7 1.7 2.6 3.9 2.6 6.2S9.7 12.5 8 14.2C6.3 12.5 5.4 10.3 5.4 8S6.3 3.5 8 1.8Z" stroke="currentColor" stroke-width="1.1"/>
+                    </svg>
+                    <span>{{ module.chat_demo.secondary_pill_label|default('Search') }}</span>
+                  </button>
+                </div>
+
+                <form class="hero-chat-inputbar" data-hero-chat-form>
+                  <input
+                    type="text"
+                    class="hero-chat-input"
+                    data-hero-chat-input
+                    placeholder="{{ module.chat_demo.input_placeholder|default('Ask anything ...')|escape_attr }}"
+                    aria-label="Message the Fluentic AI agent"
+                    autocomplete="off"
+                  >
+                  <button type="submit" class="hero-chat-send" data-hero-chat-send aria-label="Send message">
+                    <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
+                      <path d="M3 10l14-6.5-5.5 14-2.4-6.1L3 10Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                </form>
+
+                {% if module.chat_demo.suggestions|length %}
+                  <div class="hero-chat-suggestions">
+                    {% for s in module.chat_demo.suggestions %}
+                      {% if s.text %}
+                        <button type="button" class="hero-chat-suggestion" data-hero-chat-suggestion="{{ s.text|escape_attr }}">
+                          <svg viewBox="0 0 12 12" width="11" height="11" fill="currentColor" aria-hidden="true">
+                            <path d="M6 0c.3 1.9 1 3.2 2.9 3.6-1.9.4-2.6 1.7-2.9 3.6-.3-1.9-1-3.2-2.9-3.6C5 3.2 5.7 1.9 6 0Z"/>
+                          </svg>
+                          <span>{{ s.text }}</span>
+                        </button>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+
+                {% if module.chat_demo.auto_replies|length %}
+                  <ul class="hero-chat-replies" data-hero-chat-replies hidden>
+                    {% for r in module.chat_demo.auto_replies %}
+                      {% if r.text %}<li>{{ r.text }}</li>{% endif %}
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            {% elif module.visual.main_image.src %}
+              <img
+                src="{{ module.visual.main_image.src|escape_url }}"
+                alt="{{ module.visual.main_image.alt|escape_attr }}"
+                class="hero-image-02"
+                loading="eager"
+                {% if module.visual.main_image.width %}width="{{ module.visual.main_image.width }}"{% endif %}
+                {% if module.visual.main_image.height %}height="{{ module.visual.main_image.height }}"{% endif %}
+              >
+            {% endif %}
 
             {% if module.visual.show_particles %}
               {% if module.visual.particle_one.src %}
@@ -96,52 +181,178 @@
       {% endif %}
     </div>
   </div>
-
-  {% if module.background_video.enabled and (module.background_video.mp4_url or module.background_video.webm_url) %}
-    <div class="hero-video" aria-hidden="true">
-      <video autoplay loop muted playsinline poster="{{ module.background_video.poster.src|escape_url }}">
-        {% if module.background_video.webm_url %}<source src="{{ module.background_video.webm_url|escape_url }}" type="video/webm">{% endif %}
-        {% if module.background_video.mp4_url %}<source src="{{ module.background_video.mp4_url|escape_url }}" type="video/mp4">{% endif %}
-      </video>
-      <div class="hero-video-overlay"></div>
-    </div>
-  {% endif %}
 </section>
 
-<!-- Cycles the example chat bubbles one at a time, like the live Fluentic hero. -->
+<!-- Reveals the example chat bubbles in a stagger, floats the particles (CSS-only),
+     drives the video play/pause toggle, and makes the chat card actually send messages. -->
 {% require_js %}
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const MAX_MESSAGES = 6;
+    const TYPING_DELAY_MS = 500;
+    const REPLY_DELAY_MS = 950;
 
-    document.querySelectorAll('[data-fluentic-hero] [data-hero-messages]').forEach((block) => {
-      const wrappers = Array.from(block.querySelectorAll('.hero-message-wrapper'));
-      if (reduceMotion || wrappers.length < 2) return;
+    document.querySelectorAll('[data-fluentic-hero]').forEach((hero) => {
+      const messageBlock = hero.querySelector('[data-hero-messages]');
 
-      const HOLD_MS = 2600;
-      const ENTER_MS = 450;
-      let index = wrappers.findIndex((el) => el.classList.contains('is-active'));
-      if (index < 0) index = 0;
+      // Staggered chat-bubble reveal: messages pop in one after another the
+      // first time the panel enters view, then stay visible.
+      if (messageBlock) {
+        if (reduceMotion) {
+          messageBlock.classList.add('is-visible');
+        } else if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                messageBlock.classList.add('is-visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.25 });
+          observer.observe(messageBlock);
+        } else {
+          messageBlock.classList.add('is-visible');
+        }
+      }
 
-      const showNext = () => {
-        const current = wrappers[index];
-        const nextIndex = (index + 1) % wrappers.length;
-        const next = wrappers[nextIndex];
+      // Background video play/pause toggle.
+      const video = hero.querySelector('.hero-video video');
+      const toggle = hero.querySelector('[data-hero-video-toggle]');
+      if (video && toggle) {
+        const setToggleState = (isPaused) => {
+          toggle.classList.toggle('is-paused', isPaused);
+          toggle.setAttribute('aria-pressed', String(isPaused));
+          toggle.setAttribute('aria-label', isPaused ? 'Play background video' : 'Pause background video');
+        };
 
-        current.classList.remove('is-active');
-        window.setTimeout(() => {
-          current.style.display = 'none';
+        if (reduceMotion) {
+          video.pause();
+          setToggleState(true);
+        }
 
-          next.style.display = 'flex';
-          // Force reflow so the enter transition restarts every cycle.
-          void next.offsetWidth;
-          next.classList.add('is-active');
-        }, ENTER_MS);
+        toggle.addEventListener('click', () => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
 
-        index = nextIndex;
+        video.addEventListener('play', () => setToggleState(false));
+        video.addEventListener('pause', () => setToggleState(true));
+      }
+
+      // Interactive chat demo: typing (or a suggestion click) appends a live
+      // message, then a canned agent reply follows after a short "typing" beat.
+      const chatCard = hero.querySelector('[data-hero-chat]');
+      if (!messageBlock || !chatCard) return;
+
+      const form = chatCard.querySelector('[data-hero-chat-form]');
+      const input = chatCard.querySelector('[data-hero-chat-input]');
+      const replyPool = Array.from(chatCard.querySelectorAll('[data-hero-chat-replies] li'))
+        .map((li) => li.textContent.trim())
+        .filter(Boolean);
+
+      const userAvatarSrc = chatCard.getAttribute('data-user-avatar-src') || '';
+      const userAvatarAlt = chatCard.getAttribute('data-user-avatar-alt') || 'You';
+      const agentAvatarSrc = chatCard.getAttribute('data-agent-avatar-src') || '';
+      const agentAvatarAlt = chatCard.getAttribute('data-agent-avatar-alt') || 'Fluentic AI';
+
+      const trimHistory = () => {
+        while (messageBlock.children.length > MAX_MESSAGES) {
+          messageBlock.firstElementChild.remove();
+        }
       };
 
-      window.setInterval(showNext, HOLD_MS);
+      const buildAvatar = (src, alt) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'message-avatar-wrap';
+        if (!src) return wrap;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = alt;
+        img.loading = 'lazy';
+        wrap.appendChild(img);
+        return wrap;
+      };
+
+      const addBubble = (sender, text) => {
+        messageBlock.classList.add('is-visible');
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'hero-message-wrapper hero-message-wrapper--' + sender;
+
+        const textWrap = document.createElement('div');
+        textWrap.className = 'message-text-wrap';
+        const p = document.createElement('p');
+        p.className = 'message-text';
+        p.textContent = text;
+        textWrap.appendChild(p);
+
+        if (sender === 'agent') {
+          wrapper.appendChild(buildAvatar(agentAvatarSrc, agentAvatarAlt));
+          wrapper.appendChild(textWrap);
+        } else {
+          wrapper.appendChild(textWrap);
+          wrapper.appendChild(buildAvatar(userAvatarSrc, userAvatarAlt));
+        }
+
+        messageBlock.appendChild(wrapper);
+        trimHistory();
+        // Force reflow so the entrance transition plays for this new bubble.
+        void textWrap.offsetWidth;
+        return wrapper;
+      };
+
+      const addTypingBubble = () => {
+        const wrapper = addBubble('agent', '');
+        wrapper.classList.add('hero-message-wrapper--typing');
+        const textWrap = wrapper.querySelector('.message-text-wrap');
+        textWrap.classList.add('hero-typing-dots');
+        textWrap.innerHTML = '<span></span><span></span><span></span>';
+        return wrapper;
+      };
+
+      const pickReply = () => {
+        if (!replyPool.length) return "Thanks — I'll get right on that.";
+        return replyPool[Math.floor(Math.random() * replyPool.length)];
+      };
+
+      const sendMessage = (text) => {
+        const trimmed = (text || '').trim();
+        if (!trimmed) return;
+
+        addBubble('user', trimmed);
+
+        if (reduceMotion) {
+          addBubble('agent', pickReply());
+          return;
+        }
+
+        window.setTimeout(() => {
+          const typing = addTypingBubble();
+          window.setTimeout(() => {
+            typing.remove();
+            addBubble('agent', pickReply());
+          }, REPLY_DELAY_MS);
+        }, TYPING_DELAY_MS);
+      };
+
+      if (form && input) {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          sendMessage(input.value);
+          input.value = '';
+          input.focus();
+        });
+      }
+
+      chatCard.querySelectorAll('[data-hero-chat-suggestion]').forEach((button) => {
+        button.addEventListener('click', () => {
+          sendMessage(button.getAttribute('data-hero-chat-suggestion'));
+        });
+      });
     });
   });
 </script>

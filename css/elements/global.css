@@ -165,61 +165,12 @@
 
 
 
-/* ==================================
-   Eyebrow Text (.eyebrow-custom)
-   ================================== */
-
-/* Main Wrapper - Styled as a subtle pill */
-.eyebrow-custom {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px; /* Space between icon and text */
-  padding: 10px 10px 10px 8px;
-  background-color: var(--bg-accent-2);
-  border-radius: 6px;
-}
-
-/* The Energy Ellipse Icon */
-.eyebrow-icon {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  object-fit: contain;
-}
-
-/* Inner Content Wrapper */
-.eyebrow-content {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* The Eyebrow Text */
-.eyebrow-text {
-  margin: 0;
-  font-family: var(--tertiary-font);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary); 
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  line-height: 1;
-}
-
-/* The Blinking Cursor */
-.eyebrow-cursor {
-  display: inline-block;
-  width: 6px;
-  height: 14px;
-  background-color: color-mix(in srgb, var(--text-primary) 20%, transparent);
-  animation: eyebrow-blink 1s step-end infinite;
-}
-
-/* Blinking Keyframe Animation */
-@keyframes eyebrow-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
+/* Eyebrow badge (.eyebrow-custom, .eyebrow-icon, .eyebrow-content,
+   .eyebrow-text) is styled in css/elements/_buttons.css, which loads after
+   this file and was the block actually winning the cascade — this file
+   used to carry a second, conflicting definition (including a blinking
+   cursor the live site doesn't have). Keep the eyebrow's canonical styles
+   in _buttons.css only; don't reintroduce a copy here. */
 
 
 
