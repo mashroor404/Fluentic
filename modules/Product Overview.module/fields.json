@@ -1,0 +1,344 @@
+[ {
+  "id" : "daf4cb6e-cb57-4630-87b6-5a0adeef516c",
+  "name" : "eyebrow_text",
+  "label" : "Eyebrow Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Product Overview"
+}, {
+  "id" : "c53d7b55-330e-4b24-a096-ba55200a5a8c",
+  "name" : "eyebrow_icon",
+  "label" : "Eyebrow Icon",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/6984fc2e00e2222da1035dca_Star.svg",
+    "alt" : "",
+    "loading" : "lazy"
+  }
+}, {
+  "id" : "0ed46291-40ea-456a-aece-23d4c47cf0ac",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Explore the Power of Flentic"
+}, {
+  "id" : "d083901f-577c-4858-a541-555ca61a7b5e",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Discover how Flentic turns manual processes into automated pipelines. Our intelligent features are designed to optimize every workflow."
+}, {
+  "id" : "dd239e74-80b5-4c02-837e-eca081593379",
+  "name" : "overview_card",
+  "label" : "Overview Card",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "fbb52382-e6a6-4da0-884b-5ef8b372e598",
+    "name" : "card_title",
+    "label" : "Card Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Intelligent Automation Workflow Engine"
+  }, {
+    "id" : "f8e7409b-8365-472f-9c1c-e58961b8e8fe",
+    "name" : "card_description",
+    "label" : "Card Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Automate repetitive tasks, orchestrate multi-step workflows, and boost output with smart, AI-powered automation capabilities."
+  }, {
+    "id" : "66ed2afa-e6e0-4c04-8711-120a602dc523",
+    "name" : "card_image",
+    "label" : "Card Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/6983a575b5b1b138ea8c76e2_f3945cd3badb2c3a7f2215d87c21bfa3_Overview%20Image%20%282%29%20%281%29.png",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 1054,
+      "height" : 988,
+      "max_width" : 1054,
+      "max_height" : 988
+    }
+  }, {
+    "id" : "fa8c918e-4c34-489d-ac37-bd4d4235e31c",
+    "name" : "show_automation_cluster",
+    "label" : "Show floating automation logos over the image",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "36dd6d3f-8157-4260-b6ee-4157367d8cf9",
+    "name" : "bullet_item",
+    "label" : "Bullet Item",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : 6,
+      "sorting_label_field" : null,
+      "default" : 3
+    },
+    "children" : [ {
+      "id" : "83b90f12-4843-49d6-95d8-d1c24936bf41",
+      "name" : "bullet_text",
+      "label" : "Bullet Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Unified Data Connections"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "bullet_text" : "Unified Data Connections"
+    }, {
+      "bullet_text" : "Real-Time Data Syncing"
+    }, {
+      "bullet_text" : "Flexible API Integrations"
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "card_title" : "Intelligent Automation Workflow Engine",
+    "card_description" : "Automate repetitive tasks, orchestrate multi-step workflows, and boost output with smart, AI-powered automation capabilities.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/6983a575b5b1b138ea8c76e2_f3945cd3badb2c3a7f2215d87c21bfa3_Overview%20Image%20%282%29%20%281%29.png",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 1054,
+      "height" : 988,
+      "max_width" : 1054,
+      "max_height" : 988
+    },
+    "show_automation_cluster" : false,
+    "bullet_item" : [ {
+      "bullet_text" : "Unified Data Connections"
+    }, {
+      "bullet_text" : "Real-Time Data Syncing"
+    }, {
+      "bullet_text" : "Flexible API Integrations"
+    } ]
+  }, {
+    "card_title" : "Advanced AI-Powered Analytics Tools",
+    "card_description" : "Leverage intelligent analytics to uncover hidden patterns, predict future trends, and make data-driven decisions with confidence.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/6983a423e9bdc10ccc31c606_ef3ad44a68dd940799c141501c3b87b9_Overview%20Image%20%281%29.png",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 1054,
+      "height" : 988,
+      "max_width" : 1054,
+      "max_height" : 988
+    },
+    "show_automation_cluster" : false,
+    "bullet_item" : [ {
+      "bullet_text" : "Accurate Trend Forecasting"
+    }, {
+      "bullet_text" : "Dynamic Insightful Dashboards"
+    }, {
+      "bullet_text" : "AI-Driven Data Metrics"
+    } ]
+  }, {
+    "card_title" : "Seamless Agent Integration Process",
+    "card_description" : "Automate repetitive tasks, optimize workflows, and boost productivity with smart, AI-powered automation capabilities.",
+    "card_image" : {
+      "size_type" : "auto",
+      "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/69a75b2a808c51abc66e1d79_Overview.png",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 360,
+      "height" : 239,
+      "max_width" : 360,
+      "max_height" : 239
+    },
+    "show_automation_cluster" : true,
+    "bullet_item" : [ {
+      "bullet_text" : "Streamlined Workflow Automation"
+    }, {
+      "bullet_text" : "Efficient Task Optimization"
+    }, {
+      "bullet_text" : "Smart Trigger Functions"
+    } ]
+  } ]
+}, {
+  "id" : "88a54b4b-20d5-4555-b32f-7b2691af1f29",
+  "name" : "video_banner",
+  "label" : "Video Banner",
+  "required" : false,
+  "locked" : false,
+  "type" : "group",
+  "display_width" : null,
+  "children" : [ {
+    "id" : "eb443be4-e7e1-4c22-a5ab-3d41de865e07",
+    "name" : "show",
+    "label" : "Show video banner",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "206cf192-c7fe-48aa-9749-c4ed0172168f",
+    "name" : "mp4_url",
+    "label" : "MP4 URL",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a752b479a33af12472dd8a_Benefit_mp4.mp4"
+  }, {
+    "id" : "2234d2b1-fae9-48c4-a5c2-ec2d86fa82e6",
+    "name" : "webm_url",
+    "label" : "WebM URL",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a752b479a33af12472dd8a_Benefit_webm.webm"
+  }, {
+    "id" : "21036243-2599-4131-b82d-b81dca559af0",
+    "name" : "poster",
+    "label" : "Poster Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : true,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a752b479a33af12472dd8a_Benefit_poster.0000000.jpg",
+      "alt" : "",
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "1385f9ac-d708-43a4-911d-72c8f63aa3ce",
+    "name" : "tag",
+    "label" : "Tag",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : 12,
+      "sorting_label_field" : null,
+      "default" : 7
+    },
+    "children" : [ {
+      "id" : "8a06810f-642c-4687-9303-4289eca6da20",
+      "name" : "tag_text",
+      "label" : "Tag Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Workflow Orchestration"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "tag_text" : "Workflow Orchestration"
+    }, {
+      "tag_text" : "Process Automation"
+    }, {
+      "tag_text" : "Technology Modernization"
+    }, {
+      "tag_text" : "AI-Powered Automation"
+    }, {
+      "tag_text" : "Sales Process Automation"
+    }, {
+      "tag_text" : "Marketing Automation"
+    }, {
+      "tag_text" : "Support Sales Reps"
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "default" : {
+    "show" : true,
+    "mp4_url" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a752b479a33af12472dd8a_Benefit_mp4.mp4",
+    "webm_url" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a752b479a33af12472dd8a_Benefit_webm.webm",
+    "poster" : {
+      "size_type" : "auto",
+      "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a752b479a33af12472dd8a_Benefit_poster.0000000.jpg",
+      "alt" : "",
+      "loading" : "lazy"
+    },
+    "tag" : [ {
+      "tag_text" : "Workflow Orchestration"
+    }, {
+      "tag_text" : "Process Automation"
+    }, {
+      "tag_text" : "Technology Modernization"
+    }, {
+      "tag_text" : "AI-Powered Automation"
+    }, {
+      "tag_text" : "Sales Process Automation"
+    }, {
+      "tag_text" : "Marketing Automation"
+    }, {
+      "tag_text" : "Support Sales Reps"
+    } ]
+  }
+} ]
