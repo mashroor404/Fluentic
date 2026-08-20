@@ -184,6 +184,15 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Keep the Explore All control macro-driven and animate its wrapper rather than modifying the shared button markup.
 - Derive reveal row size from the responsive grid: three cards at desktop, two at tablet, and one at mobile. Give each visual row its own ScrollTrigger.
 
+## Build FAQ accordion modules
+
+- Use a repeatable group for question/answer pairs and a repeatable image field for contact/avatar artwork. Bundle local fallback images so an empty image repeater still renders the intended reference design.
+- Use the shared `btn_macros.eyebrow_label` for the FAQ badge and global theme tokens for all type, colors, borders, and surfaces.
+- Build accordion titles as native `<button>` controls. Keep `aria-expanded`, `aria-controls`, the panel's `aria-hidden`, and the visual open class synchronized; use unique panel IDs derived from the HubSpot module instance name.
+- Keep one FAQ open at a time, but render all FAQ items closed by default for this project.
+- Animate the badge and split-word heading with the established overlapping timing, then reveal the contact prompt and each accordion item upward from 50px. Keep these FAQ reveals brisk (about 0.45–0.5s) and give each item its own ScrollTrigger so lower mobile items animate when they actually enter the viewport. Use the FAQ module's 320ms panel and 220ms icon/opacity transitions for responsive-feeling accordion toggles.
+- Keep the server-rendered accordion usable without GSAP and remove transitions under `prefers-reduced-motion`.
+
 ## Replace global modules safely
 
 - Before replacing a global module, find every template/partial reader and preserve the deployed folder path, module label, and existing `module_id` unless a new remote module is explicitly required.
