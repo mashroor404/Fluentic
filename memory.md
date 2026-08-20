@@ -195,3 +195,11 @@ The blog heading carries `gsap_split_word`; its DOM-created word spans carry `gs
 The FAQ list is a repeater with one to twelve items. The contact avatar field is also a repeater (up to six images); when it is empty, the three bundled Fluentic avatars render as local fallbacks. All FAQ items are closed by default. Accordion controls use semantic buttons with `aria-expanded`, `aria-controls`, labelled regions, keyboard support, and single-open behavior. The open/close transition is intentionally quick: 320ms for panel height and 220ms for opacity/icons.
 
 Its GSAP sequence matches the existing module language: eyebrow at 0s, split heading words at 0.12s, contact prompt at 0.34s, and each accordion item revealing 50px upward as it reaches the viewport. Reveal tweens use brisk 0.45–0.5s durations. Selectors and initialization are scoped to each module instance, GSAP is not loaded again, and reduced-motion users receive a static fully visible layout.
+
+## Demo text block wrap module
+
+`modules/demo-text-block-wrap.module/` recreates the homepage `.demo-text-block-wrap` CTA ribbon. Editors can change its repeated text, destination link, and separator icon; the downloaded `Vector.svg` gradient mark is the local fallback. The server-rendered track follows the reference structure with six text panels and seven circular icon separators.
+
+Desktop text panels are 1215px wide with 212px icon circles. The module follows the reference's 991px, 767px, and 479px steps (800/600/400px text and 160/140/120px icons). Typography and surfaces use the theme's global font and color tokens.
+
+GSAP ScrollTrigger scrubs the complete track from `xPercent: 0` to `xPercent: -10` between `top bottom` and `bottom top`. Scrolling down therefore moves the track left, while scrolling upward naturally reverses it to the right. The track uses `will-change: transform`, `transform-style: preserve-3d`, and `force3D`; motion is disabled under `prefers-reduced-motion`.
