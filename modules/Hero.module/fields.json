@@ -509,7 +509,7 @@
         "children": [
           {
             "id": "3f6a1b2c-4d5e-4f60-8a1b-2c3d4e5f6a77",
-            "name": "label",
+            "name": "text",
             "label": "Suggestion text",
             "required": false,
             "locked": false,
@@ -525,13 +525,13 @@
         "occurrence": {
           "min": 0,
           "max": 5,
-          "sorting_label_field": "label",
+          "sorting_label_field": "text",
           "default": 3
         },
         "default": [
-          { "label": "Create Workflow" },
-          { "label": "Setup Bot" },
-          { "label": "Schedule Message" }
+          { "text": "Create Workflow" },
+          { "text": "Setup Bot" },
+          { "text": "Schedule Message" }
         ]
       },
       {
@@ -617,9 +617,9 @@
       "secondary_pill_label": "Search",
       "input_placeholder": "Ask anything ...",
       "suggestions": [
-        { "label": "Create Workflow" },
-        { "label": "Setup Bot" },
-        { "label": "Schedule Message" }
+        { "text": "Create Workflow" },
+        { "text": "Setup Bot" },
+        { "text": "Schedule Message" }
       ],
       "user_avatar": {
         "size_type": "auto",
