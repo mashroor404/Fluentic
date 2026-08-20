@@ -193,6 +193,14 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Animate the badge and split-word heading with the established overlapping timing, then reveal the contact prompt and each accordion item upward from 50px. Keep these FAQ reveals brisk (about 0.45–0.5s) and give each item its own ScrollTrigger so lower mobile items animate when they actually enter the viewport. Use the FAQ module's 320ms panel and 220ms icon/opacity transitions for responsive-feeling accordion toggles.
 - Keep the server-rendered accordion usable without GSAP and remove transitions under `prefers-reduced-motion`.
 
+## Build scroll-scrubbed text ribbons
+
+- Match the reference track composition and responsive item dimensions before tuning motion. Fluentic's demo ribbon uses six text panels, seven icon separators, 1215px/212px desktop sizing, and 800/600/400px plus 160/140/120px responsive steps.
+- Keep the displayed text, destination link, and separator image editable. Use the bundled Fluentic `Vector.svg` as the fallback separator.
+- Apply `will-change: transform` and `transform-style: preserve-3d` to the complete horizontal track, not to every repeated child.
+- Use one reversible ScrollTrigger scrub from `xPercent: 0` to approximately `-10`, with `start: "top bottom"` and `end: "bottom top"`. Scroll progress then moves left on the way down and right on the way up without a separate direction listener.
+- Mark repeated visual content as decorative and give the wrapping link one useful accessible label. Disable the transform under `prefers-reduced-motion`.
+
 ## Replace global modules safely
 
 - Before replacing a global module, find every template/partial reader and preserve the deployed folder path, module label, and existing `module_id` unless a new remote module is explicitly required.

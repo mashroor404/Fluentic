@@ -1,0 +1,77 @@
+[
+  {
+    "id": "2fdc1c6e-5235-43d0-b080-08db0d483ea5",
+    "name": "content",
+    "label": "Content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "c59b7c04-0318-4c63-8804-d316b20c728f",
+        "name": "text",
+        "label": "Text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Request a Demo"
+      },
+      {
+        "id": "280f1ca8-d7af-43ec-b31d-30993997b9c5",
+        "name": "link",
+        "label": "Link",
+        "required": false,
+        "locked": false,
+        "supported_types": [
+          "EXTERNAL",
+          "CONTENT",
+          "EMAIL_ADDRESS",
+          "PHONE_NUMBER"
+        ],
+        "show_advanced_rel_options": false,
+        "type": "link",
+        "display_width": null,
+        "default": {
+          "url": {
+            "content_id": null,
+            "href": "/contact-us",
+            "type": "EXTERNAL"
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        }
+      },
+      {
+        "id": "95be2c21-8a70-43a5-bc06-5b9188fed856",
+        "name": "icon",
+        "label": "Icon",
+        "help_text": "Select an image to replace the bundled Fluentic gradient icon.",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "type": "image",
+        "display_width": null
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "text": "Request a Demo",
+      "link": {
+        "url": {
+          "content_id": null,
+          "href": "/contact-us",
+          "type": "EXTERNAL"
+        },
+        "open_in_new_tab": false,
+        "no_follow": false
+      }
+    }
+  }
+]
