@@ -104,6 +104,15 @@ Example:
 - Check that theme variables exist before using them. Current legacy aliases are not guaranteed: `--primary-bg`, `--primary-dark-text-color`, `--border-width`, and `--border-color` differ from the newer `--bg-primary`, `--text-primary`, `--global-border-width`, and `--global-border-color` names.
 - Verify the page in the HubSpot editor and in the published preview after upload/sync.
 
+## Preview branch changes in HubSpot
+
+- Run `npm run watch:hubspot` at the repository root to initial-sync and continuously upload local changes to `/Fluentic` in account `246817745` as drafts.
+- This theme uses checked-in `fields.json` files, so do not add a separate `fields.js` compilation watcher unless the schema format is intentionally migrated later.
+- Use `npm run watch:hubspot:check` for a non-uploading configuration check.
+- Keep local-only files in `.hsignore`; do not add `--remove` to the watch command because branch changes must not delete unrelated remote assets.
+- Keep draft mode as the default. Use `HUBSPOT_WATCH_MODE=publish` only when the user explicitly intends to update published theme files.
+- Stop the watcher with `Ctrl+C`, and confirm the changed module in Design Manager or HubSpot's preview before merging the branch.
+
 ## Lessons captured from this project
 
 - Root `fields.json` is for theme-wide editor settings; a module's own `fields.json` is for module content/style controls.
