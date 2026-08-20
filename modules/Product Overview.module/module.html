@@ -361,6 +361,13 @@
       flex: 0 0 auto;
       max-width: 100%;
       width: 100%;
+      /* Without an explicit height here, .po-card-image's height:100% has
+         no concrete parent height to resolve against once the card goes
+         to a single column — different source images then rendered at
+         different (sometimes collapsed) sizes card to card. Fixing the
+         height makes every card's media box (including the automation
+         cluster on card 3) the same size on mobile. */
+      height: clamp(200px, 56vw, 320px);
     }
 
     .po-card-text {
