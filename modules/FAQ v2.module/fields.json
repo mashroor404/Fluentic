@@ -1,0 +1,264 @@
+[
+  {
+    "id": "49747cb0-e52f-4fdc-b81f-b57a2693eaee",
+    "name": "section_content",
+    "label": "Section content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "520a9f96-5352-471f-8684-7841e56cff2f",
+        "name": "eyebrow_text",
+        "label": "Eyebrow text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "FAQ"
+      },
+      {
+        "id": "e6843c63-b5d8-43ba-83cf-e8d9f9786a2c",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Frequently Asked Questions"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "eyebrow_text": "FAQ",
+      "heading": "Frequently Asked Questions"
+    }
+  },
+  {
+    "id": "81ea096c-0350-4215-80d7-05abe098292b",
+    "name": "contact",
+    "label": "Contact prompt",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "79210c24-f051-488b-a97d-45eb701ef12a",
+        "name": "show_contact",
+        "label": "Show contact prompt",
+        "required": false,
+        "locked": false,
+        "display": "toggle",
+        "type": "boolean",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "f1401072-e108-4ec2-a67c-a156d56ade27",
+        "name": "title",
+        "label": "Title",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "contact.show_contact",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "text",
+        "display_width": null,
+        "default": "Still have a question?"
+      },
+      {
+        "id": "58f5bcf4-33df-4890-8e88-cb44cc7c6182",
+        "name": "link_text",
+        "label": "Link text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "contact.show_contact",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "text",
+        "display_width": null,
+        "default": "Contact Us!"
+      },
+      {
+        "id": "71c041a9-586e-42e0-96ec-7388edc765f2",
+        "name": "link",
+        "label": "Contact link",
+        "required": false,
+        "locked": false,
+        "supported_types": [
+          "EXTERNAL",
+          "CONTENT",
+          "EMAIL_ADDRESS",
+          "PHONE_NUMBER"
+        ],
+        "show_advanced_rel_options": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "contact.show_contact",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "link",
+        "display_width": null,
+        "default": {
+          "url": {
+            "content_id": null,
+            "href": "/contact-us",
+            "type": "EXTERNAL"
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        }
+      },
+      {
+        "id": "72271ace-f6d4-40ea-ac3d-8b810a48471b",
+        "name": "supporting_text",
+        "label": "Supporting text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "contact.show_contact",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "text",
+        "display_width": null,
+        "default": "We’ll be happy to help you."
+      },
+      {
+        "id": "df228a2a-94d2-440e-8600-f335a7a2363c",
+        "name": "avatar_images",
+        "label": "FAQ images",
+        "help_text": "Add, remove, or reorder the overlapping contact images. The three Fluentic avatars are used when this repeater is empty.",
+        "required": false,
+        "locked": false,
+        "occurrence": {
+          "min": 0,
+          "max": 6,
+          "sorting_label_field": null,
+          "default": 0
+        },
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "contact.show_contact",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "image",
+        "display_width": null,
+        "default": []
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_contact": true,
+      "title": "Still have a question?",
+      "link_text": "Contact Us!",
+      "link": {
+        "url": {
+          "content_id": null,
+          "href": "/contact-us",
+          "type": "EXTERNAL"
+        },
+        "open_in_new_tab": false,
+        "no_follow": false
+      },
+      "supporting_text": "We’ll be happy to help you.",
+      "avatar_images": []
+    }
+  },
+  {
+    "id": "365c6d17-2f0a-49f0-bba7-b225b0a58009",
+    "name": "faq_items",
+    "label": "FAQ items",
+    "required": false,
+    "locked": false,
+    "occurrence": {
+      "min": 1,
+      "max": 12,
+      "sorting_label_field": "question",
+      "default": 5
+    },
+    "children": [
+      {
+        "id": "8a7bbf58-16ed-4578-b169-99bc30d1cae4",
+        "name": "question",
+        "label": "Question",
+        "required": true,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "What is Fluentic AI?"
+      },
+      {
+        "id": "37ef70a0-9cf0-41eb-af17-efbd285ce0dd",
+        "name": "answer",
+        "label": "Answer",
+        "required": false,
+        "locked": false,
+        "type": "richtext",
+        "display_width": null,
+        "default": "<p>Fluentic AI is a powerful platform designed to help businesses integrate, analyze, and automate data workflows using artificial intelligence.</p>"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": [
+      {
+        "question": "What is Fluentic AI?",
+        "answer": "<p>Fluentic AI is a powerful platform designed to help businesses integrate, analyze, and automate data workflows using artificial intelligence. It empowers teams to make smarter decisions and drive growth through seamless data management.</p>"
+      },
+      {
+        "question": "Can I integrate Fluentic AI with my existing tools?",
+        "answer": "<p>Yes! Fluentic AI supports integration with a wide range of tools and platforms. Our flexible APIs allow you to connect with your data sources effortlessly, enabling a smooth workflow.</p>"
+      },
+      {
+        "question": "How does Fluentic AI automate tasks?",
+        "answer": "<p>Fluentic AI uses AI-driven workflows to automate repetitive tasks such as data processing, reporting, and notifications. This helps save time and boosts productivity for your team.</p>"
+      },
+      {
+        "question": "Is my data secure with Fluentic AI?",
+        "answer": "<p>Absolutely! Fluentic AI takes security seriously. We use enterprise-grade encryption to protect your data, ensuring that it’s secure at all stages, from integration to processing.</p>"
+      },
+      {
+        "question": "What kind of support do you offer?",
+        "answer": "<p>We offer 24/7 support via email for all users, with additional live chat and priority support for Plus and Pro plan subscribers. Our team is always ready to assist with any questions or issues you may have.</p>"
+      }
+    ]
+  }
+]

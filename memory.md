@@ -187,3 +187,11 @@ Its scoped GSAP timeline follows the solution-section timing: badge at 0s, headi
 The heading and Explore All link are editable. The white Explore All button uses `btn_macros.secondary_button` (variant 2). The responsive card grid changes from three columns to two and then one, and featured images scale slightly on card hover/focus. Styling is scoped and uses global Fluentic color/font/border/container variables.
 
 The blog heading carries `gsap_split_word`; its DOM-created word spans carry `gsap_split_word1` and slide upward in a stagger. The macro button starts its own 50px fade-up shortly afterward. Blog cards reveal from 50px below in visual rows sized to the active grid: three cards on desktop, two on tablet, and one on mobile. Animation queries are scoped per module instance and disabled for reduced-motion users; GSAP and ScrollTrigger continue to come from `templates/layouts/base.html`.
+
+## FAQ v2 module
+
+`modules/FAQ v2.module/` recreates the homepage `<section id="FAQ" class="faq-section">` as an editable HubSpot DnD module. It uses the global eyebrow macro, global fonts/colors/borders, the original five FAQ questions and answers, and the downloaded Fluentic plus/minus icons and three FAQ avatars.
+
+The FAQ list is a repeater with one to twelve items. The contact avatar field is also a repeater (up to six images); when it is empty, the three bundled Fluentic avatars render as local fallbacks. All FAQ items are closed by default. Accordion controls use semantic buttons with `aria-expanded`, `aria-controls`, labelled regions, keyboard support, and single-open behavior. The open/close transition is intentionally quick: 320ms for panel height and 220ms for opacity/icons.
+
+Its GSAP sequence matches the existing module language: eyebrow at 0s, split heading words at 0.12s, contact prompt at 0.34s, and each accordion item revealing 50px upward as it reaches the viewport. Reveal tweens use brisk 0.45–0.5s durations. Selectors and initialization are scoped to each module instance, GSAP is not loaded again, and reduced-motion users receive a static fully visible layout.
