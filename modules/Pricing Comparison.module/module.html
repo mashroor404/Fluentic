@@ -160,6 +160,13 @@
     width: 1.375rem;
   }
 
+  .pricing-card-icon svg,
+  .pricing-list-item__icon svg {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
   .pricing-card:nth-child(3n + 2) .pricing-card-icon {
     color: var(--accent-purple);
   }
@@ -185,7 +192,6 @@
     font-size: 0.75rem;
     font-weight: var(--font-weight-medium);
     line-height: 1.4;
-    margin-left: auto;
     padding: 0.125rem 0.5rem;
     white-space: nowrap;
   }
@@ -437,9 +443,9 @@
                       <div class="pricing-card__content">
                         <div class="pricing-head">
                           <div class="pricing-card-title">
-                            <svg class="pricing-card-icon" viewBox="0 0 22 22" aria-hidden="true">
-                              <path d="M11 1.5 13.7 7l6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L2.2 7.9 8.3 7 11 1.5Z" fill="currentColor"/>
-                            </svg>
+                            {% if card.card_icon_svg %}
+                              <span class="pricing-card-icon" aria-hidden="true">{{ card.card_icon_svg|safe }}</span>
+                            {% endif %}
                             <h3 class="pricing-card__name">{{ card.card_name|escape_html }}</h3>
                             {% if card.is_popular and card.popular_label %}
                               <span class="popular-badge">{{ card.popular_label|escape_html }}</span>
@@ -476,9 +482,9 @@
                             <ul class="pricing-list" role="list">
                               {% for feature in card.features %}
                                 <li class="pricing-list-item">
-                                  <svg class="pricing-list-item__icon" viewBox="0 0 20 20" aria-hidden="true">
-                                    <path d="M18.75 10a1.25 1.25 0 0 1-.82 1.17l-4.96 1.8-1.8 4.96a1.25 1.25 0 0 1-2.34 0l-1.8-4.96-4.96-1.8a1.25 1.25 0 0 1 0-2.34l4.96-1.8 1.8-4.96a1.25 1.25 0 0 1 2.34 0l1.8 4.96 4.96 1.8c.5.18.82.65.82 1.17Z" fill="currentColor"/>
-                                  </svg>
+                                  {% if card.feature_icon_svg %}
+                                    <span class="pricing-list-item__icon" aria-hidden="true">{{ card.feature_icon_svg|safe }}</span>
+                                  {% endif %}
                                   <span>{{ feature|escape_html }}</span>
                                 </li>
                               {% endfor %}
@@ -582,7 +588,7 @@
 
         const eyebrow = section.querySelector("[data-pricing-eyebrow]");
         const description = section.querySelector("[data-pricing-description]");
-        const content = section.querySelector("[data-pricing-content]");
+        const activePanel = panels.find((panel) => !panel.hidden);
         const header = section.querySelector(".pricing-comparison__header");
 
         if (header) {
@@ -613,9 +619,9 @@
           }
         }
 
-        if (content) {
+        if (activePanel) {
           window.gsap.fromTo(
-            content,
+            activePanel,
             { autoAlpha: 0, y: 50 },
             {
               autoAlpha: 1,
@@ -623,8 +629,8 @@
               ease: "power3.out",
               y: 0,
               scrollTrigger: {
-                trigger: content,
-                start: "top 88%",
+                trigger: section,
+                start: "top bottom",
                 once: true
               }
             }

@@ -112,6 +112,30 @@
             "default": "Get started with Fluentic AI at no cost"
           },
           {
+            "id": "6d25e551-05fb-4bab-bf8a-a258f4b85b91",
+            "name": "card_icon_svg",
+            "label": "Card icon SVG",
+            "help_text": "Paste the complete SVG markup used beside the card name.",
+            "required": false,
+            "locked": false,
+            "allow_new_line": true,
+            "type": "text",
+            "display_width": null,
+            "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" fill=\"none\"><path d=\"M11 1.5 13.7 7l6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L2.2 7.9 8.3 7 11 1.5Z\" fill=\"currentColor\"/></svg>"
+          },
+          {
+            "id": "ed3ad11d-40bc-4a67-844c-d63afcc469c2",
+            "name": "feature_icon_svg",
+            "label": "Feature icon SVG",
+            "help_text": "Paste the complete SVG markup used for every feature in this card.",
+            "required": false,
+            "locked": false,
+            "allow_new_line": true,
+            "type": "text",
+            "display_width": null,
+            "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"none\"><path d=\"M18.75 10a1.25 1.25 0 0 1-.82 1.17l-4.96 1.8-1.8 4.96a1.25 1.25 0 0 1-2.34 0l-1.8-4.96-4.96-1.8a1.25 1.25 0 0 1 0-2.34l4.96-1.8 1.8-4.96a1.25 1.25 0 0 1 2.34 0l1.8 4.96 4.96 1.8c.5.18.82.65.82 1.17Z\" fill=\"currentColor\"/></svg>"
+          },
+          {
             "id": "c2bdc28e-92ee-41f8-9233-69650c670cad",
             "name": "is_popular",
             "label": "Popular plan",
