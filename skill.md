@@ -104,6 +104,15 @@ Example:
 - Check that theme variables exist before using them. Current legacy aliases are not guaranteed: `--primary-bg`, `--primary-dark-text-color`, `--border-width`, and `--border-color` differ from the newer `--bg-primary`, `--text-primary`, `--global-border-width`, and `--global-border-color` names.
 - Verify the page in the HubSpot editor and in the published preview after upload/sync.
 
+## Preview branch changes in HubSpot
+
+- Run `npm run watch:hubspot` at the repository root to initial-sync and continuously upload local changes to `/Fluentic` in account `246817745` as drafts.
+- This theme uses checked-in `fields.json` files, so do not add a separate `fields.js` compilation watcher unless the schema format is intentionally migrated later.
+- Use `npm run watch:hubspot:check` for a non-uploading configuration check.
+- Keep local-only files in `.hsignore`; do not add `--remove` to the watch command because branch changes must not delete unrelated remote assets.
+- Keep draft mode as the default. Use `HUBSPOT_WATCH_MODE=publish` only when the user explicitly intends to update published theme files.
+- Stop the watcher with `Ctrl+C`, and confirm the changed module in Design Manager or HubSpot's preview before merging the branch.
+
 ## Lessons captured from this project
 
 - Root `fields.json` is for theme-wide editor settings; a module's own `fields.json` is for module content/style controls.
@@ -175,6 +184,32 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Keep the Explore All control macro-driven and animate its wrapper rather than modifying the shared button markup.
 - Derive reveal row size from the responsive grid: three cards at desktop, two at tablet, and one at mobile. Give each visual row its own ScrollTrigger.
 
+## Build FAQ accordion modules
+
+- Use a repeatable group for question/answer pairs and a repeatable image field for contact/avatar artwork. Bundle local fallback images so an empty image repeater still renders the intended reference design.
+- Use the shared `btn_macros.eyebrow_label` for the FAQ badge and global theme tokens for all type, colors, borders, and surfaces.
+- Build accordion titles as native `<button>` controls. Keep `aria-expanded`, `aria-controls`, the panel's `aria-hidden`, and the visual open class synchronized; use unique panel IDs derived from the HubSpot module instance name.
+- Keep one FAQ open at a time, but render all FAQ items closed by default for this project.
+- Animate the badge and split-word heading with the established overlapping timing, then reveal the contact prompt and each accordion item upward from 50px. Keep these FAQ reveals brisk (about 0.45–0.5s) and give each item its own ScrollTrigger so lower mobile items animate when they actually enter the viewport. Use the FAQ module's 320ms panel and 220ms icon/opacity transitions for responsive-feeling accordion toggles.
+- Keep the server-rendered accordion usable without GSAP and remove transitions under `prefers-reduced-motion`.
+
+## Build scroll-scrubbed text ribbons
+
+- Match the reference track composition and responsive item dimensions before tuning motion. Fluentic's demo ribbon uses six text panels, seven icon separators, 1215px/212px desktop sizing, and 800/600/400px plus 160/140/120px responsive steps.
+- Keep the displayed text, destination link, and separator image editable. Use the bundled Fluentic `Vector.svg` as the fallback separator.
+- Apply `will-change: transform` and `transform-style: preserve-3d` to the complete horizontal track, not to every repeated child.
+- Use one reversible ScrollTrigger scrub from `xPercent: 0` to `-6`, with `scrub: 1.2`, `start: "top bottom"`, and `end: "bottom top"`. Scroll progress then moves gently left on the way down and right on the way up without a separate direction listener.
+- Mark repeated visual content as decorative and give the wrapping link one useful accessible label. Disable the transform under `prefers-reduced-motion`.
+
+## Build nested pricing comparison modules
+
+- Model billing filters as a repeating `plans` group. Nest a repeating `cards` group inside each plan, then use a repeating text field for each card's features. Keep group nesting within HubSpot's supported depth and loop through the resulting arrays directly in HubL.
+- Give every card a boolean popular toggle plus an editable popular label and background image. Render the selected image only for popular cards and use the bundled Fluentic pricing particle as its fallback.
+- Keep pricing card and feature icons editor-controlled through multiline text fields that accept complete SVG markup. One feature-icon field per card can be reused across that card's repeatable feature rows; do not hardcode the SVG paths in module markup.
+- Render every pricing CTA through `/Fluentic/Macros/Button.html`: `animated_button` for popular/base-black cards and `secondary_button` for regular/variant-2 cards.
+- Build filter controls as semantic tabs with unique module-instance IDs, `aria-selected`, `aria-controls`, tabpanels, and Left/Right/Home/End keyboard navigation. Keep all filter behavior available without GSAP.
+- Scope the header reveal, initial active-panel reveal, and tab-change card reveal to the module instance. Trigger the active `.pricing-comparison__panel` from 50px below when the section first enters the viewport, while preserving the separate staggered reveal for cards in newly selected tabs. Skip only the motion when reduced motion is requested.
+
 ## Replace global modules safely
 
 - Before replacing a global module, find every template/partial reader and preserve the deployed folder path, module label, and existing `module_id` unless a new remote module is explicitly required.
@@ -182,3 +217,12 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Bundle default logos and artwork with the theme and resolve them through `get_asset_url`; image fields should override those defaults.
 - Keep global navigation, social, brand, wordmark, and legal content editor-controlled through grouped and repeatable fields.
 - Preserve a rollback path through version control and do not upload the replacement until the user explicitly requests deployment.
+
+## Build Fluentic global headers
+
+- Match the reference navbar around a 1240px container and a translucent white shell with 20px backdrop blur, 16px radius, 12px padding, and a subtle shadow. At 991px and below, use the solid white shell and dropdown treatment.
+- Keep the existing header squeeze behavior when refining the navigation: this project toggles `.is-scrolled` after 30vh and reduces the desktop container to 67rem.
+- Use separate editable logo-icon and logo-text image fields, with the downloaded Fluentic Logo Icon and Logo Text SVG files as local `get_asset_url` fallbacks.
+- Render desktop and mobile header CTAs with `btn_macros.animated_button`; use scoped navbar sizing rather than hand-coded CTA markup.
+- Do not add active-page icons or persist a navigation index. The Header module intentionally has no icon field, active-state markup/CSS, `data-nav-index`, or localStorage behavior.
+- Keep mobile navigation controls semantic: synchronize `aria-expanded`, update the button label, and close on navigation, Escape, outside click, and return to desktop width.

@@ -28,6 +28,14 @@ images/          Theme preview/static image assets
 6. Pages and blog templates extend `templates/layouts/base.html`. A new page uses a template with `templateType: page`; blog listing and post templates use their corresponding HubSpot template types.
 7. In HubSpot, sync/upload the complete theme folder, publish it, then create/edit content with one of the theme's page or blog templates. Theme settings are then available from the theme editor and flow into the rendered CSS.
 
+## Local HubSpot draft watcher
+
+Run `npm run watch:hubspot` from the theme root to perform an initial upload and then continuously sync local theme changes to `/Fluentic` in HubSpot account `246817745`. The wrapper delegates to the installed native command `hs watch . /Fluentic --account 246817745 --initial-upload --cms-publish-mode draft`; draft mode makes changes available in Design Manager and HubSpot preview without publishing them to live pages.
+
+This repository stores module schemas directly as `fields.json`, so no `fields.js` compiler or npm watcher dependency is needed. The watcher covers module HTML, fields JSON, CSS, JavaScript, templates, macros, assets, and root theme settings. Stop it with `Ctrl+C`. Run `npm run watch:hubspot:check` to verify the resolved command without uploading anything.
+
+Environment overrides are available when needed: `HUBSPOT_ACCOUNT`, `HUBSPOT_WATCH_DEST`, and `HUBSPOT_WATCH_MODE` (`draft` or `publish`). Publish mode can affect live pages and should only be used intentionally. `.hsignore` prevents GitHub configuration, Markdown notes, and local watcher/package files from being uploaded. The watcher intentionally does not use `--remove`, so it will not delete remote files that are absent locally.
+
 ## Theme setting to CSS mapping
 
 The important mapping is in `css/elements/global.css` (also duplicated in `css/main.css`):
@@ -164,6 +172,14 @@ GSAP and ScrollTrigger are supplied by `templates/layouts/base.html` and must no
 
 The editable schema now covers the brand logo/link/description, four selectable social platforms, repeatable navigation columns and links, optional oversized wordmark, copyright rich text, and repeatable legal links. The bundled Fluentic logo and large Logo Text SVGs are local `get_asset_url` fallbacks. The module renders a section with the required `footer` class inside the existing global `<footer>` partial, avoiding invalid nested footer landmarks. Styling uses global theme variables and follows the reference's desktop, tablet, and mobile layout without adding JavaScript.
 
+## Global Header module
+
+`modules/Global/Header.module/` matches the Fluentic Webflow navbar while preserving the project's existing 30vh scroll-triggered squeeze from the 1240px reference width to 67rem. The nav shell is always translucent white with 20px backdrop blur, a 16px radius, 12px padding, and the reference shadow; at 991px and below it switches to a solid white shell and dropdown menu.
+
+The logo has separate editable icon and text-image fields. When either is empty, the downloaded Fluentic `Logo Icon.svg` and `Logo Text.svg` assets render through `get_asset_url`. Default links mirror the reference: Feature, Process, Testimonial, Pricing, and Blog. Desktop and mobile CTA labels are independently editable (`Sign up` and `Contact` by default), but both render through `btn_macros.animated_button`, with the compact 6px by 20px navbar treatment.
+
+The former active-page icon behavior was removed completely: there is no navigation SVG field, icon markup, `data-nav-index`, `w--current` styling, or localStorage state. Header JavaScript now only manages the existing scroll squeeze and the accessible mobile menu, including synchronized `aria-expanded`, Escape/outside-click closing, and desktop-resize cleanup.
+
 ## CTA module
 
 `modules/CTA.module/` recreates the Webflow `<section class="cta-section">` as an editable HubSpot DnD page module. Editor fields control the eyebrow, heading, button visibility/text/link, illustration visibility/image/alt text, and the panel's Background Image.
@@ -180,6 +196,7 @@ The heading and Explore All link are editable. The white Explore All button uses
 
 The blog heading carries `gsap_split_word`; its DOM-created word spans carry `gsap_split_word1` and slide upward in a stagger. The macro button starts its own 50px fade-up shortly afterward. Blog cards reveal from 50px below in visual rows sized to the active grid: three cards on desktop, two on tablet, and one on mobile. Animation queries are scoped per module instance and disabled for reduced-motion users; GSAP and ScrollTrigger continue to come from `templates/layouts/base.html`.
 
+<<<<<<< HEAD
 ## Key Benefit module
 
 `modules/Key Benefit.module/` recreates the Webflow `<section class="benefit-section">` ("Why Choose Fluentic AI") as an editable HubSpot DnD page module, added 2026-08-21. Structure, spacing, and breakpoints were read from the live markup and `fluentic.webflow.shared.793a05b7f.css` rather than estimated.
@@ -199,3 +216,28 @@ Layout follows the reference breakpoints exactly: 1240px container; three-column
 The scoped GSAP timeline reuses the solution-section header timing (eyebrow 0s, split heading words 0.12s, description 0.3s) and then reveals the white card, the center visual, and the bottom card as three independent 50px rises with a 1px blur, matching the three `data-w-id` reveals in the reference. GSAP and ScrollTrigger come only from `templates/layouts/base.html`; all motion is gated behind `prefers-reduced-motion: no-preference`.
 
 The module's eyebrow renders through `btn_macros.eyebrow_label`, so it is sentence case while the live site's `.sub-title` is uppercased by CSS. That difference is intentional — the eyebrow is a shared site-wide component and was deliberately normalized on 2026-08-20; do not add a module-local `text-transform` override.
+=======
+## FAQ v2 module
+
+`modules/FAQ v2.module/` recreates the homepage `<section id="FAQ" class="faq-section">` as an editable HubSpot DnD module. It uses the global eyebrow macro, global fonts/colors/borders, the original five FAQ questions and answers, and the downloaded Fluentic plus/minus icons and three FAQ avatars.
+
+The FAQ list is a repeater with one to twelve items. The contact avatar field is also a repeater (up to six images); when it is empty, the three bundled Fluentic avatars render as local fallbacks. All FAQ items are closed by default. Accordion controls use semantic buttons with `aria-expanded`, `aria-controls`, labelled regions, keyboard support, and single-open behavior. The open/close transition is intentionally quick: 320ms for panel height and 220ms for opacity/icons.
+
+Its GSAP sequence matches the existing module language: eyebrow at 0s, split heading words at 0.12s, contact prompt at 0.34s, and each accordion item revealing 50px upward as it reaches the viewport. Reveal tweens use brisk 0.45–0.5s durations. Selectors and initialization are scoped to each module instance, GSAP is not loaded again, and reduced-motion users receive a static fully visible layout.
+
+## Demo text block wrap module
+
+`modules/demo-text-block-wrap.module/` recreates the homepage `.demo-text-block-wrap` CTA ribbon. Editors can change its repeated text, destination link, and separator icon; the downloaded `Vector.svg` gradient mark is the local fallback. The server-rendered track follows the reference structure with six text panels and seven circular icon separators.
+
+Desktop text panels are 1215px wide with 212px icon circles. The module follows the reference's 991px, 767px, and 479px steps (800/600/400px text and 160/140/120px icons). Typography and surfaces use the theme's global font and color tokens.
+
+GSAP ScrollTrigger scrubs the complete track from `xPercent: 0` to `xPercent: -6` between `top bottom` and `bottom top`, with `scrub: 1.2` for a slower, smoother response. Scrolling down therefore moves the track gently left, while scrolling upward naturally reverses it to the right. The track uses `will-change: transform`, `transform-style: preserve-3d`, and `force3D`; motion is disabled under `prefers-reduced-motion`.
+
+## Pricing Comparison module
+
+`modules/Pricing Comparison.module/` recreates the Fluentic pricing section as an editable HubSpot DnD module. Its field model is `plans` repeating group → nested `cards` repeating group → repeating `features` text field. Defaults provide Monthly and Yearly tabs, each with Free, Plus, and Pro cards.
+
+Every card has editable name, description, card-icon SVG markup, feature-icon SVG markup, price, billing period, features heading/list, button text/link, popular toggle, popular label, and popular background image. The feature icon is configured once per card and reused for every row in that card's repeatable features list. Popular cards use the highlighted inset-header design, the base/black global button macro, and the selected background image or bundled `Pricing Card Particle.svg` fallback. Regular cards use the white/variant-2 global button macro.
+
+Plan filtering uses semantic tabs and tabpanels with synchronized `aria-selected`, keyboard Left/Right/Home/End navigation, and instance-scoped IDs. The first plan is active initially. The header uses the established eyebrow and split-word GSAP reveal; the active `.pricing-comparison__panel` rises from 50px as soon as the section enters the viewport, and newly selected plan cards receive a short staggered reveal. Reduced-motion mode preserves filtering without animation.
+>>>>>>> 6cb12da788ed7b588aa0ba88693343384f21b5ce

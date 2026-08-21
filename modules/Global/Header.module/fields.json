@@ -7,7 +7,7 @@
   "children" : [ {
     "id" : "hdr-logo-image",
     "name" : "logo_image",
-    "label" : "Logo Image",
+    "label" : "Logo Icon",
     "required" : false,
     "locked" : false,
     "responsive" : false,
@@ -17,7 +17,24 @@
     "display_width" : null,
     "default" : {
       "src" : "",
-      "alt" : "Re-board Technology",
+      "alt" : "Fluentic logo icon",
+      "width" : 0,
+      "height" : 0
+    }
+  }, {
+    "id" : "hdr-logo-text-image",
+    "name" : "logo_text_image",
+    "label" : "Logo Text Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "Fluentic",
       "width" : 0,
       "height" : 0
     }
@@ -49,7 +66,13 @@
   "default" : {
     "logo_image" : {
       "src" : "",
-      "alt" : "Re-board Technology",
+      "alt" : "Fluentic logo icon",
+      "width" : 0,
+      "height" : 0
+    },
+    "logo_text_image" : {
+      "src" : "",
+      "alt" : "Fluentic",
       "width" : 0,
       "height" : 0
     },
@@ -71,9 +94,9 @@
   "locked" : false,
   "occurrence" : {
     "min" : 1,
-    "max" : null,
-    "sorting_label_field" : null,
-    "default" : 1
+    "max" : 8,
+    "sorting_label_field" : "nav_text",
+    "default" : 5
   },
   "children" : [ {
     "id" : "hdr-nav-text",
@@ -104,15 +127,6 @@
       "open_in_new_tab" : false,
       "no_follow" : false
     }
-  }, {
-    "id" : "dedcb2b5-a043-47d7-3e1f-947f923f9942",
-    "name" : "icon_svg_code",
-    "label" : "Icon svg code",
-    "required" : false,
-    "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
-    "display_width" : null
   } ],
   "tab" : "CONTENT",
   "expanded" : false,
@@ -120,12 +134,56 @@
   "type" : "group",
   "display_width" : null,
   "default" : [ {
-    "nav_text" : "Retail",
+    "nav_text" : "Feature",
     "nav_link" : {
       "url" : {
         "content_id" : null,
         "type" : "EXTERNAL",
-        "href" : ""
+        "href" : "/#Features"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "nav_text" : "Process",
+    "nav_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "/#Process"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "nav_text" : "Testimonial",
+    "nav_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "/#Testimonial"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "nav_text" : "Pricing",
+    "nav_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "/#Pricing"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "nav_text" : "Blog",
+    "nav_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "/blog"
       },
       "open_in_new_tab" : false,
       "no_follow" : false
@@ -146,7 +204,17 @@
     "allow_new_line" : false,
     "type" : "text",
     "display_width" : null,
-    "default" : "Get Started Free"
+    "default" : "Sign up"
+  }, {
+    "id" : "hdr-cta-mobile-text",
+    "name" : "mobile_button_text",
+    "label" : "Mobile Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Contact"
   }, {
     "id" : "hdr-cta-link",
     "name" : "button_link",
@@ -161,7 +229,7 @@
       "url" : {
         "content_id" : null,
         "type" : "EXTERNAL",
-        "href" : ""
+        "href" : "/contact-us"
       },
       "open_in_new_tab" : false,
       "no_follow" : false
@@ -173,12 +241,13 @@
   "type" : "group",
   "display_width" : null,
   "default" : {
-    "button_text" : "Get Started Free",
+    "button_text" : "Sign up",
+    "mobile_button_text" : "Contact",
     "button_link" : {
       "url" : {
         "content_id" : null,
         "type" : "EXTERNAL",
-        "href" : ""
+        "href" : "/contact-us"
       },
       "open_in_new_tab" : false,
       "no_follow" : false
