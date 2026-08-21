@@ -1,0 +1,1016 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  .testimonial-section {
+    /* Spacing + type scale read off the live Fluentic stylesheet. The theme's
+       shared --text-h2/--text-h3 tokens don't match these values, so they stay
+       local to this module instead of changing site-wide tokens. */
+    --ts-pad-default: 120px;
+    --ts-pad-large: 160px;
+    --ts-h2-size: 60px;
+    --ts-h3-size: 44px;
+    --ts-h5-size: 24px;
+    --ts-card-padding: 40px;
+    --ts-card-padding-inline: 40px;
+    --ts-author-image-size: 60px;
+    --ts-slider-padding: 0px;
+
+    --ts-block-width: {{ module.style.block_max_width|default(1920) }}px;
+    --ts-container-width: {{ module.style.container_max_width|default(1240) }}px;
+    --ts-content-width: {{ module.style.content_max_width|default(994) }}px;
+    --ts-slider-width: 894px;
+    --ts-card-wrap-width: 726px;
+    --ts-card-width: 676px;
+    --ts-card-bg: {{ module.style.card_background_color.color|default('#FFFFFF') }};
+
+    position: relative;
+    box-sizing: border-box;
+    padding: 16px 16px var(--ts-pad-large);
+    {% if module.style.overlap_previous %}margin-top: -16px;{% endif %}
+    font-family: var(--primary-font, 'General Sans', Arial, sans-serif);
+    color: var(--text-primary, #1B0C27);
+  }
+
+  .testimonial-section *,
+  .testimonial-section *::before,
+  .testimonial-section *::after {
+    box-sizing: border-box;
+  }
+
+  .testimonial-content-block {
+    max-width: var(--ts-block-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: var(--ts-pad-default);
+    padding-bottom: var(--ts-pad-default);
+    border-radius: 16px;
+    background-color: var(--page-bg, #F8F7F8);
+    background-image: var(--ts-background-image, none);
+    background-position: 50% 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .testimonial-container {
+    width: 100%;
+    max-width: var(--ts-container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* ---------- Section title ---------- */
+
+  .testimonial-section .section-title-block {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto 60px;
+  }
+
+  .testimonial-eyebrow-ring {
+    display: inline-flex;
+    padding: 1px;
+    border-radius: 99px;
+    background-color: var(--accent-purple, #D37BFF);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07), 0 8px 8px rgba(0, 0, 0, 0.06), 0 19px 11px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Re-skins the shared eyebrow macro to the live "wall of love" pill without
+     duplicating its markup: white inner pill inside the purple ring. */
+  .testimonial-eyebrow-ring .eyebrow-custom {
+    --eyebrow-bg-color: var(--bg-primary, #FFFFFF);
+    --eyebrow-border-color: transparent;
+    min-height: 0;
+    padding: 5px 12px;
+    border-radius: 99px;
+    text-transform: uppercase;
+    box-shadow: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .testimonial-eyebrow-ring .eyebrow-text {
+    font-size: 14px;
+    line-height: 1;
+    font-weight: var(--font-weight-medium, 500);
+  }
+
+  .testimonial-section .section-title {
+    max-width: 894px;
+    margin: 16px 0 0;
+  }
+
+  .testimonial-heading {
+    margin: 0;
+    font-family: var(--primary-font, 'General Sans', Arial, sans-serif);
+    font-size: var(--ts-h2-size);
+    line-height: 1.1;
+    letter-spacing: 0;
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--text-primary, #1B0C27);
+  }
+
+  .testimonial-content-wrap {
+    display: flex;
+    flex-flow: column;
+    gap: 40px;
+    width: 100%;
+    max-width: var(--ts-content-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ---------- Slider ---------- */
+
+  .testimonial-slider {
+    position: relative;
+    width: 100%;
+    max-width: var(--ts-slider-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--ts-slider-padding);
+    padding-right: var(--ts-slider-padding);
+    background-color: transparent;
+  }
+
+  .testimonial-slider-mask {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    touch-action: pan-y;
+  }
+
+  .testimonial-slider-track {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    transition-duration: 0ms;
+    will-change: transform;
+  }
+
+  .testimonial-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .testimonial-card-wrap {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    max-width: var(--ts-card-wrap-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .testimonial-card {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    height: 100%;
+    max-width: var(--ts-card-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--ts-card-padding) var(--ts-card-padding-inline);
+    border: 1px solid var(--ts-card-bg);
+    border-radius: 16px;
+    background-color: var(--ts-card-bg);
+  }
+
+  /* The translucent "stacked card" peeking out behind the active slide. */
+  .testimonial-card-bg {
+    position: absolute;
+    z-index: -1;
+    top: 10%;
+    left: 0;
+    right: 0;
+    height: 80%;
+    border-radius: 14px;
+    opacity: 0.5;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 4px 2px var(--bg-primary, #FFFFFF);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .testimonial-quote {
+    margin: 0;
+    font-size: var(--ts-h5-size);
+    line-height: 1.33;
+    letter-spacing: 0;
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--text-primary, #1B0C27);
+  }
+
+  .testimonial-card-author-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .testimonial-card-author-info .author-image {
+    flex: 0 0 auto;
+    width: var(--ts-author-image-size);
+    max-width: var(--ts-author-image-size);
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .testimonial-card-author-info .author-info {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .testimonial-author-name {
+    font-size: 16px;
+    line-height: 1.62;
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--text-primary, #1B0C27);
+  }
+
+  .testimonial-author-role {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.62;
+    font-weight: var(--font-weight-regular, 400);
+    color: var(--text-primary, #1B0C27);
+  }
+
+  /* ---------- Arrows ---------- */
+
+  .testimonial-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--bg-primary, #FFFFFF);
+    color: var(--text-primary, #1B0C27);
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .testimonial-arrow.is-left { left: 0; }
+  .testimonial-arrow.is-right { right: 0; }
+
+  .testimonial-arrow:hover { transform: translateY(-50%) scale(1.06); }
+
+  .testimonial-arrow:focus-visible {
+    outline: 2px solid var(--text-primary, #1B0C27);
+    outline-offset: 2px;
+  }
+
+  .testimonial-arrow[disabled] {
+    opacity: 0.4;
+    cursor: default;
+    transform: translateY(-50%);
+  }
+
+  .testimonial-arrow-icon {
+    display: block;
+    width: 6px;
+    max-width: 6px;
+    height: auto;
+    color: currentColor;
+  }
+
+  /* ---------- Statistics ---------- */
+
+  .statistic-widget-wrap {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 638px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .statistic-widget {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    min-width: 200px;
+    text-align: center;
+  }
+
+  .statistic-widget .counter-number {
+    font-size: var(--ts-h3-size);
+    line-height: 1.18;
+    font-weight: var(--font-weight-medium, 500);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary, #1B0C27);
+  }
+
+  .statistic-widget p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.62;
+    color: var(--text-primary, #1B0C27);
+  }
+
+  /* ---------- Trusted by ---------- */
+
+  .brand-block {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    max-width: var(--ts-content-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .brand-block .brand-heading {
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--text-primary, #1B0C27);
+  }
+
+  .brand-logo-wrap {
+    display: flex;
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    gap: 26px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .brand-logo-wrap .brand-logo {
+    flex: none;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 991px) {
+    .testimonial-section {
+      --ts-pad-default: 80px;
+      --ts-pad-large: 80px;
+      --ts-h2-size: 48px;
+      --ts-h3-size: 40px;
+      --ts-h5-size: 22px;
+      --ts-slider-padding: 80px;
+    }
+
+    .testimonial-section .section-title-block {
+      margin-bottom: 40px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .testimonial-section {
+      --ts-pad-default: 60px;
+      --ts-pad-large: 60px;
+      --ts-h2-size: 36px;
+      --ts-h3-size: 32px;
+      --ts-h5-size: 20px;
+      --ts-card-padding: 24px;
+      --ts-card-padding-inline: 24px;
+      --ts-author-image-size: 50px;
+      --ts-slider-padding: 0px;
+    }
+
+    .testimonial-container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .testimonial-section .section-title {
+      margin-bottom: 16px;
+    }
+
+    /* Live layout drops the arrows below the card on small screens, centred
+       as a pair: both get margin:auto, then nudge apart by 24px each way. */
+    .testimonial-arrow {
+      position: relative;
+      top: auto;
+      transform: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .testimonial-arrow:hover { transform: scale(1.06); }
+    .testimonial-arrow[disabled] { transform: none; }
+
+    .testimonial-arrow.is-left {
+      left: -24px;
+      margin-top: 40px;
+      margin-bottom: -40px;
+    }
+
+    .testimonial-arrow.is-right {
+      right: -24px;
+    }
+
+    .statistic-widget-wrap {
+      flex-flow: row wrap;
+    }
+
+    .statistic-widget {
+      flex: 1;
+      min-width: 160px;
+      max-width: 100%;
+    }
+
+    .brand-logo-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 26px;
+      place-items: center;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .testimonial-section {
+      --ts-pad-default: 40px;
+      --ts-pad-large: 40px;
+      --ts-card-padding-inline: 16px;
+    }
+
+    .testimonial-card-wrap {
+      width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .testimonial-eyebrow-ring .eyebrow-text {
+      font-size: 12px;
+    }
+
+    .statistic-widget {
+      min-width: 120px;
+    }
+
+    .brand-logo-wrap {
+      row-gap: 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial-slider-track {
+      transition-duration: 0ms !important;
+    }
+
+    .testimonial-arrow,
+    .testimonial-arrow:hover {
+      transition: none;
+      transform: translateY(-50%);
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{# ---------- Bundled reference assets, overridable from the editor ---------- #}
+{% set default_eyebrow_icon = get_asset_url("../../css/elements/Assets/icons/6984fc2e00e2222da1035dca_Star.svg") %}
+{% set default_author_image = get_asset_url("../../css/elements/Assets/icons/6980b00ecc7476edfd628bd2_Image.svg") %}
+{% set default_background = get_asset_url("../../css/elements/Assets/images/6980a912398899baa485ffcf_About BG Image.webp") %}
+{# Hash-free copies of the four "Logo - #n.svg" reference files: an unencoded
+   '#' in an asset URL is read as a fragment and silently breaks the image. #}
+{% set default_logos = [
+  get_asset_url("../../css/elements/Assets/icons/6980b7cebe0790b041e27b65_Logo 1.svg"),
+  get_asset_url("../../css/elements/Assets/icons/6980b4715899e12a869e9371_Logo 2.svg"),
+  get_asset_url("../../css/elements/Assets/icons/6980b786d2840dcc05123029_Logo 3.svg"),
+  get_asset_url("../../css/elements/Assets/icons/6980b78649432f63ddaf2004_Logo 4.svg")
+] %}
+
+{% set eyebrow_icon_src = module.content.eyebrow_icon.src|default(default_eyebrow_icon, true) %}
+{% set background_src = module.style.background_image.src|default(default_background, true) %}
+{% set slide_count = module.testimonials|length %}
+
+<section class="testimonial-section" data-testimonial-section>
+  <div
+    class="testimonial-content-block"
+    {% if background_src %}style="--ts-background-image: url('{{ background_src|escape_url }}');"{% endif %}
+  >
+    <div class="testimonial-container">
+      <div class="testimonial-content-wrapper">
+
+        {% if module.content.heading or (module.content.show_eyebrow and module.content.eyebrow_text) %}
+          <div class="section-title-block">
+            {% if module.content.show_eyebrow and module.content.eyebrow_text %}
+              <div class="testimonial-eyebrow-ring">
+                {{ btn_macros.eyebrow_label(module.content.eyebrow_text, eyebrow_icon_src) }}
+              </div>
+            {% endif %}
+
+            {% if module.content.heading %}
+              <div class="section-title">
+                <h2 class="testimonial-heading">{{ module.content.heading|escape_html }}</h2>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="testimonial-content-wrap">
+
+          {% if slide_count %}
+            <div
+              class="testimonial-slider"
+              data-ts-slider
+              data-ts-reveal
+              data-ts-loop="{{ 'true' if module.slider.loop else 'false' }}"
+              data-ts-autoplay="{{ 'true' if module.slider.autoplay else 'false' }}"
+              data-ts-delay="{{ module.slider.autoplay_delay|default(4000) }}"
+              data-ts-duration="{{ module.slider.transition_duration|default(500) }}"
+              role="region"
+              aria-roledescription="carousel"
+              aria-label="{{ module.content.heading|default('Customer testimonials', true)|escape_attr }}"
+            >
+              <div class="testimonial-slider-mask" data-ts-mask>
+                <div class="testimonial-slider-track" data-ts-track>
+                  {% for item in module.testimonials %}
+                    {% set author_src = item.author_image.src|default(default_author_image, true) %}
+                    <div
+                      class="testimonial-slide"
+                      data-ts-slide
+                      role="group"
+                      aria-roledescription="slide"
+                      aria-label="Testimonial {{ loop.index }} of {{ slide_count }}"
+                    >
+                      <div class="testimonial-card-wrap">
+                        <div class="testimonial-card">
+                          {% if item.quote %}
+                            <p class="testimonial-quote">{{ item.quote|escape_html }}</p>
+                          {% endif %}
+
+                          {% if item.author_name or item.author_role or author_src %}
+                            <div class="testimonial-card-author-info">
+                              {% if author_src %}
+                                <img
+                                  class="author-image"
+                                  src="{{ author_src|escape_url }}"
+                                  alt="{{ item.author_image.alt|default(item.author_name, true)|escape_attr }}"
+                                  loading="lazy"
+                                  width="60"
+                                  height="60"
+                                >
+                              {% endif %}
+                              <div class="author-info">
+                                {% if item.author_name %}
+                                  <div class="testimonial-author-name">{{ item.author_name|escape_html }}</div>
+                                {% endif %}
+                                {% if item.author_role %}
+                                  <p class="testimonial-author-role">{{ item.author_role|escape_html }}</p>
+                                {% endif %}
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                        <div class="testimonial-card-bg" aria-hidden="true"></div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              {% if module.slider.show_arrows and slide_count > 1 %}
+                <button type="button" class="testimonial-arrow is-left" data-ts-prev aria-label="Previous testimonial">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 14" fill="none" class="testimonial-arrow-icon" aria-hidden="true">
+                    <path d="M6.64282 12.6431L0.642822 6.64307L6.64282 0.643066" stroke="currentColor" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+                <button type="button" class="testimonial-arrow is-right" data-ts-next aria-label="Next testimonial">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 14" fill="none" class="testimonial-arrow-icon" aria-hidden="true">
+                    <path d="M0.642822 12.6431L6.64282 6.64307L0.642822 0.643066" stroke="currentColor" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if module.stats.show_stats and module.stats.items|length %}
+            <div class="statistic-widget-wrap" data-ts-reveal>
+              {% for stat in module.stats.items %}
+                <div class="statistic-widget">
+                  {% if stat.value %}
+                    <div
+                      class="counter-number"
+                      {% if module.stats.animate_counters %}data-ts-counter data-ts-target="{{ stat.value|escape_attr }}"{% endif %}
+                    >{{ stat.value|escape_html }}</div>
+                  {% endif %}
+                  {% if stat.caption %}<p>{{ stat.caption|escape_html }}</p>{% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if module.brands.show_brands and (module.brands.heading or module.brands.logos|length) %}
+            <div class="brand-block" data-ts-reveal>
+              {% if module.brands.heading %}
+                <div class="brand-heading">{{ module.brands.heading|escape_html }}</div>
+              {% endif %}
+
+              {% if module.brands.logos|length %}
+                <div class="brand-logo-wrap">
+                  {% for row in module.brands.logos %}
+                    {% set fallback_logo = default_logos[loop.index0] if loop.index0 < default_logos|length else '' %}
+                    {% set logo_src = row.logo.src|default(fallback_logo, true) %}
+                    {% if logo_src %}
+                      <img
+                        class="brand-logo"
+                        src="{{ logo_src|escape_url }}"
+                        alt="{{ row.logo.alt|default('Brand logo', true)|escape_attr }}"
+                        loading="lazy"
+                      >
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% require_js %}
+<script>
+  (function () {
+    'use strict';
+
+    var SECTION_SELECTOR = '[data-testimonial-section]:not([data-ts-ready])';
+
+    function prefersReducedMotion() {
+      return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Slider                                                              */
+    /* ------------------------------------------------------------------ */
+    function initSlider(root) {
+      var slider = root.querySelector('[data-ts-slider]');
+      if (!slider) return;
+
+      var mask = slider.querySelector('[data-ts-mask]');
+      var track = slider.querySelector('[data-ts-track]');
+      var slides = Array.prototype.slice.call(slider.querySelectorAll('[data-ts-slide]'));
+      var prevBtn = slider.querySelector('[data-ts-prev]');
+      var nextBtn = slider.querySelector('[data-ts-next]');
+      var total = slides.length;
+
+      if (!track || total === 0) return;
+
+      if (total === 1) {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        return;
+      }
+
+      var motionOK = !prefersReducedMotion();
+      var loop = slider.getAttribute('data-ts-loop') === 'true';
+      var duration = parseInt(slider.getAttribute('data-ts-duration'), 10);
+      if (isNaN(duration) || duration < 0) duration = 500;
+      var autoplay = slider.getAttribute('data-ts-autoplay') === 'true' && motionOK;
+      var delay = parseInt(slider.getAttribute('data-ts-delay'), 10);
+      if (isNaN(delay) || delay < 1000) delay = 4000;
+
+      /* Clones on both ends give a seamless wrap in either direction. They are
+         hidden from assistive tech and carry no [data-ts-slide] hook, so the
+         real slide list above is unaffected. */
+      if (loop) {
+        var headClone = slides[total - 1].cloneNode(true);
+        var tailClone = slides[0].cloneNode(true);
+        [headClone, tailClone].forEach(function (clone) {
+          clone.removeAttribute('data-ts-slide');
+          clone.setAttribute('data-ts-clone', '');
+          clone.setAttribute('aria-hidden', 'true');
+          clone.removeAttribute('role');
+          clone.removeAttribute('aria-roledescription');
+          clone.removeAttribute('aria-label');
+        });
+        track.appendChild(tailClone);
+        track.insertBefore(headClone, track.firstChild);
+      }
+
+      var offset = loop ? 1 : 0;
+      var index = 0;            /* logical slide, 0..total-1 */
+      var position = offset;    /* physical slide including clones */
+      var settleTimer = null;
+      var animating = false;
+
+      function applyTransform(animate, dragPx) {
+        var ms = (animate && motionOK) ? duration : 0;
+        track.style.transitionDuration = ms + 'ms';
+        var base = 'translate3d(calc(' + (-position * 100) + '%';
+        if (dragPx) base += (dragPx < 0 ? ' - ' : ' + ') + Math.abs(dragPx) + 'px';
+        track.style.transform = base + '), 0, 0)';
+      }
+
+      function syncState() {
+        slides.forEach(function (slide, i) {
+          var active = i === index;
+          slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+        if (!loop) {
+          if (prevBtn) prevBtn.disabled = index === 0;
+          if (nextBtn) nextBtn.disabled = index === total - 1;
+        }
+      }
+
+      /* After the slide settles, silently jump off a clone onto the real slide. */
+      function normalize() {
+        if (!loop) return;
+        if (position === 0) {
+          position = total;
+          applyTransform(false);
+        } else if (position === total + 1) {
+          position = 1;
+          applyTransform(false);
+        }
+      }
+
+      function commit(animate) {
+        animating = true;
+        applyTransform(animate);
+        window.clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(function () {
+          normalize();
+          animating = false;
+          syncState();
+        }, (animate && motionOK) ? duration + 20 : 20);
+      }
+
+      function goNext() {
+        if (animating) return;
+        if (loop) {
+          position += 1;
+          index = (index + 1) % total;
+        } else {
+          if (index >= total - 1) return;
+          index += 1;
+          position = index;
+        }
+        commit(true);
+      }
+
+      function goPrev() {
+        if (animating) return;
+        if (loop) {
+          position -= 1;
+          index = (index - 1 + total) % total;
+        } else {
+          if (index <= 0) return;
+          index -= 1;
+          position = index;
+        }
+        commit(true);
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { stopAuto(); goPrev(); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { stopAuto(); goNext(); });
+
+      slider.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowLeft') { stopAuto(); goPrev(); event.preventDefault(); }
+        else if (event.key === 'ArrowRight') { stopAuto(); goNext(); event.preventDefault(); }
+      });
+
+      /* ---------------- Drag / swipe ---------------- */
+      if (mask && window.PointerEvent) {
+        var dragging = false;
+        var startX = 0;
+        var deltaX = 0;
+        var pointerId = null;
+
+        mask.addEventListener('pointerdown', function (event) {
+          if (animating || (event.pointerType === 'mouse' && event.button !== 0)) return;
+          dragging = true;
+          startX = event.clientX;
+          deltaX = 0;
+          pointerId = event.pointerId;
+          track.style.transitionDuration = '0ms';
+          if (mask.setPointerCapture) {
+            try { mask.setPointerCapture(pointerId); } catch (err) {}
+          }
+        });
+
+        mask.addEventListener('pointermove', function (event) {
+          if (!dragging || event.pointerId !== pointerId) return;
+          deltaX = event.clientX - startX;
+          applyTransform(false, deltaX);
+        });
+
+        function endDrag(event) {
+          if (!dragging || (event && event.pointerId !== pointerId)) return;
+          dragging = false;
+          pointerId = null;
+          var threshold = Math.max(40, mask.offsetWidth * 0.12);
+          if (deltaX <= -threshold) { stopAuto(); goNext(); }
+          else if (deltaX >= threshold) { stopAuto(); goPrev(); }
+          else { commit(true); }
+          deltaX = 0;
+        }
+
+        mask.addEventListener('pointerup', endDrag);
+        mask.addEventListener('pointercancel', endDrag);
+        mask.addEventListener('dragstart', function (event) { event.preventDefault(); });
+      }
+
+      /* ---------------- Autoplay ---------------- */
+      var autoTimer = null;
+      var autoAllowed = autoplay;
+      var inView = true;
+
+      function tick() {
+        if (!autoAllowed || !inView || document.hidden) return;
+        goNext();
+      }
+
+      function startAuto() {
+        if (!autoAllowed || autoTimer) return;
+        autoTimer = window.setInterval(tick, delay);
+      }
+
+      function stopAuto() {
+        autoAllowed = false;
+        if (autoTimer) { window.clearInterval(autoTimer); autoTimer = null; }
+      }
+
+      function pauseAuto() {
+        if (autoTimer) { window.clearInterval(autoTimer); autoTimer = null; }
+      }
+
+      if (autoplay) {
+        slider.addEventListener('pointerenter', pauseAuto);
+        slider.addEventListener('pointerleave', function () { startAuto(); });
+        slider.addEventListener('focusin', pauseAuto);
+        slider.addEventListener('focusout', function () { startAuto(); });
+        document.addEventListener('visibilitychange', function () {
+          if (document.hidden) pauseAuto(); else startAuto();
+        });
+
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              inView = entry.isIntersecting;
+              if (inView) startAuto(); else pauseAuto();
+            });
+          }, { threshold: 0.2 }).observe(slider);
+        }
+        startAuto();
+      }
+
+      applyTransform(false);
+      syncState();
+
+      window.addEventListener('resize', function () {
+        applyTransform(false);
+      });
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Scroll reveals — mirrors the live site's opacity/blur/50px rise.     */
+    /* State is applied from JS only, so the no-JS render stays visible.    */
+    /* ------------------------------------------------------------------ */
+    function initReveals(root) {
+      var targets = Array.prototype.slice.call(root.querySelectorAll('[data-ts-reveal]'));
+      if (!targets.length) return;
+      if (prefersReducedMotion() || typeof window.gsap === 'undefined') return;
+
+      var gsap = window.gsap;
+      var hasScrollTrigger = typeof window.ScrollTrigger !== 'undefined';
+      if (hasScrollTrigger) {
+        gsap.registerPlugin(window.ScrollTrigger);
+      }
+
+      targets.forEach(function (el) {
+        gsap.set(el, { opacity: 0, y: 50, filter: 'blur(1px)' });
+        var vars = {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 0.8,
+          ease: 'power2.out'
+        };
+        if (hasScrollTrigger) {
+          vars.scrollTrigger = { trigger: el, start: 'top 88%', once: true };
+        }
+        gsap.to(el, vars);
+      });
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Statistic count-up                                                  */
+    /* ------------------------------------------------------------------ */
+    function initCounters(root) {
+      var counters = Array.prototype.slice.call(root.querySelectorAll('[data-ts-counter]'));
+      if (!counters.length || prefersReducedMotion()) return;
+      if (!('IntersectionObserver' in window)) return;
+
+      function parse(raw) {
+        var match = /^([^\d]*)([\d.,]+)(.*)$/.exec(raw);
+        if (!match) return null;
+        var digits = match[2];
+        var plain = digits.replace(/,/g, '');
+        var value = parseFloat(plain);
+        if (isNaN(value)) return null;
+        var dot = plain.indexOf('.');
+        return {
+          prefix: match[1],
+          suffix: match[3],
+          value: value,
+          decimals: dot === -1 ? 0 : plain.length - dot - 1,
+          grouped: digits.indexOf(',') !== -1
+        };
+      }
+
+      function render(parts, current) {
+        var text = parts.decimals > 0 ? current.toFixed(parts.decimals) : String(Math.round(current));
+        if (parts.grouped) {
+          var pieces = text.split('.');
+          pieces[0] = pieces[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          text = pieces.join('.');
+        }
+        return parts.prefix + text + parts.suffix;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          observer.unobserve(el);
+
+          var parts = parse(el.getAttribute('data-ts-target') || el.textContent || '');
+          if (!parts) return;
+
+          var DURATION = 1600;
+          var started = null;
+
+          function step(now) {
+            if (started === null) started = now;
+            var progress = Math.min((now - started) / DURATION, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = render(parts, parts.value * eased);
+            if (progress < 1) window.requestAnimationFrame(step);
+            else el.textContent = render(parts, parts.value);
+          }
+
+          el.textContent = render(parts, 0);
+          window.requestAnimationFrame(step);
+        });
+      }, { threshold: 0.4 });
+
+      counters.forEach(function (el) { observer.observe(el); });
+    }
+
+    function init() {
+      var sections = document.querySelectorAll(SECTION_SELECTOR);
+      Array.prototype.forEach.call(sections, function (section) {
+        section.setAttribute('data-ts-ready', 'true');
+        initSlider(section);
+        initReveals(section);
+        initCounters(section);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+{% end_require_js %}
