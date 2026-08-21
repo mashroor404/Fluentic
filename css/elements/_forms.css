@@ -1,255 +1,325 @@
-  /* ════════════════════════════════
-  HubSpot form overrides
-  Works for legacy + multi-step
-  ════════════════════════════════ */
+/* ════════════════════════════════
+   HubSpot form overrides
+   Works for legacy + multi-step
+   Mapped to New Global Variables
+════════════════════════════════ */
 
-  /* Field spacing */
-  .fh-form-wrap .hs-form .hs-form-field {
-    margin-bottom: 14px;
-  }
-
-.form-columns-1 .hs-input{
-  width:100%;
+/* Field spacing */
+.fh-form-wrap .hs-form .hs-form-field {
+  margin-bottom: 20px;
 }
 
-  /* Hide labels for standard input fields, show for radio/checkbox groups */
-  .fh-form-wrap .hs-form .hs-fieldtype-text > label,
-  .fh-form-wrap .hs-form .hs-fieldtype-email > label,
-  .fh-form-wrap .hs-form .hs-fieldtype-phone > label,
-  .fh-form-wrap .hs-form .hs-fieldtype-number > label,
-  .fh-form-wrap .hs-form .hs-fieldtype-select > label,
-  .fh-form-wrap .hs-form .hs-fieldtype-textarea > label {
-    display: none;
-  }
+.form-columns-1 .hs-input {
+  width: 100%;
+}
 
-  .fh-form-wrap .hs-form .hs-fieldtype-radio > label,
-  .fh-form-wrap .hs-form .hs-fieldtype-checkbox > label {
-    display: block;
-    font-family: var(--secondary-font);
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);
-    font-weight: 600;
-    color: var(--primary-dark-text-color);
-    margin-bottom: 14px;
-  }
+/* Hide labels for standard input fields, show for radio/checkbox groups */
+.fh-form-wrap .hs-form .hs-fieldtype-text > label,
+.fh-form-wrap .hs-form .hs-fieldtype-email > label,
+.fh-form-wrap .hs-form .hs-fieldtype-phone > label,
+.fh-form-wrap .hs-form .hs-fieldtype-number > label,
+.fh-form-wrap .hs-form .hs-fieldtype-select > label,
+.fh-form-wrap .hs-form .hs-fieldtype-textarea > label {
+  display: block;
+}
 
-  /* Text / email / phone / number inputs */
-  .fh-form-wrap .hs-form input.hs-input:not([type="checkbox"]):not([type="radio"]),
-  .fh-form-wrap .hs-form select.hs-input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 14px 16px;
-    background: var(--primary-bg);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    font-family: var(--secondary-font);
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);;
-    color: var(--primary-dark-text-color);
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
+.hs-fieldtype-textarea{
+  margin-bottom: 20px;
+}
 
-  /* Select arrow */
-  .fh-form-wrap .hs-form select.hs-input {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 44px;
-    cursor: pointer;
-    width:100% !important;
+.fh-form-wrap .hs-form .hs-fieldtype-radio > label,
+.fh-form-wrap .hs-form .hs-fieldtype-checkbox > label {
+  display: block;
+  font-family: var(--secondary-font);
+  font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
 
-  }
+/* Text / email / phone / number inputs */
+.fh-form-wrap .hs-form input.hs-input:not([type="checkbox"]):not([type="radio"]),
+.fh-form-wrap .hs-form select.hs-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  background: var(--bg-primary);
+  border:none;
+  border-radius: 14px;
+  font-family: var(--secondary-font);
+  font-size: .875rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease;
+  padding:19px;
+ font-size:14px;
+}
 
-  /* Textarea */
-  .fh-form-wrap .hs-form textarea.hs-input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100% !important;
-    box-sizing: border-box;
-    min-height: 148px;
-    padding: 14px 16px;
-    background: var(--primary-bg);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    font-family: var(--secondary-font);
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);
-    color: var(--primary-dark-text-color);
-    resize: vertical;
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
+/* Select arrow */
+.fh-form-wrap .hs-form select.hs-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+  cursor: pointer;
+  width: 100% !important;
+}
 
-  /* Focus state */
-  .fh-form-wrap .hs-form input.hs-input:focus,
-  .fh-form-wrap .hs-form select.hs-input:focus,
-  .fh-form-wrap .hs-form textarea.hs-input:focus {
-    border-color: var(--primary-dark-text-color);
-    box-shadow: none;
-  }
+/* Textarea */
+.fh-form-wrap .hs-form textarea.hs-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100% !important;
+  box-sizing: border-box;
+  min-height: 92px;
+  padding: 19px;
+  background: var(--bg-primary);
+  border:none;
+  border-radius: 14px;
+  font-family: var(--secondary-font);
+  font-size: 14px;
+  color: var(--text-primary);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+  margin-bottom: 0px;
+}
 
-  /* Placeholder text */
-  .fh-form-wrap .hs-form input::placeholder,
-  .fh-form-wrap .hs-form textarea::placeholder {
-    color: var(--secondary-dark-text-color);
-  }
+/* Focus state */
+.fh-form-wrap .hs-form input.hs-input:focus,
+.fh-form-wrap .hs-form select.hs-input:focus,
+.fh-form-wrap .hs-form textarea.hs-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: none;
+}
 
-  /* ── Radio buttons ── */
-  .fh-form-wrap .hs-form .inputs-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+/* Placeholder text */
+.fh-form-wrap .hs-form input::placeholder,
+.fh-form-wrap .hs-form textarea::placeholder {
+  color: var(--text-secondary);
+}
 
-  .fh-form-wrap .hs-form .hs-form-radio,
-  .fh-form-wrap .hs-form .hs-form-radio-display {
-    margin-bottom: 12px;
-  }
+/* ── Radio buttons ── */
+.fh-form-wrap .hs-form .inputs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .fh-form-wrap .hs-form .hs-form-radio label,
-  .fh-form-wrap .hs-form .hs-form-radio-display label {
-    display: flex !important;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    font-family: var(--secondary-font);
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);
-    color: var(--primary-dark-text-color);
-    line-height: 1.4;
-  }
+.fh-form-wrap .hs-form .hs-form-radio,
+.fh-form-wrap .hs-form .hs-form-radio-display {
+  margin-bottom: 12px;
+}
 
-  .fh-form-wrap .hs-form input[type="radio"] {
-    -webkit-appearance: none;
-    appearance: none;
-    flex-shrink: 0;
-    width: 20px !important;
-    height: 20px;
-    border: 1px solid #707070;
-    border-radius: 50%;
-    cursor: pointer;
-    margin: 0;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-  }
+.fh-form-wrap .hs-form .hs-form-radio label,
+.fh-form-wrap .hs-form .hs-form-radio-display label {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--secondary-font);
+  font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);
+  color: var(--text-primary);
+  line-height: 1.4;
+}
 
-  .fh-form-wrap .hs-form input[type="radio"]:checked {
-    background-color: #2B8A45;
-    border-color: #2B8A45;
-    box-shadow: inset 0 0 0 3px #ffffff;
-  }
+.fh-form-wrap .hs-form input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  width: 20px !important;
+  height: 20px;
+  border: var(--global-border-width) solid var(--global-border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
 
-  /* ── GDPR / Consent section ── */
-  .fh-form-wrap .hs-form .legal-consent-container {
-    margin-top: 12px;
-  }
+.fh-form-wrap .hs-form input[type="radio"]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: inset 0 0 0 3px #ffffff;
+}
 
-  .fh-form-wrap .hs-form .legal-consent-container .hs-richtext {
-    font-family: var(--secondary-font);
-    font-size: 13px;
-    color: var(--tertiary-dark-text-color);
-    line-height: 1.5;
-    margin-bottom: 12px;
-  }
+/* ── GDPR / Consent section ── */
+.fh-form-wrap .hs-form .legal-consent-container {
+  margin-top: 12px;
+}
 
-  .fh-form-wrap .hs-form .legal-consent-container .hs-richtext p {
-    margin: 0;
-  }
+.fh-form-wrap .hs-form .legal-consent-container .hs-richtext {
+  font-family: var(--secondary-font);
+  font-size: 13px;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
 
-  .fh-form-wrap .hs-form .legal-consent-container .hs-form-booleancheckbox {
-    margin-bottom: 0;
-  }
+.fh-form-wrap .hs-form .legal-consent-container .hs-richtext p {
+  margin: 0;
+}
 
-  .fh-form-wrap .hs-form .legal-consent-container .hs-form-booleancheckbox label {
-    display: flex !important;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    font-family: var(--secondary-font);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--secondary-dark-text-color);
-    line-height: 1.5;
-  }
+.fh-form-wrap .hs-form .legal-consent-container .hs-form-booleancheckbox {
+  margin-bottom: 0;
+}
 
-  /* Custom checkbox */
-  .fh-form-wrap .hs-form input[type="checkbox"] {
-    -webkit-appearance: none;
-    appearance: none;
-    flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-    border: 1.5px solid #c4c4c4;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 0;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-  }
+.fh-form-wrap .hs-form .legal-consent-container .hs-form-booleancheckbox label {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: var(--secondary-font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
 
-  .fh-form-wrap .hs-form input[type="checkbox"]:checked {
-    background-color: var(--dark-bg);
-    border-color: var(--dark-bg);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpath d='M2 6l3 3 5-5'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 10px;
-  }
+/* Custom checkbox */
+.fh-form-wrap .hs-form input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: var(--global-border-width) solid var(--global-border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
 
-  /* ── Submit / Next / Prev buttons ── */
-  .fh-form-wrap .hs-form .hs-button {
-    -webkit-appearance: none;
-    appearance: none;
-    display: inline-block;
-    background: var(--dark-bg);
-    color: var(--light-text-color);
-    border: 2px solid var(--dark-bg);
-    border-radius: var(--border-radius);
-    padding: 14px 36px;
-    font-family: var(--secondary-font);
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-    margin-top: 8px;
-  }
+.fh-form-wrap .hs-form input[type="checkbox"]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpath d='M2 6l3 3 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px;
+}
 
-  .fh-form-wrap .hs-form .hs-button:hover {
-    background: transparent;
-    color: var(--dark-bg);
-  }
-
-  /* ── Error messages ── */
-  .fh-form-wrap .hs-form .hs-error-msgs {
-    list-style: none;
-    padding: 0;
-    margin: 4px 0 0;
-  }
-
-  .fh-form-wrap .hs-form .hs-error-msg,
-  .fh-form-wrap .hs-form label.hs-error-msg {
-    font-family: var(--secondary-font);
-    font-size: 12px;
-    color: #d93025;
-    display: block;
-  }
-
-  /* ── Multi-step: progress bar ── */
-  .fh-form-wrap .hs-form .hs-progress-bar {
-    height: 4px;
-    background: var(--border-color);
-    border-radius: 2px;
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-
-  .fh-form-wrap .hs-form .hs-progress-bar .hs-progress-bar-fill {
-    height: 100%;
-    background: var(--dark-bg);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
+/* ── Submit / Next / Prev buttons ── */
+/* ── Submit / Next / Prev buttons (Legacy) ── */
+.fh-form-wrap .hs-form .hs-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  
+  /* Set the solid hover color on the base button */
+  background: var(--primary-color);
+  color: var(--btn-primary-text-color);
+  
+  border: none;
+  border-radius: var(--btn-primary-border-radius);
+  padding: 14px 36px;
+  font-family: var(--btn-primary-font);
+  font-size: var(--btn-primary-font-size);
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 6px 14px 0 #00061742;
+  
+  /* Setup for the gradient overlay */
+  position: relative;
+  z-index: 1;
+  overflow: hidden; 
+  
+  transition: background 0.3s cubic-bezier(.39, .575, .565, 1);
+}
 
 
-/*Multi Step*/
+.fh-form-wrap .hs-form .hs-button:hover {
+  color: var(--text-light-primary);
+  background:var(--dark-bg);
+}
 
 
+/* ── Submit Buttons (Multi-step) ── */
+[data-hsfc-id=Renderer] .hsfc-Button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  display: inline-block !important;
+  
+  /* Set the solid hover color on the base button */
+  background-color: var(--text-primary) !important;
+  background-image: none !important; /* Overrides any default HubSpot inline gradients */
+  color: var(--btn-primary-text-color) !important;
+  
+  border: none !important;
+  border-radius: var(--btn-primary-border-radius) !important;
+  padding: 14px 36px !important;
+  font-family: var(--btn-primary-font) !important;
+  font-size: var(--btn-primary-font-size) !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  box-shadow: 0 6px 14px 0 #00061742 !important;
+  
+  /* Setup for the gradient overlay */
+  position: relative !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+  
+  transition: color 0.3s cubic-bezier(.39, .575, .565, 1) !important;
+}
+
+/* The gradient sits on top of the solid background */
+[data-hsfc-id=Renderer] .hsfc-Button::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-image: radial-gradient(circle farthest-corner at 200% 10%, #51a2ff, #0552fc) !important;
+  z-index: -1 !important; /* Keeps it behind the text */
+  transition: opacity 0.3s cubic-bezier(.39, .575, .565, 1) !important;
+}
+
+/* Fade out the gradient to reveal the solid background color */
+[data-hsfc-id=Renderer] .hsfc-Button:hover::before {
+  opacity: 0 !important;
+}
+
+[data-hsfc-id=Renderer] .hsfc-Button:hover {
+  color: var(--text-light-primary) !important;
+}
+
+/* ── Error messages ── */
+.fh-form-wrap .hs-form .hs-error-msgs {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+}
+
+.fh-form-wrap .hs-form .hs-error-msg,
+.fh-form-wrap .hs-form label.hs-error-msg {
+  font-family: var(--secondary-font);
+  font-size: 12px;
+  color: #EF6B51;
+  display: block;
+}
+
+/* ── Multi-step: progress bar ── */
+.fh-form-wrap .hs-form .hs-progress-bar {
+  height: 4px;
+  background: var(--global-border-color);
+  border-radius: 2px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.fh-form-wrap .hs-form .hs-progress-bar .hs-progress-bar-fill {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+
+/* ════════════════════════════════
+   Multi Step Overrides
+   ════════════════════════════════ */
 
 /* ── Individual Radio Option Rows ── */
 .fh-form-wrap .hsfc-FieldLabel {
@@ -258,10 +328,10 @@
   gap: 12px;
   cursor: pointer;
   font-family: var(--secondary-font);
-  font-size: 15px;
-  color: var(--primary-dark-text-color);
+  font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);
+  color: var(--text-primary);
   line-height: 1.4;
-  margin-bottom: 12px; /* Replaces legacy .hs-form-radio margin */
+  margin-bottom: 12px;
 }
 
 /* ── Custom Radio Buttons ── */
@@ -271,164 +341,211 @@
   flex-shrink: 0;
   width: 20px !important;
   height: 20px;
-  border: 1px solid #707070;
+  border: var(--global-border-width) solid var(--global-border-color);
   border-radius: 50%;
   cursor: pointer;
   margin: 0;
   transition: border-color 0.2s ease, background-color 0.2s ease;
-  
 }
 
-[data-hsfc-id=Renderer] .hsfc-RadioFieldGroup__Options label{
-      margin-bottom: 12px;
+[data-hsfc-id=Renderer] .hsfc-Step .hsfc-Step__Content {
+ padding:0 !important;
 }
 
-
-.hsfc-RadioInput:checked:after{
- background-color: #2B8A45 !important;
+[data-hsfc-id=Renderer] .hsfc-RadioFieldGroup__Options label {
+  margin-bottom: 12px;
 }
 
-/* ── Radio Active / Checked State ── */
-.fh-form-wrap input[type="radio"].hsfc-RadioInput:checked {
-  
+.hsfc-RadioInput:checked:after {
+  background-color: var(--primary-color) !important;
 }
 
+[data-hsfc-id=Renderer] .hsfc-NavigationRow {
+ margin-top:0px !important;
+}
+
+/* ── Text Input ── */
 [data-hsfc-id=Renderer] .hsfc-TextInput {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 14px 16px !important;
-    background: var(--primary-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--border-radius) !important;
-    font-family: var(--secondary-font) !important;
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem) !important;
-    color: var(--primary-dark-text-color) !important;
-    resize: vertical !important;
-    outline: none !important;
-    transition: border-color 0.2s ease !important;
-  
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 14px 16px !important;
+  background: var(--bg-primary) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  font-family: var(--secondary-font) !important;
+  font-size: .875rem !important;
+  color: var(--text-primary) !important;
+  resize: vertical !important;
+  outline: none !important;
+  transition: border-color 0.2s ease !important;
 }
 
+[data-hsfc-id=Renderer] .hsfc-TextInput:focus{
+ box-shadow:none !important;
+}
+
+[data-hsfc-id=Renderer] .hsfc-TextInput:active {
+ box-shadow:none !important;
+}
+
+[data-hsfc-id=Renderer] .hsfc-TextInput:focus-visible{
+outline:none !important;
+}
+
+[data-hsfc-id=Renderer] .hsfc-TextInput:hover {
+ box-shadow: none !important;
+}
+
+[data-hsfc-id=Renderer] .hsfc-TextareaInput:focus {
+ box-shadow:none !important;
+}
+
+[data-hsfc-id=Renderer] .hsfc-TextareaInput:active {
+box-shadow:none !important;
+}
+
+[data-hsfc-id=Renderer] .hsfc-TextareaInput:hover{
+ box-shadow:none !important;
+}
 
 [data-hsfc-id=Renderer] .hsfc-DropdownOptions__List__ListItem {
- background:var(--primary-bg) !important;
+  background: var(--bg-primary) !important;
 }
 
 [data-hsfc-id=Renderer] .hsfc-DropdownOptions__Search {
- background:var(--primary-bg) !important;
+  background: var(--bg-primary) !important;
 }
 
-[data-hsfc-id=Renderer]  .hsfc-TextareaInput {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100% !important;
-    box-sizing: border-box;
-    padding: 14px 16px;
-    background: var(--primary-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--border-radius) !important;
-    font-family: var(--secondary-font) !important;
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem) !important;
-    color: var(--primary-dark-text-color) !important;
-    resize: vertical !important;
-    outline: none !important;
-    transition: border-color 0.2s ease !important;
+[data-hsfc-id=Renderer] .hsfc-TextareaInput {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100% !important;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  background: var(--bg-primary) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  font-family: var(--secondary-font) !important;
+  font-size: .875rem !important;
+  color: var(--text-primary) !important;
+  resize: vertical !important;
+  min-height: 90px !important;
+  outline: none !important;
+  transition: border-color 0.2s ease !important;
 }
-
 
 .hsfc-NavigationRow__Buttons:has(>*:only-child) {
- justify-content:flex-start !important;
+  justify-content: flex-start !important;
 }
 
-[data-hsfc-id=Renderer] .hsfc-Button{
-
-   -webkit-appearance: none !important;
-    appearance: none !important;
-    display: inline-block !important;
-    background: var(--dark-bg) !important;
-    color: var(--light-text-color) !important;
-    border: 2px solid var(--dark-bg) !important;
-    border-radius: var(--border-radius) !important;
-    padding: 14px 36px !important;
-    font-family: var(--secondary-font) !important;
-    font-size: 16px !important;
-    cursor: pointer !important;
-    transition: background 0.3s ease, color 0.3s ease !important; 
-    margin-top: 8px !important;
+/* ── Submit Buttons ── */
+[data-hsfc-id=Renderer] .hsfc-Button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  display: inline-block !important;
+  background: var(--primary-color) !important;
+  color: var(--btn-primary-text-color) !important;
+  border: none !important;
+  border-radius: var(--btn-primary-border-radius) !important;
+  padding: 14px 36px !important;
+  font-family: var(--btn-primary-font) !important;
+  font-size: var(--btn-primary-font-size) !important;
+  cursor: pointer !important;
+  transition: background 0.3s ease, color 0.3s ease !important; 
+  margin-top: 8px !important;
+  width: 100% !important;
+  box-shadow: 0 6px 14px 0 #00061742 !important;
+  transition: border-color .3s cubic-bezier(.39, .575, .565, 1), box-shadow .3s cubic-bezier(.39, .575, .565, 1), color .3s cubic-bezier(.39, .575, .565, 1);
 }
 
+[data-hsfc-id=Renderer] .hsfc-Button:hover {
+  background: var(--text-primary) !important;
+  color: var(--text-light-primary) !important;
+}
+
+/* ── Labels & Text ── */
 [data-hsfc-id=Renderer] .hsfc-FieldLabel {
-     display: block;
-    font-family: var(--secondary-font) !important;
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem) !important;
-    font-weight: 400 !important;
-    color: var(--primary-dark-text-color) !important;
-    margin-bottom: 14px !important;
+  display: block !important;
+  font-family: var(--primary-font) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  line-height: 1.2 !important;
+  margin-top: 0 !important;
+  margin-bottom: 16px !important;
 }
-
 
 [data-hsfc-id=Renderer] .hsfc-RichText p {
-    display: block;
-    font-family: var(--secondary-font) !important;
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem) !important;
-    font-weight: 600 !important;
-    color: var(--primary-dark-text-color) !important;
-    margin-bottom: 14px !important;
+  display: block;
+  font-family: var(--primary-font) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  margin-bottom: 16px !important;
+}
+[data-hsfc-id=Renderer] .hsfc-Button:not([disabled]):hover {
+  transform: translateY(0px) !important;
 }
 
-[data-hsfc-id=Renderer] .hsfc-RadioFieldGroup__Options label{
-    gap:12px !important;
+[data-hsfc-id=Renderer] .hsfc-RadioFieldGroup__Options label {
+  gap: 12px !important;
 }
 
-
-.hsfc-PhoneInput{
- gap:0px !important;
+/* ── Phone Inputs ── */
+.hsfc-PhoneInput {
+  gap: 0px !important;
 }
 
-.hsfc-PhoneInput  .hsfc-TextInput{
+.hsfc-PhoneInput .hsfc-TextInput {
   border-top-left-radius: 0px !important;
-  border-top-right-radius:  var(--border-radius) !important;
-  border-bottom-right-radius: var(--border-radius) !important;
-  border-bottom-left-radius: 0px !important ;
+  border-top-right-radius: 14px !important;
+  border-bottom-right-radius: 14px !important;
+  border-bottom-left-radius: 0px !important;
 }
 
-
-[data-hsfc-id=Renderer] .hsfc-PhoneInput:not(.hsfc-PhoneInput--rtl) .hsfc-PhoneInput__FlagAndCaret{
- border: 1px solid var(--border-color) !important;
- border-right:0px !important; 
- border-top-left-radius: var(--border-radius) !important;
- border-bottom-left-radius: var(--border-radius) !important ;
- background: var(--primary-bg)
+[data-hsfc-id=Renderer] .hsfc-PhoneInput:not(.hsfc-PhoneInput--rtl) .hsfc-PhoneInput__FlagAndCaret {
+  border: none !important;
+  border-right: 0px !important; 
+  border-top-left-radius: 14px !important;
+  border-bottom-left-radius: 14px !important;
+  background: var(--bg-primary);
 }
 
-/* Fields */
+/* ════════════════════════════════
+   Generic Inputs & Overrides
+   ════════════════════════════════ */
 
 .hs-form-field {
   margin-bottom: 1.4rem;
 }
 
-/* Labels */
+
+.form-columns-2{
+ display:flex;
+ gap: 10px;
+}
 
 form label {
   display: block;
-  font-size: 0.875rem;
   margin-bottom: 0.35rem;
+  font-family: var(--primary-font);
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-top: 0;
+  font-size:1rem;
+  font-weight:600;
+  margin-bottom:16px;
 }
 
-/* Form Title */
 .form-title {
   margin-bottom: 0;
 }
 
-/* Help text */
-
 form legend {
   font-size: 0.875rem;
 }
-
-/* Inputs */
 
 form input[type=text],
 form input[type=search],
@@ -454,14 +571,11 @@ form fieldset {
 }
 
 @media (max-width: 400px), (min-device-width: 320px) and (max-device-width: 480px) {
-   .fh-form-wrap .hs-form input.hs-input:not([type="checkbox"]):not([type="radio"]),
-  .fh-form-wrap .hs-form select.hs-input{
-   width:100% !important;
+  .fh-form-wrap .hs-form input.hs-input:not([type="checkbox"]):not([type="radio"]),
+  .fh-form-wrap .hs-form select.hs-input {
+    width: 100% !important;
+  }
 }
-}
-
-
-/* Inputs - checkbox/radio */
 
 form .inputs-list {
   margin: 0;
@@ -485,14 +599,13 @@ form input[type=radio] {
   margin-right: 0.35rem;
 }
 
-/* Inputs - date picker */
-
+/* Date picker */
 .hs-dateinput {
   position: relative;
 }
 
 .hs-dateinput:before {
-  content:'\01F4C5';
+  content: '\01F4C5';
   position: absolute;
   right: 10%;
   top: 50%;
@@ -500,7 +613,7 @@ form input[type=radio] {
 }
 
 .fn-date-picker .pika-table thead th {
-  color: #FFF;
+  color: var(--bg-primary); /* Adjusted from #FFF to fit themes dynamically */
 }
 
 .fn-date-picker td.is-selected .pika-button {
@@ -511,11 +624,10 @@ form input[type=radio] {
 .fn-date-picker td .pika-button:hover,
 .fn-date-picker td .pika-button:focus {
   border-radius: 0 !important;
-  color: #FFF;
+  color: var(--bg-primary);
 }
 
-/* Inputs - file picker */
-
+/* File picker */
 form input[type=file] {
   background-color: transparent;
   border: initial;
@@ -523,7 +635,6 @@ form input[type=file] {
 }
 
 /* Headings and text */
-
 form .hs-richtext,
 form .hs-richtext p {
   font-size: 0.875rem;
@@ -535,18 +646,16 @@ form .hs-richtext img {
 }
 
 /* GDPR */
-
 .legal-consent-container .hs-form-booleancheckbox-display > span,
 .legal-consent-container .hs-form-booleancheckbox-display > span p {
   margin-left: 10px !important;
-  border-radius: var(--border-radius);
-    font-family: var(--secondary-font);
-    font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);
-  color: var(--secondary-dark-text-color);
+  border-radius: var(--global-border-radius);
+  font-family: var(--secondary-font);
+  font-size: clamp(1rem, 0.5625vw + 0.8875rem, 1.5625rem);
+  color: var(--text-secondary);
 }
 
 /* Validation */
-
 .hs-form-required {
   color: #EF6B51;
 }
@@ -560,8 +669,7 @@ form .hs-richtext img {
   margin-top: 0.35rem;
 }
 
-/* Submit button */
-
+/* Submit button fallback */
 form input[type=submit],
 form .hs-button {
   cursor: pointer;
@@ -569,38 +677,222 @@ form .hs-button {
   text-align: center;
   transition: all 0.15s linear;
   white-space: normal;
+  
 }
 
 /* Captcha */
-
 .grecaptcha-badge {
   margin: 0 auto;
 }
 
-{% if ( get_asset_version("@hubspot/search_input") == "1" ) %}
-  /* Search button input field and suggestions */
-  .body-container-wrapper .hs-search-field__button {
-    padding: 15px;
+/* Search Input module integration */
+.body-container-wrapper .hs-search-field__button {
+  padding: 15px;
+}
+
+.body-container-wrapper .hs-search-field__bar--button-inline .hs-search-field__button {
+  margin-left: 6px;
+  margin-bottom: 0;
+}
+
+.body-container-wrapper .hs-search-field__button svg {
+  height: 15px;
+  fill: var(--bg-primary);
+}
+
+.body-container-wrapper .hs-search-field__bar > form > .hs-search-field__input {
+  padding: 10px;
+}
+
+.body-container-wrapper .hs-search-field__suggestions li a {
+  color: var(--text-primary);
+  padding: 0.35rem 0.7rem;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Fluentic Contact Us form
+   Scoped so existing theme forms retain their current treatment.
+═══════════════════════════════════════════════════════════════ */
+.fh-form-wrap.fluentic-contact-form .hs-form,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] {
+  color: var(--text-primary);
+  font-family: var(--secondary-font);
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form fieldset {
+  max-width: none !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .form-columns-1,
+.fh-form-wrap.fluentic-contact-form .hs-form .form-columns-2 {
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .form-columns-2 {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .form-columns-2 .hs-form-field {
+  float: none !important;
+  width: 100% !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .hs-form-field {
+  margin-bottom: 16px;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .hs-form-field > label,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-FieldLabel {
+  color: var(--text-primary) !important;
+  display: block !important;
+  font-family: var(--secondary-font) !important;
+  font-size: 1rem !important;
+  font-weight: var(--font-weight-regular, 400) !important;
+  line-height: 1.4 !important;
+  margin: 0 0 12px !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form input.hs-input:not([type='checkbox']):not([type='radio']):not([type='file']),
+.fh-form-wrap.fluentic-contact-form .hs-form select.hs-input,
+.fh-form-wrap.fluentic-contact-form .hs-form textarea.hs-input,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-TextInput,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-TextareaInput {
+  background-color: var(--bg-primary) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  color: var(--text-primary) !important;
+  font-family: var(--secondary-font) !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  min-height: 50px !important;
+  outline: none !important;
+  padding: 12px !important;
+  transition: border-color 200ms ease, box-shadow 200ms ease !important;
+  width: 100% !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form select.hs-input {
+  background-position: right 12px center;
+  padding-right: 40px !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form textarea.hs-input,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-TextareaInput {
+  min-height: 144px !important;
+  resize: vertical !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form input.hs-input:focus,
+.fh-form-wrap.fluentic-contact-form .hs-form select.hs-input:focus,
+.fh-form-wrap.fluentic-contact-form .hs-form textarea.hs-input:focus,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-TextInput:focus,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-TextareaInput:focus {
+  border-color: color-mix(in srgb, var(--text-primary) 35%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-purple) 16%, transparent) !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form input::placeholder,
+.fh-form-wrap.fluentic-contact-form .hs-form textarea::placeholder,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] input::placeholder,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] textarea::placeholder {
+  color: color-mix(in srgb, var(--text-primary) 55%, transparent) !important;
+  opacity: 1;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .actions,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-NavigationRow {
+  margin: 16px 0 0 !important;
+  padding: 0 !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .hs-button,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-Button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: var(--text-primary) !important;
+  border: 1px solid var(--text-primary) !important;
+  border-radius: var(--btn-primary-border-radius, 8px) !important;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  color: var(--text-light-primary) !important;
+  cursor: pointer !important;
+  font-family: var(--btn-primary-font, var(--secondary-font)) !important;
+  font-size: var(--btn-primary-font-size, 1rem) !important;
+  font-weight: var(--font-weight-medium, 500) !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  min-height: 52px !important;
+  padding: 12px 32px !important;
+  transition: background-color 300ms ease, border-color 300ms ease, transform 300ms ease !important;
+  width: 100% !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .hs-button:hover,
+.fh-form-wrap.fluentic-contact-form .hs-form .hs-button:focus-visible,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-Button:hover,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-Button:focus-visible {
+  background: var(--text-primary) !important;
+  border-color: var(--text-primary) !important;
+  color: var(--text-light-primary) !important;
+  transform: translateY(-1px) !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .hs-button:focus-visible,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-Button:focus-visible {
+  outline: 3px solid var(--accent-blue) !important;
+  outline-offset: 3px !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .legal-consent-container,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-LegalConsent {
+  color: var(--text-secondary);
+  font-family: var(--secondary-font);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.fh-form-wrap.fluentic-contact-form .hs-form .hs-error-msg,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-ErrorAlert,
+.fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-FieldError {
+  color: var(--accent-red, #F82A2D) !important;
+  font-size: 0.75rem !important;
+}
+
+.fh-form-wrap.fluentic-contact-form .submitted-message {
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  color: var(--text-primary);
+  padding: 24px;
+}
+
+@media (max-width: 767px) {
+  .fh-form-wrap.fluentic-contact-form .hs-form .form-columns-2 {
+    grid-template-columns: 1fr;
   }
 
-  .body-container-wrapper .hs-search-field__bar--button-inline .hs-search-field__button {
-    margin-left: 6px;
-    margin-bottom: 0;
+  .fh-form-wrap.fluentic-contact-form .hs-form textarea.hs-input,
+  .fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-TextareaInput {
+    min-height: 120px !important;
   }
+}
 
-  .body-container-wrapper .hs-search-field__button svg {
-    height: 15px;
-    fill: #fff;
+@media (max-width: 479px) {
+  .fh-form-wrap.fluentic-contact-form .hs-form textarea.hs-input,
+  .fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-TextareaInput {
+    min-height: 100px !important;
   }
+}
 
-  .body-container-wrapper .hs-search-field__bar > form > .hs-search-field__input {
-    padding: 10px;
+@media (prefers-reduced-motion: reduce) {
+  .fh-form-wrap.fluentic-contact-form .hs-form .hs-button,
+  .fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-Button {
+    transition: none !important;
   }
-
-  .body-container-wrapper .hs-search-field__suggestions li a {
-    color: #494A52;
-    padding: 0.35rem 0.7rem;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-{% endif %}
+}

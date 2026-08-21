@@ -657,8 +657,9 @@
         let scrollFrame = null;
 
         const updateScrolledState = () => {
-          const scrollThreshold = Math.max(window.innerHeight * 0.6, 1);
-          const scrollProgress = Math.min(Math.max(window.scrollY / scrollThreshold, 0), 1);
+          const scrollStart = window.innerHeight * 0.6;
+          const squeezeDistance = Math.max(window.innerHeight * 0.6, 1);
+          const scrollProgress = Math.min(Math.max((window.scrollY - scrollStart) / squeezeDistance, 0), 1);
           const remainingProgress = 1 - scrollProgress;
           const squeezedWidth = 67 + (10.5 * remainingProgress);
           const headerPadding = 16 + (8 * remainingProgress);
