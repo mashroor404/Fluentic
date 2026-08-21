@@ -172,6 +172,14 @@ GSAP and ScrollTrigger are supplied by `templates/layouts/base.html` and must no
 
 The editable schema now covers the brand logo/link/description, four selectable social platforms, repeatable navigation columns and links, optional oversized wordmark, copyright rich text, and repeatable legal links. The bundled Fluentic logo and large Logo Text SVGs are local `get_asset_url` fallbacks. The module renders a section with the required `footer` class inside the existing global `<footer>` partial, avoiding invalid nested footer landmarks. Styling uses global theme variables and follows the reference's desktop, tablet, and mobile layout without adding JavaScript.
 
+## Global Header module
+
+`modules/Global/Header.module/` matches the Fluentic Webflow navbar while preserving the project's existing 30vh scroll-triggered squeeze from the 1240px reference width to 67rem. The nav shell is always translucent white with 20px backdrop blur, a 16px radius, 12px padding, and the reference shadow; at 991px and below it switches to a solid white shell and dropdown menu.
+
+The logo has separate editable icon and text-image fields. When either is empty, the downloaded Fluentic `Logo Icon.svg` and `Logo Text.svg` assets render through `get_asset_url`. Default links mirror the reference: Feature, Process, Testimonial, Pricing, and Blog. Desktop and mobile CTA labels are independently editable (`Sign up` and `Contact` by default), but both render through `btn_macros.animated_button`, with the compact 6px by 20px navbar treatment.
+
+The former active-page icon behavior was removed completely: there is no navigation SVG field, icon markup, `data-nav-index`, `w--current` styling, or localStorage state. Header JavaScript now only manages the existing scroll squeeze and the accessible mobile menu, including synchronized `aria-expanded`, Escape/outside-click closing, and desktop-resize cleanup.
+
 ## CTA module
 
 `modules/CTA.module/` recreates the Webflow `<section class="cta-section">` as an editable HubSpot DnD page module. Editor fields control the eyebrow, heading, button visibility/text/link, illustration visibility/image/alt text, and the panel's Background Image.

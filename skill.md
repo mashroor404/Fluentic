@@ -217,3 +217,12 @@ If these values should become editable HubSpot theme settings, add them to root 
 - Bundle default logos and artwork with the theme and resolve them through `get_asset_url`; image fields should override those defaults.
 - Keep global navigation, social, brand, wordmark, and legal content editor-controlled through grouped and repeatable fields.
 - Preserve a rollback path through version control and do not upload the replacement until the user explicitly requests deployment.
+
+## Build Fluentic global headers
+
+- Match the reference navbar around a 1240px container and a translucent white shell with 20px backdrop blur, 16px radius, 12px padding, and a subtle shadow. At 991px and below, use the solid white shell and dropdown treatment.
+- Keep the existing header squeeze behavior when refining the navigation: this project toggles `.is-scrolled` after 30vh and reduces the desktop container to 67rem.
+- Use separate editable logo-icon and logo-text image fields, with the downloaded Fluentic Logo Icon and Logo Text SVG files as local `get_asset_url` fallbacks.
+- Render desktop and mobile header CTAs with `btn_macros.animated_button`; use scoped navbar sizing rather than hand-coded CTA markup.
+- Do not add active-page icons or persist a navigation index. The Header module intentionally has no icon field, active-state markup/CSS, `data-nav-index`, or localStorage behavior.
+- Keep mobile navigation controls semantic: synchronize `aria-expanded`, update the button label, and close on navigation, Escape, outside click, and return to desktop width.
