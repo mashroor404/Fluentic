@@ -293,9 +293,15 @@
 
   /* Fluentic reference alignment. The existing scroll-width squeeze remains intact. */
   .site-header {
+    --nav-header-padding-top: 24px;
+    --nav-logo-gap: 14px;
+    --nav-squeeze-width: 77.5rem;
+    --nav-wordmark-opacity: 1;
+    --nav-wordmark-scale: 1;
+    --nav-wordmark-width: 87px;
     background-color: transparent;
     inset: 0 0 auto;
-    padding: 24px 0 20px;
+    padding: var(--nav-header-padding-top) 0 20px;
   }
 
   .site-header.is-scrolled {
@@ -309,7 +315,7 @@
 
   .container.is-nav {
     background-color: transparent;
-    max-width: min(77.5rem, var(--container-max-width, 77.5rem));
+    max-width: min(var(--nav-squeeze-width), var(--container-max-width, 77.5rem));
     width: 90%;
   }
 
@@ -338,7 +344,7 @@
 
   .logo_link {
     flex: 1 1 0;
-    gap: 14px;
+    gap: var(--nav-logo-gap);
     max-width: 189px;
     transition: gap 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   }
@@ -354,9 +360,9 @@
     display: block;
     flex: 0 1 auto;
     height: auto;
-    max-width: 87px;
-    opacity: 1;
-    transform: scaleX(1);
+    max-width: var(--nav-wordmark-width);
+    opacity: var(--nav-wordmark-opacity);
+    transform: scaleX(var(--nav-wordmark-scale));
     transform-origin: left center;
     transition: max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
       opacity 0.4s ease,
@@ -443,7 +449,14 @@
     }
 
     .logo_link {
+      gap: 14px;
       max-width: 160px;
+    }
+
+    .logo_wordmark {
+      max-width: 87px;
+      opacity: 1;
+      transform: scaleX(1);
     }
 
     .nav_menu-btn {
@@ -641,13 +654,33 @@
           if (window.innerWidth > 991) setMenuState(false);
         });
 
+        let scrollFrame = null;
+
         const updateScrolledState = () => {
-          const scrollThreshold = window.innerHeight * 0.3;
-          header.classList.toggle('is-scrolled', window.scrollY > scrollThreshold);
+          const scrollThreshold = Math.max(window.innerHeight * 0.6, 1);
+          const scrollProgress = Math.min(Math.max(window.scrollY / scrollThreshold, 0), 1);
+          const remainingProgress = 1 - scrollProgress;
+          const squeezedWidth = 67 + (10.5 * remainingProgress);
+          const headerPadding = 16 + (8 * remainingProgress);
+
+          header.style.setProperty('--nav-header-padding-top', `${headerPadding.toFixed(3)}px`);
+          header.style.setProperty('--nav-logo-gap', `${(14 * remainingProgress).toFixed(3)}px`);
+          header.style.setProperty('--nav-squeeze-width', `${squeezedWidth.toFixed(3)}rem`);
+          header.style.setProperty('--nav-wordmark-opacity', remainingProgress.toFixed(4));
+          header.style.setProperty('--nav-wordmark-scale', remainingProgress.toFixed(4));
+          header.style.setProperty('--nav-wordmark-width', `${(87 * remainingProgress).toFixed(3)}px`);
+          header.classList.toggle('is-scrolled', scrollProgress >= 1);
+          scrollFrame = null;
+        };
+
+        const requestScrolledStateUpdate = () => {
+          if (scrollFrame !== null) return;
+          scrollFrame = window.requestAnimationFrame(updateScrolledState);
         };
 
         updateScrolledState();
-        window.addEventListener('scroll', updateScrolledState, { passive: true });
+        window.addEventListener('scroll', requestScrolledStateUpdate, { passive: true });
+        window.addEventListener('resize', requestScrolledStateUpdate);
       });
     };
 

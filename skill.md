@@ -221,8 +221,8 @@ If these values should become editable HubSpot theme settings, add them to root 
 ## Build Fluentic global headers
 
 - Match the reference navbar around a 1240px container and a translucent white shell with 20px backdrop blur, 16px radius, 12px padding, and a subtle shadow. At 991px and below, use the solid white shell and dropdown treatment.
-- Keep the existing header squeeze behavior when refining the navigation: this project toggles `.is-scrolled` after 30vh and reduces the desktop container to 67rem.
-- Synchronize the desktop logo wordmark with the navbar squeeze using the same 0.4s timing: transition `max-width` from 87px to 0, opacity from 1 to 0, and horizontal scale from 1 to 0 while retaining the logo icon. Do not hide the wordmark on mobile.
+- Drive the header squeeze continuously over the first 60vh of scrolling using clamped progress (`scrollY / (innerHeight * 0.6)`) and `requestAnimationFrame`. Interpolate the desktop container from 77.5rem to 67rem and top padding from 24px to 16px; use `.is-scrolled` only as the completed-state marker.
+- Synchronize the desktop logo wordmark with that same scroll progress: interpolate max-width from 87px to 0, opacity and horizontal scale from 1 to 0, and logo gap from 14px to 0 while retaining the logo icon. Keep static full-size logo values on mobile.
 - Use separate editable logo-icon and logo-text image fields, with the downloaded Fluentic Logo Icon and Logo Text SVG files as local `get_asset_url` fallbacks.
 - Render desktop and mobile header CTAs with `btn_macros.animated_button`; use scoped navbar sizing rather than hand-coded CTA markup.
 - Do not add active-page icons or persist a navigation index. The Header module intentionally has no icon field, active-state markup/CSS, `data-nav-index`, or localStorage behavior.
