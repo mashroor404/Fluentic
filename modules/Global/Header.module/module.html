@@ -215,9 +215,11 @@
       
       opacity: 0;
       visibility: hidden;
-      transform-origin: top right;
-      transform: scale(0);
-      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; 
+      transform-origin: top center;
+      transform: translate3d(0, -16px, 0);
+      transition: opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0s 0.4s;
       z-index: 100;
     }
 
@@ -271,8 +273,10 @@
     .site-header.is-open .nav_menu-wrap {
       opacity: 1;
       visibility: visible;
-      transform: scale(1);
-      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0s;
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0s;
     }
     
     /* Hamburger to X Animation */
@@ -289,9 +293,15 @@
 
   /* Fluentic reference alignment. The existing scroll-width squeeze remains intact. */
   .site-header {
+    --nav-header-padding-top: 24px;
+    --nav-logo-gap: 14px;
+    --nav-squeeze-width: 77.5rem;
+    --nav-wordmark-opacity: 1;
+    --nav-wordmark-scale: 1;
+    --nav-wordmark-width: 87px;
     background-color: transparent;
     inset: 0 0 auto;
-    padding: 24px 0 20px;
+    padding: var(--nav-header-padding-top) 0 20px;
   }
 
   .site-header.is-scrolled {
@@ -305,7 +315,7 @@
 
   .container.is-nav {
     background-color: transparent;
-    max-width: min(77.5rem, var(--container-max-width, 77.5rem));
+    max-width: min(var(--nav-squeeze-width), var(--container-max-width, 77.5rem));
     width: 90%;
   }
 
@@ -334,8 +344,9 @@
 
   .logo_link {
     flex: 1 1 0;
-    gap: 14px;
+    gap: var(--nav-logo-gap);
     max-width: 189px;
+    transition: gap 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .logo_img {
@@ -349,8 +360,27 @@
     display: block;
     flex: 0 1 auto;
     height: auto;
-    max-width: 87px;
+    max-width: var(--nav-wordmark-width);
+    opacity: var(--nav-wordmark-opacity);
+    transform: scaleX(var(--nav-wordmark-scale));
+    transform-origin: left center;
+    transition: max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      opacity 0.4s ease,
+      transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: max-width, opacity, transform;
     width: 100%;
+  }
+
+  @media screen and (min-width: 992px) {
+    .site-header.is-scrolled .logo_link {
+      gap: 0;
+    }
+
+    .site-header.is-scrolled .logo_wordmark {
+      max-width: 0;
+      opacity: 0;
+      transform: scaleX(0);
+    }
   }
 
   .nav_menu-wrap {
@@ -419,7 +449,14 @@
     }
 
     .logo_link {
+      gap: 14px;
       max-width: 160px;
+    }
+
+    .logo_wordmark {
+      max-width: 87px;
+      opacity: 1;
+      transform: scaleX(1);
     }
 
     .nav_menu-btn {
@@ -435,8 +472,12 @@
       margin-top: 8px;
       padding: 20px;
       right: 0;
-      transform: translateY(-8px) scale(0.98);
+      transform: translate3d(0, -16px, 0);
       transform-origin: top center;
+      transition: opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0s 0.4s;
+      will-change: opacity, transform;
     }
 
     .nav_menu_flex-wrap {
@@ -463,7 +504,18 @@
     }
 
     .site-header.is-open .nav_menu-wrap {
-      transform: translateY(0) scale(1);
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo_link,
+    .logo_wordmark,
+    .nav_menu-wrap {
+      transition: none;
     }
   }
   {% end_scope_css %}
@@ -602,13 +654,34 @@
           if (window.innerWidth > 991) setMenuState(false);
         });
 
+        let scrollFrame = null;
+
         const updateScrolledState = () => {
-          const scrollThreshold = window.innerHeight * 0.3;
-          header.classList.toggle('is-scrolled', window.scrollY > scrollThreshold);
+          const scrollStart = window.innerHeight * 0.6;
+          const squeezeDistance = Math.max(window.innerHeight * 0.6, 1);
+          const scrollProgress = Math.min(Math.max((window.scrollY - scrollStart) / squeezeDistance, 0), 1);
+          const remainingProgress = 1 - scrollProgress;
+          const squeezedWidth = 67 + (10.5 * remainingProgress);
+          const headerPadding = 16 + (8 * remainingProgress);
+
+          header.style.setProperty('--nav-header-padding-top', `${headerPadding.toFixed(3)}px`);
+          header.style.setProperty('--nav-logo-gap', `${(14 * remainingProgress).toFixed(3)}px`);
+          header.style.setProperty('--nav-squeeze-width', `${squeezedWidth.toFixed(3)}rem`);
+          header.style.setProperty('--nav-wordmark-opacity', remainingProgress.toFixed(4));
+          header.style.setProperty('--nav-wordmark-scale', remainingProgress.toFixed(4));
+          header.style.setProperty('--nav-wordmark-width', `${(87 * remainingProgress).toFixed(3)}px`);
+          header.classList.toggle('is-scrolled', scrollProgress >= 1);
+          scrollFrame = null;
+        };
+
+        const requestScrolledStateUpdate = () => {
+          if (scrollFrame !== null) return;
+          scrollFrame = window.requestAnimationFrame(updateScrolledState);
         };
 
         updateScrolledState();
-        window.addEventListener('scroll', updateScrolledState, { passive: true });
+        window.addEventListener('scroll', requestScrolledStateUpdate, { passive: true });
+        window.addEventListener('resize', requestScrolledStateUpdate);
       });
     };
 

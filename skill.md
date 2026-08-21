@@ -221,8 +221,19 @@ If these values should become editable HubSpot theme settings, add them to root 
 ## Build Fluentic global headers
 
 - Match the reference navbar around a 1240px container and a translucent white shell with 20px backdrop blur, 16px radius, 12px padding, and a subtle shadow. At 991px and below, use the solid white shell and dropdown treatment.
-- Keep the existing header squeeze behavior when refining the navigation: this project toggles `.is-scrolled` after 30vh and reduces the desktop container to 67rem.
+- Delay the header squeeze until 60vh, then drive it continuously over the next 60vh using clamped progress (`(scrollY - innerHeight * 0.6) / (innerHeight * 0.6)`) and `requestAnimationFrame`. Interpolate the desktop container from 77.5rem to 67rem and top padding from 24px to 16px; use `.is-scrolled` only as the completed-state marker at 120vh.
+- Synchronize the desktop logo wordmark with that same scroll progress: interpolate max-width from 87px to 0, opacity and horizontal scale from 1 to 0, and logo gap from 14px to 0 while retaining the logo icon. Keep static full-size logo values on mobile.
 - Use separate editable logo-icon and logo-text image fields, with the downloaded Fluentic Logo Icon and Logo Text SVG files as local `get_asset_url` fallbacks.
 - Render desktop and mobile header CTAs with `btn_macros.animated_button`; use scoped navbar sizing rather than hand-coded CTA markup.
 - Do not add active-page icons or persist a navigation index. The Header module intentionally has no icon field, active-state markup/CSS, `data-nav-index`, or localStorage behavior.
 - Keep mobile navigation controls semantic: synchronize `aria-expanded`, update the button label, and close on navigation, Escape, outside click, and return to desktop width.
+- Reveal the mobile navigation downward from the bottom of `.nav_wrap` with a Y-axis translate and opacity transition. Do not use the previous scale-from-corner effect.
+
+## Build native HubSpot contact modules
+
+- Use a HubSpot `form` field for the portal-owned form and render it with HubL's `{% form %}` tag. Do not hardcode an account-specific form ID into a reusable theme module; let the page editor select or create the form in the target portal.
+- Keep surrounding content editable: section eyebrow/heading, repeatable contact methods, optional testimonial, author details, and privacy copy. For editable inline icons, accept complete SVG markup in a multiline text field and render it with `|safe` only in the dedicated icon container.
+- Apply `fh-form-wrap fluentic-contact-form` to the Fluentic contact form panel. Maintain its dedicated scoped rules at the end of `css/elements/_forms.css` so both legacy `.hs-form` markup and the newer `[data-hsfc-id='Renderer']` output are covered without altering unrelated forms.
+- Match the contact reference with white controls on the page-gray panel, 50px minimum input height, 8px corners, a two-column desktop name row, a responsive single-column layout, and a full-width primary-style submit button.
+- A native HubSpot form owns its submit markup, so style that generated control with the global primary button variables; this is the exception to the usual requirement to render module buttons through `Button.html` macros.
+- Keep the form visually usable before a form is selected by rendering a clear editor-facing placeholder. Preserve reduced-motion behavior and use the established overlapping eyebrow/split-heading reveal for the section entrance.
