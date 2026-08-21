@@ -1,6 +1,6 @@
 # Fluentic HubSpot Theme Memory
 
-Last reviewed: 2026-08-20
+Last reviewed: 2026-08-21
 
 ## What this project is
 
@@ -196,26 +196,22 @@ The heading and Explore All link are editable. The white Explore All button uses
 
 The blog heading carries `gsap_split_word`; its DOM-created word spans carry `gsap_split_word1` and slide upward in a stagger. The macro button starts its own 50px fade-up shortly afterward. Blog cards reveal from 50px below in visual rows sized to the active grid: three cards on desktop, two on tablet, and one on mobile. Animation queries are scoped per module instance and disabled for reduced-motion users; GSAP and ScrollTrigger continue to come from `templates/layouts/base.html`.
 
-## FAQ v2 module
+## Key Benefit module
 
-`modules/FAQ v2.module/` recreates the homepage `<section id="FAQ" class="faq-section">` as an editable HubSpot DnD module. It uses the global eyebrow macro, global fonts/colors/borders, the original five FAQ questions and answers, and the downloaded Fluentic plus/minus icons and three FAQ avatars.
+`modules/Key Benefit.module/` recreates the Webflow `<section class="benefit-section">` ("Why Choose Fluentic AI") as an editable HubSpot DnD page module, added 2026-08-21. Structure, spacing, and breakpoints were read from the live markup and `fluentic.webflow.shared.793a05b7f.css` rather than estimated.
 
-The FAQ list is a repeater with one to twelve items. The contact avatar field is also a repeater (up to six images); when it is empty, the three bundled Fluentic avatars render as local fallbacks. All FAQ items are closed by default. Accordion controls use semantic buttons with `aria-expanded`, `aria-controls`, labelled regions, keyboard support, and single-open behavior. The open/close transition is intentionally quick: 320ms for panel height and 220ms for opacity/icons.
+Editor fields: a `section_content` group (eyebrow, heading, description), a `media` group (show toggle + center image), a `benefits` repeater (2–8 items with title, description, and optional icon override), a `bottom_card` group (show toggle, heading, description), and a top-level `compliance_badges` repeater (0–6 badges). The badge repeater is top-level rather than nested inside `bottom_card` because HubSpot does not support repeating fields inside another repeating group; it is hidden through `visibility.controlling_field_path: bottom_card.show_card`. Its child field is named `text`, not `label`, per the reserved-name rule noted above.
 
-Its GSAP sequence matches the existing module language: eyebrow at 0s, split heading words at 0.12s, contact prompt at 0.34s, and each accordion item revealing 50px upward as it reaches the viewport. Reveal tweens use brisk 0.45–0.5s durations. Selectors and initialization are scoped to each module instance, GSAP is not loaded again, and reduced-motion users receive a static fully visible layout.
+The benefits repeater is split into the reference's two side columns at render time with `{% set column_split = (benefit_count * 0.5)|round(0, 'ceil')|int %}` and two filtered loops. Float multiplication is deliberate: Jinjava's integer `/` semantics are ambiguous, so `* 0.5` guarantees a float before `round(0, 'ceil')`. Six default items produce the reference's 3 + 3 layout; odd counts put the extra item in the left column.
 
-## Demo text block wrap module
+The bundled `Benefit Image.webp` and `Benefit Icon.svg` resolve through `get_asset_url` and are overridable by the image fields.
 
-`modules/demo-text-block-wrap.module/` recreates the homepage `.demo-text-block-wrap` CTA ribbon. Editors can change its repeated text, destination link, and separator icon; the downloaded `Vector.svg` gradient mark is the local fallback. The server-rendered track follows the reference structure with six text panels and seven circular icon separators.
+The live compliance seals are inline SVGs with "SOC 2"/"GDPR"/"HIPAA" baked in as vector paths, which editors cannot change. They are reproduced in CSS instead — an 80px circle with the reference's outer ring gradient (`#ED56CA` → `#FFDDF7`, offset `-5%`/`105.83%` to reproduce the SVG's `y=-4`→`y=84.667` gradient span) and an inner circle inset 8.75% (7/80) filled `var(--bg-primary)` → `var(--accent-pink)`. Badge text scales with `calc(var(--key-benefit-badge-size) * 0.2)` so any label stays proportional. The two ring hexes have no theme equivalent and stay as local custom properties on the section.
 
-Desktop text panels are 1215px wide with 212px icon circles. The module follows the reference's 991px, 767px, and 479px steps (800/600/400px text and 160/140/120px icons). Typography and surfaces use the theme's global font and color tokens.
+Reference values consumed as theme tokens: `--gradient-icon` already equals the live `linear-gradient(#fff, #f0eaf6)` icon-wrap gradient because `--bg-accent-2` is `#F0EAF6`. The section heading intentionally uses the theme's `--text-h2` (max 50px) rather than the live 60px so it matches the other Fluentic section headings on the same page; card-internal sizes (18px titles, 16px body, 24px→20px bottom heading) are set locally since no theme token matches.
 
-GSAP ScrollTrigger scrubs the complete track from `xPercent: 0` to `xPercent: -6` between `top bottom` and `bottom top`, with `scrub: 1.2` for a slower, smoother response. Scrolling down therefore moves the track gently left, while scrolling upward naturally reverses it to the right. The track uses `will-change: transform`, `transform-style: preserve-3d`, and `force3D`; motion is disabled under `prefers-reduced-motion`.
+Layout follows the reference breakpoints exactly: 1240px container; three-column flex card at desktop; at ≤991px the card stacks and each benefit column becomes a row; at ≤767px the center visual moves above both columns (`order: -9999`), items wrap two-up, and the bottom card stacks with its badges on top; at ≤479px padding and gaps tighten. Section padding steps 160/80/60/40px.
 
-## Pricing Comparison module
+The scoped GSAP timeline reuses the solution-section header timing (eyebrow 0s, split heading words 0.12s, description 0.3s) and then reveals the white card, the center visual, and the bottom card as three independent 50px rises with a 1px blur, matching the three `data-w-id` reveals in the reference. GSAP and ScrollTrigger come only from `templates/layouts/base.html`; all motion is gated behind `prefers-reduced-motion: no-preference`.
 
-`modules/Pricing Comparison.module/` recreates the Fluentic pricing section as an editable HubSpot DnD module. Its field model is `plans` repeating group → nested `cards` repeating group → repeating `features` text field. Defaults provide Monthly and Yearly tabs, each with Free, Plus, and Pro cards.
-
-Every card has editable name, description, card-icon SVG markup, feature-icon SVG markup, price, billing period, features heading/list, button text/link, popular toggle, popular label, and popular background image. The feature icon is configured once per card and reused for every row in that card's repeatable features list. Popular cards use the highlighted inset-header design, the base/black global button macro, and the selected background image or bundled `Pricing Card Particle.svg` fallback. Regular cards use the white/variant-2 global button macro.
-
-Plan filtering uses semantic tabs and tabpanels with synchronized `aria-selected`, keyboard Left/Right/Home/End navigation, and instance-scoped IDs. The first plan is active initially. The header uses the established eyebrow and split-word GSAP reveal; the active `.pricing-comparison__panel` rises from 50px as soon as the section enters the viewport, and newly selected plan cards receive a short staggered reveal. Reduced-motion mode preserves filtering without animation.
+The module's eyebrow renders through `btn_macros.eyebrow_label`, so it is sentence case while the live site's `.sub-title` is uppercased by CSS. That difference is intentional — the eyebrow is a shared site-wide component and was deliberately normalized on 2026-08-20; do not add a module-local `text-transform` override.
