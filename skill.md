@@ -205,9 +205,10 @@ If these values should become editable HubSpot theme settings, add them to root 
 
 - Model billing filters as a repeating `plans` group. Nest a repeating `cards` group inside each plan, then use a repeating text field for each card's features. Keep group nesting within HubSpot's supported depth and loop through the resulting arrays directly in HubL.
 - Give every card a boolean popular toggle plus an editable popular label and background image. Render the selected image only for popular cards and use the bundled Fluentic pricing particle as its fallback.
+- Keep pricing card and feature icons editor-controlled through multiline text fields that accept complete SVG markup. One feature-icon field per card can be reused across that card's repeatable feature rows; do not hardcode the SVG paths in module markup.
 - Render every pricing CTA through `/Fluentic/Macros/Button.html`: `animated_button` for popular/base-black cards and `secondary_button` for regular/variant-2 cards.
 - Build filter controls as semantic tabs with unique module-instance IDs, `aria-selected`, `aria-controls`, tabpanels, and Left/Right/Home/End keyboard navigation. Keep all filter behavior available without GSAP.
-- Scope the header reveal, initial pricing-content reveal, and tab-change card reveal to the module instance. Skip only the motion when reduced motion is requested.
+- Scope the header reveal, initial active-panel reveal, and tab-change card reveal to the module instance. Trigger the active `.pricing-comparison__panel` from 50px below when the section first enters the viewport, while preserving the separate staggered reveal for cards in newly selected tabs. Skip only the motion when reduced motion is requested.
 
 ## Replace global modules safely
 
