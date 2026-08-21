@@ -1,0 +1,275 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  .text-highlighter-section {
+    --text-highlight-bg: {{ module.appearance.background_color.color|default('#1B0C27', true) }};
+    --text-highlight-color: {{ module.appearance.text_color.color|default('#FFFFFF', true) }};
+    --text-highlight-dim: {{ (module.appearance.dim_opacity|default(18, true)) * 0.01 }};
+    --text-highlight-glow: {{ module.glow.glow_color.color|default('#FF82E1', true) }};
+    --text-highlight-glow-opacity: {{ (module.glow.glow_color.opacity|default(50, true)) * 0.01 }};
+
+    background-color: var(--page-bg);
+    padding: 0 16px;
+    position: relative;
+  }
+
+  .text-highlighter__panel {
+    align-items: center;
+    background-color: var(--text-highlight-bg);
+    border-radius: 16px;
+    color: var(--text-highlight-color);
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 auto;
+    max-width: 1920px;
+    overflow: hidden;
+    padding: 200px 0;
+    position: relative;
+  }
+
+  .text-highlighter__container {
+    margin: 0 auto;
+    max-width: 1240px;
+    padding: 0 20px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .text-highlighter__wrap {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    justify-content: flex-start;
+    margin: 0 auto;
+    max-width: 920px;
+    width: 100%;
+  }
+
+  /* The reference renders this as a <p> without the .medium modifier, so it
+     takes the body's regular weight — not the 500 that h2 headings get. Its
+     size is the live h2 token (60/48/36px), which is larger than the theme's
+     --text-h2 (capped at 50px), so it is set explicitly here. */
+  .text-highlighter__text {
+    color: var(--text-highlight-color);
+    font-family: var(--primary-font);
+    font-size: 60px;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  /* Words are created by the script, so the un-highlighted state can only
+     ever exist when JS is running. Without it the paragraph stays fully
+     legible. */
+  .text-highlighter__word {
+    display: inline-block;
+    will-change: opacity;
+  }
+
+  /* Soft off-centre glow behind the panel, matching the reference. */
+  .text-highlighter__glow-block {
+    align-items: flex-start;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .text-highlighter__glow-wrap {
+    height: 100%;
+    max-width: 1920px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .text-highlighter__glow {
+    background-color: var(--text-highlight-glow);
+    border-radius: 50%;
+    filter: blur(250px);
+    height: 619px;
+    inset: -169px auto auto -140px;
+    opacity: calc(var(--text-highlight-glow-opacity) * 0.3);
+    position: absolute;
+    width: 744px;
+  }
+
+  @media (max-width: 991px) {
+    .text-highlighter__panel {
+      padding: 100px 0;
+    }
+
+    .text-highlighter__text {
+      font-size: 48px;
+    }
+
+    .text-highlighter__glow {
+      width: 600px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .text-highlighter-section {
+      padding: 0 10px;
+    }
+
+    .text-highlighter__panel {
+      padding: 80px 0;
+    }
+
+    .text-highlighter__container {
+      padding: 0 16px;
+    }
+
+    .text-highlighter__wrap {
+      gap: 32px;
+    }
+
+    .text-highlighter__text {
+      font-size: 36px;
+    }
+
+    .text-highlighter__glow {
+      height: 500px;
+      width: 400px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .text-highlighter__panel {
+      padding: 60px 0;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="text-highlighter-section" data-text-highlighter-section>
+  <div class="text-highlighter__panel">
+    {% if module.glow.show_glow %}
+      <div class="text-highlighter__glow-block" aria-hidden="true">
+        <div class="text-highlighter__glow-wrap">
+          <div class="text-highlighter__glow"></div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="text-highlighter__container">
+      <div class="text-highlighter__wrap">
+        {% if module.section_content.eyebrow_text %}
+          <div data-text-highlighter-eyebrow>
+            {{ btn_macros.eyebrow_label(module.section_content.eyebrow_text, module.section_content.eyebrow_icon.src, 'v3') }}
+          </div>
+        {% endif %}
+
+        {% if module.section_content.text %}
+          <p class="text-highlighter__text" data-text-highlighter-text>{{ module.section_content.text|escape_html }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% require_js %}
+<script>
+  (() => {
+    const initTextHighlighters = () => {
+      if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+
+      window.gsap.registerPlugin(window.ScrollTrigger);
+
+      document.querySelectorAll("[data-text-highlighter-section]").forEach((section) => {
+        if (section.dataset.textHighlighterInitialized === "true") return;
+        section.dataset.textHighlighterInitialized = "true";
+
+        const textElement = section.querySelector("[data-text-highlighter-text]");
+        if (!textElement) return;
+
+        /* Split into words up front so the scrubbed timeline has something to
+           stagger. Whitespace is re-inserted as plain text nodes so the
+           paragraph still wraps and reads normally. */
+        const words = [];
+        const source = textElement.textContent.trim().split(/\s+/);
+        const fragment = document.createDocumentFragment();
+
+        source.forEach((word, index) => {
+          const span = document.createElement("span");
+          span.className = "text-highlighter__word";
+          span.textContent = word;
+          fragment.appendChild(span);
+          words.push(span);
+
+          if (index < source.length - 1) {
+            fragment.appendChild(document.createTextNode(" "));
+          }
+        });
+
+        textElement.replaceChildren(fragment);
+
+        const media = window.gsap.matchMedia();
+
+        media.add("(prefers-reduced-motion: no-preference)", () => {
+          const styles = window.getComputedStyle(section);
+          const dim = parseFloat(styles.getPropertyValue("--text-highlight-dim")) || 0.18;
+
+          const eyebrow = section.querySelector("[data-text-highlighter-eyebrow]");
+
+          if (eyebrow) {
+            window.gsap.fromTo(
+              eyebrow,
+              { autoAlpha: 0, y: 22 },
+              {
+                autoAlpha: 1,
+                duration: 0.55,
+                ease: "power3.out",
+                y: 0,
+                scrollTrigger: { trigger: eyebrow, start: "top 88%", once: true }
+              }
+            );
+          }
+
+          /* Scrub-linked so the highlight tracks the scroll position directly,
+             word by word, rather than playing once on entry. */
+          const tween = window.gsap.fromTo(
+            words,
+            { opacity: dim },
+            {
+              opacity: 1,
+              duration: 1,
+              ease: "none",
+              stagger: 0.6,
+              scrollTrigger: {
+                trigger: textElement,
+                start: "top 80%",
+                end: "bottom 55%",
+                scrub: 0.4
+              }
+            }
+          );
+
+          return () => {
+            /* matchMedia teardown: drop the dim state so the paragraph is
+               left fully legible if the query stops matching. */
+            tween.scrollTrigger && tween.scrollTrigger.kill();
+            tween.kill();
+            window.gsap.set(words, { clearProps: "opacity" });
+          };
+        });
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initTextHighlighters, { once: true });
+    } else {
+      initTextHighlighters();
+    }
+  })();
+</script>
+{% end_require_js %}
