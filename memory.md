@@ -174,7 +174,7 @@ The editable schema now covers the brand logo/link/description, four selectable 
 
 ## Global Header module
 
-`modules/Global/Header.module/` matches the Fluentic Webflow navbar while preserving the project's existing 30vh scroll-triggered squeeze from the 1240px reference width to 67rem. The nav shell is always translucent white with 20px backdrop blur, a 16px radius, 12px padding, and the reference shadow; at 991px and below it switches to a solid white shell and dropdown menu.
+`modules/Global/Header.module/` matches the Fluentic Webflow navbar while preserving the project's existing 30vh scroll-triggered squeeze from the 1240px reference width to 67rem. The Fluentic logo wordmark synchronizes with that 0.4s squeeze: it collapses horizontally from 87px to 0 and fades from opacity 1 to 0 while the icon remains visible. This wordmark behavior is desktop-only. The nav shell is always translucent white with 20px backdrop blur, a 16px radius, 12px padding, and the reference shadow; at 991px and below it switches to a solid white shell and dropdown menu that reveals with a downward translate from the navbar rather than a scale animation.
 
 The logo has separate editable icon and text-image fields. When either is empty, the downloaded Fluentic `Logo Icon.svg` and `Logo Text.svg` assets render through `get_asset_url`. Default links mirror the reference: Feature, Process, Testimonial, Pricing, and Blog. Desktop and mobile CTA labels are independently editable (`Sign up` and `Contact` by default), but both render through `btn_macros.animated_button`, with the compact 6px by 20px navbar treatment.
 
