@@ -1,0 +1,1 @@
+/* Module scripts are scoped in module.html alongside the shared GSAP timeline. */

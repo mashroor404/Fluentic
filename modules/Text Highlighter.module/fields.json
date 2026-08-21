@@ -1,0 +1,172 @@
+[ {
+  "id" : "36f7b7fa-c5ba-446a-9da8-79b0c1c74e87",
+  "name" : "section_content",
+  "label" : "Section content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "f37f62bf-08cc-4afd-80ea-00de50f37545",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "About"
+  }, {
+    "id" : "26cdb825-7894-4d4d-a482-79b40f243dd5",
+    "name" : "eyebrow_icon",
+    "label" : "Eyebrow icon",
+    "help_text" : "Optional. Defaults to the bundled Fluentic gradient star.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : null,
+      "size_type" : null,
+      "width" : null,
+      "height" : null,
+      "max_width" : null,
+      "max_height" : null,
+      "loading" : "disabled"
+    }
+  }, {
+    "id" : "68a93e7c-a975-4940-b2d2-451711b6b2ee",
+    "name" : "text",
+    "label" : "Highlighted text",
+    "help_text" : "Each word brightens in turn as the section scrolls through the viewport.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : true,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Fluentic AI is crafted to elevate how businesses showcase their AI solutions. With a focus on clean design, it helps brands engage and convert."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "About",
+    "text" : "Fluentic AI is crafted to elevate how businesses showcase their AI solutions. With a focus on clean design, it helps brands engage and convert."
+  }
+}, {
+  "id" : "ce179e49-8b60-4950-9b9f-48f75c8d02b7",
+  "name" : "appearance",
+  "label" : "Appearance",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "8a15646f-d914-4103-8841-f38954b04999",
+    "name" : "background_color",
+    "label" : "Panel background",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#1B0C27",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "8fe447a3-a80f-4fa5-9e99-b6e1c3c351b3",
+    "name" : "text_color",
+    "label" : "Highlighted text colour",
+    "help_text" : "The colour a word reaches once it is highlighted.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#FFFFFF",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "660d96fb-5b0c-4780-932a-220ebef3121b",
+    "name" : "dim_opacity",
+    "label" : "Un-highlighted opacity (%)",
+    "help_text" : "How faint a word is before it is highlighted. Lower is fainter.",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "min" : 0,
+    "max" : 100,
+    "step" : 1,
+    "suffix" : "%",
+    "type" : "number",
+    "display_width" : null,
+    "default" : 18
+  } ],
+  "tab" : "STYLE",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background_color" : {
+      "color" : "#1B0C27",
+      "opacity" : 100
+    },
+    "text_color" : {
+      "color" : "#FFFFFF",
+      "opacity" : 100
+    },
+    "dim_opacity" : 18
+  }
+}, {
+  "id" : "778fc6ae-7fc0-437b-9096-0371558e19e0",
+  "name" : "glow",
+  "label" : "Background glow",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "523d99ec-d287-40f6-a7ec-31d3059c773c",
+    "name" : "show_glow",
+    "label" : "Show glow",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "da3bcbd1-9fed-4c86-a157-7e45b7a5eae8",
+    "name" : "glow_color",
+    "label" : "Glow colour",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "glow.show_glow",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#FF82E1",
+      "opacity" : 50
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "show_glow" : true,
+    "glow_color" : {
+      "color" : "#FF82E1",
+      "opacity" : 50
+    }
+  }
+} ]

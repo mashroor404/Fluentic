@@ -121,10 +121,7 @@ Core color tokens from the live stylesheet:
 | Neutral 7 | `#EDEBE9` |
 | Neutral 8 | `#F6F5F4` |
 
-The main accent gradient is `linear-gradient(120deg, #F0E9F7, #D588FC 61%, #FF49D4)`. A smaller icon gradient uses `linear-gradient(#FFF, #F0EAF6)`. These Webflow values are the best visual reference when aligning the HubSpot theme; they are not currently the same as the existing HubSpot defaults in root `fields.json`.
-
-## Fluentic Webflow reference assets
-
+The main accent gradient is `linear-gradient(120deg, #F0E9F7, #D588FC 61%, #FF49D4)`. A smaller icon gradient uses `linear-gradient(#FFF, #F0EAF6)`. These Webflow values are the best visual reference when aligning t
 The original media referenced by the public homepage and its published stylesheet was downloaded on 2026-08-19 to `css/elements/Assets/`:
 
 ```text
@@ -166,7 +163,7 @@ GSAP and ScrollTrigger are supplied by `templates/layouts/base.html` and must no
 - The eyebrow badge originally kept its own styling (flat pill, blinking cursor) instead of matching the live site's frosted `.sub-title` pill; left alone in the first two revisions since it's a site-wide shared component, out of Hero's scope. **Fixed site-wide on 2026-08-20** (user asked directly): removed the blinking-cursor `<span class="eyebrow-cursor">` from `Macros/Button.html`'s `eyebrow_label` macro and from two modules that had hand-copied the eyebrow markup instead of using the macro (`Trusted by.module`, `Execution.module` — search for `eyebrow-custom` before adding a new eyebrow anywhere, some modules don't call the macro). Also deleted a second, dead `.eyebrow-custom`/`.eyebrow-cursor` definition in `css/elements/global.css` that `css/elements/_buttons.css` (loaded after it) was silently overriding — `_buttons.css` is now the sole canonical eyebrow definition (frosted pill, `border-radius:999px`, `backdrop-filter:blur(10px)`, no cursor).
 - Button hover text-swap animation (`.button-primary`, `.button-text` in `css/elements/_buttons.css`) was slowed down on request (300/400ms → 550/650ms) to read closer to the live site's pace. The live site actually drives this via Webflow's compiled IX2 JS, not a discoverable CSS transition value, so this duration is a considered approximation, not a scraped exact match — revisit if it still reads too fast/slow.
 
-## Global Footer module
+## G
 
 `modules/Global/Footer.module/` was rebuilt from the Fluentic Webflow footer reference while preserving its existing folder name, `Footer` label, and HubSpot module ID `383963363024`. Both footer partial files may reference this module, but `templates/layouts/base.html` currently renders `templates/partials/Footer2.html`; do not revert it to the older footer partial.
 
@@ -174,7 +171,7 @@ The editable schema now covers the brand logo/link/description, four selectable 
 
 ## Global Header module
 
-`modules/Global/Header.module/` matches the Fluentic Webflow navbar with a delayed, continuous scroll-linked squeeze. It stays full-size through the first 60vh, then interpolates over the next 60vh and reaches its final state at 120vh. During that range, the desktop container moves from 77.5rem to 67rem and its top padding from 24px to 16px. At the same time, the Fluentic logo wordmark width, opacity, horizontal scale, and 14px logo gap interpolate to zero while the icon remains visible. The `.is-scrolled` class marks only the completed state. This wordmark behavior is desktop-only. The nav shell is always translucent white with 20px backdrop blur, a 16px radius, 12px padding, and the reference shadow; at 991px and below it switches to a solid white shell and dropdown menu that reveals with a downward translate from the navbar rather than a scale animation.
+`modules/Global/Header.module/` matches the Fluentic Webflow navbar while preserving the project's existing 30vh scroll-triggered squeeze from the 1240px reference width to 67rem. The nav shell is always translucent white with 20px backdrop blur, a 16px radius, 12px padding, and the reference shadow; at 991px and below it switches to a solid white shell and dropdown menu.
 
 The logo has separate editable icon and text-image fields. When either is empty, the downloaded Fluentic `Logo Icon.svg` and `Logo Text.svg` assets render through `get_asset_url`. Default links mirror the reference: Feature, Process, Testimonial, Pricing, and Blog. Desktop and mobile CTA labels are independently editable (`Sign up` and `Contact` by default), but both render through `btn_macros.animated_button`, with the compact 6px by 20px navbar treatment.
 
@@ -240,4 +237,4 @@ GSAP ScrollTrigger scrubs the complete track from `xPercent: 0` to `xPercent: -6
 Every card has editable name, description, card-icon SVG markup, feature-icon SVG markup, price, billing period, features heading/list, button text/link, popular toggle, popular label, and popular background image. The feature icon is configured once per card and reused for every row in that card's repeatable features list. Popular cards use the highlighted inset-header design, the base/black global button macro, and the selected background image or bundled `Pricing Card Particle.svg` fallback. Regular cards use the white/variant-2 global button macro.
 
 Plan filtering uses semantic tabs and tabpanels with synchronized `aria-selected`, keyboard Left/Right/Home/End navigation, and instance-scoped IDs. The first plan is active initially. The header uses the established eyebrow and split-word GSAP reveal; the active `.pricing-comparison__panel` rises from 50px as soon as the section enters the viewport, and newly selected plan cards receive a short staggered reveal. Reduced-motion mode preserves filtering without animation.
->>>>>>> 6cb12da788ed7b588aa0ba88693343384f21b5ce
+>>>>>>> 6cb12da788ed7b588a

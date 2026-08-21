@@ -1,0 +1,332 @@
+[ {
+  "id" : "a1f7c204-6b39-4e58-9c02-7d4e6b81f350",
+  "name" : "section_content",
+  "label" : "Section content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "3d6b8e15-9a27-4c63-b8f1-0e5a2d7c9461",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "How it Works"
+  }, {
+    "id" : "76624458-fa60-44e4-b797-3d2c4035b705",
+    "name" : "eyebrow_icon",
+    "label" : "Eyebrow icon",
+    "help_text" : "Optional. Defaults to the bundled Fluentic gradient star.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : null,
+      "size_type" : null,
+      "width" : null,
+      "height" : null,
+      "max_width" : null,
+      "max_height" : null,
+      "loading" : "disabled"
+    }
+  }, {
+    "id" : "c05d3921-8e46-4a7f-b13c-9d2f5a6e08b7",
+    "name" : "heading",
+    "label" : "Heading",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "A Simple 3-Step Process"
+  }, {
+    "id" : "72b8f4e0-1c53-49a6-8d7b-3e0a9c15d62f",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : true,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Get started quickly and effortlessly with Fluence AI's streamlined 3-step process designed to optimize your data workflow."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "How it Works",
+    "heading" : "A Simple 3-Step Process",
+    "description" : "Get started quickly and effortlessly with Fluence AI's streamlined 3-step process designed to optimize your data workflow."
+  }
+}, {
+  "id" : "f8fd5931-912e-4488-aa01-279074b198ff",
+  "name" : "buttons",
+  "label" : "Buttons",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "1b7e5c38-902d-4a41-86f9-4c2e7b035da8",
+    "name" : "show_primary",
+    "label" : "Show primary button",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "e6304f92-7b15-4c8d-a025-9f1b8d6e3c74",
+    "name" : "primary_text",
+    "label" : "Primary button text",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "buttons.show_primary",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Get Started"
+  }, {
+    "id" : "84c1a6d5-3e70-4b92-8f6a-2d95c0e7b418",
+    "name" : "primary_link",
+    "label" : "Primary button link",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "buttons.show_primary",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "/contact-us"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "id" : "f30b8e47-6c29-4d15-b7a3-0e8f52c96d1b",
+    "name" : "show_secondary",
+    "label" : "Show secondary button",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "3c4bf73e-3f53-43d9-bc89-56aacdbee62c",
+    "name" : "secondary_text",
+    "label" : "Secondary button text",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "buttons.show_secondary",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Book a Demo"
+  }, {
+    "id" : "6d52b0f8-9a17-4e34-8c60-3b7d1e5a94c2",
+    "name" : "secondary_link",
+    "label" : "Secondary button link",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "buttons.show_secondary",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "/contact-us"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "show_primary" : true,
+    "primary_text" : "Get Started",
+    "show_secondary" : true,
+    "secondary_text" : "Book a Demo"
+  }
+}, {
+  "id" : "b48e7f31-0d65-4c29-a7f8-5e91b3c06d47",
+  "name" : "feature_media",
+  "label" : "Feature image",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "0a6c9e25-7f83-4b17-92d4-6e3a8b571c09",
+    "name" : "show_image",
+    "label" : "Show feature image",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "d719b8a3-2e56-4f04-b98c-1a7d604e35f2",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "feature_media.show_image",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : true,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : null,
+      "size_type" : null,
+      "width" : null,
+      "height" : null,
+      "max_width" : null,
+      "max_height" : null,
+      "loading" : "disabled"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "show_image" : true
+  }
+}, {
+  "id" : "697a1a01-b66c-4643-8dab-ee9d4acb9ca6",
+  "name" : "steps",
+  "label" : "Steps",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 6,
+    "sorting_label_field" : "title",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "3c80e5a7-6b14-4d92-8f37-0e2b9c6a5178",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Setup & Training"
+  }, {
+    "id" : "9b4f0c62-8d37-4a15-b6e9-2c750a83f4d6",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : true,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Effortlessly integrate data from various sources into a unified system."
+  }, {
+    "id" : "5228f33b-2e5d-49ee-99d9-67caa62a6c9d",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : true,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : null,
+      "size_type" : null,
+      "width" : null,
+      "height" : null,
+      "max_width" : null,
+      "max_height" : null,
+      "loading" : "disabled"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "Setup & Training",
+    "description" : "Effortlessly integrate data from various sources into a unified system."
+  }, {
+    "title" : "Test Your Agent",
+    "description" : "Use AI to uncover valuable insights and improve performance."
+  }, {
+    "title" : "Deploy Agent",
+    "description" : "Streamline tasks and enhance productivity with AI."
+  } ]
+}, {
+  "id" : "c6017d4b-3e82-4f59-a1d0-9b5e7c284a63",
+  "name" : "overlap_previous",
+  "label" : "Overlap the section above",
+  "help_text" : "Matches the live site, which pulls this section up over the one before it. Turn off if this module is not placed directly beneath a full-bleed section.",
+  "required" : false,
+  "locked" : false,
+  "display" : "toggle",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+} ]
