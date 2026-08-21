@@ -222,7 +222,9 @@ If these values should become editable HubSpot theme settings, add them to root 
 
 - Match the reference navbar around a 1240px container and a translucent white shell with 20px backdrop blur, 16px radius, 12px padding, and a subtle shadow. At 991px and below, use the solid white shell and dropdown treatment.
 - Keep the existing header squeeze behavior when refining the navigation: this project toggles `.is-scrolled` after 30vh and reduces the desktop container to 67rem.
+- Synchronize the desktop logo wordmark with the navbar squeeze using the same 0.4s timing: transition `max-width` from 87px to 0, opacity from 1 to 0, and horizontal scale from 1 to 0 while retaining the logo icon. Do not hide the wordmark on mobile.
 - Use separate editable logo-icon and logo-text image fields, with the downloaded Fluentic Logo Icon and Logo Text SVG files as local `get_asset_url` fallbacks.
 - Render desktop and mobile header CTAs with `btn_macros.animated_button`; use scoped navbar sizing rather than hand-coded CTA markup.
 - Do not add active-page icons or persist a navigation index. The Header module intentionally has no icon field, active-state markup/CSS, `data-nav-index`, or localStorage behavior.
 - Keep mobile navigation controls semantic: synchronize `aria-expanded`, update the button label, and close on navigation, Escape, outside click, and return to desktop width.
+- Reveal the mobile navigation downward from the bottom of `.nav_wrap` with a Y-axis translate and opacity transition. Do not use the previous scale-from-corner effect.
