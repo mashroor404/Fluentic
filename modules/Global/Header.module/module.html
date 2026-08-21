@@ -14,6 +14,7 @@
     background-color: transparent; 
     border-bottom: none; 
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    padding-top: 10px;
   }
 
   .site-header.is-scrolled {
@@ -40,6 +41,7 @@
     min-height: 80px;
     position: relative;
     transition: all 0.4s ease;
+    padding:12px;
   }
 
   /* ==================================
@@ -54,8 +56,6 @@
       border-radius: 14px;
       /* Removed the border entirely to fix the black blink bug */
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08); 
-      padding-left: 24px;
-      padding-right: 12px;
     }
     
     .site-header.is-scrolled .nav_wrap {
@@ -128,7 +128,7 @@
   .nav_menu-link {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 24px;
     font-family: var(--primary-font);
     font-size: 16px;
     font-weight: 600;
@@ -145,49 +145,8 @@
     margin: 0;
   }
 
-  /* SVG Icon Styles */
-  .nav-icon {
-    display: none; /* Hidden by default */
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-  }
-
-  .nav-icon svg {
-    width: 100%;
-    height: 100%;
-    fill: currentColor; 
-  }
-
   .nav_menu-link:hover {
     opacity: 1; 
-  }
-
-  /* ==================================
-     The Target Active Indicator Styling
-     ================================== */
-  .nav_menu-link.w--current {
-    opacity: 1;
-    background-color: #F0F0F0; 
-    color: var(--text-primary);
-    border: 1px solid #0000000f; 
-    box-shadow: 0 4px 12px rgba(1, 16, 50, 0.06); 
-  }
-
-  /* Show the icon ONLY when active */
-  .nav_menu-link.w--current .nav-icon {
-    display: flex; 
-    color: var(--primary-color, #2F6BFF); 
-  }
-
-  /* ==================================
-     Header CTA Gradient Override
-     ================================== */
-  .site-header .btn-wrap a,
-  .site-header .btn-wrap button,
-  .site-header .btn-wrap .btn {
-    background: var(--gradient-3) !important;
   }
 
   /* Hide Mobile Elements on Desktop */
@@ -256,9 +215,11 @@
       
       opacity: 0;
       visibility: hidden;
-      transform-origin: top right;
-      transform: scale(0);
-      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; 
+      transform-origin: top center;
+      transform: translate3d(0, -16px, 0);
+      transition: opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0s 0.4s;
       z-index: 100;
     }
 
@@ -298,12 +259,6 @@
       opacity: 1 !important;
     }
     
-    .nav_menu-link.w--current {
-      background-color: transparent !important;
-      border: 1px solid transparent !important;
-      box-shadow: none !important;
-    }
-
     .btn-wrap.is-nav {
       display: block;
       width: 100%;
@@ -318,8 +273,10 @@
     .site-header.is-open .nav_menu-wrap {
       opacity: 1;
       visibility: visible;
-      transform: scale(1);
-      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0s;
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0s;
     }
     
     /* Hamburger to X Animation */
@@ -333,156 +290,372 @@
       transform: translateY(-8px) rotate(-45deg);
     }
   }
+
+  /* Fluentic reference alignment. The existing scroll-width squeeze remains intact. */
+  .site-header {
+    background-color: transparent;
+    inset: 0 0 auto;
+    padding: 24px 0 20px;
+  }
+
+  .site-header.is-scrolled {
+    padding-top: 16px;
+  }
+
+  .padding-global {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .container.is-nav {
+    background-color: transparent;
+    max-width: min(77.5rem, var(--container-max-width, 77.5rem));
+    width: 90%;
+  }
+
+  .nav_wrap {
+    -webkit-backdrop-filter: blur(20px);
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    min-height: 0;
+    padding: 12px;
+  }
+
+  .site-header.is-scrolled .container.is-nav {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .site-header.is-scrolled .nav_wrap {
+    min-height: 0;
+  }
+
+  .logo_link {
+    flex: 1 1 0;
+    gap: 14px;
+    max-width: 189px;
+    transition: gap 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .logo_img {
+    flex: 0 0 32px;
+    height: 32px;
+    max-height: 32px;
+    width: 32px;
+  }
+
+  .logo_wordmark {
+    display: block;
+    flex: 0 1 auto;
+    height: auto;
+    max-width: 87px;
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: left center;
+    transition: max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      opacity 0.4s ease,
+      transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: max-width, opacity, transform;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 992px) {
+    .site-header.is-scrolled .logo_link {
+      gap: 0;
+    }
+
+    .site-header.is-scrolled .logo_wordmark {
+      max-width: 0;
+      opacity: 0;
+      transform: scaleX(0);
+    }
+  }
+
+  .nav_menu-wrap {
+    justify-content: center;
+  }
+
+  .nav_menu_flex-wrap,
+  .nav_menu {
+    justify-content: center;
+  }
+
+  .nav_menu_flex-wrap {
+    gap: 0;
+  }
+
+  .nav_menu-list {
+    gap: 24px;
+  }
+
+  .nav_menu-link {
+    border: 0;
+    border-radius: 0;
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2, 1rem);
+    font-weight: var(--font-weight-medium, 500);
+    opacity: 0.8;
+    padding: 0;
+  }
+
+  .nav_menu-link:hover,
+  .nav_menu-link:focus-visible {
+    color: var(--text-primary);
+    opacity: 1;
+  }
+
+  .btn-wrap.hide-tablet {
+    align-items: center;
+    display: flex;
+    flex: 1 1 0;
+    justify-content: flex-end;
+    max-width: 189px;
+    width: 100%;
+  }
+
+  .site-header .button-primary {
+    min-height: 36px;
+    padding: 6px 20px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .site-header,
+    .site-header.is-scrolled {
+      background-color: transparent;
+      padding: 20px 0 16px;
+    }
+
+    .container.is-nav {
+      max-width: none;
+      width: calc(100% - 32px);
+    }
+
+    .nav_wrap {
+      background-color: var(--bg-primary, #fff);
+      padding: 8px 12px;
+    }
+
+    .logo_link {
+      max-width: 160px;
+    }
+
+    .nav_menu-btn {
+      background-color: transparent;
+    }
+
+    .nav_menu-wrap {
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      background-color: var(--bg-primary, #fff);
+      border-radius: 16px;
+      left: 0;
+      margin-top: 8px;
+      padding: 20px;
+      right: 0;
+      transform: translate3d(0, -16px, 0);
+      transform-origin: top center;
+      transition: opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0s 0.4s;
+      will-change: opacity, transform;
+    }
+
+    .nav_menu_flex-wrap {
+      gap: 0;
+      width: 100%;
+    }
+
+    .nav_menu-item {
+      border-bottom: 0;
+    }
+
+    .nav_menu-link {
+      color: var(--text-primary) !important;
+      font-size: var(--text-body, 1.125rem);
+      padding: 8px 0;
+    }
+
+    .btn-wrap.is-nav {
+      margin-top: 10px;
+    }
+
+    .btn-wrap.is-nav .button-primary {
+      width: 100%;
+    }
+
+    .site-header.is-open .nav_menu-wrap {
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo_link,
+    .logo_wordmark,
+    .nav_menu-wrap {
+      transition: none;
+    }
+  }
   {% end_scope_css %}
 </style>
 {% end_require_css %}
 
-<header class="nav site-header" data-sticky="true">
+{% set logo_href = module.logo.logo_link.url.href %}
+{% if not logo_href %}{% set logo_href = "/" %}{% endif %}
+{% set logo_icon_src = module.logo.logo_image.src %}
+{% if not logo_icon_src %}
+  {% set logo_icon_src = get_asset_url('../../../css/elements/Assets/icons/698b27c7157f0b46c816e0ee_Logo Icon.svg') %}
+{% endif %}
+{% set logo_text_src = module.logo.logo_text_image.src %}
+{% if not logo_text_src %}
+  {% set logo_text_src = get_asset_url('../../../css/elements/Assets/icons/698b27c75f402314249d219c_06358543d347e99ff2b72ab7d04f07b6_Logo Text.svg') %}
+{% endif %}
+{% set cta_href = module.cta.button_link.url.href %}
+{% if module.cta.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+  {% set cta_href = "mailto:" ~ cta_href %}
+{% endif %}
+{% if not cta_href %}{% set cta_href = "/contact-us" %}{% endif %}
+{% set mobile_button_text = module.cta.mobile_button_text or module.cta.button_text %}
+
+<header class="nav header-section site-header" data-sticky="true" data-site-header>
   <div class="padding-global">
     <div class="container is-nav">
       <div class="nav_wrap">
-        
-        <!-- Background Overlay -->
-        <div class="nav_wrap-overlay"></div>
-        
-        <!-- Logo -->
-        <a data-wf--logo--variant="primary" href="{{ module.logo.logo_link.url.href|default('/') }}" class="logo_link w-inline-block">
-          {% if module.logo.logo_image.src %}
-            <img loading="eager" src="{{ module.logo.logo_image.src }}" alt="{{ module.logo.logo_image.alt }}" class="logo_img" width="{{ module.logo.logo_image.width }}" height="{{ module.logo.logo_image.height }}">
-          {% endif %}
-          <p>Account Based RevOps</p>
+
+        <a
+          href="{{ logo_href|escape_url }}"
+          class="brand-logo-link logo_link w-inline-block"
+          aria-label="Home"
+          {% if module.logo.logo_link.open_in_new_tab %}target="_blank"{% endif %}
+          {% if module.logo.logo_link.open_in_new_tab or module.logo.logo_link.no_follow %}rel="{% if module.logo.logo_link.no_follow %}nofollow{% endif %}{% if module.logo.logo_link.open_in_new_tab %}{% if module.logo.logo_link.no_follow %} {% endif %}noopener{% endif %}"{% endif %}
+        >
+          <img loading="eager" src="{{ logo_icon_src|escape_url }}" alt="" class="logo_img">
+          <img loading="eager" src="{{ logo_text_src|escape_url }}" alt="{{ module.logo.logo_text_image.alt|default('Fluentic', true)|escape_attr }}" class="logo_wordmark">
         </a>
 
-        <!-- Navigation Menu -->
-        <div class="nav_menu-wrap">
+        <div class="nav_menu-wrap" id="nav-menu-{{ name|escape_attr }}" data-nav-menu>
           <div class="nav_menu-contain">
             <div class="nav_menu_flex-wrap">
               <nav class="nav_menu">
                 <ul role="list" class="nav_menu-list">
-                  
                   {% for item in module.navigation %}
+                    {% set nav_href = item.nav_link.url.href %}
+                    {% if item.nav_link.url.type is equalto "EMAIL_ADDRESS" %}
+                      {% set nav_href = "mailto:" ~ nav_href %}
+                    {% endif %}
                     <li class="nav_menu-item">
-                      <a href="{{ item.nav_link.url.href }}" 
-                         class="nav_menu-link w-inline-block" 
-                         data-nav-index="{{ loop.index }}"
-                         {% if item.nav_link.open_in_new_tab %}target="_blank"{% endif %} 
-                         {% if item.nav_link.no_follow %}rel="nofollow"{% endif %}>
-                        
-                        <!-- SVG Icon Container -->
-                        {% if item.icon_svg_code %}
-                          <div class="nav-icon">
-                            {{ item.icon_svg_code }}
-                          </div>
-                        {% endif %}
-                        
-                        <p>{{ item.nav_text }}</p>
+                      <a
+                        href="{{ nav_href|escape_url }}"
+                        class="nav-link nav_menu-link w-inline-block"
+                        {% if item.nav_link.open_in_new_tab %}target="_blank"{% endif %}
+                        {% if item.nav_link.open_in_new_tab or item.nav_link.no_follow %}rel="{% if item.nav_link.no_follow %}nofollow{% endif %}{% if item.nav_link.open_in_new_tab %}{% if item.nav_link.no_follow %} {% endif %}noopener{% endif %}"{% endif %}
+                      >
+                        <span>{{ item.nav_text|escape_html }}</span>
                       </a>
                     </li>
                   {% endfor %}
-                  
                 </ul>
               </nav>
-              
-              <!-- Mobile CTA Button (Inside Nav) -->
+
               <div class="btn-wrap is-nav">
-                {% if module.cta.button_text %}
-                  <a href="{{ module.cta.button_link.url.href }}" 
-                     class="btn s-btn" 
-                     style="display: flex; justify-content: center; align-items: center; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;"
-                     {% if module.cta.button_link.open_in_new_tab %}target="_blank"{% endif %} 
-                     {% if module.cta.button_link.no_follow %}rel="nofollow"{% endif %}>
-                    {{ module.cta.button_text }}
-                  </a>
+                {% if mobile_button_text %}
+                  {{ btn_macros.animated_button(mobile_button_text, cta_href, module.cta.button_link.open_in_new_tab, module.cta.button_link.no_follow) }}
                 {% endif %}
               </div>
-
             </div>
           </div>
         </div>
 
-        <!-- Desktop CTA Button -->
         <div class="btn-wrap hide-tablet">
           {% if module.cta.button_text %}
-            {{ btn_macros.animated_button(module.cta.button_text, module.cta.button_link.url.href) }}
+            {{ btn_macros.animated_button(module.cta.button_text, cta_href, module.cta.button_link.open_in_new_tab, module.cta.button_link.no_follow) }}
           {% endif %}
         </div>
 
-        <!-- Mobile Hamburger Menu Button -->
-        <button class="nav_menu-btn" aria-label="Toggle Navigation">
-          <div class="nav_menu-line-wrap">
-            <div class="nav_menu-line is-first"></div>
-            <div class="nav_menu-line is-middle"></div>
-            <div class="nav_menu-line is-last"></div>
-          </div>
+        <button
+          class="menu-button nav_menu-btn"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="nav-menu-{{ name|escape_attr }}"
+          data-nav-toggle
+        >
+          <span class="nav_menu-line-wrap" aria-hidden="true">
+            <span class="nav_menu-line is-first"></span>
+            <span class="nav_menu-line is-middle"></span>
+            <span class="nav_menu-line is-last"></span>
+          </span>
         </button>
-
       </div>
     </div>
   </div>
-  
-  <div class="nav_overlay"></div>
 </header>
 
 {% require_js %}
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var header = document.querySelector('.site-header');
-    var menuBtn = document.querySelector('.nav_menu-btn');
+  (() => {
+    const initHeaders = () => {
+      document.querySelectorAll('[data-site-header]').forEach((header) => {
+        if (header.dataset.headerInitialized === 'true') return;
+        header.dataset.headerInitialized = 'true';
 
-    // 1. Hamburger Mobile Menu Toggle
-    if(menuBtn) {
-      menuBtn.addEventListener('click', function() {
-        header.classList.toggle('is-open');
+        const menuButton = header.querySelector('[data-nav-toggle]');
+
+        const setMenuState = (isOpen) => {
+          header.classList.toggle('is-open', isOpen);
+
+          if (menuButton) {
+            menuButton.setAttribute('aria-expanded', String(isOpen));
+            menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+          }
+        };
+
+        if (menuButton) {
+          menuButton.addEventListener('click', () => {
+            setMenuState(!header.classList.contains('is-open'));
+          });
+        }
+
+        header.querySelectorAll('.nav_menu-link, .btn-wrap.is-nav a').forEach((link) => {
+          link.addEventListener('click', () => setMenuState(false));
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') setMenuState(false);
+        });
+
+        document.addEventListener('click', (event) => {
+          if (!header.contains(event.target)) setMenuState(false);
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 991) setMenuState(false);
+        });
+
+        const updateScrolledState = () => {
+          const scrollThreshold = window.innerHeight * 0.3;
+          header.classList.toggle('is-scrolled', window.scrollY > scrollThreshold);
+        };
+
+        updateScrolledState();
+        window.addEventListener('scroll', updateScrolledState, { passive: true });
       });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeaders, { once: true });
+    } else {
+      initHeaders();
     }
-
-    // 2. 30vh Scroll Listener for Floating Pill Design
-    window.addEventListener('scroll', function() {
-      var scrollThreshold = window.innerHeight * 0.3;
-      if (window.scrollY > scrollThreshold) {
-        header.classList.add('is-scrolled');
-      } else {
-        header.classList.remove('is-scrolled');
-      }
-    });
-
-    // 3. Loop-Index Active State Logic via LocalStorage
-    var navLinks = document.querySelectorAll('.nav_menu-link');
-    var logoLink = document.querySelector('.logo_link');
-    
-    // Check if the user has clicked a nav link before in this session
-    var activeIndex = localStorage.getItem('activeNavIndex');
-    
-    // Default to '1' (Home) if there is no history (e.g. first visit)
-    if (!activeIndex) {
-      activeIndex = '1';
-    }
-
-    // Apply the w--current class based on the saved index on page load
-    navLinks.forEach(function(link) {
-      if (link.getAttribute('data-nav-index') === activeIndex) {
-        link.classList.add('w--current');
-      } else {
-        link.classList.remove('w--current');
-      }
-
-      // Add click listener to save the new index to storage
-      link.addEventListener('click', function() {
-        var clickedIndex = this.getAttribute('data-nav-index');
-        localStorage.setItem('activeNavIndex', clickedIndex);
-        
-        // Immediately update visuals before page navigates
-        navLinks.forEach(function(l) { l.classList.remove('w--current'); });
-        this.classList.add('w--current');
-      });
-    });
-
-    // Reset active state to '1' if they click the logo to go home
-    if (logoLink) {
-      logoLink.addEventListener('click', function() {
-        localStorage.setItem('activeNavIndex', '1');
-      });
-    }
-  });
+  })();
 </script>
 {% end_require_js %}

@@ -28,6 +28,14 @@ images/          Theme preview/static image assets
 6. Pages and blog templates extend `templates/layouts/base.html`. A new page uses a template with `templateType: page`; blog listing and post templates use their corresponding HubSpot template types.
 7. In HubSpot, sync/upload the complete theme folder, publish it, then create/edit content with one of the theme's page or blog templates. Theme settings are then available from the theme editor and flow into the rendered CSS.
 
+## Local HubSpot draft watcher
+
+Run `npm run watch:hubspot` from the theme root to perform an initial upload and then continuously sync local theme changes to `/Fluentic` in HubSpot account `246817745`. The wrapper delegates to the installed native command `hs watch . /Fluentic --account 246817745 --initial-upload --cms-publish-mode draft`; draft mode makes changes available in Design Manager and HubSpot preview without publishing them to live pages.
+
+This repository stores module schemas directly as `fields.json`, so no `fields.js` compiler or npm watcher dependency is needed. The watcher covers module HTML, fields JSON, CSS, JavaScript, templates, macros, assets, and root theme settings. Stop it with `Ctrl+C`. Run `npm run watch:hubspot:check` to verify the resolved command without uploading anything.
+
+Environment overrides are available when needed: `HUBSPOT_ACCOUNT`, `HUBSPOT_WATCH_DEST`, and `HUBSPOT_WATCH_MODE` (`draft` or `publish`). Publish mode can affect live pages and should only be used intentionally. `.hsignore` prevents GitHub configuration, Markdown notes, and local watcher/package files from being uploaded. The watcher intentionally does not use `--remove`, so it will not delete remote files that are absent locally.
+
 ## Theme setting to CSS mapping
 
 The important mapping is in `css/elements/global.css` (also duplicated in `css/main.css`):
@@ -163,6 +171,14 @@ GSAP and ScrollTrigger are supplied by `templates/layouts/base.html` and must no
 `modules/Global/Footer.module/` was rebuilt from the Fluentic Webflow footer reference while preserving its existing folder name, `Footer` label, and HubSpot module ID `383963363024`. Both footer partial files may reference this module, but `templates/layouts/base.html` currently renders `templates/partials/Footer2.html`; do not revert it to the older footer partial.
 
 The editable schema now covers the brand logo/link/description, four selectable social platforms, repeatable navigation columns and links, optional oversized wordmark, copyright rich text, and repeatable legal links. The bundled Fluentic logo and large Logo Text SVGs are local `get_asset_url` fallbacks. The module renders a section with the required `footer` class inside the existing global `<footer>` partial, avoiding invalid nested footer landmarks. Styling uses global theme variables and follows the reference's desktop, tablet, and mobile layout without adding JavaScript.
+
+## Global Header module
+
+`modules/Global/Header.module/` matches the Fluentic Webflow navbar while preserving the project's existing 30vh scroll-triggered squeeze from the 1240px reference width to 67rem. The Fluentic logo wordmark synchronizes with that 0.4s squeeze: it collapses horizontally from 87px to 0 and fades from opacity 1 to 0 while the icon remains visible. This wordmark behavior is desktop-only. The nav shell is always translucent white with 20px backdrop blur, a 16px radius, 12px padding, and the reference shadow; at 991px and below it switches to a solid white shell and dropdown menu that reveals with a downward translate from the navbar rather than a scale animation.
+
+The logo has separate editable icon and text-image fields. When either is empty, the downloaded Fluentic `Logo Icon.svg` and `Logo Text.svg` assets render through `get_asset_url`. Default links mirror the reference: Feature, Process, Testimonial, Pricing, and Blog. Desktop and mobile CTA labels are independently editable (`Sign up` and `Contact` by default), but both render through `btn_macros.animated_button`, with the compact 6px by 20px navbar treatment.
+
+The former active-page icon behavior was removed completely: there is no navigation SVG field, icon markup, `data-nav-index`, `w--current` styling, or localStorage state. Header JavaScript now only manages the existing scroll squeeze and the accessible mobile menu, including synchronized `aria-expanded`, Escape/outside-click closing, and desktop-resize cleanup.
 
 ## CTA module
 
