@@ -1,0 +1,320 @@
+[
+  {
+    "id": "f35ab0c3-60a8-41e7-aef9-d4b154c14d01",
+    "name": "section_content",
+    "label": "Section content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "848c69ba-1c85-420b-b3cf-cc8c6f45e216",
+        "name": "eyebrow_text",
+        "label": "Eyebrow text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Contact us"
+      },
+      {
+        "id": "1aaf844d-7bd0-4f52-a8d9-9c70b9fd6f02",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Get in touch with our team"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "eyebrow_text": "Contact us",
+      "heading": "Get in touch with our team"
+    }
+  },
+  {
+    "id": "036eb1ba-3267-40df-ab22-f36db4cb3140",
+    "name": "contact_content",
+    "label": "Contact details",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "2fd92727-da74-44bb-8fab-a914650f054f",
+        "name": "intro_heading",
+        "label": "Intro heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Feel free to reach out — we’d love to connect."
+      },
+      {
+        "id": "32663d6f-d4a7-4539-bdc5-67bf29e8173b",
+        "name": "links",
+        "label": "Contact links",
+        "required": false,
+        "locked": false,
+        "occurrence": {
+          "min": 1,
+          "max": 4,
+          "sorting_label_field": "title",
+          "default": 2
+        },
+        "children": [
+          {
+            "id": "61422900-6031-43ae-89e7-1a5d4180c83b",
+            "name": "icon_svg",
+            "label": "Icon SVG",
+            "help_text": "Paste the complete SVG markup for this contact method.",
+            "required": false,
+            "locked": false,
+            "allow_new_line": true,
+            "type": "text",
+            "display_width": null,
+            "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\"><path opacity=\".2\" d=\"M21 5.25 12 13.5 3 5.25H21Z\" fill=\"currentColor\"/><path d=\"M21 4.5H3a.75.75 0 0 0-.75.75V18a1.5 1.5 0 0 0 1.5 1.5h16.5a1.5 1.5 0 0 0 1.5-1.5V5.25A.75.75 0 0 0 21 4.5ZM12 12.48 4.93 6h14.14L12 12.48ZM9.25 12 3.75 17.04V6.96L9.25 12Zm1.11 1.02 1.13 1.03a.75.75 0 0 0 1.01 0l1.13-1.03L19.07 18H4.93l5.43-4.98ZM14.75 12l5.5-5.05v10.1L14.75 12Z\" fill=\"currentColor\"/></svg>"
+          },
+          {
+            "id": "82103373-a9a2-4db2-8b2e-574f994f59db",
+            "name": "title",
+            "label": "Title",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "Email us"
+          },
+          {
+            "id": "5c4f8b39-0cbd-4cd4-aecb-52158a1cfc90",
+            "name": "link_text",
+            "label": "Link text",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "hello@fluentic.ai"
+          },
+          {
+            "id": "37f035bb-e832-4477-ad4d-d728ad3112d7",
+            "name": "link",
+            "label": "Link",
+            "required": false,
+            "locked": false,
+            "supported_types": [
+              "EXTERNAL",
+              "CONTENT",
+              "EMAIL_ADDRESS",
+              "PHONE_NUMBER"
+            ],
+            "show_advanced_rel_options": false,
+            "type": "link",
+            "display_width": null,
+            "default": {
+              "url": {
+                "content_id": null,
+                "href": "hello@fluentic.ai",
+                "type": "EMAIL_ADDRESS"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          }
+        ],
+        "tab": "CONTENT",
+        "expanded": false,
+        "group_occurrence_meta": null,
+        "type": "group",
+        "display_width": null,
+        "default": [
+          {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\"><path opacity=\".2\" d=\"M21 5.25 12 13.5 3 5.25H21Z\" fill=\"currentColor\"/><path d=\"M21 4.5H3a.75.75 0 0 0-.75.75V18a1.5 1.5 0 0 0 1.5 1.5h16.5a1.5 1.5 0 0 0 1.5-1.5V5.25A.75.75 0 0 0 21 4.5ZM12 12.48 4.93 6h14.14L12 12.48ZM9.25 12 3.75 17.04V6.96L9.25 12Zm1.11 1.02 1.13 1.03a.75.75 0 0 0 1.01 0l1.13-1.03L19.07 18H4.93l5.43-4.98ZM14.75 12l5.5-5.05v10.1L14.75 12Z\" fill=\"currentColor\"/></svg>",
+            "title": "Email us",
+            "link_text": "hello@fluentic.ai",
+            "link": {
+              "url": {
+                "content_id": null,
+                "href": "hello@fluentic.ai",
+                "type": "EMAIL_ADDRESS"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          },
+          {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\".2\"/><path d=\"M12 7.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Zm-1.25 4.15h1.5v5.5h-1.5v-5.5Z\" fill=\"currentColor\"/><circle cx=\"12\" cy=\"12\" r=\"9.25\" stroke=\"currentColor\" stroke-width=\"1.5\"/></svg>",
+            "title": "Get support",
+            "link_text": "Chat with us",
+            "link": {
+              "url": {
+                "content_id": null,
+                "href": "/contact-us",
+                "type": "EXTERNAL"
+              },
+              "open_in_new_tab": false,
+              "no_follow": false
+            }
+          }
+        ]
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "intro_heading": "Feel free to reach out — we’d love to connect."
+    }
+  },
+  {
+    "id": "eed868e1-e2bf-46ed-a330-982d67f94bdb",
+    "name": "testimonial",
+    "label": "Testimonial",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "3c00a1ed-99bc-4449-91b3-ab02d03b728f",
+        "name": "show_testimonial",
+        "label": "Show testimonial",
+        "required": false,
+        "locked": false,
+        "display": "toggle",
+        "type": "boolean",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "503dd601-9f69-4eab-8cc4-6698c7a83725",
+        "name": "quote",
+        "label": "Quote",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "“Fluence AI has revolutionized the way we process data. The seamless integration and advanced analytics tools have saved us countless hours and improved our decision-making.”"
+      },
+      {
+        "id": "2b04ac42-bbf9-48de-8854-d39b07922380",
+        "name": "author_image",
+        "label": "Author image",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": false,
+        "type": "image",
+        "display_width": null,
+        "default": {
+          "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/6984e0d52ac602b59bd303c0_Author%20Image.png",
+          "alt": "Amber Stone",
+          "width": 120,
+          "height": 120
+        }
+      },
+      {
+        "id": "75feceab-f3a4-48e9-af13-93189216216c",
+        "name": "author_name",
+        "label": "Author name",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Amber Stone"
+      },
+      {
+        "id": "7620f7d3-1872-4832-bd1f-c5fbba397ad7",
+        "name": "author_role",
+        "label": "Author role",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Operations Manager, GrowthTech"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_testimonial": true,
+      "quote": "“Fluence AI has revolutionized the way we process data. The seamless integration and advanced analytics tools have saved us countless hours and improved our decision-making.”",
+      "author_image": {
+        "src": "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2/6984e0d52ac602b59bd303c0_Author%20Image.png",
+        "alt": "Amber Stone",
+        "width": 120,
+        "height": 120
+      },
+      "author_name": "Amber Stone",
+      "author_role": "Operations Manager, GrowthTech"
+    }
+  },
+  {
+    "id": "1cecd11d-f6a3-4b30-9a12-0752897264a3",
+    "name": "form_content",
+    "label": "HubSpot form",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "5b9b40ce-dce6-47d9-885f-73c33da7f6a4",
+        "name": "form",
+        "label": "Form",
+        "help_text": "Select the HubSpot form to display in this contact section.",
+        "required": false,
+        "locked": false,
+        "type": "form",
+        "display_width": null,
+        "default": {
+          "form_id": "",
+          "response_type": "inline",
+          "message": "Thanks for contacting us. We’ll get back to you shortly.",
+          "gotowebinar_webinar_key": null,
+          "redirect_id": null,
+          "redirect_url": ""
+        }
+      },
+      {
+        "id": "5eb8b080-9a37-4ce4-9dcb-46dd90e469da",
+        "name": "privacy_text",
+        "label": "Privacy text",
+        "required": false,
+        "locked": false,
+        "type": "richtext",
+        "display_width": null,
+        "default": "<p>By submitting this form you agree to our friendly <a href=\"/utility-pages/privacy-policy\">privacy policy</a>.</p>"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "form": {
+        "form_id": "",
+        "response_type": "inline",
+        "message": "Thanks for contacting us. We’ll get back to you shortly.",
+        "gotowebinar_webinar_key": null,
+        "redirect_id": null,
+        "redirect_url": ""
+      },
+      "privacy_text": "<p>By submitting this form you agree to our friendly <a href=\"/utility-pages/privacy-policy\">privacy policy</a>.</p>"
+    }
+  }
+]
