@@ -1,0 +1,579 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  .key-benefit-section {
+    /* Badge ring stops are specific to this section's compliance seals and
+       have no equivalent in the theme palette, so they stay local. */
+    --key-benefit-badge-ring-start: #ED56CA;
+    --key-benefit-badge-ring-end: #FFDDF7;
+    --key-benefit-badge-size: 80px;
+
+    background-color: var(--page-bg);
+    padding: 160px 0;
+  }
+
+  .key-benefit__container {
+    margin: 0 auto;
+    max-width: 1240px;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Section header                                                      */
+  /* ------------------------------------------------------------------ */
+
+  .key-benefit__header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 60px;
+    text-align: center;
+  }
+
+  .key-benefit__heading {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-medium);
+    margin: 16px auto 24px;
+    max-width: 49.9375rem;
+  }
+
+  .key-benefit__word {
+    display: inline-block;
+  }
+
+  .key-benefit__description {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.62;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Benefit card                                                        */
+  /* ------------------------------------------------------------------ */
+
+  .key-benefit__card {
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    margin: 0 auto 16px;
+    padding: 40px 40px 32px;
+    width: 100%;
+  }
+
+  .key-benefit__column {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    justify-content: flex-start;
+    max-width: 243px;
+    width: 100%;
+  }
+
+  .key-benefit__column--right {
+    max-width: 245px;
+  }
+
+  .key-benefit__item {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: flex-start;
+    max-width: 243px;
+    width: 100%;
+  }
+
+  .key-benefit__icon-wrap {
+    background-image: var(--gradient-icon);
+    border-radius: 4px;
+    box-shadow:
+      0 1px 8px 0 rgba(83, 44, 102, 0.1),
+      inset 0 1px 1px 0 var(--bg-primary),
+      inset 0 -1px 2px 0 rgba(157, 33, 219, 0.15);
+    flex: 0 0 auto;
+    height: 32px;
+    padding: 6px;
+    width: 32px;
+  }
+
+  .key-benefit__icon {
+    display: block;
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
+
+  .key-benefit__item-title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: 18px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .key-benefit__item-text {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  .key-benefit__visual {
+    border-radius: 16px;
+    max-width: 520px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .key-benefit__visual-image {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Bottom card                                                         */
+  /* ------------------------------------------------------------------ */
+
+  .key-benefit__footer {
+    align-items: center;
+    background-color: var(--bg-primary);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    padding: 24px;
+    width: 100%;
+  }
+
+  .key-benefit__footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-width: 461px;
+  }
+
+  .key-benefit__footer-heading {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: 24px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.33;
+    margin: 0;
+  }
+
+  .key-benefit__footer-description {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  .key-benefit__badges {
+    display: flex;
+    gap: 16px;
+  }
+
+  .key-benefit__badge {
+    aspect-ratio: 1;
+    background-image: linear-gradient(
+      180deg,
+      var(--key-benefit-badge-ring-start) -5%,
+      var(--key-benefit-badge-ring-end) 105.83%
+    );
+    border-radius: 50%;
+    flex: 0 0 auto;
+    height: var(--key-benefit-badge-size);
+    position: relative;
+    width: var(--key-benefit-badge-size);
+  }
+
+  .key-benefit__badge-inner {
+    align-items: center;
+    background-image: linear-gradient(180deg, var(--bg-primary), var(--accent-pink));
+    border-radius: 50%;
+    display: flex;
+    inset: 8.75%;
+    justify-content: center;
+    position: absolute;
+  }
+
+  .key-benefit__badge-text {
+    color: var(--text-light-primary);
+    font-family: var(--primary-font);
+    font-size: calc(var(--key-benefit-badge-size) * 0.2);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.15;
+    margin: 0;
+    overflow-wrap: anywhere;
+    padding: 0 8%;
+    text-align: center;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Responsive                                                          */
+  /* ------------------------------------------------------------------ */
+
+  @media (max-width: 991px) {
+    .key-benefit-section {
+      padding: 80px 0;
+    }
+
+    .key-benefit__header {
+      margin-bottom: 40px;
+    }
+
+    .key-benefit__card {
+      flex-direction: column;
+      padding: 32px;
+    }
+
+    .key-benefit__column {
+      flex-direction: row;
+      max-width: none;
+    }
+
+    .key-benefit__column--right {
+      gap: 32px;
+      justify-content: space-between;
+    }
+
+    .key-benefit__visual {
+      max-width: none;
+    }
+
+    .key-benefit__footer-text {
+      max-width: 400px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .key-benefit-section {
+      padding: 60px 0;
+    }
+
+    .key-benefit__container {
+      padding: 0 16px;
+    }
+
+    .key-benefit__heading {
+      margin-bottom: 16px;
+    }
+
+    .key-benefit__card {
+      padding: 24px;
+    }
+
+    .key-benefit__column {
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .key-benefit__item {
+      flex: 1;
+      max-width: 100%;
+      min-width: 200px;
+      width: auto;
+    }
+
+    /* The reference stacks the visual above both benefit columns on mobile. */
+    .key-benefit__visual {
+      order: -9999;
+    }
+
+    .key-benefit__footer {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .key-benefit__footer-text {
+      max-width: none;
+    }
+
+    .key-benefit__badges {
+      order: -9999;
+    }
+
+    .key-benefit__footer-heading {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .key-benefit-section {
+      padding: 40px 0;
+    }
+
+    .key-benefit__card {
+      gap: 32px;
+      padding: 16px;
+    }
+
+    .key-benefit__column {
+      gap: 32px;
+    }
+
+    .key-benefit__item {
+      gap: 8px;
+    }
+
+    .key-benefit__footer {
+      gap: 8px;
+      padding: 16px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% set default_icon = get_asset_url("../../css/elements/Assets/icons/6980987a0184622327aa2f48_Benefit Icon.svg") %}
+
+{% macro benefit_item(item, fallback_icon) %}
+  {% set icon_src = item.icon.src|default(fallback_icon, true) %}
+  <div class="key-benefit__item">
+    {% if icon_src %}
+      <div class="key-benefit__icon-wrap">
+        <img
+          class="key-benefit__icon"
+          src="{{ icon_src|escape_url }}"
+          alt="{{ item.icon.alt|default('', true)|escape_attr }}"
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+
+    {% if item.title %}
+      <p class="key-benefit__item-title">{{ item.title|escape_html }}</p>
+    {% endif %}
+
+    {% if item.description %}
+      <p class="key-benefit__item-text">{{ item.description|escape_html }}</p>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+<section class="key-benefit-section" data-key-benefit-section>
+  <div class="key-benefit__container">
+    <header class="key-benefit__header">
+      {% if module.section_content.eyebrow_text %}
+        <div data-key-benefit-eyebrow>
+          {{ btn_macros.eyebrow_label(module.section_content.eyebrow_text) }}
+        </div>
+      {% endif %}
+
+      {% if module.section_content.heading %}
+        <h2 class="key-benefit__heading gsap_split_word" data-key-benefit-heading>{{ module.section_content.heading|escape_html }}</h2>
+      {% endif %}
+
+      {% if module.section_content.description %}
+        <p class="key-benefit__description" data-key-benefit-description>{{ module.section_content.description|escape_html }}</p>
+      {% endif %}
+    </header>
+
+    {% set benefit_items = module.benefits %}
+    {% set benefit_count = benefit_items|length %}
+    {% set column_split = (benefit_count * 0.5)|round(0, 'ceil')|int %}
+
+    <div class="key-benefit__card" data-key-benefit-card>
+      {% if benefit_count %}
+        <div class="key-benefit__column key-benefit__column--left">
+          {% for item in benefit_items %}
+            {% if loop.index <= column_split %}{{ benefit_item(item, default_icon) }}{% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if module.media.show_image %}
+        {% set visual_src = module.media.image.src|default(get_asset_url("../../css/elements/Assets/images/6983a6c1167b8bc8e1dea890_Benefit Image.webp"), true) %}
+        {% set visual_width = module.media.image.width|default(1976, true) %}
+        {% set visual_height = module.media.image.height|default(1976, true) %}
+        {% if visual_src %}
+          <div class="key-benefit__visual" data-key-benefit-visual>
+            <img
+              class="key-benefit__visual-image"
+              src="{{ visual_src|escape_url }}"
+              alt="{{ module.media.image.alt|default(module.section_content.heading, true)|escape_attr }}"
+              width="{{ visual_width }}"
+              height="{{ visual_height }}"
+              {% if module.media.image.loading and module.media.image.loading != "disabled" %}loading="{{ module.media.image.loading }}"{% else %}loading="lazy"{% endif %}
+            >
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% if benefit_count > column_split %}
+        <div class="key-benefit__column key-benefit__column--right">
+          {% for item in benefit_items %}
+            {% if loop.index > column_split %}{{ benefit_item(item, default_icon) }}{% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if module.bottom_card.show_card %}
+      <div class="key-benefit__footer" data-key-benefit-footer>
+        {% if module.bottom_card.heading or module.bottom_card.description %}
+          <div class="key-benefit__footer-text">
+            {% if module.bottom_card.heading %}
+              <p class="key-benefit__footer-heading">{{ module.bottom_card.heading|escape_html }}</p>
+            {% endif %}
+            {% if module.bottom_card.description %}
+              <p class="key-benefit__footer-description">{{ module.bottom_card.description|escape_html }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if module.compliance_badges %}
+          <div class="key-benefit__badges">
+            {% for badge in module.compliance_badges %}
+              {% if badge.text %}
+                <div class="key-benefit__badge">
+                  <span class="key-benefit__badge-inner">
+                    <span class="key-benefit__badge-text">{{ badge.text|escape_html }}</span>
+                  </span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% require_js %}
+<script>
+  (() => {
+    const initKeyBenefitSections = () => {
+      if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+
+      window.gsap.registerPlugin(window.ScrollTrigger);
+
+      document.querySelectorAll("[data-key-benefit-section]").forEach((section) => {
+        if (section.dataset.keyBenefitAnimationInitialized === "true") return;
+        section.dataset.keyBenefitAnimationInitialized = "true";
+
+        const heading = section.querySelector("[data-key-benefit-heading]");
+        const headingWords = [];
+
+        if (heading) {
+          const words = heading.textContent.trim().split(/\s+/);
+          const fragment = document.createDocumentFragment();
+
+          words.forEach((word, index) => {
+            const wordElement = document.createElement("span");
+            wordElement.className = "key-benefit__word gsap_split_word2";
+            wordElement.textContent = word;
+            fragment.appendChild(wordElement);
+            headingWords.push(wordElement);
+
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(" "));
+            }
+          });
+
+          heading.replaceChildren(fragment);
+        }
+
+        const media = window.gsap.matchMedia();
+
+        media.add("(prefers-reduced-motion: no-preference)", () => {
+          const eyebrow = section.querySelector("[data-key-benefit-eyebrow]");
+          const description = section.querySelector("[data-key-benefit-description]");
+          const header = section.querySelector(".key-benefit__header");
+          const card = section.querySelector("[data-key-benefit-card]");
+          const visual = section.querySelector("[data-key-benefit-visual]");
+          const footer = section.querySelector("[data-key-benefit-footer]");
+
+          if (header) {
+            const headerTimeline = window.gsap.timeline({
+              defaults: { ease: "power3.out" },
+              scrollTrigger: {
+                trigger: header,
+                start: "top 82%",
+                once: true
+              }
+            });
+
+            if (eyebrow) {
+              headerTimeline.fromTo(
+                eyebrow,
+                { autoAlpha: 0, y: 22 },
+                { autoAlpha: 1, duration: 0.55, y: 0 },
+                0
+              );
+            }
+
+            if (headingWords.length) {
+              headerTimeline.fromTo(
+                headingWords,
+                { autoAlpha: 0, y: 28 },
+                { autoAlpha: 1, duration: 0.6, stagger: 0.06, y: 0 },
+                0.12
+              );
+            }
+
+            if (description) {
+              headerTimeline.fromTo(
+                description,
+                { autoAlpha: 0, y: 24 },
+                { autoAlpha: 1, duration: 0.55, y: 0 },
+                0.3
+              );
+            }
+          }
+
+          /* The reference reveals the white card, the centre visual, and the
+             bottom card as three independent 50px rises. */
+          [card, visual, footer].forEach((element) => {
+            if (!element) return;
+
+            window.gsap.fromTo(
+              element,
+              { autoAlpha: 0, filter: "blur(1px)", y: 50 },
+              {
+                autoAlpha: 1,
+                duration: 0.8,
+                ease: "power3.out",
+                filter: "blur(0px)",
+                y: 0,
+                scrollTrigger: {
+                  trigger: element,
+                  start: "top 86%",
+                  once: true
+                }
+              }
+            );
+          });
+        });
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initKeyBenefitSections, { once: true });
+    } else {
+      initKeyBenefitSections();
+    }
+  })();
+</script>
+{% end_require_js %}

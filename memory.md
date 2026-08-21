@@ -1,6 +1,6 @@
 # Fluentic HubSpot Theme Memory
 
-Last reviewed: 2026-08-20
+Last reviewed: 2026-08-21
 
 ## What this project is
 
@@ -179,3 +179,23 @@ Its scoped GSAP timeline follows the solution-section timing: badge at 0s, headi
 The heading and Explore All link are editable. The white Explore All button uses `btn_macros.secondary_button` (variant 2). The responsive card grid changes from three columns to two and then one, and featured images scale slightly on card hover/focus. Styling is scoped and uses global Fluentic color/font/border/container variables.
 
 The blog heading carries `gsap_split_word`; its DOM-created word spans carry `gsap_split_word1` and slide upward in a stagger. The macro button starts its own 50px fade-up shortly afterward. Blog cards reveal from 50px below in visual rows sized to the active grid: three cards on desktop, two on tablet, and one on mobile. Animation queries are scoped per module instance and disabled for reduced-motion users; GSAP and ScrollTrigger continue to come from `templates/layouts/base.html`.
+
+## Key Benefit module
+
+`modules/Key Benefit.module/` recreates the Webflow `<section class="benefit-section">` ("Why Choose Fluentic AI") as an editable HubSpot DnD page module, added 2026-08-21. Structure, spacing, and breakpoints were read from the live markup and `fluentic.webflow.shared.793a05b7f.css` rather than estimated.
+
+Editor fields: a `section_content` group (eyebrow, heading, description), a `media` group (show toggle + center image), a `benefits` repeater (2–8 items with title, description, and optional icon override), a `bottom_card` group (show toggle, heading, description), and a top-level `compliance_badges` repeater (0–6 badges). The badge repeater is top-level rather than nested inside `bottom_card` because HubSpot does not support repeating fields inside another repeating group; it is hidden through `visibility.controlling_field_path: bottom_card.show_card`. Its child field is named `text`, not `label`, per the reserved-name rule noted above.
+
+The benefits repeater is split into the reference's two side columns at render time with `{% set column_split = (benefit_count * 0.5)|round(0, 'ceil')|int %}` and two filtered loops. Float multiplication is deliberate: Jinjava's integer `/` semantics are ambiguous, so `* 0.5` guarantees a float before `round(0, 'ceil')`. Six default items produce the reference's 3 + 3 layout; odd counts put the extra item in the left column.
+
+The bundled `Benefit Image.webp` and `Benefit Icon.svg` resolve through `get_asset_url` and are overridable by the image fields.
+
+The live compliance seals are inline SVGs with "SOC 2"/"GDPR"/"HIPAA" baked in as vector paths, which editors cannot change. They are reproduced in CSS instead — an 80px circle with the reference's outer ring gradient (`#ED56CA` → `#FFDDF7`, offset `-5%`/`105.83%` to reproduce the SVG's `y=-4`→`y=84.667` gradient span) and an inner circle inset 8.75% (7/80) filled `var(--bg-primary)` → `var(--accent-pink)`. Badge text scales with `calc(var(--key-benefit-badge-size) * 0.2)` so any label stays proportional. The two ring hexes have no theme equivalent and stay as local custom properties on the section.
+
+Reference values consumed as theme tokens: `--gradient-icon` already equals the live `linear-gradient(#fff, #f0eaf6)` icon-wrap gradient because `--bg-accent-2` is `#F0EAF6`. The section heading intentionally uses the theme's `--text-h2` (max 50px) rather than the live 60px so it matches the other Fluentic section headings on the same page; card-internal sizes (18px titles, 16px body, 24px→20px bottom heading) are set locally since no theme token matches.
+
+Layout follows the reference breakpoints exactly: 1240px container; three-column flex card at desktop; at ≤991px the card stacks and each benefit column becomes a row; at ≤767px the center visual moves above both columns (`order: -9999`), items wrap two-up, and the bottom card stacks with its badges on top; at ≤479px padding and gaps tighten. Section padding steps 160/80/60/40px.
+
+The scoped GSAP timeline reuses the solution-section header timing (eyebrow 0s, split heading words 0.12s, description 0.3s) and then reveals the white card, the center visual, and the bottom card as three independent 50px rises with a 1px blur, matching the three `data-w-id` reveals in the reference. GSAP and ScrollTrigger come only from `templates/layouts/base.html`; all motion is gated behind `prefers-reduced-motion: no-preference`.
+
+The module's eyebrow renders through `btn_macros.eyebrow_label`, so it is sentence case while the live site's `.sub-title` is uppercased by CSS. That difference is intentional — the eyebrow is a shared site-wide component and was deliberately normalized on 2026-08-20; do not add a module-local `text-transform` override.

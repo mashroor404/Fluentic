@@ -1,0 +1,294 @@
+[
+  {
+    "id": "6f2b1c4a-8d05-4c1e-9a77-5b3e0f61c210",
+    "name": "section_content",
+    "label": "Section content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "0c9a4e17-2f63-4b8d-8e51-7d2c6a9f4311",
+        "name": "eyebrow_text",
+        "label": "Eyebrow text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Key Benefits"
+      },
+      {
+        "id": "b1d73f80-5a4c-4e29-9f16-3c8e2d570a44",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Why Choose Fluentic AI"
+      },
+      {
+        "id": "d4e61a92-7b38-4c05-b2fa-8e19c73d5f06",
+        "name": "description",
+        "label": "Description",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Flentic delivers real results — save hours daily, eliminate errors, and scale your automation operations without adding headcount."
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "eyebrow_text": "Key Benefits",
+      "heading": "Why Choose Fluentic AI",
+      "description": "Flentic delivers real results — save hours daily, eliminate errors, and scale your automation operations without adding headcount."
+    }
+  },
+  {
+    "id": "9a5c2e7b-4361-4f8a-a0d3-6b7e1c94f582",
+    "name": "media",
+    "label": "Center visual",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "3e8f0b56-9c24-4a71-bd39-1f5a6e2c8047",
+        "name": "show_image",
+        "label": "Show center visual",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "7c1a4d3e-06b9-4e52-8f7d-2a9b5c308e61",
+        "name": "image",
+        "label": "Image",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "media.show_image",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "image",
+        "display_width": null
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_image": true
+    }
+  },
+  {
+    "id": "12b6e9f4-5d07-4c83-91ae-4f6d3b8c2075",
+    "name": "benefits",
+    "label": "Benefits",
+    "required": false,
+    "locked": false,
+    "occurrence": {
+      "min": 2,
+      "max": 8,
+      "sorting_label_field": "title",
+      "default": 6
+    },
+    "children": [
+      {
+        "id": "5a0d8c31-b7e6-4290-8c14-9d2f7a6b3e58",
+        "name": "title",
+        "label": "Title",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Increased Efficiency"
+      },
+      {
+        "id": "c83f5271-4a9d-4b60-a7e2-6c1b0d94f38a",
+        "name": "description",
+        "label": "Description",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "Automate tasks and reduce manual workloads"
+      },
+      {
+        "id": "e07a2b94-8f15-4d3c-b6e9-0a5c7d182f43",
+        "name": "icon",
+        "label": "Icon",
+        "required": false,
+        "locked": false,
+        "responsive": false,
+        "resizable": false,
+        "show_loading": false,
+        "type": "image",
+        "display_width": null
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": [
+      {
+        "title": "Increased Efficiency",
+        "description": "Automate tasks and reduce manual workloads"
+      },
+      {
+        "title": "Scalable Solutions",
+        "description": "Easily grow with the demands of your data"
+      },
+      {
+        "title": "Faster Decision-Making",
+        "description": "Leverage real-time insights for quicker choices"
+      },
+      {
+        "title": "Enhanced Collaboration",
+        "description": "Streamline workflows with team-friendly features"
+      },
+      {
+        "title": "Data Security",
+        "description": "Safeguard your data with top-tier encryption"
+      },
+      {
+        "title": "Continuous Improvement",
+        "description": "Let AI adapt and improve with evolving data"
+      }
+    ]
+  },
+  {
+    "id": "a4c19e60-3b52-4f87-8d0a-7e6b2c145f39",
+    "name": "bottom_card",
+    "label": "Bottom card",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "68d3a015-f92c-4e74-b1a8-5c0e9d76b423",
+        "name": "show_card",
+        "label": "Show bottom card",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "f51b7c28-0e46-4a93-9d75-3b8a2f6c0d17",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "bottom_card.show_card",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "text",
+        "display_width": null,
+        "default": "Enterprise-Grade Security"
+      },
+      {
+        "id": "2d907e4b-6c31-458f-a92d-0f7b4e8c31a6",
+        "name": "description",
+        "label": "Description",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "bottom_card.show_card",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        },
+        "type": "text",
+        "display_width": null,
+        "default": "We maintain the highest standards of security and compliance for enterprise deployments."
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_card": true,
+      "heading": "Enterprise-Grade Security",
+      "description": "We maintain the highest standards of security and compliance for enterprise deployments."
+    }
+  },
+  {
+    "id": "b7e04f13-9a68-4c25-8e31-6d5f0b2a7c94",
+    "name": "compliance_badges",
+    "label": "Compliance badges",
+    "required": false,
+    "locked": false,
+    "occurrence": {
+      "min": 0,
+      "max": 6,
+      "sorting_label_field": "text",
+      "default": 3
+    },
+    "visibility": {
+      "controlling_field": null,
+      "controlling_field_path": "bottom_card.show_card",
+      "controlling_value_regex": "true",
+      "property": null,
+      "operator": "EQUAL",
+      "access": null
+    },
+    "children": [
+      {
+        "id": "31f8c6a0-5d47-4b92-ae08-9c2d7b45e106",
+        "name": "text",
+        "label": "Badge text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "SOC 2"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": [
+      { "text": "SOC 2" },
+      { "text": "GDPR" },
+      { "text": "HIPAA" }
+    ]
+  }
+]

@@ -1,0 +1,529 @@
+[
+  {
+    "id": "8f1de315-bf3c-4ab2-8849-b2b93ee4e7a2",
+    "name": "content",
+    "label": "Section content",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "cb01fade-1032-4423-9827-453b0c3ab767",
+        "name": "show_eyebrow",
+        "label": "Show eyebrow badge",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "a740f1fc-9e9f-4403-9a50-0441781ee1ae",
+        "name": "eyebrow_text",
+        "label": "Eyebrow text",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Wall of Love"
+      },
+      {
+        "id": "e05b9bf5-21a1-4c21-b18e-28b1886679ec",
+        "name": "eyebrow_icon",
+        "label": "Eyebrow icon",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "type": "image",
+        "display_width": null,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "content.show_eyebrow",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        }
+      },
+      {
+        "id": "1bc917b3-4ed4-4015-9be3-439398f6b0d7",
+        "name": "heading",
+        "label": "Heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "What Our Customers Say"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_eyebrow": true,
+      "eyebrow_text": "Wall of Love",
+      "heading": "What Our Customers Say"
+    }
+  },
+  {
+    "id": "28fcf06c-7b23-4517-a2c2-434d9e4b279d",
+    "name": "testimonials",
+    "label": "Testimonials",
+    "required": false,
+    "locked": false,
+    "occurrence": {
+      "min": 1,
+      "max": 12,
+      "sorting_label_field": null,
+      "default": 3
+    },
+    "children": [
+      {
+        "id": "9cd02e21-5c6b-4f34-84b0-48969020c975",
+        "name": "quote",
+        "label": "Quote",
+        "required": false,
+        "locked": false,
+        "allow_new_line": true,
+        "type": "text",
+        "display_width": null,
+        "default": "“Fluence AI has revolutionized the way we process data. The seamless integration and advanced analytics tools have saved us countless hours and improved our decision-making”"
+      },
+      {
+        "id": "3c82ebb3-a51e-4825-8f2c-fb6e2575dfa7",
+        "name": "author_name",
+        "label": "Author name",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Amber Stone"
+      },
+      {
+        "id": "e02cabd9-bf9d-4444-9923-d0dcc373a6a3",
+        "name": "author_role",
+        "label": "Author role",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "Operations Manager, GrowthTech"
+      },
+      {
+        "id": "b10e560d-c208-4b20-ac3e-6c86513109dd",
+        "name": "author_image",
+        "label": "Author photo",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": true,
+        "type": "image",
+        "display_width": null
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": [
+      {
+        "quote": "“Fluence AI has revolutionized the way we process data. The seamless integration and advanced analytics tools have saved us countless hours and improved our decision-making”",
+        "author_name": "Amber Stone",
+        "author_role": "Operations Manager, GrowthTech"
+      },
+      {
+        "quote": "“Fluence AI has revolutionized the way we process data. The seamless integration and advanced analytics tools have saved us countless hours and improved our decision-making”",
+        "author_name": "Amber Stone",
+        "author_role": "Operations Manager, GrowthTech"
+      },
+      {
+        "quote": "“Fluence AI has revolutionized the way we process data. The seamless integration and advanced analytics tools have saved us countless hours and improved our decision-making”",
+        "author_name": "Amber Stone",
+        "author_role": "Operations Manager, GrowthTech"
+      }
+    ],
+    "help_text": "Each testimonial becomes one slide. Add, remove, or reorder slides here."
+  },
+  {
+    "id": "2bdfa61d-6b33-4957-bb9c-3a26d38ede96",
+    "name": "slider",
+    "label": "Slider behaviour",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "95f0784b-bcf7-42fe-891d-673c18ebbda9",
+        "name": "show_arrows",
+        "label": "Show previous / next arrows",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "d7500372-84d5-4a86-b126-9c29eb067eae",
+        "name": "loop",
+        "label": "Loop back to the first slide",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "2782cb30-4261-407d-a92e-e56d168762d7",
+        "name": "autoplay",
+        "label": "Autoplay slides",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": false
+      },
+      {
+        "id": "a9d015e3-0e3f-4dad-b9b7-489093075950",
+        "name": "autoplay_delay",
+        "label": "Autoplay delay",
+        "required": false,
+        "locked": false,
+        "display": "text",
+        "step": 1,
+        "type": "number",
+        "display_width": null,
+        "default": 4000,
+        "min": 1000,
+        "max": 20000,
+        "suffix": "ms",
+        "help_text": "Time each slide stays on screen before advancing.",
+        "visibility": {
+          "controlling_field": null,
+          "controlling_field_path": "slider.autoplay",
+          "controlling_value_regex": "true",
+          "property": null,
+          "operator": "EQUAL",
+          "access": null
+        }
+      },
+      {
+        "id": "d9913e57-c327-4eef-8a93-1343d3a41c03",
+        "name": "transition_duration",
+        "label": "Transition duration",
+        "required": false,
+        "locked": false,
+        "display": "text",
+        "step": 1,
+        "type": "number",
+        "display_width": null,
+        "default": 500,
+        "min": 0,
+        "max": 2000,
+        "suffix": "ms"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_arrows": true,
+      "loop": true,
+      "autoplay": false,
+      "autoplay_delay": 4000,
+      "transition_duration": 500
+    }
+  },
+  {
+    "id": "d06e38f4-2003-4d3c-8d9d-17239538a1f3",
+    "name": "stats",
+    "label": "Statistics",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "6e92f323-f2dc-4411-9bc2-5aa2f25479ef",
+        "name": "show_stats",
+        "label": "Show statistics row",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "f8a80e85-a2e8-4a7a-98ec-2768600aa8fe",
+        "name": "animate_counters",
+        "label": "Count numbers up on scroll",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "cafa0d9a-bb0f-47fe-92f5-212cb85b17dd",
+        "name": "items",
+        "label": "Statistics",
+        "required": false,
+        "locked": false,
+        "occurrence": {
+          "min": 0,
+          "max": 4,
+          "sorting_label_field": null,
+          "default": 3
+        },
+        "children": [
+          {
+            "id": "b286cfa5-57b0-437c-9409-4a2c7d6be296",
+            "name": "value",
+            "label": "Number",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "100+"
+          },
+          {
+            "id": "bf80c851-a224-4501-ba4a-b569957c0a8a",
+            "name": "caption",
+            "label": "Caption",
+            "required": false,
+            "locked": false,
+            "allow_new_line": false,
+            "type": "text",
+            "display_width": null,
+            "default": "Businesses are Happy"
+          }
+        ],
+        "tab": "CONTENT",
+        "expanded": true,
+        "group_occurrence_meta": null,
+        "type": "group",
+        "display_width": null,
+        "default": [
+          {
+            "value": "100+",
+            "caption": "Businesses are Happy"
+          },
+          {
+            "value": "5,000+",
+            "caption": "Data-driven decisions"
+          },
+          {
+            "value": "98%",
+            "caption": "Customer Satisfied"
+          }
+        ]
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_stats": true,
+      "animate_counters": true
+    }
+  },
+  {
+    "id": "f64fa608-93ea-4623-9d70-b46de4498c20",
+    "name": "brands",
+    "label": "Trusted by",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "22355dc3-94f0-407c-a04b-fa4b7242108e",
+        "name": "show_brands",
+        "label": "Show trusted-by row",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "cbb97878-3e9f-4bb1-930c-5937bc93f874",
+        "name": "heading",
+        "label": "Row heading",
+        "required": false,
+        "locked": false,
+        "allow_new_line": false,
+        "type": "text",
+        "display_width": null,
+        "default": "We are trusted by"
+      },
+      {
+        "id": "453d206f-ee87-4f8e-913b-1e8204de9a0b",
+        "name": "logos",
+        "label": "Logos",
+        "required": false,
+        "locked": false,
+        "occurrence": {
+          "min": 0,
+          "max": 8,
+          "sorting_label_field": null,
+          "default": 4
+        },
+        "children": [
+          {
+            "id": "0b81455e-125e-4f4b-a217-4115031b1f7f",
+            "name": "logo",
+            "label": "Logo",
+            "required": false,
+            "locked": false,
+            "responsive": true,
+            "resizable": true,
+            "show_loading": true,
+            "type": "image",
+            "display_width": null
+          }
+        ],
+        "tab": "CONTENT",
+        "expanded": true,
+        "group_occurrence_meta": null,
+        "type": "group",
+        "display_width": null,
+        "default": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "show_brands": true,
+      "heading": "We are trusted by"
+    }
+  },
+  {
+    "id": "408c9a7b-7705-4af0-94a5-ab1a314523e2",
+    "name": "style",
+    "label": "Style",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "1a4f704c-bbf7-47ad-9cd1-3af62c5bf7eb",
+        "name": "background_image",
+        "label": "Panel background image",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": true,
+        "show_loading": false,
+        "type": "image",
+        "display_width": null
+      },
+      {
+        "id": "75de18ed-24b1-4cb7-9259-20c1356e4ba7",
+        "name": "card_background_color",
+        "label": "Card background",
+        "required": false,
+        "locked": false,
+        "type": "color",
+        "display_width": null,
+        "default": {
+          "color": "#FFFFFF",
+          "opacity": 100
+        }
+      },
+      {
+        "id": "626c6f22-d395-47e6-9adc-32f4c8816c26",
+        "name": "overlap_previous",
+        "label": "Tuck panel under the section above",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "display": "toggle",
+        "display_width": null,
+        "default": true
+      },
+      {
+        "id": "bb601341-cd15-45f7-a0ae-b8f95c0cd688",
+        "name": "block_max_width",
+        "label": "Panel max width",
+        "required": false,
+        "locked": false,
+        "display": "text",
+        "step": 1,
+        "type": "number",
+        "display_width": null,
+        "default": 1920,
+        "min": 800,
+        "max": 2400,
+        "suffix": "px"
+      },
+      {
+        "id": "d562e739-e353-48a1-8300-24909523690d",
+        "name": "container_max_width",
+        "label": "Content container max width",
+        "required": false,
+        "locked": false,
+        "display": "text",
+        "step": 1,
+        "type": "number",
+        "display_width": null,
+        "default": 1240,
+        "min": 600,
+        "max": 1920,
+        "suffix": "px"
+      },
+      {
+        "id": "95751a1a-4891-4c9e-95ca-006c6a295892",
+        "name": "content_max_width",
+        "label": "Inner column max width",
+        "required": false,
+        "locked": false,
+        "display": "text",
+        "step": 1,
+        "type": "number",
+        "display_width": null,
+        "default": 994,
+        "min": 600,
+        "max": 1600,
+        "suffix": "px"
+      }
+    ],
+    "tab": "STYLE",
+    "expanded": true,
+    "group_occurrence_meta": null,
+    "type": "group",
+    "display_width": null,
+    "default": {
+      "overlap_previous": true,
+      "block_max_width": 1920,
+      "container_max_width": 1240,
+      "content_max_width": 994,
+      "card_background_color": {
+        "color": "#FFFFFF",
+        "opacity": 100
+      }
+    }
+  }
+]
