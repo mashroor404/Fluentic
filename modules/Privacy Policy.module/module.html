@@ -1,0 +1,147 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  .privacy-policy-section {
+    background-color: var(--page-bg);
+    padding: clamp(7.5rem, 10.42vw, 12.5rem) 0 clamp(4rem, 8.33vw, 10rem);
+  }
+
+  .privacy-policy-container {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: min(var(--container-max-width), 77.5rem);
+    width: 90%;
+  }
+
+  .privacy-policy-header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto clamp(3.75rem, 6.25vw, 7.5rem);
+    text-align: center;
+  }
+
+  .privacy-policy-eyebrow {
+    --eyebrow-bg-color: transparent;
+    --eyebrow-border-color: var(--accent-pink);
+  }
+
+  .privacy-policy-title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h1);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.1;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .privacy-policy-date {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .privacy-policy-content {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-p);
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 60.625rem;
+  }
+
+  .privacy-policy-content h2,
+  .privacy-policy-content h3,
+  .privacy-policy-content h4,
+  .privacy-policy-content h5,
+  .privacy-policy-content h6 {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.2;
+    margin: clamp(2.5rem, 4vw, 3.75rem) 0 1.25rem;
+  }
+
+  .privacy-policy-content h2 { font-size: var(--text-h3); }
+  .privacy-policy-content h3 { font-size: var(--text-h4); }
+  .privacy-policy-content h4 { font-size: var(--text-h5); }
+  .privacy-policy-content h5,
+  .privacy-policy-content h6 { font-size: var(--text-h6); }
+
+  .privacy-policy-content p,
+  .privacy-policy-content ul,
+  .privacy-policy-content ol,
+  .privacy-policy-content blockquote {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-p);
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+
+  .privacy-policy-content ul,
+  .privacy-policy-content ol {
+    padding-left: 1.5rem;
+  }
+
+  .privacy-policy-content li + li {
+    margin-top: 0.5rem;
+  }
+
+  .privacy-policy-content a {
+    color: var(--text-primary);
+    text-decoration-color: var(--accent-pink);
+    text-underline-offset: 0.2em;
+  }
+
+  .privacy-policy-content > :first-child {
+    margin-top: 0;
+  }
+
+  .privacy-policy-content > :last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .privacy-policy-section {
+      padding: 7.5rem 0 3.75rem;
+    }
+
+    .privacy-policy-header {
+      margin-bottom: 3.75rem;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="privacy-policy-section">
+  <div class="privacy-policy-container">
+    <header class="privacy-policy-header">
+      <div class="privacy-policy-eyebrow">
+        {{ btn_macros.eyebrow_label(
+          "Privacy",
+          get_asset_url("../../css/elements/Assets/icons/6984fc2e00e2222da1035dca_Star.svg")
+        ) }}
+      </div>
+
+      {% if module.page_title %}
+        <h1 class="privacy-policy-title">{{ module.page_title|escape_html }}</h1>
+      {% endif %}
+
+      {% if module.date %}
+        <p class="privacy-policy-date">{{ module.date|escape_html }}</p>
+      {% endif %}
+    </header>
+
+    {% if module.body %}
+      <div class="privacy-policy-content">
+        {{ module.body }}
+      </div>
+    {% endif %}
+  </div>
+</section>
