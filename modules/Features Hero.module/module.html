@@ -1,0 +1,415 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  /* ==================================
+     Section Layout
+     ================================== */
+  .features-hero-section {
+    position: relative;
+    padding: 160px 0 0;
+    overflow: hidden;
+    z-index: 10;
+    background-color: var(--page-bg, #F8F7F8);
+  }
+
+  .features-hero-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Soft brand-gradient glows (same interior-hero language as the About hero) */
+  .features-hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .features-hero-glow.is-purple {
+    top: -180px;
+    left: -140px;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, var(--accent-purple, #D37BFF) 0%, transparent 70%);
+    opacity: 0.18;
+  }
+
+  .features-hero-glow.is-pink {
+    top: -140px;
+    right: -160px;
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, var(--accent-pink, #FF82E1) 0%, transparent 70%);
+    opacity: 0.16;
+  }
+
+  .features-hero-glow.is-blue {
+    bottom: -220px;
+    left: 30%;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, var(--accent-blue, #80AAFD) 0%, transparent 70%);
+    opacity: 0.14;
+  }
+
+  /* ==================================
+     Two-Column Layout (Content | Visual)
+     ================================== */
+  .features-hero-layout {
+    display: flex;
+    align-items: center;
+    gap: clamp(32px, 5vw, 72px);
+    padding-bottom: 100px;
+  }
+
+  /* Left Column: Content */
+  .features-hero-content {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    min-width: 0;
+  }
+
+  .features-hero-content h1 {
+    margin-top: 20px;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .features-hero-content h1 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  .features-hero-desc {
+    max-width: 560px;
+    margin-top: 24px;
+  }
+
+  .features-hero-desc .body {
+    margin-bottom: 0;
+  }
+
+  /* Buttons */
+  .features-hero-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .features-hero-button-wrap {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+  }
+
+  /* ==================================
+     Feature Chips (2-Column Flex)
+     ================================== */
+  .features-hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .features-hero-chip {
+    flex: 0 0 calc(50% - 6px); /* 2 per row (6px = half the 12px gap) */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(27, 12, 39, 0.1);
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(27, 12, 39, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-family: var(--secondary-font, 'General Sans', sans-serif);
+    font-size: 14px;
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--text-primary, #1B0C27);
+    line-height: 1.4;
+  }
+
+  .features-hero-chip svg {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+  }
+
+  .features-hero-chip span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ==================================
+     Right Column: Media in Frosted Glass Shell
+     (echoes the home hero's glass card)
+     ================================== */
+  .features-hero-visual {
+    flex: 1 1 50%;
+    position: relative;
+    z-index: 5;
+    min-width: 0;
+    padding: 24px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.6));
+    border-radius: 40px;
+    box-shadow:
+      inset -1px 1px rgba(255, 255, 255, 0.9),
+      inset 1px -1px rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(90px);
+    backdrop-filter: blur(90px);
+  }
+
+  .features-hero-media {
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--bg-accent-2, #F0EAF6);
+  }
+
+  .features-hero-media img,
+  .features-hero-media video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* No visual set → let the content column breathe wider */
+  .features-hero-layout.no-visual .features-hero-content {
+    flex: 1 1 100%;
+    max-width: 760px;
+  }
+
+  /* GSAP initial hide states */
+  .gsap-fh-el {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .gsap-fh-visual {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* ==================================
+     Responsive
+     ================================== */
+  @media screen and (max-width: 991px) {
+    /* Stack: content on top, visual below */
+    .features-hero-layout {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 40px;
+      padding-bottom: 72px;
+    }
+
+    .features-hero-visual {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .features-hero-section {
+      padding: 120px 0 0;
+    }
+
+    .features-hero-layout {
+      padding-bottom: 56px;
+    }
+
+    .features-hero-desc {
+      margin-top: 16px;
+    }
+
+    .features-hero-buttons {
+      margin-top: 24px;
+      width: 100%;
+    }
+
+    .features-hero-button-wrap {
+      width: 100%;
+    }
+
+    .features-hero-chips {
+      margin-top: 32px;
+      gap: 8px;
+      max-width: 100%;
+    }
+
+    .features-hero-chip {
+      flex: 0 0 calc(50% - 4px); /* keep 2 per row with the tighter 8px gap */
+      font-size: 13px;
+      padding: 8px 12px;
+    }
+
+    .features-hero-visual {
+      padding: 14px;
+      border-radius: 24px;
+    }
+
+    .features-hero-media {
+      border-radius: 12px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="features-hero-section">
+
+  <!-- Soft brand glows -->
+  <div class="features-hero-glow is-purple"></div>
+  <div class="features-hero-glow is-pink"></div>
+  <div class="features-hero-glow is-blue"></div>
+
+  <div class="container">
+    <div class="features-hero-layout{% if not module.visual.image.src %} no-visual{% endif %}">
+
+    <!-- Left Column: Content -->
+    <div class="features-hero-content">
+
+      <!-- Eyebrow (shared theme macro) -->
+      {% if module.heading_contents.eyebrow_text %}
+        <div class="gsap-fh-el">
+          {{ btn_macros.eyebrow_label(module.heading_contents.eyebrow_text) }}
+        </div>
+      {% endif %}
+
+      <!-- Title -->
+      {% if module.heading_contents.title %}
+        <h1 class="gsap-blur-reveal">{{ module.heading_contents.title }}</h1>
+      {% endif %}
+
+      <!-- Description -->
+      {% if module.heading_contents.description %}
+        <div class="features-hero-desc gsap-fh-el">
+          <p class="body">{{ module.heading_contents.description }}</p>
+        </div>
+      {% endif %}
+
+      <!-- Buttons (shared animated theme buttons) -->
+      {% if (module.primary_button.show and module.primary_button.text) or (module.secondary_button.show and module.secondary_button.text) %}
+        <div class="features-hero-buttons gsap-fh-el">
+          {% if module.primary_button.show and module.primary_button.text %}
+            <div class="features-hero-button-wrap">
+              {{ btn_macros.animated_button(module.primary_button.text, module.primary_button.link.url.href|default('#'), module.primary_button.link.open_in_new_tab, module.primary_button.link.no_follow) }}
+            </div>
+          {% endif %}
+          {% if module.secondary_button.show and module.secondary_button.text %}
+            <div class="features-hero-button-wrap">
+              {{ btn_macros.secondary_button(module.secondary_button.text, module.secondary_button.link.url.href|default('#'), module.secondary_button.link.open_in_new_tab, module.secondary_button.link.no_follow) }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <!-- Feature Chips -->
+      {% if module.feature_chips|length %}
+        <div class="features-hero-chips gsap-fh-el">
+          {% for chip in module.feature_chips %}
+            {% if chip.text %}
+              <div class="features-hero-chip">
+                <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="7" fill="url(#fh-chip-grad-{{ loop.index }})"/>
+                  <path d="M4 7.2 6.2 9.4 10 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="fh-chip-grad-{{ loop.index }}" x1="0" y1="0" x2="14" y2="14" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#D588FC"/>
+                      <stop offset="1" stop-color="#FF49D4"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <span>{{ chip.text }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    </div>
+
+    <!-- Right Column: screenshot/image in frosted-glass shell (optional) -->
+    {% if module.visual.image.src %}
+      <div class="features-hero-visual gsap-fh-visual">
+        <div class="features-hero-media">
+          <img
+            src="{{ module.visual.image.src|escape_url }}"
+            alt="{{ module.visual.image.alt|default('Fluentic features') }}"
+            loading="eager"
+            {% if module.visual.image.width %}width="{{ module.visual.image.width }}"{% endif %}
+            {% if module.visual.image.height %}height="{{ module.visual.image.height }}"{% endif %}
+          >
+        </div>
+      </div>
+    {% endif %}
+
+    </div>
+  </div>
+</section>
+
+<!-- GSAP Scroll & Reveal Animations -->
+{% require_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".features-hero-section");
+      if (!section) return;
+
+      // 1. Hero Title Blur Reveal (word by word, same as other theme headings)
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        gsap.to(wordSpans, {
+          opacity: 1,
+          filter: 'blur(0px)',
+          y: 0,
+          duration: 0.8,
+          stagger: 0.08,
+          delay: 0.15,
+          ease: 'sine.out'
+        });
+      }
+
+      // 2. Eyebrow, description, buttons, chips — staggered rise
+      gsap.fromTo(section.querySelectorAll(".gsap-fh-el"),
+        { y: 24, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.12, delay: 0.1, ease: "power3.out"
+        }
+      );
+
+      // 3. Glass visual slides in from the right, with a soft scale
+      const visual = section.querySelector(".gsap-fh-visual");
+      if (visual) {
+        gsap.fromTo(visual,
+          { x: 48, opacity: 0, scale: 0.98 },
+          { x: 0, opacity: 1, scale: 1, duration: 1, delay: 0.35, ease: "power3.out" }
+        );
+      }
+
+    } else {
+      console.warn("GSAP or ScrollTrigger is missing. Make sure the CDNs are added to base.html.");
+    }
+  });
+</script>
+{% end_require_js %}
