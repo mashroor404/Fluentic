@@ -350,7 +350,12 @@
       padding-top: 0 !important;
     }
 
-    .po-card-inner {
+    /* Must also name the reversed variant: the desktop
+       .po-card--reversed .po-card-inner rule outweighs a bare
+       .po-card-inner override, leaving even cards stuck in
+       row-reverse (text squeezed out) on mobile. */
+    .po-card-inner,
+    .po-card--reversed .po-card-inner {
       transform: none !important;
       scale: none !important;
       flex-direction: column;
@@ -401,7 +406,6 @@
 
 <section class="section po-section" data-product-overview>
   <div class="container">
-
     <div class="section-header po-header mb-72">
       {% if module.eyebrow_text %}
         <div>{{ btn_macros.eyebrow_label(module.eyebrow_text, module.eyebrow_icon.src) }}</div>
@@ -583,9 +587,11 @@
           );
         }
 
-      } else if (reduceMotion) {
-        // Reduced motion: leave the server-rendered, fully-visible
-        // description in place instead of leaving it stuck at opacity 0.
+      } else {
+        // Reduced motion, or GSAP/ScrollTrigger unavailable (e.g. CDN
+        // blocked/slow, or this module rendered outside the page layout
+        // that loads them): reveal the server-rendered description
+        // instead of leaving it stuck at opacity 0 with no way in.
         const desc = section.querySelector('.po-desc');
         if (desc) desc.style.opacity = '1';
       }
