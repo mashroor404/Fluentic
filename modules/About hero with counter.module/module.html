@@ -1,3 +1,5 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
 {% require_css %}
 <style>
   {% scope_css %}
@@ -6,9 +8,10 @@
      ================================== */
   .about-stats-section {
     position: relative;
-    padding: 100px 0;
+    padding: 140px 0 100px;
     overflow: hidden;
     z-index: 10;
+    background-color: var(--page-bg, #F8F7F8);
   }
 
   .about-stats-section .container {
@@ -16,31 +19,65 @@
     z-index: 2;
   }
 
+  /* Soft brand-gradient glows behind the hero (matches home hero sky feel) */
+  .about-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .about-glow.is-purple {
+    top: -160px;
+    left: -120px;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, var(--accent-purple, #D37BFF) 0%, transparent 70%);
+    opacity: 0.18;
+  }
+
+  .about-glow.is-pink {
+    top: -120px;
+    right: -140px;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, var(--accent-pink, #FF82E1) 0%, transparent 70%);
+    opacity: 0.16;
+  }
+
   /* ==================================
-     Images Row (Portrait + Landscape)
+     Hero Header (Eyebrow + Title)
      ================================== */
-  .about-images-wrap {
-    display: flex;
-    gap: 24px;
+  .about-hero-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 56px;
+  }
+
+  .about-hero-header h1 {
+    margin-top: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .about-hero-header h1 span.word {
+    display: inline-block;
+    will-change: transform, filter;
+  }
+
+  /* ==================================
+     Media (Single Column — Image or Video)
+     ================================== */
+  .about-media-wrap {
+    border-radius: 20px;
+    overflow: hidden;
     margin-bottom: 48px;
-    align-items: stretch;
+    background-color: var(--bg-accent-2, #F0EAF6);
+    aspect-ratio: 21 / 9;
   }
 
-  .about-img-portrait {
-    flex: 0 0 35%; /* Takes up roughly 35% of the width */
-    border-radius: 20px;
-    overflow: hidden;
-    background-color: var(--bg-accent-2, #E2E8F0);
-  }
-
-  .about-img-landscape {
-    flex: 1; /* Takes up the remaining 65% */
-    border-radius: 20px;
-    overflow: hidden;
-    background-color: var(--bg-accent-2, #E2E8F0);
-  }
-
-  .about-images-wrap img {
+  .about-media-wrap img,
+  .about-media-wrap video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -48,7 +85,8 @@
     transition: transform 0.6s ease;
   }
 
-  .about-images-wrap div:hover img {
+  .about-media-wrap:hover img,
+  .about-media-wrap:hover video {
     transform: scale(1.03);
   }
 
@@ -61,7 +99,7 @@
   }
 
   .about-description-wrap p {
-    color: var(--text-secondary, #475569);
+    color: var(--text-secondary, #5D6C7B);
     margin: 0;
   }
 
@@ -75,35 +113,59 @@
     position: relative;
   }
 
-  /* Inheriting abr-section card styles */
   .about-card {
-    background-color: var(--bg-accent-3, #F1F5F9); 
-    border-radius: 12px;
+    position: relative;
+    background-color: var(--bg-primary, #FFFFFF);
+    border-radius: 16px;
     padding: 32px 24px;
-    border: 1px solid rgba(1, 16, 50, 0.05); /* Subtle border for light mode */
+    border: 1px solid rgba(27, 12, 39, 0.08);
+    box-shadow: 0 8px 24px rgba(27, 12, 39, 0.04);
     transition: transform 0.1s ease-out, box-shadow 0.3s ease;
     transform-style: preserve-3d;
     will-change: transform;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Brand gradient hairline across the card top */
+  .about-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-brand, linear-gradient(120deg, #F0E9F7, #D588FC 61%, #FF49D4));
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   .about-card:hover {
-    box-shadow: 0 12px 32px rgba(1, 16, 50, 0.06);
+    box-shadow: 0 16px 40px rgba(27, 12, 39, 0.08);
+  }
+
+  .about-card:hover::before {
+    opacity: 1;
   }
 
   .about-card-title {
-    font-family: var(--primary-font, system-ui, sans-serif);
+    font-family: var(--primary-font, 'General Sans', sans-serif);
     font-size: clamp(2rem, 3vw, 2.75rem);
-    font-weight: 500;
-    color: var(--primary-color, #2F6BFF);
+    font-weight: var(--font-weight-medium, 500);
     line-height: 1.1;
     margin-bottom: 16px;
     letter-spacing: -0.03em;
+    background: linear-gradient(120deg, var(--gradient-middle, #D588FC), var(--gradient-hot, #FF49D4));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--gradient-hot, #FF49D4); /* fallback for no background-clip support */
+    width: fit-content;
   }
 
   .about-card-desc {
-    color: var(--text-primary, #011032);
+    color: var(--text-primary, #1B0C27);
     margin: 0;
   }
 
@@ -112,7 +174,7 @@
     opacity: 0;
     will-change: transform, opacity;
   }
-  
+
   .gsap-about-card {
     opacity: 0;
   }
@@ -128,25 +190,17 @@
 
   @media screen and (max-width: 767px) {
     .about-stats-section {
-      padding: 64px 0;
-    }
-    
-    /* Stack Images on Mobile */
-    .about-images-wrap {
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    
-    /* Taller portrait aspect ratio to match the reference image */
-    .about-img-portrait {
-      aspect-ratio: 3 / 4;
-      width: 100%;
+      padding: 110px 0 64px;
     }
 
-    .about-img-landscape {
-      aspect-ratio: 16 / 9;
-      width: 100%;
+    .about-hero-header {
+      margin-bottom: 40px;
+    }
+
+    /* Media on Mobile — taller aspect ratio, single column */
+    .about-media-wrap {
+      aspect-ratio: 4 / 3;
+      margin-bottom: 32px;
     }
 
     .about-description-wrap {
@@ -158,18 +212,18 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
-    
+
     .about-card {
-      padding: 20px 16px; /* Slightly tighter padding so text fits */
+      padding: 20px 16px;
     }
 
     .about-card-title {
-      font-size: clamp(1.5rem, 6vw, 2rem); /* Scaled down slightly for 2-column mobile */
+      font-size: clamp(1.5rem, 6vw, 2rem);
       margin-bottom: 8px;
     }
 
     .about-card-desc {
-      font-size: 13px; /* Ensure description remains readable without overflowing */
+      font-size: 13px;
     }
   }
   {% end_scope_css %}
@@ -177,20 +231,32 @@
 {% end_require_css %}
 
 <section class="about-stats-section">
+
+  <!-- Soft brand glows -->
+  <div class="about-glow is-purple"></div>
+  <div class="about-glow is-pink"></div>
+
   <div class="container">
-    
-    <!-- Top Row: Split Images -->
-    <div class="about-images-wrap gsap-about-el">
-      <div class="about-img-portrait">
-        {% if module.images.image_portrait.src %}
-          <img src="{{ module.images.image_portrait.src }}" alt="{{ module.images.image_portrait.alt|default('Portrait Image') }}" loading="{{ module.images.image_portrait.loading }}">
+
+    <!-- Hero Header: Eyebrow + Title -->
+    {% if module.heading_contents.eyebrow_text or module.heading_contents.title %}
+      <div class="about-hero-header">
+        {% if module.heading_contents.eyebrow_text %}
+          {{ btn_macros.eyebrow_label(module.heading_contents.eyebrow_text) }}
+        {% endif %}
+        {% if module.heading_contents.title %}
+          <h1 class="gsap-blur-reveal">{{ module.heading_contents.title }}</h1>
         {% endif %}
       </div>
-      <div class="about-img-landscape">
-        {% if module.images.image_landscape.src %}
-          <img src="{{ module.images.image_landscape.src }}" alt="{{ module.images.image_landscape.alt|default('Landscape Image') }}" loading="{{ module.images.image_landscape.loading }}">
-        {% endif %}
-      </div>
+    {% endif %}
+
+    <!-- Top Row: Single-Column Media (Image by default; Video when "Use Video" is on) -->
+    <div class="about-media-wrap gsap-about-el">
+      {% if module.media.use_video and module.media.video %}
+        <video class="about-media-video" src="{{ module.media.video }}"{% if module.media.image.src %} poster="{{ module.media.image.src }}"{% endif %} autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline" webkit-playsinline="true" disablepictureinpicture></video>
+      {% elif module.media.image.src %}
+        <img src="{{ module.media.image.src }}" alt="{{ module.media.image.alt|default('About Fluentic') }}" loading="{{ module.media.image.loading }}">
+      {% endif %}
     </div>
 
     <!-- Middle Row: Description -->
@@ -206,7 +272,7 @@
         <div class="about-card gsap-about-card">
           <!-- Card Large Stat -->
           <div class="about-card-title">{{ item.title }}</div>
-          <!-- Card Small Description (Added body-highlight class here) -->
+          <!-- Card Small Description -->
           <p class="body-highlight about-card-desc">{{ item.description }}</p>
         </div>
       {% endfor %}
@@ -222,10 +288,53 @@
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
 
-      // 1. Reveal Images & Text (Slide up and fade in)
-      gsap.fromTo(".gsap-about-el", 
-        { y: 40, opacity: 0 }, 
-        { 
+      const section = document.querySelector(".about-stats-section");
+      if (!section) return;
+
+      // 1. Hero Title Blur Reveal (word by word, same as home page headings)
+      const heading = section.querySelector(".gsap-blur-reveal");
+      if (heading) {
+        const words = heading.textContent.trim().split(/\s+/);
+        heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
+        const wordSpans = heading.querySelectorAll('.word');
+
+        gsap.set(wordSpans, { opacity: 0, filter: 'blur(10px)', y: 8 });
+
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 85%',
+          once: true,
+          onEnter() {
+            gsap.to(wordSpans, {
+              opacity: 1, 
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'sine.out'
+            });
+          }
+        });
+      }
+
+      // 2. Force video autoplay (covers browsers that ignore the attribute-only
+      // autoplay hint, e.g. after being toggled on later or on slower connections)
+      const aboutVideo = section.querySelector(".about-media-video");
+      if (aboutVideo) {
+        aboutVideo.muted = true;
+        aboutVideo.playsInline = true;
+        const tryPlay = () => aboutVideo.play().catch(() => {});
+        tryPlay();
+        aboutVideo.addEventListener("loadedmetadata", tryPlay);
+        ["click", "touchstart", "scroll"].forEach((evt) => {
+          document.addEventListener(evt, tryPlay, { once: true, passive: true });
+        });
+      }
+
+      // 3. Reveal Images & Text (Slide up and fade in)
+      gsap.fromTo(".gsap-about-el",
+        { y: 40, opacity: 0 },
+        {
           y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power3.out",
           scrollTrigger: {
             trigger: ".about-stats-section",
@@ -234,17 +343,17 @@
         }
       );
 
-      // 2. Prepare Counter Animation Data
+      // 4. Prepare Counter Animation Data
       document.querySelectorAll('.about-card-title').forEach(title => {
         title.innerHTML = title.innerText.replace(/(\d+\.?\d*)/g, (match) => {
           return `<span class="counter-num" data-target="${match}">0</span>`;
         });
       });
 
-      // 3. Cards Fade-In & Counter Trigger
-      gsap.fromTo(".gsap-about-card", 
-        { y: 40, opacity: 0 }, 
-        { 
+      // 5. Cards Fade-In & Counter Trigger
+      gsap.fromTo(".gsap-about-card",
+        { y: 40, opacity: 0 },
+        {
           y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
           scrollTrigger: {
             trigger: ".about-cards-grid",
@@ -253,16 +362,16 @@
         }
       );
 
-      // 4. Execute actual number counting
+      // 6. Execute actual number counting
       gsap.utils.toArray('.about-card-title .counter-num').forEach(el => {
         const target = parseFloat(el.getAttribute('data-target'));
         const isFloat = el.getAttribute('data-target').includes('.');
-        
+
         gsap.to(el, {
           innerHTML: target,
           duration: 2,
           ease: "power2.out",
-          snap: { innerHTML: isFloat ? 0.1 : 1 }, 
+          snap: { innerHTML: isFloat ? 0.1 : 1 },
           scrollTrigger: {
             trigger: ".about-cards-grid",
             start: "top 85%"
@@ -270,7 +379,7 @@
         });
       });
 
-      // 5. Card 3D Tilt Hover Animation (Same as abr-section)
+      // 7. Card 3D Tilt Hover Animation
       document.querySelectorAll('.about-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
           const rect = card.getBoundingClientRect();
@@ -278,14 +387,13 @@
           const y = e.clientY - rect.top;
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -10; 
+
+          const rotateX = ((y - centerY) / centerY) * -10;
           const rotateY = ((x - centerX) / centerX) * 10;
-          
+
           card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
 
-        // Reset to flat when mouse leaves
         card.addEventListener('mouseleave', () => {
           card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
