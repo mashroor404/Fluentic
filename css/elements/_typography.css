@@ -4,8 +4,9 @@ body {
   background-color: var(--page-bg);
   color: var(--text-primary);
   font-family: var(--secondary-font);
+  font-size: var(--text-default);
   font-weight: var(--font-weight-regular, 400);
-  line-height: 1.62;
+  line-height: var(--line-height-default);
   overflow-wrap: break-word;
 }
 
@@ -100,33 +101,52 @@ img {
 
 :root {
   /* ==========================================================================
-     Fluid Typography Scale (Base: 1rem = 16px)
-     Scales dynamically between 320px (mobile) and 1920px (desktop)
+     Fluentic Fluid Typography Scale (Base: 1rem = 16px)
+     Reference desktop values are reached at 1920px and scale down smoothly
+     to mobile values at 320px.
      ========================================================================== */
 
-  /* H1: Max 62px (3.875rem) | Min 36px (2.25rem) */
-  --text-h1: clamp(2.25rem, 1.625vw + 1.925rem, 3.875rem);
+  /* Display: 48px -> 84px */
+  --text-display: clamp(3rem, 2.25vw + 2.55rem, 5.25rem);
 
-  /* H2: Max 50px (3.125rem) | Min 32px (2rem) */
-  --text-h2: clamp(2rem, 1.125vw + 1.775rem, 3.125rem);
+  /* Headings: responsive mobile minimum -> reference desktop maximum */
+  --text-h1: clamp(2.5rem, 2.25vw + 2.05rem, 4.75rem);       /* 40px -> 76px */
+  --text-h2: clamp(2.25rem, 1.5vw + 1.95rem, 3.75rem);       /* 36px -> 60px */
+  --text-h3: clamp(1.875rem, 0.875vw + 1.7rem, 2.75rem);     /* 30px -> 44px */
+  --text-h4: clamp(1.625rem, 0.375vw + 1.55rem, 2rem);       /* 26px -> 32px */
+  --text-h5: clamp(1.375rem, 0.125vw + 1.35rem, 1.5rem);     /* 22px -> 24px */
+  --text-h6: clamp(1.125rem, 0.125vw + 1.1rem, 1.25rem);     /* 18px -> 20px */
 
-  /* H3: Max 36px (2.25rem) | Min 28px (1.75rem) */
-  --text-h3: clamp(1.75rem, 0.5vw + 1.65rem, 2.25rem);
+  /* Paragraphs */
+  --text-default: 1rem;                                      /* 16px */
+  --text-small: 0.875rem;                                    /* 14px */
+  --text-medium: clamp(1rem, 0.125vw + 0.975rem, 1.125rem);  /* 16px -> 18px */
+  --text-large: clamp(1.125rem, 0.125vw + 1.1rem, 1.25rem);  /* 18px -> 20px */
+  --text-xsmall: 0.75rem;                                    /* 12px */
 
-  /* H4: Max 32px (2rem) | Min 24px (1.5rem) */
-  --text-h4: clamp(1.5rem, 0.5vw + 1.4rem, 2rem);
+  /* Buttons */
+  --text-button-large: clamp(1.125rem, 0.125vw + 1.1rem, 1.25rem);
+  --text-button-default: clamp(1rem, 0.125vw + 0.975rem, 1.125rem);
+  --text-button-small: clamp(0.875rem, 0.125vw + 0.85rem, 1rem);
 
-  /* H5: Max 28px (1.75rem) | Min 20px (1.25rem) */
-  --text-h5: clamp(1.25rem, 0.5vw + 1.15rem, 1.75rem);
+  /* Line heights from the Fluentic reference */
+  --line-height-display: 1.2;
+  --line-height-h1: 1.07;
+  --line-height-h2: 1.1;
+  --line-height-h3: 1.18;
+  --line-height-h4: 1.25;
+  --line-height-h5: 1.33;
+  --line-height-h6: 1.2;
+  --line-height-default: 1.62;
+  --line-height-small: 1.14;
+  --line-height-medium: 1.5;
+  --line-height-large: 1.5;
+  --line-height-button: 1;
 
-  /* H6: Max 24px (1.5rem) | Min 16px (1rem) */
-  --text-h6: clamp(1rem, 0.5vw + 0.9rem, 1.5rem);
-
-  /* Body & Body-Highlight: Max 18px (1.125rem) | Min 16px (1rem) */
-  --text-body: clamp(1rem, 0.125vw + 0.975rem, 1.125rem);
-
-  /* Body 2 & Body 2-Highlight: Max 16px (1rem) | Min 14px (0.875rem) */
-  --text-body-2: clamp(0.875rem, 0.125vw + 0.85rem, 1rem);
+  /* Existing project aliases */
+  --text-body: var(--text-medium);
+  --text-body-2: var(--text-default);
+  --text-p: var(--text-default);
 }
 
 /* Update your classes as well */
@@ -138,17 +158,16 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
   font-weight: var(--font-weight-medium, 500);
   margin: 0;
-  line-height: 1.2;
   letter-spacing: 0;
 }
 
 
-h1 { font-size: var(--text-h1);}
-h2 { font-size: var(--text-h2); }
-h3 { font-size: var(--text-h3); }
-h4 { font-size: var(--text-h4); }
-h5 { font-size: var(--text-h5); }
-h6 { font-size: var(--text-h6); }
+h1 { font-size: var(--text-h1); line-height: var(--line-height-h1); }
+h2 { font-size: var(--text-h2); line-height: var(--line-height-h2); }
+h3 { font-size: var(--text-h3); line-height: var(--line-height-h3); }
+h4 { font-size: var(--text-h4); line-height: var(--line-height-h4); }
+h5 { font-size: var(--text-h5); line-height: var(--line-height-h5); }
+h6 { font-size: var(--text-h6); line-height: var(--line-height-h6); }
 
 
 
@@ -157,7 +176,7 @@ h6 { font-size: var(--text-h6); }
   font-size: var(--text-body);
   font-family: var(--secondary-font);
   font-weight: var(--font-weight-regular, 400);
-  line-height: 1.5;
+  line-height: var(--line-height-medium);
   margin-top: 0;
 }
 
@@ -166,7 +185,7 @@ h6 { font-size: var(--text-h6); }
   font-weight: var(--font-weight-semibold, 600);
   font-family: var(--secondary-font);
   font-size: var(--text-body);
-  line-height: 1.5;
+  line-height: var(--line-height-medium);
 }
 
 .body-2 {
@@ -174,7 +193,7 @@ h6 { font-size: var(--text-h6); }
   font-size: var(--text-body-2);
   font-family: var(--secondary-font);
   font-weight: var(--font-weight-regular, 400);
-  line-height: 1.5;
+  line-height: var(--line-height-default);
   margin-top: 0;
 }
 
@@ -183,7 +202,7 @@ h6 { font-size: var(--text-h6); }
   font-size: var(--text-body-2);
   font-family: var(--secondary-font);
   font-weight: var(--font-weight-semibold, 600);
-  line-height: 1.5;
+  line-height: var(--line-height-default);
 }
 
 /* General Sans weight utilities used by the Webflow reference. */
