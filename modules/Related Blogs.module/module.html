@@ -1,0 +1,173 @@
+{% require_css %}
+<style>
+  {% scope_css %}
+  .related-blog-cards__list {
+    display: grid;
+    gap: 2.5rem 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .related-blog-card {
+    background-color: var(--bg-primary);
+    border-radius: max(var(--global-border-radius), 1rem);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    overflow: hidden;
+    padding: 0.5rem 0.5rem 1.5rem;
+    text-decoration: none;
+  }
+
+  .related-blog-card:focus-visible {
+    outline: 0.125rem solid var(--accent-purple);
+    outline-offset: 0.25rem;
+  }
+
+  .related-blog-card__image-wrap {
+    aspect-ratio: 1392 / 1000;
+    border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.5rem);
+    overflow: hidden;
+  }
+
+  .related-blog-card__image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 420ms ease;
+    width: 100%;
+  }
+
+  .related-blog-card:hover .related-blog-card__image,
+  .related-blog-card:focus-visible .related-blog-card__image {
+    transform: scale(1.045);
+  }
+
+  .related-blog-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 1rem 1rem;
+  }
+
+  .related-blog-card__info {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    text-transform: uppercase;
+  }
+
+  .related-blog-card__tag,
+  .related-blog-card__date {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-xsmall, 0.75rem);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  .related-blog-card__tag {
+    border: var(--global-border-width) solid var(--accent-pink);
+    border-radius: 999px;
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+  }
+
+  .related-blog-card__date {
+    margin-left: auto;
+  }
+
+  .related-blog-card__title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h5);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 991px) {
+    .related-blog-cards__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .related-blog-cards__list {
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .related-blog-card__image {
+      transition: none;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% set related_tag_slugs = [] %}
+{% set related_posts = [] %}
+
+{% for topic in content.topic_list %}
+  {% if loop.index <= 10 %}
+    {% do related_tag_slugs.append(topic.slug) %}
+  {% endif %}
+{% endfor %}
+
+{% if related_tag_slugs %}
+  {% set candidate_posts = blog_recent_tag_posts(group.id, related_tag_slugs, 4, "OR") %}
+
+  {% for post in candidate_posts %}
+    {% if post.absolute_url != content.absolute_url and related_posts|length < 3 %}
+      {% do related_posts.append(post) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if related_posts %}
+  <div class="related-blog-cards__list">
+    {% for post in related_posts %}
+      {% set first_topic = post.topic_list|first %}
+      {% set publish_date = post.publish_date_local_time %}
+      {% if not publish_date %}
+        {% set publish_date = post.publish_date %}
+      {% endif %}
+
+      <a class="related-blog-card" href="{{ post.absolute_url|escape_url }}">
+        {% if post.featured_image %}
+          <div class="related-blog-card__image-wrap">
+            <img
+              class="related-blog-card__image"
+              src="{{ post.featured_image|escape_url }}"
+              alt="{{ post.featured_image_alt_text|default(post.name)|escape_attr }}"
+              loading="lazy"
+            >
+          </div>
+        {% endif %}
+
+        <div class="related-blog-card__body">
+          <div class="related-blog-card__info">
+            {% if first_topic %}
+              <span class="related-blog-card__tag">{{ first_topic.name|escape_html }}</span>
+            {% endif %}
+
+            {% if publish_date %}
+              <time class="related-blog-card__date" datetime="{{ publish_date|escape_attr }}">
+                {{ publish_date|format_datetime("MMMM d, yyyy") }}
+              </time>
+            {% endif %}
+          </div>
+
+          <h3 class="related-blog-card__title">{{ post.name|escape_html }}</h3>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}

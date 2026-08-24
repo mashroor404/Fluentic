@@ -68,7 +68,7 @@
 
   .blog-back-button:hover .blog-back-button__icon,
   .blog-back-button:focus-visible .blog-back-button__icon {
-    transform: translateX(-0.25rem);
+    /* transform: translateX(-0.25rem); */
   }
 
   .blog-post-tag {
@@ -279,6 +279,7 @@
 
   .related-blog-button {
     flex: none;
+    box-shadow: inset 0 2px 4px #fff6, 0 2px 4px #0000001a;
   }
 
   .related-blog-button .button-primary[data-wf--button-primary--variant='v2'],
@@ -292,152 +293,6 @@
     color: var(--text-primary);
   }
 
-  .related-blogs .blog-section {
-    margin: 0;
-    padding: 0;
-  }
-
-  .related-blogs .blog-section > .container {
-    max-width: none;
-    width: 100%;
-  }
-
-  .related-blogs .blog-title-row {
-    display: none;
-  }
-
-  .related-blogs .blog-cl-list,
-  .related-blogs .related-posts__list,
-  .related-blogs .related-posts__posts,
-  .related-blogs .blog-related-posts__list,
-  .related-blogs .fluentic-related-grid {
-    display: grid;
-    gap: 2.5rem 1.5rem;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .related-blogs .blog-card,
-  .related-blogs .related-posts__card,
-  .related-blogs .related-posts__post,
-  .related-blogs .blog-related-posts__post,
-  .related-blogs .fluentic-related-card {
-    background-color: var(--bg-primary);
-    border-radius: max(var(--global-border-radius), 1rem);
-    color: var(--text-primary);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    height: 100%;
-    overflow: hidden;
-    padding: 0.5rem 0.5rem 1.5rem;
-    text-decoration: none;
-  }
-
-  .related-blogs .blog-image-wrap,
-  .related-blogs .related-posts__image-wrapper,
-  .related-blogs .related-posts__post-image-wrapper,
-  .related-blogs .blog-related-posts__post-image-wrapper,
-  .related-blogs .fluentic-related-image-wrap {
-    aspect-ratio: 1392 / 1000;
-    border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.5rem);
-    display: block;
-    overflow: hidden;
-  }
-
-  .related-blogs .blog-card__image,
-  .related-blogs .blog-image-wrap img,
-  .related-blogs .related-posts__image,
-  .related-blogs .blog-related-posts__image,
-  .related-blogs .fluentic-related-image {
-    display: block;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1);
-    transition: transform 420ms ease;
-    width: 100%;
-  }
-
-  .related-blogs .blog-card:hover .blog-card__image,
-  .related-blogs .blog-card:focus-visible .blog-card__image,
-  .related-blogs .blog-card:hover .blog-image-wrap img,
-  .related-blogs .blog-card:focus-visible .blog-image-wrap img,
-  .related-blogs .related-posts__card:hover .related-posts__image,
-  .related-blogs .related-posts__post:hover .related-posts__image,
-  .related-blogs .blog-related-posts__post:hover .blog-related-posts__image,
-  .related-blogs .fluentic-related-card:hover .fluentic-related-image,
-  .related-blogs .fluentic-related-card:focus-within .fluentic-related-image {
-    transform: scale(1.045);
-  }
-
-  .related-blogs .blog-card-body,
-  .related-blogs .related-posts__content,
-  .related-blogs .related-posts__post-content,
-  .related-blogs .blog-related-posts__content,
-  .related-blogs .fluentic-related-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0.5rem 1rem 1rem;
-  }
-
-  .related-blogs .blog-info-wrap {
-    align-items: center;
-    display: flex;
-    gap: 1rem;
-    justify-content: space-between;
-    text-transform: uppercase;
-  }
-
-  .related-blogs .blog-tag,
-  .related-blogs .blog-card__date {
-    color: var(--text-primary);
-    font-family: var(--secondary-font);
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-medium);
-    letter-spacing: 0.04em;
-    line-height: 1.2;
-  }
-
-  .related-blogs .blog-tag {
-    border: var(--global-border-width) solid var(--accent-pink);
-    border-radius: 999px;
-    padding: 0.375rem 0.875rem;
-  }
-
-  .related-blogs .blog-card__date {
-    margin-left: auto;
-  }
-
-  .related-blogs .blog-card__title,
-  .related-blogs .related-posts__title,
-  .related-blogs .related-posts__post-title,
-  .related-blogs .blog-related-posts__title,
-  .related-blogs .fluentic-related-title,
-  .related-blogs .related-posts__title a,
-  .related-blogs .related-posts__post-title a,
-  .related-blogs .blog-related-posts__title-link,
-  .related-blogs .fluentic-related-title a {
-    color: var(--text-primary);
-    font-family: var(--primary-font);
-    font-size: var(--text-h5);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.25;
-    margin: 0;
-    text-decoration: none;
-  }
-
-  .related-blogs .related-posts__summary,
-  .related-blogs .related-posts__post-summary,
-  .related-blogs .blog-related-posts__content > p,
-  .related-blogs .fluentic-related-summary {
-    display: none;
-  }
-
-  .related-blogs .related-posts__heading,
-  .related-blogs .blog-related-posts > .content-wrapper > h2 {
-    display: none;
-  }
-
   @media screen and (max-width: 991px) {
     .blog-details-content-block {
       gap: 2rem;
@@ -445,14 +300,6 @@
 
     .blog-details-info-row {
       gap: 2.5rem;
-    }
-
-    .related-blogs .blog-cl-list,
-    .related-blogs .related-posts__list,
-    .related-blogs .related-posts__posts,
-    .related-blogs .blog-related-posts__list,
-    .related-blogs .fluentic-related-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
@@ -480,15 +327,6 @@
       flex-wrap: wrap;
       gap: 1.5rem;
     }
-
-    .related-blogs .blog-cl-list,
-    .related-blogs .related-posts__list,
-    .related-blogs .related-posts__posts,
-    .related-blogs .blog-related-posts__list,
-    .related-blogs .fluentic-related-grid {
-      gap: 1.5rem;
-      grid-template-columns: 1fr;
-    }
   }
 
   @media screen and (max-width: 479px) {
@@ -507,13 +345,6 @@
 
   @media (prefers-reduced-motion: reduce) {
     .blog-back-button__icon {
-      transition: none;
-    }
-
-    .related-blogs .blog-card__image,
-    .related-blogs .related-posts__image,
-    .related-blogs .blog-related-posts__image,
-    .related-blogs .fluentic-related-image {
       transition: none;
     }
   }
@@ -562,55 +393,8 @@
       });
     }
 
-    function normalizeRelatedPosts() {
-      var relatedRoot = document.querySelector('.related-blogs');
-
-      if (!relatedRoot) {
-        return;
-      }
-
-      var cards = relatedRoot.querySelectorAll(
-        'article, .related-posts__card, .related-posts__post, .blog-related-posts__post'
-      );
-
-      if (!cards.length) {
-        return;
-      }
-
-      cards[0].parentElement.classList.add('fluentic-related-grid');
-
-      cards.forEach(function (card) {
-        var image = card.querySelector('img');
-        var heading = card.querySelector('h2, h3, h4');
-        var summary = card.querySelector(
-          '.related-posts__summary, .related-posts__post-summary, .blog-related-posts__content > p'
-        );
-
-        card.classList.add('fluentic-related-card');
-
-        if (image) {
-          var imageWrap = image.closest('a') || image.parentElement;
-          image.classList.add('fluentic-related-image');
-          imageWrap.classList.add('fluentic-related-image-wrap');
-        }
-
-        if (heading) {
-          heading.classList.add('fluentic-related-title');
-
-          if (heading.parentElement !== card) {
-            heading.parentElement.classList.add('fluentic-related-content');
-          }
-        }
-
-        if (summary) {
-          summary.classList.add('fluentic-related-summary');
-        }
-      });
-    }
-
     function initializeBlogPostEnhancements() {
       customizeSocialIcons();
-      normalizeRelatedPosts();
     }
 
     if (document.readyState === 'loading') {
@@ -642,7 +426,9 @@
           <div class="blog-details-info-row">
             <div class="blog-details-info-left">
               <a class="blog-back-button" href="{{ blog_listing_url|escape_url }}">
-                <span class="blog-back-button__icon" aria-hidden="true">&larr;</span>
+                <span class="blog-back-button__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+<path d="M17.4995 10C17.4995 10.1658 17.4337 10.3247 17.3165 10.442C17.1992 10.5592 17.0403 10.625 16.8745 10.625H4.63311L9.1917 15.1828C9.24977 15.2409 9.29583 15.3098 9.32726 15.3857C9.35869 15.4616 9.37486 15.5429 9.37486 15.625C9.37486 15.7071 9.35869 15.7885 9.32726 15.8643C9.29583 15.9402 9.24977 16.0091 9.1917 16.0672C9.13363 16.1253 9.0647 16.1713 8.98883 16.2028C8.91295 16.2342 8.83164 16.2504 8.74952 16.2504C8.66739 16.2504 8.58608 16.2342 8.5102 16.2028C8.43433 16.1713 8.3654 16.1253 8.30733 16.0672L2.68233 10.4422C2.62422 10.3842 2.57812 10.3152 2.54667 10.2393C2.51521 10.1635 2.49902 10.0821 2.49902 10C2.49902 9.91788 2.51521 9.83655 2.54667 9.76067C2.57812 9.6848 2.62422 9.61587 2.68233 9.55782L8.30733 3.93282C8.4246 3.81555 8.58366 3.74966 8.74952 3.74966C8.91537 3.74966 9.07443 3.81555 9.1917 3.93282C9.30898 4.0501 9.37486 4.20916 9.37486 4.37501C9.37486 4.54086 9.30898 4.69992 9.1917 4.8172L4.63311 9.37501H16.8745C17.0403 9.37501 17.1992 9.44086 17.3165 9.55807C17.4337 9.67528 17.4995 9.83425 17.4995 10Z" fill="#1B0C27"/>
+<script xmlns=""/></svg></span>
                 <span>Back</span>
               </a>
 
@@ -702,7 +488,7 @@
       </div>
 
       <div class="related-blogs">
-        {% module "module_17876023874323" path="@hubspot/growth/modules/related-posts", label="related-posts.module" %}
+        {% module "related_blogs" path="/Fluentic/modules/Related Blogs.module", label="Related Blogs" %}
       </div>
     </div>
   </section>
