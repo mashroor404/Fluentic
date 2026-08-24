@@ -4,7 +4,7 @@
 <style>
   {% scope_css %}
   /* ==================================
-     Section Layout & Background
+     Section Layout & Video Background
      ================================== */
   .enterprise-section-wrapper {
     position: relative;
@@ -13,9 +13,74 @@
 
   .enterprise-section {
     position: relative;
+    isolation: isolate;
     padding: 120px 0;
-    /* Using your requested global variable with a dark fallback */
-    background-color: var(--dark-bg, #0B101E);
+    overflow: hidden;
+    /* Theme dark background — shows while the video loads or if it's off */
+    background-color: var(--dark-bg, #1B0C27);
+  }
+
+  .enterprise-video {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .enterprise-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Dark theme-tinted wash so white card text stays legible over the footage */
+  .enterprise-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,rgba(27,12,39,0.4) 0%,rgba(27,12,39,0.6) 100%)
+  }
+
+  .enterprise-video-toggle {
+    position: absolute;
+    z-index: 10;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 11px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .enterprise-video-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.24);
+    transform: scale(1.05);
+  }
+
+  .enterprise-video-toggle svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .enterprise-video-toggle .icon-play {
+    display: none;
+  }
+
+  .enterprise-video-toggle.is-paused .icon-pause {
+    display: none;
+  }
+
+  .enterprise-video-toggle.is-paused .icon-play {
+    display: block;
   }
 
   .enterprise-section .container {
@@ -34,7 +99,7 @@
 
   .enterprise-header h2 {
     margin: 24px 0 0;
-    color: #ffffff; /* Forces white text on dark background */
+    color: var(--text-light-primary, #FFFFFF);
     letter-spacing: -0.02em;
   }
 
@@ -44,115 +109,74 @@
   }
 
   .enterprise-header-desc {
-    margin: 24px auto 0; 
-    color: var(--text-secondary);
+    margin: 24px auto 0;
+    color: var(--text-light-secondary, #F6F5F4);
+    opacity: 0.8;
     will-change: transform, opacity;
   }
 
   /* ==================================
-     Cards Grid & Dynamic Borders
+     Cards Grid — Glass Cards
      ================================== */
   .enterprise-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
 
   .enterprise-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 48px 32px;
-    border-color: rgba(255, 255, 255, 0.1);
-    border-style: solid;
-    border-width: 0;
-    transition: transform 0.3s ease;
+    padding: 40px 28px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     will-change: transform;
   }
 
   .enterprise-card:hover {
     transform: translateY(-4px);
-  }
-
-  /* Desktop Borders (3 columns) */
-  @media screen and (min-width: 1025px) {
-    /* Right borders for col 1 & 2 */
-    .enterprise-card:nth-child(1),
-    .enterprise-card:nth-child(2),
-    .enterprise-card:nth-child(4),
-    .enterprise-card:nth-child(5) {
-      border-right-width: 1px;
-    }
-    /* Bottom borders for top row */
-    .enterprise-card:nth-child(1),
-    .enterprise-card:nth-child(2),
-    .enterprise-card:nth-child(3) {
-      border-bottom-width: 1px;
-    }
-  }
-
-  /* Tablet Borders (2 columns) */
-  @media screen and (max-width: 1024px) and (min-width: 768px) {
-    .enterprise-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    /* Right border for odd items (col 1) */
-    .enterprise-card:nth-child(odd) {
-      border-right-width: 1px;
-    }
-    /* Bottom border for all except the last row */
-    .enterprise-card:not(:nth-last-child(-n+2)) {
-      border-bottom-width: 1px;
-    }
-  }
-
-  /* Mobile Borders (1 column) */
-  @media screen and (max-width: 767px) {
-    .enterprise-section {
-      padding: 80px 0;
-    }
-    .enterprise-grid {
-      grid-template-columns: 1fr;
-    }
-    .enterprise-card {
-      padding: 40px 16px;
-    }
-    /* Bottom border for all except the very last item */
-    .enterprise-card:not(:last-child) {
-      border-bottom-width: 1px;
-    }
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.24);
   }
 
   /* ==================================
-     Card Content
+     Card Image (from content — no baked-in icon)
      ================================== */
-  .enterprise-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    /* Using your requested global variable for the icon */
-    background: var(--gradient-2, linear-gradient(135deg, #51a2ff 0%, #0552fc 100%));
-    border-radius: 10px;
+  .enterprise-card-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 250px;
     margin-bottom: 24px;
-    box-shadow: 0 4px 16px rgba(5, 82, 252, 0.3);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--gradient-brand, linear-gradient(120deg, #F0E9F7, #D588FC 61%, #FF49D4));
+    flex-shrink: 0;
   }
 
-  .enterprise-icon svg {
-    width: 24px;
-    height: 24px;
-    fill: none; /* Inherits SVG strokes properly */
+  .enterprise-card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .enterprise-card-title {
-    color: #ffffff;
+    color: var(--text-light-primary, #FFFFFF);
     font-size: clamp(1.125rem, 1.5vw, 1.35rem);
     margin: 0 0 12px 0;
   }
 
   .enterprise-card-desc {
-    color: var(--text-secondary, #94A3B8);
+    color: var(--text-light-secondary, #F6F5F4);
+    opacity: 0.72;
     margin: 0;
     max-width: 280px;
   }
@@ -163,14 +187,63 @@
   .gsap-ent-card {
     opacity: 0;
   }
+
+  /* ==================================
+     Responsive
+     ================================== */
+  @media screen and (max-width: 1024px) {
+    .enterprise-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .enterprise-section {
+      padding: 80px 0;
+    }
+    .enterprise-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .enterprise-card {
+      padding: 32px 24px;
+    }
+    .enterprise-video-toggle {
+      right: 16px;
+      bottom: 16px;
+      width: 32px;
+      height: 32px;
+    }
+  }
   {% end_scope_css %}
 </style>
 {% end_require_css %}
 
 <div class="enterprise-section-wrapper">
-  <section class="enterprise-section">
+  <section class="enterprise-section" data-fluentic-enterprise>
+
+    <!-- Background Video (same source/mechanism as the home Hero) -->
+    {% if module.background_video.enabled and (module.background_video.mp4_url or module.background_video.webm_url) %}
+      <div class="enterprise-video" aria-hidden="true">
+        <video autoplay loop muted playsinline poster="{{ module.background_video.poster.src|escape_url }}">
+          {% if module.background_video.webm_url %}<source src="{{ module.background_video.webm_url|escape_url }}" type="video/webm">{% endif %}
+          {% if module.background_video.mp4_url %}<source src="{{ module.background_video.mp4_url|escape_url }}" type="video/mp4">{% endif %}
+        </video>
+        <div class="enterprise-video-overlay"></div>
+      </div>
+      <!-- <button type="button" class="enterprise-video-toggle" data-enterprise-video-toggle aria-pressed="false" aria-label="Pause background video">
+        <svg class="icon-pause" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+          <rect x="3" y="2" width="3.4" height="12" rx="1.2" fill="currentColor"/>
+          <rect x="9.6" y="2" width="3.4" height="12" rx="1.2" fill="currentColor"/>
+        </svg>
+        <svg class="icon-play" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+          <path d="M4 2.6c0-.9 1-1.4 1.7-.9l8 5.4c.6.4.6 1.3 0 1.8l-8 5.4c-.7.5-1.7 0-1.7-.9V2.6Z" fill="currentColor"/>
+        </svg>
+      </button> -->
+    {% endif %}
+
     <div class="container">
-      
+
       <!-- Section Header -->
       <div class="enterprise-header">
         <!-- Eyebrow -->
@@ -185,7 +258,7 @@
           <h2 class="gsap-blur-reveal">{{ module.title }}</h2>
         {% endif %}
 
-        <!-- Description (Added for standardized animation support) -->
+        <!-- Description -->
         {% if module.description %}
           <p class="body enterprise-header-desc" style="opacity: 0;">
             {{ module.description }}
@@ -197,28 +270,61 @@
       <div class="enterprise-grid">
         {% for item in module.cards %}
           <div class="enterprise-card gsap-ent-card">
-            
-            <!-- Icon Background with SVG -->
-            <div class="enterprise-icon">
-              {{ item.card_icon_svg }}
-            </div>
+
+            <!-- Card Image (content-driven only) -->
+            {% if item.card_image.src %}
+              <div class="enterprise-card-image-wrap">
+                <img src="{{ item.card_image.src }}" alt="{{ item.card_image.alt|default(item.title) }}" loading="{{ item.card_image.loading|default('lazy') }}">
+              </div>
+            {% endif %}
 
             <!-- Content -->
             <h4 class="enterprise-card-title">{{ item.title }}</h4>
             <p class="body-2 enterprise-card-desc">{{ item.description }}</p>
-            
+
           </div>
         {% endfor %}
       </div>
-      
+
     </div>
   </section>
 </div>
 
-<!-- GSAP Scroll Animations -->
+<!-- GSAP Scroll Animations & Video Toggle -->
 {% require_js %}
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('[data-fluentic-enterprise]').forEach((section) => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Background video play/pause toggle
+      const video = section.querySelector(".enterprise-video video");
+      const toggle = section.querySelector("[data-enterprise-video-toggle]");
+      if (video && toggle) {
+        const setToggleState = (isPaused) => {
+          toggle.classList.toggle("is-paused", isPaused);
+          toggle.setAttribute("aria-pressed", String(isPaused));
+          toggle.setAttribute("aria-label", isPaused ? "Play background video" : "Pause background video");
+        };
+
+        if (reduceMotion) {
+          video.pause();
+          setToggleState(true);
+        }
+
+        toggle.addEventListener("click", () => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+
+        video.addEventListener("play", () => setToggleState(false));
+        video.addEventListener("pause", () => setToggleState(true));
+      }
+    });
+
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
       console.warn("GSAP missing. Animations will not load.");
       return;
@@ -233,9 +339,9 @@
     ------------------------------------------------------------------ */
     const eyebrow = section.querySelector(".gsap-ent-eyebrow");
     if (eyebrow) {
-      gsap.fromTo(eyebrow, 
-        { opacity: 0, y: 15 }, 
-        { 
+      gsap.fromTo(eyebrow,
+        { opacity: 0, y: 15 },
+        {
           opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
           scrollTrigger: { trigger: section, start: 'top 85%', once: true }
         }
@@ -275,13 +381,13 @@
     ------------------------------------------------------------------ */
     const headerDesc = section.querySelector(".enterprise-header-desc");
     if (headerDesc) {
-      gsap.fromTo(headerDesc, 
-        { opacity: 0, y: 15 }, 
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8, 
-          delay: 0.3, // Waits slightly for the title to finish revealing
+      gsap.fromTo(headerDesc,
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.3,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: section.querySelector('.enterprise-header'),
@@ -295,17 +401,17 @@
     /* ------------------------------------------------------------------
        4. Cards Grid (Staggered fade in & slide up)
     ------------------------------------------------------------------ */
-    gsap.fromTo(".gsap-ent-card", 
-      { 
-        y: 40, 
-        opacity: 0 
-      }, 
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.8, 
-        stagger: 0.1, 
-        delay: 0.4, // Delays card entrance so header reveals first
+    gsap.fromTo(".gsap-ent-card",
+      {
+        y: 40,
+        opacity: 0
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        delay: 0.4,
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".enterprise-grid",
