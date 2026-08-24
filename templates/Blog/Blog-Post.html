@@ -196,8 +196,7 @@
   .blog-share-label {
     color: var(--text-primary);
     font-family: var(--secondary-font);
-    font-size: var(--text-body-2, 1rem);
-    font-weight: var(--font-weight-medium);
+    font-size: 18px;
     margin: 0;
   }
 
@@ -228,21 +227,24 @@
     display: flex;
     height: 1.5rem;
     justify-content: center;
-    transition: color 240ms ease, transform 240ms ease;
     width: 1.5rem;
   }
 
   .blog-share-module a:hover,
   .blog-share-module a:focus-visible {
-    color: var(--accent-pink);
-    transform: translateY(-0.125rem);
+    color: var(--text-primary);
+    transform: none;
   }
 
-  .blog-share-module img,
-  .blog-share-module svg {
+  .blog-share-module a:focus-visible {
+    border-radius: 0.125rem;
+    outline: 0.125rem solid var(--accent-purple);
+    outline-offset: 0.25rem;
+  }
+
+  .blog-share-module .social-link-icon {
     display: block;
     height: 1.5rem;
-    object-fit: contain;
     width: 1.5rem;
   }
 
@@ -279,6 +281,17 @@
     flex: none;
   }
 
+  .related-blog-button .button-primary[data-wf--button-primary--variant='v2'],
+  .related-blog-button .button-primary[data-wf--button-primary--variant='v2']:hover,
+  .related-blog-button .button-primary[data-wf--button-primary--variant='v2']:focus-visible {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: transparent;
+    box-shadow: inset 0 0 0 1px var(--global-border-color),
+      inset 0 2px 4px 0 rgba(255, 255, 255, 0.4),
+      0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+  }
+
   .related-blogs .blog-section {
     margin: 0;
     padding: 0;
@@ -293,13 +306,21 @@
     display: none;
   }
 
-  .related-blogs .blog-cl-list {
+  .related-blogs .blog-cl-list,
+  .related-blogs .related-posts__list,
+  .related-blogs .related-posts__posts,
+  .related-blogs .blog-related-posts__list,
+  .related-blogs .fluentic-related-grid {
     display: grid;
     gap: 2.5rem 1.5rem;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .related-blogs .blog-card {
+  .related-blogs .blog-card,
+  .related-blogs .related-posts__card,
+  .related-blogs .related-posts__post,
+  .related-blogs .blog-related-posts__post,
+  .related-blogs .fluentic-related-card {
     background-color: var(--bg-primary);
     border-radius: max(var(--global-border-radius), 1rem);
     color: var(--text-primary);
@@ -312,14 +333,22 @@
     text-decoration: none;
   }
 
-  .related-blogs .blog-image-wrap {
+  .related-blogs .blog-image-wrap,
+  .related-blogs .related-posts__image-wrapper,
+  .related-blogs .related-posts__post-image-wrapper,
+  .related-blogs .blog-related-posts__post-image-wrapper,
+  .related-blogs .fluentic-related-image-wrap {
     aspect-ratio: 1392 / 1000;
     border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.5rem);
+    display: block;
     overflow: hidden;
   }
 
   .related-blogs .blog-card__image,
-  .related-blogs .blog-image-wrap img {
+  .related-blogs .blog-image-wrap img,
+  .related-blogs .related-posts__image,
+  .related-blogs .blog-related-posts__image,
+  .related-blogs .fluentic-related-image {
     display: block;
     height: 100%;
     object-fit: cover;
@@ -331,11 +360,20 @@
   .related-blogs .blog-card:hover .blog-card__image,
   .related-blogs .blog-card:focus-visible .blog-card__image,
   .related-blogs .blog-card:hover .blog-image-wrap img,
-  .related-blogs .blog-card:focus-visible .blog-image-wrap img {
+  .related-blogs .blog-card:focus-visible .blog-image-wrap img,
+  .related-blogs .related-posts__card:hover .related-posts__image,
+  .related-blogs .related-posts__post:hover .related-posts__image,
+  .related-blogs .blog-related-posts__post:hover .blog-related-posts__image,
+  .related-blogs .fluentic-related-card:hover .fluentic-related-image,
+  .related-blogs .fluentic-related-card:focus-within .fluentic-related-image {
     transform: scale(1.045);
   }
 
-  .related-blogs .blog-card-body {
+  .related-blogs .blog-card-body,
+  .related-blogs .related-posts__content,
+  .related-blogs .related-posts__post-content,
+  .related-blogs .blog-related-posts__content,
+  .related-blogs .fluentic-related-content {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -370,13 +408,34 @@
     margin-left: auto;
   }
 
-  .related-blogs .blog-card__title {
+  .related-blogs .blog-card__title,
+  .related-blogs .related-posts__title,
+  .related-blogs .related-posts__post-title,
+  .related-blogs .blog-related-posts__title,
+  .related-blogs .fluentic-related-title,
+  .related-blogs .related-posts__title a,
+  .related-blogs .related-posts__post-title a,
+  .related-blogs .blog-related-posts__title-link,
+  .related-blogs .fluentic-related-title a {
     color: var(--text-primary);
     font-family: var(--primary-font);
     font-size: var(--text-h5);
     font-weight: var(--font-weight-medium);
     line-height: 1.25;
     margin: 0;
+    text-decoration: none;
+  }
+
+  .related-blogs .related-posts__summary,
+  .related-blogs .related-posts__post-summary,
+  .related-blogs .blog-related-posts__content > p,
+  .related-blogs .fluentic-related-summary {
+    display: none;
+  }
+
+  .related-blogs .related-posts__heading,
+  .related-blogs .blog-related-posts > .content-wrapper > h2 {
+    display: none;
   }
 
   @media screen and (max-width: 991px) {
@@ -388,7 +447,11 @@
       gap: 2.5rem;
     }
 
-    .related-blogs .blog-cl-list {
+    .related-blogs .blog-cl-list,
+    .related-blogs .related-posts__list,
+    .related-blogs .related-posts__posts,
+    .related-blogs .blog-related-posts__list,
+    .related-blogs .fluentic-related-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
@@ -418,7 +481,11 @@
       gap: 1.5rem;
     }
 
-    .related-blogs .blog-cl-list {
+    .related-blogs .blog-cl-list,
+    .related-blogs .related-posts__list,
+    .related-blogs .related-posts__posts,
+    .related-blogs .blog-related-posts__list,
+    .related-blogs .fluentic-related-grid {
       gap: 1.5rem;
       grid-template-columns: 1fr;
     }
@@ -439,14 +506,121 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .blog-back-button__icon,
-    .blog-share-module a {
+    .blog-back-button__icon {
+      transition: none;
+    }
+
+    .related-blogs .blog-card__image,
+    .related-blogs .related-posts__image,
+    .related-blogs .blog-related-posts__image,
+    .related-blogs .fluentic-related-image {
       transition: none;
     }
   }
 
 </style>
 {% end_require_css %}
+
+{% require_js position="footer" %}
+<script>
+  (function () {
+    var socialIcons = {
+      facebook: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 15 24" fill="none" class="social-link-icon" aria-hidden="true"><path d="M11.5556 5.33333H8.22222C7.60855 5.33333 7.11111 5.8308 7.11111 6.44444V9.77778H11.5556C11.6819 9.77498 11.8018 9.83378 11.8769 9.93544C11.952 10.0371 11.9731 10.1689 11.9333 10.2889L11.1111 12.7333C11.0353 12.9577 10.8257 13.1093 10.5889 13.1111H7.11111V21.4444C7.11111 21.7512 6.86233 22 6.55555 22H3.77778C3.47096 22 3.22222 21.7512 3.22222 21.4444V13.1111H1.55555C1.24873 13.1111 1 12.8623 1 12.5556V10.3333C1 10.0266 1.24873 9.77778 1.55555 9.77778H3.22222V6.44444C3.22222 3.98984 5.21211 2 7.66667 2H11.5556C11.8623 2 12.1111 2.24873 12.1111 2.55556V4.77778C12.1111 5.0846 11.8623 5.33333 11.5556 5.33333Z" fill="currentColor"></path></svg>',
+      instagram: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 24" fill="none" class="social-link-icon" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.3194 2H8.43056C5.36231 2 2.875 4.48731 2.875 7.55556V16.4444C2.875 19.5127 5.36231 22 8.43056 22H17.3194C20.3876 22 22.875 19.5127 22.875 16.4444V7.55556C22.875 4.48731 20.3876 2 17.3194 2ZM20.9305 16.4444C20.9244 18.4362 19.3112 20.0494 17.3194 20.0556H8.43056C6.43873 20.0494 4.82555 18.4362 4.81945 16.4444V7.55556C4.82555 5.56372 6.43873 3.95054 8.43056 3.94444H17.3194C19.3112 3.95054 20.9244 5.56372 20.9305 7.55556V16.4444ZM18.1527 7.83333C18.7664 7.83333 19.2638 7.33587 19.2638 6.72222C19.2638 6.10858 18.7664 5.61111 18.1527 5.61111C17.5391 5.61111 17.0416 6.10858 17.0416 6.72222C17.0416 7.33587 17.5391 7.83333 18.1527 7.83333ZM12.875 7C10.1136 7 7.875 9.23858 7.875 12C7.875 14.7614 10.1136 17 12.875 17C15.6364 17 17.875 14.7614 17.875 12C17.878 10.673 17.3521 9.39952 16.4137 8.4612C15.4754 7.52288 14.202 6.99704 12.875 7ZM9.81945 12C9.81945 13.6876 11.1874 15.0556 12.875 15.0556C14.5625 15.0556 15.9305 13.6876 15.9305 12C15.9305 10.3124 14.5625 8.94444 12.875 8.94444C11.1874 8.94444 9.81945 10.3124 9.81945 12Z" fill="currentColor"></path></svg>',
+      twitter: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" class="social-link-icon" aria-hidden="true"><path d="M10.6689 9.65845L15.1696 16.0961H13.3225L9.64982 10.843V10.8426L9.11061 10.0715L4.82031 3.93457H6.66742L10.1297 8.8873L10.6689 9.65845Z" fill="currentColor"></path><path d="M17.839 0H2.16104C0.967563 0 0 0.967563 0 2.16104V17.839C0 19.0324 0.967563 20 2.16104 20H17.839C19.0324 20 20 19.0324 20 17.839V2.16104C20 0.967563 19.0324 0 17.839 0ZM12.7566 16.9604L9.0401 11.5514L4.38696 16.9604H3.18435L8.50611 10.7746L3.18435 3.02934H7.24336L10.7627 8.15126L15.1689 3.02934H16.3715L11.2968 8.92828H11.2965L16.8156 16.9604H12.7566Z" fill="currentColor"></path></svg>',
+      linkedin: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="social-link-icon" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.22222 2H19.7778C21.0051 2 22 2.99492 22 4.22222V19.7778C22 21.0051 21.0051 22 19.7778 22H4.22222C2.99492 22 2 21.0051 2 19.7778V4.22222C2 2.99492 2.99492 2 4.22222 2ZM7.55556 18.6667C7.86238 18.6667 8.11111 18.4179 8.11111 18.1111V10.3333C8.11111 10.0266 7.86238 9.77778 7.55556 9.77778H5.88889C5.58207 9.77778 5.33333 10.0266 5.33333 10.3333V18.1111C5.33333 18.4179 5.58207 18.6667 5.88889 18.6667H7.55556ZM6.72222 8.66667C5.80174 8.66667 5.05556 7.92048 5.05556 7C5.05556 6.07952 5.80174 5.33333 6.72222 5.33333C7.6427 5.33333 8.38889 6.07952 8.38889 7C8.38889 7.92048 7.6427 8.66667 6.72222 8.66667ZM18.1111 18.6667C18.4179 18.6667 18.6667 18.4179 18.6667 18.1111V13C18.7028 11.2342 17.3973 9.72724 15.6444 9.51111C14.4189 9.39917 13.2314 9.97156 12.5556 11V10.3333C12.5556 10.0266 12.3068 9.77778 12 9.77778H10.3333C10.0266 9.77778 9.77778 10.0266 9.77778 10.3333V18.1111C9.77778 18.4179 10.0266 18.6667 10.3333 18.6667H12C12.3068 18.6667 12.5556 18.4179 12.5556 18.1111V13.9444C12.5556 13.024 13.3018 12.2778 14.2222 12.2778C15.1427 12.2778 15.8889 13.024 15.8889 13.9444V18.1111C15.8889 18.4179 16.1377 18.6667 16.4444 18.6667H18.1111Z" fill="currentColor"></path></svg>'
+    };
+
+    function customizeSocialIcons() {
+      var shareModule = document.querySelector('.blog-share-module');
+
+      if (!shareModule) {
+        return;
+      }
+
+      shareModule.querySelectorAll('a').forEach(function (link) {
+        var image = link.querySelector('img');
+        var source = [
+          link.getAttribute('href') || '',
+          image ? image.getAttribute('alt') || '' : '',
+          image ? image.getAttribute('src') || '' : ''
+        ].join(' ').toLowerCase();
+        var network = ['facebook', 'instagram', 'twitter', 'linkedin'].find(function (name) {
+          return source.indexOf(name) !== -1;
+        });
+
+        if (!network) {
+          return;
+        }
+
+        var accessibleLabel = image && image.getAttribute('alt')
+          ? image.getAttribute('alt')
+          : 'Share on ' + network;
+
+        link.setAttribute('aria-label', accessibleLabel);
+        link.innerHTML = socialIcons[network];
+      });
+    }
+
+    function normalizeRelatedPosts() {
+      var relatedRoot = document.querySelector('.related-blogs');
+
+      if (!relatedRoot) {
+        return;
+      }
+
+      var cards = relatedRoot.querySelectorAll(
+        'article, .related-posts__card, .related-posts__post, .blog-related-posts__post'
+      );
+
+      if (!cards.length) {
+        return;
+      }
+
+      cards[0].parentElement.classList.add('fluentic-related-grid');
+
+      cards.forEach(function (card) {
+        var image = card.querySelector('img');
+        var heading = card.querySelector('h2, h3, h4');
+        var summary = card.querySelector(
+          '.related-posts__summary, .related-posts__post-summary, .blog-related-posts__content > p'
+        );
+
+        card.classList.add('fluentic-related-card');
+
+        if (image) {
+          var imageWrap = image.closest('a') || image.parentElement;
+          image.classList.add('fluentic-related-image');
+          imageWrap.classList.add('fluentic-related-image-wrap');
+        }
+
+        if (heading) {
+          heading.classList.add('fluentic-related-title');
+
+          if (heading.parentElement !== card) {
+            heading.parentElement.classList.add('fluentic-related-content');
+          }
+        }
+
+        if (summary) {
+          summary.classList.add('fluentic-related-summary');
+        }
+      });
+    }
+
+    function initializeBlogPostEnhancements() {
+      customizeSocialIcons();
+      normalizeRelatedPosts();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeBlogPostEnhancements);
+    } else {
+      initializeBlogPostEnhancements();
+    }
+  })();
+</script>
+{% end_require_js %}
 
 {% extends "../layouts/base.html" %}
 {% import '/Fluentic/Macros/Button.html' as btn_macros %}
@@ -506,6 +680,7 @@
           <p class="blog-share-label">Share Blog</p>
           <div class="blog-share-module">
             {% module "module_17875755358653" path="@hubspot/social_sharing", label="social_sharing.module" %}
+          </div>
         </div>
       </article>
     </div>
@@ -522,7 +697,7 @@
         </div>
 
         <div class="related-blog-button">
-          {{ btn_macros.secondary_button("View All Blogs", blog_listing_url) }}
+          {{ btn_macros.secondary_button("Explore All", blog_listing_url) }}
         </div>
       </div>
 
