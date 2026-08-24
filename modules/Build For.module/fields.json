@@ -19,6 +19,87 @@
   "display_width" : null,
   "default" : "The boring stuff, handled."
 }, {
+  "id" : "b6e1c2d3-4f5a-4b6c-8d9e-0f1a2b3c4d5e",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Security, reliability, and support built for teams that can't afford surprises."
+}, {
+  "id" : "c7f2d3e4-5a6b-4c7d-9e0f-1a2b3c4d5e6f",
+  "name" : "background_video",
+  "label" : "Background Video",
+  "help_text" : "Uses the same background video mechanism as the home page Hero.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "d8a3e4f5-6b7c-4d8e-0f1a-2b3c4d5e6f7a",
+    "name" : "enabled",
+    "label" : "Show background video",
+    "required" : false,
+    "locked" : false,
+    "type" : "boolean",
+    "display" : "toggle",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "e9b4f5a6-7c8d-4e9f-1a2b-3c4d5e6f7a8b",
+    "name" : "mp4_url",
+    "label" : "MP4 URL",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_mp4.mp4"
+  }, {
+    "id" : "f0c5a6b7-8d9e-4f0a-2b3c-4d5e6f7a8b9c",
+    "name" : "webm_url",
+    "label" : "WebM URL",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_webm.webm"
+  }, {
+    "id" : "a1d6b7c8-9e0f-4a1b-3c4d-5e6f7a8b9c0d",
+    "name" : "poster",
+    "label" : "Poster image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : true,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_poster.0000000.jpg",
+      "alt" : "",
+      "loading" : "lazy"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "enabled" : true,
+    "mp4_url" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_mp4.mp4",
+    "webm_url" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_webm.webm",
+    "poster" : {
+      "size_type" : "auto",
+      "src" : "https://cdn.prod.website-files.com/6977d6f2fb8c2461d31d41d2%2F69a74ebf80f2051bdc0dd73b_Hero%20Video_poster.0000000.jpg",
+      "alt" : "",
+      "loading" : "lazy"
+    }
+  }
+}, {
   "id" : "17de77a6-c605-7ef6-93c0-a1e0c12718e5",
   "name" : "cards",
   "label" : "Cards",
@@ -39,7 +120,7 @@
     "allow_new_line" : false,
     "type" : "text",
     "display_width" : null,
-    "default" : "SOC 2-aligned operations"
+    "default" : "SOC 2-aligned security"
   }, {
     "id" : "7d352707-2ae6-95b0-bc13-6014d577543b",
     "name" : "description",
@@ -51,15 +132,23 @@
     "display_width" : null,
     "default" : "Security posture built for procurement review from day one."
   }, {
-    "id" : "fff18da3-8134-1952-066f-46963d53f5b9",
-    "name" : "card_icon_svg",
-    "label" : "Card icon svg",
+    "id" : "b2e5f6a7-8c9d-4e0f-1a2b-3c4d5e6f7a8b",
+    "name" : "card_image",
+    "label" : "Card Image",
+    "help_text" : "Uploaded from content — no built-in icon or graphic is used.",
     "required" : false,
     "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
     "display_width" : null,
-    "default" : "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3.46831 13.8503C3.62857 13.9509 3.81408 14.004 4.0033 14.0033H11.0025C11.1642 14.0028 11.3237 14.0415 11.4672 14.1162C11.6107 14.1908 11.7339 14.2992 11.8263 14.4319C11.9187 14.5647 11.9776 14.7179 11.9978 14.8784C12.018 15.0389 11.999 15.2019 11.9424 15.3534L10.0226 21.3738C9.99255 21.4831 10.0005 21.5995 10.0453 21.7037C10.09 21.8079 10.1689 21.8938 10.2689 21.9473C10.3689 22.0008 10.4841 22.0187 10.5956 21.9981C10.7071 21.9774 10.8083 21.9195 10.8825 21.8338L20.7814 11.6332C20.9006 11.4862 20.9757 11.3084 20.9979 11.1205C21.0201 10.9326 20.9885 10.7422 20.9069 10.5715C20.8252 10.4008 20.6967 10.2567 20.5365 10.1561C20.3762 10.0555 20.1907 10.0024 20.0015 10.0031H13.0023C12.8406 10.0036 12.6811 9.96489 12.5376 9.89023C12.3941 9.81559 12.2709 9.70724 12.1785 9.57448C12.0861 9.44173 12.0272 9.28853 12.007 9.12804C11.9868 8.96754 12.0058 8.80453 12.0624 8.653L13.9822 2.63264C14.0123 2.52328 14.0043 2.40695 13.9595 2.30273C13.9148 2.19851 13.8359 2.11261 13.7359 2.05911C13.6359 2.00562 13.5207 1.98771 13.4092 2.00834C13.2977 2.02896 13.1965 2.08689 13.1223 2.17261L3.22339 12.3732C3.10418 12.5202 3.02911 12.698 3.00691 12.8859C2.9847 13.0739 3.01627 13.2642 3.09795 13.4349C3.17962 13.6057 3.30805 13.7497 3.46831 13.8503Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>"
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy"
+    }
   } ],
   "tab" : "CONTENT",
   "expanded" : false,
@@ -67,28 +156,28 @@
   "type" : "group",
   "display_width" : null,
   "default" : [ {
-    "card_icon_svg" : "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3.46831 13.8503C3.62857 13.9509 3.81408 14.004 4.0033 14.0033H11.0025C11.1642 14.0028 11.3237 14.0415 11.4672 14.1162C11.6107 14.1908 11.7339 14.2992 11.8263 14.4319C11.9187 14.5647 11.9776 14.7179 11.9978 14.8784C12.018 15.0389 11.999 15.2019 11.9424 15.3534L10.0226 21.3738C9.99255 21.4831 10.0005 21.5995 10.0453 21.7037C10.09 21.8079 10.1689 21.8938 10.2689 21.9473C10.3689 22.0008 10.4841 22.0187 10.5956 21.9981C10.7071 21.9774 10.8083 21.9195 10.8825 21.8338L20.7814 11.6332C20.9006 11.4862 20.9757 11.3084 20.9979 11.1205C21.0201 10.9326 20.9885 10.7422 20.9069 10.5715C20.8252 10.4008 20.6967 10.2567 20.5365 10.1561C20.3762 10.0555 20.1907 10.0024 20.0015 10.0031H13.0023C12.8406 10.0036 12.6811 9.96489 12.5376 9.89023C12.3941 9.81559 12.2709 9.70724 12.1785 9.57448C12.0861 9.44173 12.0272 9.28853 12.007 9.12804C11.9868 8.96754 12.0058 8.80453 12.0624 8.653L13.9822 2.63264C14.0123 2.52328 14.0043 2.40695 13.9595 2.30273C13.9148 2.19851 13.8359 2.11261 13.7359 2.05911C13.6359 2.00562 13.5207 1.98771 13.4092 2.00834C13.2977 2.02896 13.1965 2.08689 13.1223 2.17261L3.22339 12.3732C3.10418 12.5202 3.02911 12.698 3.00691 12.8859C2.9847 13.0739 3.01627 13.2642 3.09795 13.4349C3.17962 13.6057 3.30805 13.7497 3.46831 13.8503Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
-    "title" : "SOC 2-aligned operations",
-    "description" : "Security posture built for procurement review from day one."
+    "title" : "SOC 2-aligned security",
+    "description" : "Security posture built for procurement review from day one.",
+    "card_image" : { "size_type" : "auto", "src" : "", "alt" : "", "loading" : "lazy" }
   }, {
-    "card_icon_svg" : "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3.46831 13.8503C3.62857 13.9509 3.81408 14.004 4.0033 14.0033H11.0025C11.1642 14.0028 11.3237 14.0415 11.4672 14.1162C11.6107 14.1908 11.7339 14.2992 11.8263 14.4319C11.9187 14.5647 11.9776 14.7179 11.9978 14.8784C12.018 15.0389 11.999 15.2019 11.9424 15.3534L10.0226 21.3738C9.99255 21.4831 10.0005 21.5995 10.0453 21.7037C10.09 21.8079 10.1689 21.8938 10.2689 21.9473C10.3689 22.0008 10.4841 22.0187 10.5956 21.9981C10.7071 21.9774 10.8083 21.9195 10.8825 21.8338L20.7814 11.6332C20.9006 11.4862 20.9757 11.3084 20.9979 11.1205C21.0201 10.9326 20.9885 10.7422 20.9069 10.5715C20.8252 10.4008 20.6967 10.2567 20.5365 10.1561C20.3762 10.0555 20.1907 10.0024 20.0015 10.0031H13.0023C12.8406 10.0036 12.6811 9.96489 12.5376 9.89023C12.3941 9.81559 12.2709 9.70724 12.1785 9.57448C12.0861 9.44173 12.0272 9.28853 12.007 9.12804C11.9868 8.96754 12.0058 8.80453 12.0624 8.653L13.9822 2.63264C14.0123 2.52328 14.0043 2.40695 13.9595 2.30273C13.9148 2.19851 13.8359 2.11261 13.7359 2.05911C13.6359 2.00562 13.5207 1.98771 13.4092 2.00834C13.2977 2.02896 13.1965 2.08689 13.1223 2.17261L3.22339 12.3732C3.10418 12.5202 3.02911 12.698 3.00691 12.8859C2.9847 13.0739 3.01627 13.2642 3.09795 13.4349C3.17962 13.6057 3.30805 13.7497 3.46831 13.8503Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
-    "title" : "SOC 2-aligned operations",
-    "description" : "Security posture built for procurement review from day one."
+    "title" : "Dedicated onboarding",
+    "description" : "A hands-on rollout plan gets your team live with AI agents in days, not months.",
+    "card_image" : { "size_type" : "auto", "src" : "", "alt" : "", "loading" : "lazy" }
   }, {
-    "card_icon_svg" : "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3.46831 13.8503C3.62857 13.9509 3.81408 14.004 4.0033 14.0033H11.0025C11.1642 14.0028 11.3237 14.0415 11.4672 14.1162C11.6107 14.1908 11.7339 14.2992 11.8263 14.4319C11.9187 14.5647 11.9776 14.7179 11.9978 14.8784C12.018 15.0389 11.999 15.2019 11.9424 15.3534L10.0226 21.3738C9.99255 21.4831 10.0005 21.5995 10.0453 21.7037C10.09 21.8079 10.1689 21.8938 10.2689 21.9473C10.3689 22.0008 10.4841 22.0187 10.5956 21.9981C10.7071 21.9774 10.8083 21.9195 10.8825 21.8338L20.7814 11.6332C20.9006 11.4862 20.9757 11.3084 20.9979 11.1205C21.0201 10.9326 20.9885 10.7422 20.9069 10.5715C20.8252 10.4008 20.6967 10.2567 20.5365 10.1561C20.3762 10.0555 20.1907 10.0024 20.0015 10.0031H13.0023C12.8406 10.0036 12.6811 9.96489 12.5376 9.89023C12.3941 9.81559 12.2709 9.70724 12.1785 9.57448C12.0861 9.44173 12.0272 9.28853 12.007 9.12804C11.9868 8.96754 12.0058 8.80453 12.0624 8.653L13.9822 2.63264C14.0123 2.52328 14.0043 2.40695 13.9595 2.30273C13.9148 2.19851 13.8359 2.11261 13.7359 2.05911C13.6359 2.00562 13.5207 1.98771 13.4092 2.00834C13.2977 2.02896 13.1965 2.08689 13.1223 2.17261L3.22339 12.3732C3.10418 12.5202 3.02911 12.698 3.00691 12.8859C2.9847 13.0739 3.01627 13.2642 3.09795 13.4349C3.17962 13.6057 3.30805 13.7497 3.46831 13.8503Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
-    "title" : "SOC 2-aligned operations",
-    "description" : "Security posture built for procurement review from day one."
+    "title" : "Custom integrations",
+    "description" : "Connect Fluentic to your existing stack with tailored API and workflow integrations.",
+    "card_image" : { "size_type" : "auto", "src" : "", "alt" : "", "loading" : "lazy" }
   }, {
-    "card_icon_svg" : "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3.46831 13.8503C3.62857 13.9509 3.81408 14.004 4.0033 14.0033H11.0025C11.1642 14.0028 11.3237 14.0415 11.4672 14.1162C11.6107 14.1908 11.7339 14.2992 11.8263 14.4319C11.9187 14.5647 11.9776 14.7179 11.9978 14.8784C12.018 15.0389 11.999 15.2019 11.9424 15.3534L10.0226 21.3738C9.99255 21.4831 10.0005 21.5995 10.0453 21.7037C10.09 21.8079 10.1689 21.8938 10.2689 21.9473C10.3689 22.0008 10.4841 22.0187 10.5956 21.9981C10.7071 21.9774 10.8083 21.9195 10.8825 21.8338L20.7814 11.6332C20.9006 11.4862 20.9757 11.3084 20.9979 11.1205C21.0201 10.9326 20.9885 10.7422 20.9069 10.5715C20.8252 10.4008 20.6967 10.2567 20.5365 10.1561C20.3762 10.0555 20.1907 10.0024 20.0015 10.0031H13.0023C12.8406 10.0036 12.6811 9.96489 12.5376 9.89023C12.3941 9.81559 12.2709 9.70724 12.1785 9.57448C12.0861 9.44173 12.0272 9.28853 12.007 9.12804C11.9868 8.96754 12.0058 8.80453 12.0624 8.653L13.9822 2.63264C14.0123 2.52328 14.0043 2.40695 13.9595 2.30273C13.9148 2.19851 13.8359 2.11261 13.7359 2.05911C13.6359 2.00562 13.5207 1.98771 13.4092 2.00834C13.2977 2.02896 13.1965 2.08689 13.1223 2.17261L3.22339 12.3732C3.10418 12.5202 3.02911 12.698 3.00691 12.8859C2.9847 13.0739 3.01627 13.2642 3.09795 13.4349C3.17962 13.6057 3.30805 13.7497 3.46831 13.8503Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
-    "title" : "SOC 2-aligned operations",
-    "description" : "Security posture built for procurement review from day one."
+    "title" : "Role-based access control",
+    "description" : "Granular permissions keep sensitive data and workflows scoped to the right people.",
+    "card_image" : { "size_type" : "auto", "src" : "", "alt" : "", "loading" : "lazy" }
   }, {
-    "card_icon_svg" : "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3.46831 13.8503C3.62857 13.9509 3.81408 14.004 4.0033 14.0033H11.0025C11.1642 14.0028 11.3237 14.0415 11.4672 14.1162C11.6107 14.1908 11.7339 14.2992 11.8263 14.4319C11.9187 14.5647 11.9776 14.7179 11.9978 14.8784C12.018 15.0389 11.999 15.2019 11.9424 15.3534L10.0226 21.3738C9.99255 21.4831 10.0005 21.5995 10.0453 21.7037C10.09 21.8079 10.1689 21.8938 10.2689 21.9473C10.3689 22.0008 10.4841 22.0187 10.5956 21.9981C10.7071 21.9774 10.8083 21.9195 10.8825 21.8338L20.7814 11.6332C20.9006 11.4862 20.9757 11.3084 20.9979 11.1205C21.0201 10.9326 20.9885 10.7422 20.9069 10.5715C20.8252 10.4008 20.6967 10.2567 20.5365 10.1561C20.3762 10.0555 20.1907 10.0024 20.0015 10.0031H13.0023C12.8406 10.0036 12.6811 9.96489 12.5376 9.89023C12.3941 9.81559 12.2709 9.70724 12.1785 9.57448C12.0861 9.44173 12.0272 9.28853 12.007 9.12804C11.9868 8.96754 12.0058 8.80453 12.0624 8.653L13.9822 2.63264C14.0123 2.52328 14.0043 2.40695 13.9595 2.30273C13.9148 2.19851 13.8359 2.11261 13.7359 2.05911C13.6359 2.00562 13.5207 1.98771 13.4092 2.00834C13.2977 2.02896 13.1965 2.08689 13.1223 2.17261L3.22339 12.3732C3.10418 12.5202 3.02911 12.698 3.00691 12.8859C2.9847 13.0739 3.01627 13.2642 3.09795 13.4349C3.17962 13.6057 3.30805 13.7497 3.46831 13.8503Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
-    "title" : "SOC 2-aligned operations",
-    "description" : "Security posture built for procurement review from day one."
+    "title" : "99.9% uptime SLA",
+    "description" : "Production-grade infrastructure built to keep your AI workforce always on.",
+    "card_image" : { "size_type" : "auto", "src" : "", "alt" : "", "loading" : "lazy" }
   }, {
-    "card_icon_svg" : "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3.46831 13.8503C3.62857 13.9509 3.81408 14.004 4.0033 14.0033H11.0025C11.1642 14.0028 11.3237 14.0415 11.4672 14.1162C11.6107 14.1908 11.7339 14.2992 11.8263 14.4319C11.9187 14.5647 11.9776 14.7179 11.9978 14.8784C12.018 15.0389 11.999 15.2019 11.9424 15.3534L10.0226 21.3738C9.99255 21.4831 10.0005 21.5995 10.0453 21.7037C10.09 21.8079 10.1689 21.8938 10.2689 21.9473C10.3689 22.0008 10.4841 22.0187 10.5956 21.9981C10.7071 21.9774 10.8083 21.9195 10.8825 21.8338L20.7814 11.6332C20.9006 11.4862 20.9757 11.3084 20.9979 11.1205C21.0201 10.9326 20.9885 10.7422 20.9069 10.5715C20.8252 10.4008 20.6967 10.2567 20.5365 10.1561C20.3762 10.0555 20.1907 10.0024 20.0015 10.0031H13.0023C12.8406 10.0036 12.6811 9.96489 12.5376 9.89023C12.3941 9.81559 12.2709 9.70724 12.1785 9.57448C12.0861 9.44173 12.0272 9.28853 12.007 9.12804C11.9868 8.96754 12.0058 8.80453 12.0624 8.653L13.9822 2.63264C14.0123 2.52328 14.0043 2.40695 13.9595 2.30273C13.9148 2.19851 13.8359 2.11261 13.7359 2.05911C13.6359 2.00562 13.5207 1.98771 13.4092 2.00834C13.2977 2.02896 13.1965 2.08689 13.1223 2.17261L3.22339 12.3732C3.10418 12.5202 3.02911 12.698 3.00691 12.8859C2.9847 13.0739 3.01627 13.2642 3.09795 13.4349C3.17962 13.6057 3.30805 13.7497 3.46831 13.8503Z\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
-    "title" : "SOC 2-aligned operations",
-    "description" : "Security posture built for procurement review from day one."
+    "title" : "Priority support",
+    "description" : "A dedicated success team on call for enterprise rollouts and critical issues.",
+    "card_image" : { "size_type" : "auto", "src" : "", "alt" : "", "loading" : "lazy" }
   } ]
 } ]
