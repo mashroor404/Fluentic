@@ -4,4 +4,7 @@
 field-watcher.js
 package.json
 package-lock.json
+.env
+.env.example
+.gitignore
 

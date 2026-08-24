@@ -1,0 +1,551 @@
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  .how-it-works-section {
+    background-color: var(--page-bg);
+    padding: 160px 0;
+  }
+
+  /* The reference pulls this section up over the one above it. */
+  .how-it-works-section--overlap {
+    margin-top: -160px;
+  }
+
+  .how-it-works__container {
+    margin: 0 auto;
+    max-width: 1240px;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  .how-it-works__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 0 auto;
+    max-width: 1159px;
+    width: 100%;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Top row: intro card + feature image card                            */
+  /* ------------------------------------------------------------------ */
+
+  .how-it-works__top {
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+  }
+
+  .how-it-works__intro {
+    background-color: var(--bg-primary);
+    border-radius: 16px;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 40px 62px 40px 44px;
+  }
+
+  .how-it-works__header {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+
+  .how-it-works__heading {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-medium);
+    margin: 16px 0 24px;
+  }
+
+  .how-it-works__word {
+    display: inline-block;
+  }
+
+  .how-it-works__description {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: 18px;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .how-it-works__buttons {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 16px;
+    justify-content: flex-start;
+  }
+
+  .how-it-works__feature {
+    background-color: var(--bg-primary);
+    border-radius: 16px;
+    flex: 0 1 auto;
+    max-width: 364px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  .how-it-works__feature-wrap {
+    border-radius: 12px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .how-it-works__feature-image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Step cards                                                          */
+  /* ------------------------------------------------------------------ */
+
+  .how-it-works__steps {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .how-it-works__step {
+    background-color: var(--bg-primary);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 8px 8px 36px;
+    width: 100%;
+  }
+
+  .how-it-works__step-image-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .how-it-works__step-image {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  .how-it-works__step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 364px;
+    padding: 0 30px;
+    width: 100%;
+  }
+
+  .how-it-works__step-title-wrap {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .how-it-works__step-number {
+    background-color: var(--bg-primary);
+    border: var(--global-border-width) solid var(--global-border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    flex: 0 0 auto;
+    font-family: var(--primary-font);
+    font-size: 18px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    max-width: 32px;
+    padding: 0 10px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .how-it-works__step-title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: 24px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.33;
+    margin: 0;
+  }
+
+  .how-it-works__step-text {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Responsive                                                          */
+  /* ------------------------------------------------------------------ */
+
+  @media (max-width: 991px) {
+    .how-it-works-section {
+      padding: 80px 0;
+    }
+
+    .how-it-works-section--overlap {
+      margin-top: -80px;
+    }
+
+    .how-it-works__intro {
+      padding: 32px;
+    }
+
+    .how-it-works__top {
+      gap: 32px;
+    }
+
+    .how-it-works__steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .how-it-works__step {
+      padding-bottom: 32px;
+    }
+
+    .how-it-works__step-body {
+      padding: 0 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .how-it-works-section {
+      padding: 60px 0;
+    }
+
+    .how-it-works-section--overlap {
+      margin-top: -60px;
+    }
+
+    .how-it-works__container {
+      padding: 0 16px;
+    }
+
+    .how-it-works__top {
+      flex-direction: column;
+    }
+
+    .how-it-works__intro {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .how-it-works__buttons {
+      align-items: stretch;
+      flex-direction: column;
+      max-width: none;
+    }
+
+    .how-it-works__feature {
+      max-width: none;
+    }
+
+    .how-it-works__steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .how-it-works__step,
+    .how-it-works__step-body {
+      max-width: none;
+    }
+
+    .how-it-works__step {
+      padding-bottom: 24px;
+    }
+
+    .how-it-works__step-title {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .how-it-works-section {
+      padding: 40px 0;
+    }
+
+    .how-it-works-section--overlap {
+      margin-top: -40px;
+    }
+
+    .how-it-works__intro {
+      padding: 24px 16px;
+    }
+
+    .how-it-works__top {
+      gap: 24px;
+    }
+
+    .how-it-works__step-body {
+      padding: 0 10px;
+    }
+
+    /* The reference stacks the step cards as a sticky pile on small screens. */
+    .how-it-works__step {
+      position: sticky;
+      top: 90px;
+    }
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% set step_defaults = [
+  "../../css/elements/Assets/images/6980bda2c2191bf27b668b24_01.png",
+  "../../css/elements/Assets/images/6980bda9e276a9d4da59b12a_02.png",
+  "../../css/elements/Assets/images/6980bdafd43f30282785ffea_03.png"
+] %}
+
+<section class="how-it-works-section{% if module.overlap_previous %} how-it-works-section--overlap{% endif %}" data-how-it-works-section>
+  <div class="how-it-works__container">
+    <div class="how-it-works__inner">
+
+      <div class="how-it-works__top">
+        <div class="how-it-works__intro" data-how-it-works-intro>
+          <header class="how-it-works__header">
+            {% if module.section_content.eyebrow_text %}
+              <div data-how-it-works-eyebrow>
+                {{ btn_macros.eyebrow_label(module.section_content.eyebrow_text, module.section_content.eyebrow_icon.src, 'v2') }}
+              </div>
+            {% endif %}
+
+            {% if module.section_content.heading %}
+              <h2 class="how-it-works__heading gsap_split_word" data-how-it-works-heading>{{ module.section_content.heading|escape_html }}</h2>
+            {% endif %}
+
+            {% if module.section_content.description %}
+              <p class="how-it-works__description" data-how-it-works-description>{{ module.section_content.description|escape_html }}</p>
+            {% endif %}
+          </header>
+
+          {% if (module.buttons.show_primary and module.buttons.primary_text) or (module.buttons.show_secondary and module.buttons.secondary_text) %}
+            <div class="how-it-works__buttons" data-how-it-works-buttons>
+              {% if module.buttons.show_primary and module.buttons.primary_text %}
+                {{ btn_macros.animated_button(
+                     module.buttons.primary_text,
+                     module.buttons.primary_link.url.href,
+                     module.buttons.primary_link.open_in_new_tab,
+                     module.buttons.primary_link.no_follow) }}
+              {% endif %}
+
+              {% if module.buttons.show_secondary and module.buttons.secondary_text %}
+                {{ btn_macros.secondary_button(
+                     module.buttons.secondary_text,
+                     module.buttons.secondary_link.url.href,
+                     module.buttons.secondary_link.open_in_new_tab,
+                     module.buttons.secondary_link.no_follow) }}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if module.feature_media.show_image %}
+          {% set feature_src = module.feature_media.image.src|default(get_asset_url("../../css/elements/Assets/images/6980bdb9068bfe8de93c1516_People.jpg"), true) %}
+          {% if feature_src %}
+            <div class="how-it-works__feature" data-how-it-works-feature>
+              <div class="how-it-works__feature-wrap">
+                <img
+                  class="how-it-works__feature-image"
+                  src="{{ feature_src|escape_url }}"
+                  alt="{{ module.feature_media.image.alt|default('', true)|escape_attr }}"
+                  {% if module.feature_media.image.width %}width="{{ module.feature_media.image.width }}"{% else %}width="913"{% endif %}
+                  {% if module.feature_media.image.height %}height="{{ module.feature_media.image.height }}"{% else %}height="1044"{% endif %}
+                  {% if module.feature_media.image.loading and module.feature_media.image.loading != "disabled" %}loading="{{ module.feature_media.image.loading }}"{% else %}loading="lazy"{% endif %}
+                >
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      {% if module.steps %}
+        <div class="how-it-works__steps">
+          {% for step in module.steps %}
+            {% set step_src = step.image.src %}
+            {% if not step_src and loop.index <= 3 %}
+              {% set step_src = get_asset_url(step_defaults[loop.index0]) %}
+            {% endif %}
+
+            <article class="how-it-works__step" data-how-it-works-step>
+              {% if step_src %}
+                <div class="how-it-works__step-image-wrap">
+                  <img
+                    class="how-it-works__step-image"
+                    src="{{ step_src|escape_url }}"
+                    alt="{{ step.image.alt|default('', true)|escape_attr }}"
+                    {% if step.image.width %}width="{{ step.image.width }}"{% else %}width="1392"{% endif %}
+                    {% if step.image.height %}height="{{ step.image.height }}"{% else %}height="1016"{% endif %}
+                    {% if step.image.loading and step.image.loading != "disabled" %}loading="{{ step.image.loading }}"{% else %}loading="lazy"{% endif %}
+                  >
+                </div>
+              {% endif %}
+
+              {% if step.title or step.description %}
+                <div class="how-it-works__step-body">
+                  {% if step.title %}
+                    <div class="how-it-works__step-title-wrap">
+                      <div class="how-it-works__step-number">{{ loop.index }}</div>
+                      <p class="how-it-works__step-title">{{ step.title|escape_html }}</p>
+                    </div>
+                  {% endif %}
+                  {% if step.description %}
+                    <p class="how-it-works__step-text">{{ step.description|escape_html }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+{% require_js %}
+<script>
+  (() => {
+    const initHowItWorks = () => {
+      if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+
+      window.gsap.registerPlugin(window.ScrollTrigger);
+
+      document.querySelectorAll("[data-how-it-works-section]").forEach((section) => {
+        if (section.dataset.howItWorksInitialized === "true") return;
+        section.dataset.howItWorksInitialized = "true";
+
+        const heading = section.querySelector("[data-how-it-works-heading]");
+        const headingWords = [];
+
+        if (heading) {
+          const words = heading.textContent.trim().split(/\s+/);
+          const fragment = document.createDocumentFragment();
+
+          words.forEach((word, index) => {
+            const wordElement = document.createElement("span");
+            wordElement.className = "how-it-works__word gsap_split_word2";
+            wordElement.textContent = word;
+            fragment.appendChild(wordElement);
+            headingWords.push(wordElement);
+
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(" "));
+            }
+          });
+
+          heading.replaceChildren(fragment);
+        }
+
+        const media = window.gsap.matchMedia();
+
+        media.add(
+          {
+            animate: "(prefers-reduced-motion: no-preference)",
+            tablet: "(max-width: 991px)",
+            mobile: "(max-width: 767px)"
+          },
+          (context) => {
+            if (!context.conditions.animate) return;
+
+            const eyebrow = section.querySelector("[data-how-it-works-eyebrow]");
+            const description = section.querySelector("[data-how-it-works-description]");
+            const buttons = section.querySelector("[data-how-it-works-buttons]");
+            const intro = section.querySelector("[data-how-it-works-intro]");
+            const feature = section.querySelector("[data-how-it-works-feature]");
+            const steps = Array.from(section.querySelectorAll("[data-how-it-works-step]"));
+
+            if (intro) {
+              const introTimeline = window.gsap.timeline({
+                defaults: { ease: "power3.out" },
+                scrollTrigger: {
+                  trigger: intro,
+                  start: "top 82%",
+                  once: true
+                }
+              });
+
+              if (eyebrow) {
+                introTimeline.fromTo(eyebrow, { autoAlpha: 0, y: 22 }, { autoAlpha: 1, duration: 0.55, y: 0 }, 0);
+              }
+
+              if (headingWords.length) {
+                introTimeline.fromTo(
+                  headingWords,
+                  { autoAlpha: 0, y: 28 },
+                  { autoAlpha: 1, duration: 0.6, stagger: 0.06, y: 0 },
+                  0.12
+                );
+              }
+
+              if (description) {
+                introTimeline.fromTo(description, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, duration: 0.55, y: 0 }, 0.3);
+              }
+
+              if (buttons) {
+                introTimeline.fromTo(buttons, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, duration: 0.55, y: 0 }, 0.42);
+              }
+            }
+
+            if (feature) {
+              window.gsap.fromTo(
+                feature,
+                { autoAlpha: 0, filter: "blur(1px)", y: 50 },
+                {
+                  autoAlpha: 1,
+                  duration: 0.8,
+                  ease: "power3.out",
+                  filter: "blur(0px)",
+                  y: 0,
+                  scrollTrigger: { trigger: feature, start: "top 86%", once: true }
+                }
+              );
+            }
+
+            /* Reveal step cards a visual row at a time: three across at
+               desktop, two at tablet, one at mobile. */
+            const rowSize = context.conditions.mobile ? 1 : context.conditions.tablet ? 2 : 3;
+
+            for (let index = 0; index < steps.length; index += rowSize) {
+              const row = steps.slice(index, index + rowSize);
+
+              window.gsap.fromTo(
+                row,
+                { autoAlpha: 0, filter: "blur(1px)", y: 50 },
+                {
+                  autoAlpha: 1,
+                  duration: 0.8,
+                  ease: "power3.out",
+                  filter: "blur(0px)",
+                  stagger: 0.12,
+                  y: 0,
+                  scrollTrigger: { trigger: row[0], start: "top 86%", once: true }
+                }
+              );
+            }
+          }
+        );
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHowItWorks, { once: true });
+    } else {
+      initHowItWorks();
+    }
+  })();
+</script>
+{% end_require_js %}
