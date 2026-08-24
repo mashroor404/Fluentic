@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
 
-const rootDir = __dirname;
+const rootDir = __dirname; 
 
 function loadEnvFile(filePath) {
   if (!fs.existsSync(filePath)) return;
