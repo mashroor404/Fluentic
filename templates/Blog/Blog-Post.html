@@ -7,188 +7,531 @@
 
 {% require_css %}
 <style>
+  .blog-post-page {
+    background-color: var(--page-bg);
+  }
 
-  /* --- Author Profile Card Layout --- */
-  .author-profile-card {
-    display: flex;
-    align-items: flex-start;
-    border: var(--border-width) solid var(--border-color);
-    border-radius: var(--border-radius);
-    max-width: 60%;
-    margin:0 auto;
+  .blog-details-section {
+    padding: clamp(7.5rem, 10.42vw, 12.5rem) 0 clamp(4rem, 6.25vw, 7.5rem);
+  }
+
+  .blog-details-container,
+  .related-blog-container {
     box-sizing: border-box;
+    max-width: min(var(--container-max-width), 77.5rem);
   }
 
-  /* Avatar Element Handling */
-  .author-avatar-wrapper {
-    flex-shrink: 0;
-  }
-
-  .author-avatar {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: var(--border-color);
-    display: block;
-    object-fit:cover;
-  }
-
-  /* Content Blocks */
-  .author-details {
-    flex: 1;
+  .blog-details-content-block {
     display: flex;
     flex-direction: column;
-  }
-
-  .author-name {
-
-  }
-
-  .author-title {
-
-    color: var(--tertiary-dark-text-color);
-
-  }
-
-  .author-bio {
-    color: var(--tertiary-dark-text-color);
-  }
-
-  /* Contact Details */
-  .author-contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .author-link {
-    font-size: var(--text-p);
-    font-family: var(--secondary-font); 
-    text-decoration: none;
-    width: fit-content;
-    color: var(--primary-dark-text-color);
-    position: relative; /* Required to anchor the absolute underline */
-    padding-bottom: 2px; /* Creates a clean gap between the text and the line */
-    transition: color 0.2s ease;
-  }
-
-  /* Matches design: Email and LinkedIn have explicit underlines, Phone doesn't */
-  .email-link, 
-  .linkedin-link {
-
-  }
-
-  .author-link::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1.5px; /* Thickness of your underline */
-    bottom: 0;
-    left: 0;
-    background-color: var(--primary-dark-text-color); /* Matches your text color */
-    transform: scaleX(0); /* Starts shrunk down to nothing */
-    transform-origin: bottom left;
-    transition: transform 0.25s ease-out; /* Controls the slide speed */
-  }
-
-  .author-header{
-    max-width: 60%;
-    margin: 24px auto;
-    box-sizing: border-box;
-  }
-
-  /* 2. Animate the underline to full width on hover */
-  .author-link:hover::after {
-    transform: scaleX(1); /* Scales up to 100% width smoothly */
-    background-color: var(--primary-dark-text-color); /* Optional: changes line color on hover */
-  }
-
-  .hs-audio-player{
-    background: var(--secondary-bg) !important;
-    font-family: var(--secondary-font) !important;
-    color:var( --primary-dark-text-color) !mportant; 
-  }
-
-  .narration, .post-body{
-    width: 60%;
+    gap: 2.5rem;
     margin: 0 auto;
+    max-width: 47rem;
+    width: 100%;
   }
-  
-  .narration{ margin-bottom: clamp(1rem, 1.5vw, 1.25rem); }
 
+  .blog-details-title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-  .author-contact-links 
+  .blog-details-info-row {
+    align-items: center;
+    display: flex;
+    gap: 3.75rem;
+    justify-content: space-between;
+  }
 
-  /* --- Mobile Breakpoint Optimization --- */
-  @media (max-width: 768px) {
-    .author-profile-card {
+  .blog-details-info-left {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .blog-back-button {
+    align-items: center;
+    color: var(--text-primary);
+    display: inline-flex;
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2, 1rem);
+    font-weight: var(--font-weight-regular);
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .blog-back-button__icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 240ms ease;
+  }
+
+  .blog-back-button:hover .blog-back-button__icon,
+  .blog-back-button:focus-visible .blog-back-button__icon {
+    transform: translateX(-0.25rem);
+  }
+
+  .blog-post-tag {
+    border: var(--global-border-width) solid var(--accent-pink);
+    border-radius: 999px;
+    color: var(--text-primary);
+    display: inline-block;
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    padding: 0.375rem 0.875rem;
+    text-transform: uppercase;
+  }
+
+  .blog-post-date {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  .blog-post-title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .blog-main-image-wrap {
+    border-radius: max(var(--global-border-radius), 1rem);
+    overflow: hidden;
+  }
+
+  .blog-main-image {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  .post-body {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-p);
+    line-height: 1.6;
+    width: 100%;
+  }
+
+  .post-body p,
+  .post-body ul,
+  .post-body ol,
+  .post-body blockquote {
+    margin: 0 0 1.5rem;
+  }
+
+  .post-body h2,
+  .post-body h3,
+  .post-body h4,
+  .post-body h5,
+  .post-body h6 {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.2;
+    margin: 2.5rem 0 1.5rem;
+  }
+
+  .post-body h2 {
+    font-size: var(--text-h4);
+  }
+
+  .post-body h3 {
+    font-size: var(--text-h5);
+  }
+
+  .post-body ul,
+  .post-body ol {
+    padding-left: 1.875rem;
+  }
+
+  .post-body li + li {
+    margin-top: 0.5rem !important;
+  }
+
+  .post-body img {
+    border-radius: max(var(--global-border-radius), 1rem);
+    display: block;
+    height: auto;
+    margin: 2.5rem 0;
+    max-width: 100%;
+  }
+
+  .post-body blockquote {
+    background-color: var(--bg-primary);
+    border-left: 0.25rem solid var(--accent-pink);
+    border-radius: 0 var(--global-border-radius) var(--global-border-radius) 0;
+    padding: 1.5rem;
+  }
+
+  .post-body a {
+    color: var(--text-primary);
+    text-decoration-color: var(--accent-pink);
+    text-underline-offset: 0.2em;
+  }
+
+  .post-body > :last-child {
+    margin-bottom: 0;
+  }
+
+  .blog-share-block {
+    align-items: center;
+    background-color: var(--bg-primary);
+    border-radius: max(var(--global-border-radius), 0.5rem);
+    display: flex;
+    gap: 2.5rem;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .blog-share-label {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: var(--text-body-2, 1rem);
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+  }
+
+  .blog-share-module,
+  .blog-share-module .hs_cos_wrapper,
+  .blog-share-module ul,
+  .blog-share-module ol {
+    align-items: center;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .blog-share-module ul,
+  .blog-share-module ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .blog-share-module li {
+    list-style: none;
+    margin: 0 !important;
+  }
+
+  .blog-share-module a {
+    align-items: center;
+    color: var(--text-primary);
+    display: flex;
+    height: 1.5rem;
+    justify-content: center;
+    transition: color 240ms ease, transform 240ms ease;
+    width: 1.5rem;
+  }
+
+  .blog-share-module a:hover,
+  .blog-share-module a:focus-visible {
+    color: var(--accent-pink);
+    transform: translateY(-0.125rem);
+  }
+
+  .blog-share-module img,
+  .blog-share-module svg {
+    display: block;
+    height: 1.5rem;
+    object-fit: contain;
+    width: 1.5rem;
+  }
+
+  .related-blog-section {
+    background-color: var(--page-bg);
+    padding: 0 0 clamp(4rem, 6.25vw, 7.5rem);
+  }
+
+  .related-blog-header {
+    align-items: center;
+    display: flex;
+    gap: 3.75rem;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  .related-blog-title {
+    max-width: 36.8125rem;
+    width: 100%;
+  }
+
+  .related-blog-title h3,
+  .related-blog-title h2,
+  .related-blog-title p {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .related-blog-button {
+    flex: none;
+  }
+
+  .related-blogs .blog-section {
+    margin: 0;
+    padding: 0;
+  }
+
+  .related-blogs .blog-section > .container {
+    max-width: none;
+    width: 100%;
+  }
+
+  .related-blogs .blog-title-row {
+    display: none;
+  }
+
+  .related-blogs .blog-cl-list {
+    display: grid;
+    gap: 2.5rem 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .related-blogs .blog-card {
+    background-color: var(--bg-primary);
+    border-radius: max(var(--global-border-radius), 1rem);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    overflow: hidden;
+    padding: 0.5rem 0.5rem 1.5rem;
+    text-decoration: none;
+  }
+
+  .related-blogs .blog-image-wrap {
+    aspect-ratio: 1392 / 1000;
+    border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.5rem);
+    overflow: hidden;
+  }
+
+  .related-blogs .blog-card__image,
+  .related-blogs .blog-image-wrap img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 420ms ease;
+    width: 100%;
+  }
+
+  .related-blogs .blog-card:hover .blog-card__image,
+  .related-blogs .blog-card:focus-visible .blog-card__image,
+  .related-blogs .blog-card:hover .blog-image-wrap img,
+  .related-blogs .blog-card:focus-visible .blog-image-wrap img {
+    transform: scale(1.045);
+  }
+
+  .related-blogs .blog-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 1rem 1rem;
+  }
+
+  .related-blogs .blog-info-wrap {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    text-transform: uppercase;
+  }
+
+  .related-blogs .blog-tag,
+  .related-blogs .blog-card__date {
+    color: var(--text-primary);
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  .related-blogs .blog-tag {
+    border: var(--global-border-width) solid var(--accent-pink);
+    border-radius: 999px;
+    padding: 0.375rem 0.875rem;
+  }
+
+  .related-blogs .blog-card__date {
+    margin-left: auto;
+  }
+
+  .related-blogs .blog-card__title {
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: var(--text-h5);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 991px) {
+    .blog-details-content-block {
+      gap: 2rem;
+    }
+
+    .blog-details-info-row {
+      gap: 2.5rem;
+    }
+
+    .related-blogs .blog-cl-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .blog-details-section {
+      padding: 7.5rem 0 3.75rem;
+    }
+
+    .blog-details-content-block {
+      gap: 1.5rem;
+    }
+
+    .blog-details-info-row {
+      gap: 2rem;
+    }
+
+    .post-body p,
+    .post-body ul,
+    .post-body ol,
+    .post-body blockquote {
+      margin-bottom: 1rem;
+    }
+
+    .blog-share-block {
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .related-blogs .blog-cl-list {
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .blog-details-info-row {
+      align-items: flex-start;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 24px;
-      gap: 20px;
+      gap: 1rem;
     }
 
-    .author-contact-links {
-      align-items: center;
+    .related-blog-header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1.5rem;
     }
+  }
 
-    .narration, .post-body{
-      width: 90%;
+  @media (prefers-reduced-motion: reduce) {
+    .blog-back-button__icon,
+    .blog-share-module a {
+      transition: none;
     }
-
-    .author-header{
-      width:90%;
-    }
-    .author-profile-card{
-      width:90%;
-    }
-
   }
 
 </style>
 {% end_require_css %}
 
 {% extends "../layouts/base.html" %}
+{% import '/Fluentic/Macros/Button.html' as btn_macros %}
 
 {% block body %}
 
-<div class="blog-hero">
-  {% module "module_178040958064455" path="/Re-board theme/modules/Blog Hero", label="Blog Hero" %}
+{% set first_topic = content.topic_list|first %}
+{% set publish_date = content.publish_date_local_time %}
+{% if not publish_date %}
+  {% set publish_date = content.publish_date %}
+{% endif %}
+{% set blog_listing_url = group.absolute_url|default('/blog') %}
+
+<div class="blog-post-page">
+  <section class="blog-details-section">
+    <div class="container blog-details-container">
+      <article class="blog-details-content-block">
+        <header class="blog-details-title-block" data-aos="fade-up" data-aos-duration="650">
+          <div class="blog-details-info-row">
+            <div class="blog-details-info-left">
+              <a class="blog-back-button" href="{{ blog_listing_url|escape_url }}">
+                <span class="blog-back-button__icon" aria-hidden="true">&larr;</span>
+                <span>Back</span>
+              </a>
+
+              {% if first_topic %}
+                <span class="blog-post-tag">{{ first_topic.name|escape_html }}</span>
+              {% endif %}
+            </div>
+
+            {% if publish_date %}
+              <time class="blog-post-date" datetime="{{ publish_date|escape_attr }}">
+                {{ publish_date|format_datetime("MMMM d, yyyy") }}
+              </time>
+            {% endif %}
+          </div>
+
+          <h1 class="blog-post-title">{{ content.name}}</h1>
+        </header>
+
+        {% if content.featured_image %}
+          <div class="blog-main-image-wrap" data-aos="fade-up" data-aos-duration="700">
+            <img
+              class="blog-main-image"
+              src="{{ content.featured_image|escape_url }}"
+              alt="{{ content.featured_image_alt_text|default(content.name)|escape_attr }}"
+              loading="eager"
+            >
+          </div>
+        {% endif %}
+
+        <div class="post-body" data-aos="fade-up" data-aos-duration="750">
+          {{ content.post_body }}
+        </div>
+
+        <div class="blog-share-block" data-aos="fade-up" data-aos-duration="800">
+          <p class="blog-share-label">Share Blog</p>
+          <div class="blog-share-module">
+            {% module "module_17875755358653" path="@hubspot/social_sharing", label="social_sharing.module" %}
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="related-blog-section">
+    <div class="container related-blog-container">
+      <div class="related-blog-header">
+        <div class="related-blog-title">
+          {% module "Related blog text"
+            path="@hubspot/rich_text"
+            label="Related blog text"
+            html="<h3>Related Blogs</h3>" %}
+        </div>
+
+        <div class="related-blog-button">
+          {{ btn_macros.secondary_button("View All Blogs", blog_listing_url) }}
+        </div>
+      </div>
+
+      <div class="related-blogs">
+        {% module "module_17804734585235" path="/Re-board theme/modules/Related Blogs", label="Related Blogs" %}
+      </div>
+    </div>
+  </section>
+
+  {% module "blog_post_cta" path="/Fluentic/modules/CTA.module", label="CTA" %}
 </div>
-
-
-<section class="section">
-  <div class="container">
-    <div class="narration"  data-aos="fade-up"
-
-         data-aos-duration="650"
-
-         >
-      {% module "narration" path="@hubspot/blog_audio",
-  overrideable=False, styles={ groupColors: { override: 'custom', background: { color: 'var(--color-bg-light-accent-1)' }, text: { color: 'var(--color-text-dark-primary)' }, hover: { color: 'var(--color-brand-primary)' }, }, } %}
-    </div>
-    <div class="post-body"  data-aos="fade-up"
-
-         data-aos-duration="700"
-
-         >
-      {{ content.post_body }}
-    </div>
-
-    <div class="author-header">
-      {% module "module_178066681243462" 
-path="@hubspot/rich_text", 
-label="rich_text.module" 
-html="<h2>Author</h2>"%}
-    </div> 
-
-    {% module "module_178057458751112" path="/Re-board theme/modules/Author Details", label="Author Details" %}
-
-    <div class="related-blogs">
-      {% module "module_17804734585235" path="/Re-board theme/modules/Related Blogs", label="Related Blogs" %}
-    </div>
-
-  </div>
-</section>
 {% endblock body %}
