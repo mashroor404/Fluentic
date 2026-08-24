@@ -1,14 +1,50 @@
+const fs = require("node:fs");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
 
 const rootDir = __dirname;
+
+function loadEnvFile(filePath) {
+  if (!fs.existsSync(filePath)) return;
+
+  const contents = fs.readFileSync(filePath, "utf8");
+  for (const line of contents.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+
+    const separatorIndex = trimmed.indexOf("=");
+    if (separatorIndex === -1) continue;
+
+    const key = trimmed.slice(0, separatorIndex).trim();
+    let value = trimmed.slice(separatorIndex + 1).trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+
+    if (key && !(key in process.env)) {
+      process.env[key] = value;
+    }
+  }
+}
+
+loadEnvFile(path.join(rootDir, ".env"));
 const destination = process.env.HUBSPOT_WATCH_DEST || "/Fluentic";
 const account = process.env.HUBSPOT_ACCOUNT || "246817745";
 const publishMode = process.env.HUBSPOT_WATCH_MODE || "draft";
 const isDryRun = process.argv.includes("--dry-run");
 
-if (!destination.startsWith("/")) {
-  console.error("HUBSPOT_WATCH_DEST must be an absolute Design Manager path, such as /Fluentic.");
+if (!/^\/[A-Za-z0-9/_.-]*$/.test(destination)) {
+  console.error(
+    "HUBSPOT_WATCH_DEST must be an absolute Design Manager path using only letters, numbers, /, _, ., and -, such as /Fluentic."
+  );
+  process.exit(1);
+}
+
+if (!/^\d+$/.test(account)) {
+  console.error("HUBSPOT_ACCOUNT must be a numeric HubSpot account/portal ID.");
   process.exit(1);
 }
 
@@ -47,6 +83,9 @@ if (isDryRun) {
 const watcher = spawn("hs", args, {
   cwd: rootDir,
   stdio: "inherit",
+  // On Windows, global npm binaries like `hs` are `.cmd` shims that
+  // child_process.spawn cannot resolve by name without a shell.
+  shell: process.platform === "win32",
 });
 
 watcher.on("error", (error) => {
