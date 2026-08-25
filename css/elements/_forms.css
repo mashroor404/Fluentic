@@ -769,7 +769,7 @@ form .hs-button {
   box-sizing: border-box !important;
   color: var(--text-primary) !important;
   font-family: var(--secondary-font) !important;
-  font-size: 1rem !important;
+  font-size: 14px !important;
   line-height: 1.5 !important;
   margin: 0 !important;
   min-height: 50px !important;
@@ -830,7 +830,8 @@ form .hs-button {
   margin: 0 !important;
   min-height: 52px !important;
   padding: 12px 32px !important;
-  transition: background-color 300ms ease, border-color 300ms ease, transform 300ms ease !important;
+  transition: background-color 550ms ease, border-color 550ms ease,
+    color 550ms ease, transform 550ms ease !important;
   width: 100% !important;
 }
 
@@ -838,10 +839,11 @@ form .hs-button {
 .fh-form-wrap.fluentic-contact-form .hs-form .hs-button:focus-visible,
 .fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-Button:hover,
 .fh-form-wrap.fluentic-contact-form [data-hsfc-id='Renderer'] .hsfc-Button:focus-visible {
-  background: var(--text-primary) !important;
-  border-color: var(--text-primary) !important;
-  color: var(--text-light-primary) !important;
-  transform: translateY(-1px) !important;
+  background: var(--btn-primary-bg-color, #1B0C27) !important;
+  border-color: var(--btn-primary-bg-color, #1B0C27) !important;
+  color: var(--btn-primary-text-color, #FFFFFF) !important;
+  text-decoration: none !important;
+  transform: none !important;
 }
 
 .fh-form-wrap.fluentic-contact-form .hs-form .hs-button:focus-visible,
