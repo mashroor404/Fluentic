@@ -131,13 +131,17 @@
     }
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     .solution-section {
+      --solution-card-sticky-offset: 6.5rem;
       padding-top: 4rem;
     }
 
     .solution-section__grid {
+      align-items: start;
       grid-template-columns: 1fr;
+      isolation: isolate;
+      position: relative;
     }
 
     .solution-section__header {
@@ -147,6 +151,18 @@
     .solution-card__body {
       gap: 0.625rem;
       padding: 1.25rem 1rem;
+    }
+
+    .solution-card,
+    .solution-card:nth-child(4n + 1),
+    .solution-card:nth-child(4n + 2),
+    .solution-card:nth-child(4n + 3),
+    .solution-card:nth-child(4n + 4) {
+      grid-column: 1;
+      height: auto;
+      position: sticky;
+      top: var(--solution-card-sticky-offset);
+      z-index: var(--solution-card-stack-index, 1);
     }
   }
   {% end_scope_css %}
@@ -198,7 +214,7 @@
             {% endif %}
           {% endif %}
 
-          <article class="solution-card" data-solution-card>
+          <article class="solution-card" data-solution-card style="--solution-card-stack-index: {{ loop.index }};">
             {% if item.show_image and image_src %}
               <div class="solution-card__image-wrap">
                 <img
@@ -268,7 +284,7 @@
         media.add(
           {
             animate: "(prefers-reduced-motion: no-preference)",
-            mobile: "(max-width: 767px)"
+            mobile: "(max-width: 768px)"
           },
           (context) => {
             if (!context.conditions.animate) return;
