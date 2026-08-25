@@ -176,8 +176,31 @@ button:disabled,
   background: var(--eyebrow-bg-color, rgba(255, 255, 255, 0.72));
   border: 1px solid var(--eyebrow-border-color, rgba(27, 12, 39, 0.1));
   border-radius: var(--eyebrow-border-radius, 999px);
-  box-shadow: 0 8px 24px rgba(27, 12, 39, 0.05);
+  box-shadow: 0 2px 5px #00000012, 0 8px 8px #0000000f, 0 19px 11px #0000000a, 0 33px 13px #00000003, 0 52px 15px #0000;
   backdrop-filter: blur(10px);
+  margin-bottom: var(--eyebrow-spacing, 12px);
+}
+
+/* Scroll reveal: js/main.js adds .eyebrow-anim on load (so no-JS visitors
+   never see a hidden badge) and .is-visible when the badge enters the
+   viewport — it then rises 20px into place. */
+.eyebrow-custom.eyebrow-anim {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.eyebrow-custom.eyebrow-anim.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow-custom.eyebrow-anim {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .eyebrow-icon {
@@ -195,7 +218,7 @@ button:disabled,
 }
 
 .eyebrow-text {
-  margin: 0;
+  margin: 0; 
   color: inherit;
   font: inherit;
   letter-spacing: 0.01em;

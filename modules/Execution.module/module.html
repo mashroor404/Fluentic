@@ -184,12 +184,7 @@
         <!-- Eyebrow (Static) -->
         {% if module.section_headers.eyebrow_text %}
           <div class="gsap-feat-el">
-            <div class="eyebrow-custom">
-              <img class="eyebrow-icon" src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20fbee52b758d1d52eda94_energy-ellipse.svg" alt="Energy Icon">
-              <div class="eyebrow-content">
-                <p class="eyebrow-text">{{ module.section_headers.eyebrow_text }}</p>
-              </div>
-            </div>
+            {{ btn_macros.eyebrow_label(module.section_headers.eyebrow_text) }}
           </div>
         {% endif %}
 

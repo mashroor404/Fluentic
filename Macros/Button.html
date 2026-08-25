@@ -44,10 +44,14 @@ Secondary animated button END
 <!--  -------------------------
 Eyebrow badge START
 ------------------------------>
-{% macro eyebrow_label(text, icon_src="https://cdn.prod.website-files.com/6a1dd6bce5cdeadcef336317/6a20fbee52b758d1d52eda94_energy-ellipse.svg") %}
+{% macro eyebrow_label(text, icon_src="") %}
+  {# Default icon = the Star the Hero module uses, served from this theme's
+     own assets. A module passing an empty icon field also falls back to it,
+     so every eyebrow matches the hero design unless an icon is given. #}
+  {% set eyebrow_icon_src = icon_src or get_asset_url("/Fluentic/css/elements/Assets/icons/6984fc2e00e2222da1035dca_Star.svg") %}
   <div class="eyebrow-custom">
     <!-- Eyebrow Icon -->
-    {% if icon_src %}<img loading="lazy" src="{{ icon_src|escape_url }}" alt="" class="eyebrow-icon">{% endif %}
+    {% if eyebrow_icon_src %}<img loading="lazy" src="{{ eyebrow_icon_src|escape_url }}" alt="" class="eyebrow-icon">{% endif %}
 
     <!-- Eyebrow Content (no blinking cursor — matches the live site) -->
     <div class="eyebrow-content">
