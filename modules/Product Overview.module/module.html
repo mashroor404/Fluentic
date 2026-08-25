@@ -28,7 +28,7 @@
   }
 
   .po-header p {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     max-width: 680px;
     margin: 0;
   }
@@ -47,10 +47,6 @@
      position:sticky and pins at the top of the viewport in turn; as the
      next card scrolls up over it, its .po-card-inner is scaled down so
      it visibly recedes underneath (no dimming overlay). */
-  .po-cards-space {
-    height: clamp(24px, 6vw, 80px);
-  }
-
   .po-cards {
     display: grid;
     grid-template-rows: repeat(var(--po-cards-count, 1), var(--po-card-height, auto));
@@ -334,10 +330,6 @@
      scale effect isn't a good fit for small screens), revert to a
      simple column with the media above the copy. */
   @media (max-width: 768px) {
-    .po-cards-space {
-      height: 0;
-    }
-
     .po-cards {
       display: flex;
       flex-direction: column;
@@ -372,7 +364,7 @@
          different (sometimes collapsed) sizes card to card. Fixing the
          height makes every card's media box (including the automation
          cluster on card 3) the same size on mobile. */
-      height: clamp(200px, 56vw, 320px);
+      height: clamp(320px, 74.6vw, 494px);
     }
 
     .po-card-text {
@@ -424,12 +416,12 @@
       <div class="po-cards" data-po-cards>
         {% set po_icon_i = namespace(n=0) %}
         {% for card in module.overview_card %}
-          <div class="po-card{% if loop.index is even %} po-card--reversed{% endif %}" style="padding-top: {{ 20 + loop.index0 * 20 }}px; z-index: {{ loop.index }};">
+          <div class="po-card{% if loop.index is even %} po-card--reversed{% endif %}" style="padding-top: {{ 54 + loop.index0 * 20 }}px; z-index: {{ loop.index }};">
             <div class="po-card-inner">
               <div class="po-card-text">
                 <div class="po-card-title-wrap">
                   {% if card.card_title %}<h3>{{ card.card_title }}</h3>{% endif %}
-                  {% if card.card_description %}<p class="body">{{ card.card_description }}</p>{% endif %}
+                  {% if card.card_description %}<p>{{ card.card_description }}</p>{% endif %}
                 </div>
 
                 {% if card.bullet_item|length %}
@@ -442,7 +434,7 @@
                               <path d="{{ po_bullet_icon_paths[po_icon_i.n % po_bullet_icon_paths|length] }}" fill="currentColor"/>
                             </svg>
                           </span>
-                          <p class="body-2-highlight">{{ bullet.bullet_text }}</p>
+                          <p style="font-size: 18px;">{{ bullet.bullet_text }}</p>
                         </li>
                         {% set po_icon_i.n = po_icon_i.n + 1 %}
                       {% endif %}
@@ -483,7 +475,6 @@
           </div>
         {% endfor %}
       </div>
-      <div class="po-cards-space" aria-hidden="true"></div>
     {% endif %}
 
     {% if module.video_banner.show and (module.video_banner.mp4_url or module.video_banner.webm_url) %}
@@ -619,7 +610,7 @@
         const entries = cards.map((card, index) => ({
           card,
           inner: card.querySelector('.po-card-inner'),
-          offsetTop: 20 + index * 20,
+          offsetTop: parseFloat(window.getComputedStyle(card).paddingTop) || 54 + index * 20,
           toScale: 1 - (cards.length - 1 - index) * 0.1
         }));
 
