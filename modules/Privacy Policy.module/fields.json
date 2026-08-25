@@ -23,7 +23,7 @@
   },
   {
     "id": "5d94e143-abeb-4dae-92c8-0f2805ea775b",
-    "name": "body",
+    "name": "policy_body",
     "label": "Policy body",
     "required": false,
     "locked": false,
