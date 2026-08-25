@@ -68,7 +68,7 @@
 
   .blog-back-button:hover .blog-back-button__icon,
   .blog-back-button:focus-visible .blog-back-button__icon {
-    transform: translateX(-0.25rem);
+    /* transform: translateX(-0.25rem); */
   }
 
   .blog-post-tag {
@@ -196,8 +196,7 @@
   .blog-share-label {
     color: var(--text-primary);
     font-family: var(--secondary-font);
-    font-size: var(--text-body-2, 1rem);
-    font-weight: var(--font-weight-medium);
+    font-size: 18px;
     margin: 0;
   }
 
@@ -228,21 +227,24 @@
     display: flex;
     height: 1.5rem;
     justify-content: center;
-    transition: color 240ms ease, transform 240ms ease;
     width: 1.5rem;
   }
 
   .blog-share-module a:hover,
   .blog-share-module a:focus-visible {
-    color: var(--accent-pink);
-    transform: translateY(-0.125rem);
+    color: var(--text-primary);
+    transform: none;
   }
 
-  .blog-share-module img,
-  .blog-share-module svg {
+  .blog-share-module a:focus-visible {
+    border-radius: 0.125rem;
+    outline: 0.125rem solid var(--accent-purple);
+    outline-offset: 0.25rem;
+  }
+
+  .blog-share-module .social-link-icon {
     display: block;
     height: 1.5rem;
-    object-fit: contain;
     width: 1.5rem;
   }
 
@@ -277,106 +279,18 @@
 
   .related-blog-button {
     flex: none;
+    box-shadow: inset 0 2px 4px #fff6, 0 2px 4px #0000001a;
   }
 
-  .related-blogs .blog-section {
-    margin: 0;
-    padding: 0;
-  }
-
-  .related-blogs .blog-section > .container {
-    max-width: none;
-    width: 100%;
-  }
-
-  .related-blogs .blog-title-row {
-    display: none;
-  }
-
-  .related-blogs .blog-cl-list {
-    display: grid;
-    gap: 2.5rem 1.5rem;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .related-blogs .blog-card {
-    background-color: var(--bg-primary);
-    border-radius: max(var(--global-border-radius), 1rem);
+  .related-blog-button .button-primary[data-wf--button-primary--variant='v2'],
+  .related-blog-button .button-primary[data-wf--button-primary--variant='v2']:hover,
+  .related-blog-button .button-primary[data-wf--button-primary--variant='v2']:focus-visible {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: transparent;
+    box-shadow: inset 0 0 0 1px var(--global-border-color),
+      inset 0 2px 4px 0 rgba(255, 255, 255, 0.4),
+      0 2px 4px 0 rgba(0, 0, 0, 0.1);
     color: var(--text-primary);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    height: 100%;
-    overflow: hidden;
-    padding: 0.5rem 0.5rem 1.5rem;
-    text-decoration: none;
-  }
-
-  .related-blogs .blog-image-wrap {
-    aspect-ratio: 1392 / 1000;
-    border-radius: max(calc(var(--global-border-radius) - 0.25rem), 0.5rem);
-    overflow: hidden;
-  }
-
-  .related-blogs .blog-card__image,
-  .related-blogs .blog-image-wrap img {
-    display: block;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1);
-    transition: transform 420ms ease;
-    width: 100%;
-  }
-
-  .related-blogs .blog-card:hover .blog-card__image,
-  .related-blogs .blog-card:focus-visible .blog-card__image,
-  .related-blogs .blog-card:hover .blog-image-wrap img,
-  .related-blogs .blog-card:focus-visible .blog-image-wrap img {
-    transform: scale(1.045);
-  }
-
-  .related-blogs .blog-card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0.5rem 1rem 1rem;
-  }
-
-  .related-blogs .blog-info-wrap {
-    align-items: center;
-    display: flex;
-    gap: 1rem;
-    justify-content: space-between;
-    text-transform: uppercase;
-  }
-
-  .related-blogs .blog-tag,
-  .related-blogs .blog-card__date {
-    color: var(--text-primary);
-    font-family: var(--secondary-font);
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-medium);
-    letter-spacing: 0.04em;
-    line-height: 1.2;
-  }
-
-  .related-blogs .blog-tag {
-    border: var(--global-border-width) solid var(--accent-pink);
-    border-radius: 999px;
-    padding: 0.375rem 0.875rem;
-  }
-
-  .related-blogs .blog-card__date {
-    margin-left: auto;
-  }
-
-  .related-blogs .blog-card__title {
-    color: var(--text-primary);
-    font-family: var(--primary-font);
-    font-size: var(--text-h5);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.25;
-    margin: 0;
   }
 
   @media screen and (max-width: 991px) {
@@ -386,10 +300,6 @@
 
     .blog-details-info-row {
       gap: 2.5rem;
-    }
-
-    .related-blogs .blog-cl-list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
@@ -417,11 +327,6 @@
       flex-wrap: wrap;
       gap: 1.5rem;
     }
-
-    .related-blogs .blog-cl-list {
-      gap: 1.5rem;
-      grid-template-columns: 1fr;
-    }
   }
 
   @media screen and (max-width: 479px) {
@@ -439,14 +344,67 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .blog-back-button__icon,
-    .blog-share-module a {
+    .blog-back-button__icon {
       transition: none;
     }
   }
 
 </style>
 {% end_require_css %}
+
+{% require_js position="footer" %}
+<script>
+  (function () {
+    var socialIcons = {
+      facebook: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 15 24" fill="none" class="social-link-icon" aria-hidden="true"><path d="M11.5556 5.33333H8.22222C7.60855 5.33333 7.11111 5.8308 7.11111 6.44444V9.77778H11.5556C11.6819 9.77498 11.8018 9.83378 11.8769 9.93544C11.952 10.0371 11.9731 10.1689 11.9333 10.2889L11.1111 12.7333C11.0353 12.9577 10.8257 13.1093 10.5889 13.1111H7.11111V21.4444C7.11111 21.7512 6.86233 22 6.55555 22H3.77778C3.47096 22 3.22222 21.7512 3.22222 21.4444V13.1111H1.55555C1.24873 13.1111 1 12.8623 1 12.5556V10.3333C1 10.0266 1.24873 9.77778 1.55555 9.77778H3.22222V6.44444C3.22222 3.98984 5.21211 2 7.66667 2H11.5556C11.8623 2 12.1111 2.24873 12.1111 2.55556V4.77778C12.1111 5.0846 11.8623 5.33333 11.5556 5.33333Z" fill="currentColor"></path></svg>',
+      instagram: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 24" fill="none" class="social-link-icon" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.3194 2H8.43056C5.36231 2 2.875 4.48731 2.875 7.55556V16.4444C2.875 19.5127 5.36231 22 8.43056 22H17.3194C20.3876 22 22.875 19.5127 22.875 16.4444V7.55556C22.875 4.48731 20.3876 2 17.3194 2ZM20.9305 16.4444C20.9244 18.4362 19.3112 20.0494 17.3194 20.0556H8.43056C6.43873 20.0494 4.82555 18.4362 4.81945 16.4444V7.55556C4.82555 5.56372 6.43873 3.95054 8.43056 3.94444H17.3194C19.3112 3.95054 20.9244 5.56372 20.9305 7.55556V16.4444ZM18.1527 7.83333C18.7664 7.83333 19.2638 7.33587 19.2638 6.72222C19.2638 6.10858 18.7664 5.61111 18.1527 5.61111C17.5391 5.61111 17.0416 6.10858 17.0416 6.72222C17.0416 7.33587 17.5391 7.83333 18.1527 7.83333ZM12.875 7C10.1136 7 7.875 9.23858 7.875 12C7.875 14.7614 10.1136 17 12.875 17C15.6364 17 17.875 14.7614 17.875 12C17.878 10.673 17.3521 9.39952 16.4137 8.4612C15.4754 7.52288 14.202 6.99704 12.875 7ZM9.81945 12C9.81945 13.6876 11.1874 15.0556 12.875 15.0556C14.5625 15.0556 15.9305 13.6876 15.9305 12C15.9305 10.3124 14.5625 8.94444 12.875 8.94444C11.1874 8.94444 9.81945 10.3124 9.81945 12Z" fill="currentColor"></path></svg>',
+      twitter: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" class="social-link-icon" aria-hidden="true"><path d="M10.6689 9.65845L15.1696 16.0961H13.3225L9.64982 10.843V10.8426L9.11061 10.0715L4.82031 3.93457H6.66742L10.1297 8.8873L10.6689 9.65845Z" fill="currentColor"></path><path d="M17.839 0H2.16104C0.967563 0 0 0.967563 0 2.16104V17.839C0 19.0324 0.967563 20 2.16104 20H17.839C19.0324 20 20 19.0324 20 17.839V2.16104C20 0.967563 19.0324 0 17.839 0ZM12.7566 16.9604L9.0401 11.5514L4.38696 16.9604H3.18435L8.50611 10.7746L3.18435 3.02934H7.24336L10.7627 8.15126L15.1689 3.02934H16.3715L11.2968 8.92828H11.2965L16.8156 16.9604H12.7566Z" fill="currentColor"></path></svg>',
+      linkedin: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="social-link-icon" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.22222 2H19.7778C21.0051 2 22 2.99492 22 4.22222V19.7778C22 21.0051 21.0051 22 19.7778 22H4.22222C2.99492 22 2 21.0051 2 19.7778V4.22222C2 2.99492 2.99492 2 4.22222 2ZM7.55556 18.6667C7.86238 18.6667 8.11111 18.4179 8.11111 18.1111V10.3333C8.11111 10.0266 7.86238 9.77778 7.55556 9.77778H5.88889C5.58207 9.77778 5.33333 10.0266 5.33333 10.3333V18.1111C5.33333 18.4179 5.58207 18.6667 5.88889 18.6667H7.55556ZM6.72222 8.66667C5.80174 8.66667 5.05556 7.92048 5.05556 7C5.05556 6.07952 5.80174 5.33333 6.72222 5.33333C7.6427 5.33333 8.38889 6.07952 8.38889 7C8.38889 7.92048 7.6427 8.66667 6.72222 8.66667ZM18.1111 18.6667C18.4179 18.6667 18.6667 18.4179 18.6667 18.1111V13C18.7028 11.2342 17.3973 9.72724 15.6444 9.51111C14.4189 9.39917 13.2314 9.97156 12.5556 11V10.3333C12.5556 10.0266 12.3068 9.77778 12 9.77778H10.3333C10.0266 9.77778 9.77778 10.0266 9.77778 10.3333V18.1111C9.77778 18.4179 10.0266 18.6667 10.3333 18.6667H12C12.3068 18.6667 12.5556 18.4179 12.5556 18.1111V13.9444C12.5556 13.024 13.3018 12.2778 14.2222 12.2778C15.1427 12.2778 15.8889 13.024 15.8889 13.9444V18.1111C15.8889 18.4179 16.1377 18.6667 16.4444 18.6667H18.1111Z" fill="currentColor"></path></svg>'
+    };
+
+    function customizeSocialIcons() {
+      var shareModule = document.querySelector('.blog-share-module');
+
+      if (!shareModule) {
+        return;
+      }
+
+      shareModule.querySelectorAll('a').forEach(function (link) {
+        var image = link.querySelector('img');
+        var source = [
+          link.getAttribute('href') || '',
+          image ? image.getAttribute('alt') || '' : '',
+          image ? image.getAttribute('src') || '' : ''
+        ].join(' ').toLowerCase();
+        var network = ['facebook', 'instagram', 'twitter', 'linkedin'].find(function (name) {
+          return source.indexOf(name) !== -1;
+        });
+
+        if (!network) {
+          return;
+        }
+
+        var accessibleLabel = image && image.getAttribute('alt')
+          ? image.getAttribute('alt')
+          : 'Share on ' + network;
+
+        link.setAttribute('aria-label', accessibleLabel);
+        link.innerHTML = socialIcons[network];
+      });
+    }
+
+    function initializeBlogPostEnhancements() {
+      customizeSocialIcons();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeBlogPostEnhancements);
+    } else {
+      initializeBlogPostEnhancements();
+    }
+  })();
+</script>
+{% end_require_js %}
 
 {% extends "../layouts/base.html" %}
 {% import '/Fluentic/Macros/Button.html' as btn_macros %}
@@ -468,7 +426,9 @@
           <div class="blog-details-info-row">
             <div class="blog-details-info-left">
               <a class="blog-back-button" href="{{ blog_listing_url|escape_url }}">
-                <span class="blog-back-button__icon" aria-hidden="true">&larr;</span>
+                <span class="blog-back-button__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+<path d="M17.4995 10C17.4995 10.1658 17.4337 10.3247 17.3165 10.442C17.1992 10.5592 17.0403 10.625 16.8745 10.625H4.63311L9.1917 15.1828C9.24977 15.2409 9.29583 15.3098 9.32726 15.3857C9.35869 15.4616 9.37486 15.5429 9.37486 15.625C9.37486 15.7071 9.35869 15.7885 9.32726 15.8643C9.29583 15.9402 9.24977 16.0091 9.1917 16.0672C9.13363 16.1253 9.0647 16.1713 8.98883 16.2028C8.91295 16.2342 8.83164 16.2504 8.74952 16.2504C8.66739 16.2504 8.58608 16.2342 8.5102 16.2028C8.43433 16.1713 8.3654 16.1253 8.30733 16.0672L2.68233 10.4422C2.62422 10.3842 2.57812 10.3152 2.54667 10.2393C2.51521 10.1635 2.49902 10.0821 2.49902 10C2.49902 9.91788 2.51521 9.83655 2.54667 9.76067C2.57812 9.6848 2.62422 9.61587 2.68233 9.55782L8.30733 3.93282C8.4246 3.81555 8.58366 3.74966 8.74952 3.74966C8.91537 3.74966 9.07443 3.81555 9.1917 3.93282C9.30898 4.0501 9.37486 4.20916 9.37486 4.37501C9.37486 4.54086 9.30898 4.69992 9.1917 4.8172L4.63311 9.37501H16.8745C17.0403 9.37501 17.1992 9.44086 17.3165 9.55807C17.4337 9.67528 17.4995 9.83425 17.4995 10Z" fill="#1B0C27"/>
+<script xmlns=""/></svg></span>
                 <span>Back</span>
               </a>
 
@@ -506,6 +466,7 @@
           <p class="blog-share-label">Share Blog</p>
           <div class="blog-share-module">
             {% module "module_17875755358653" path="@hubspot/social_sharing", label="social_sharing.module" %}
+          </div>
         </div>
       </article>
     </div>
@@ -522,12 +483,12 @@
         </div>
 
         <div class="related-blog-button">
-          {{ btn_macros.secondary_button("View All Blogs", blog_listing_url) }}
+          {{ btn_macros.secondary_button("Explore All", blog_listing_url) }}
         </div>
       </div>
 
       <div class="related-blogs">
-        {% module "module_17804734585235" path="/Re-board theme/modules/Related Blogs", label="Related Blogs" %}
+        {% module "related_blogs" path="/Fluentic/modules/Related Blogs.module", label="Related Blogs" %}
       </div>
     </div>
   </section>
