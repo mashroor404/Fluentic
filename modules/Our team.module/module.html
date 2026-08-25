@@ -57,15 +57,12 @@
     overflow: hidden;
     aspect-ratio: 3 / 4; /* Maintains standard portrait proportions */
     background-color: var(--bg-accent-2);
-    transform-style: preserve-3d;
-    will-change: transform;
-    /* Smooth hover lift */
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    box-shadow: 0 1px 2px rgba(1, 16, 50, 0.06);
+    transition: box-shadow 0.4s ease;
   }
 
   .team-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(1, 16, 50, 0.12);
+    box-shadow: 0 20px 40px rgba(1, 16, 50, 0.16);
   }
 
   /* Member Image */
@@ -74,119 +71,74 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: scale(1);
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .team-card:hover > img {
-    transform: scale(1.2); /* Increased scale on hover */
+    transform: scale(1.06);
   }
 
   /* ==================================
-     Social Pill (Top Right)
+     Bottom Caption (Name always visible;
+     designation + socials reveal on hover)
      ================================== */
-  .team-social-pill {
+  .team-caption {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    background-color: var(--bg-primary);
-    border-radius: 12px;
-    padding: 0; /* Removed padding so hover bg touches edges */
-    display: flex;
-    align-items: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    z-index: 3;
-    overflow: hidden; /* Clips the hover background to the rounded corners */
-  }
-
-  .team-social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 32px;
-    border-radius: 0; /* Parent handles the corners */
-    background-color: transparent;
-    transition: all 0.3s ease;
-  }
-
-  .team-social-link svg {
-    width: 14px;
-    height: 14px;
-    display: block;
-  }
-
-  /* SVG & Background Colors (Inherits via currentColor) */
-  .team-social-link.is-insta { 
-    color: #E1306C; 
-  }
-  .team-social-link.is-insta:hover { 
-    background-color: #E1306C; 
-    color: var(--bg-primary); 
-  }
-
-  .team-social-link.is-linkedin { 
-    color: #0077B5; 
-  }
-  .team-social-link.is-linkedin:hover { 
-    background-color: #0077B5; 
-    color: var(--bg-primary); 
-  }
-
-  /* Divider line between icons */
-  .team-social-pill::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1px;
-    height: 14px;
-    background-color: rgba(1, 16, 50, 0.1);
-    pointer-events: none; /* Prevents divider from interfering with hover */
-  }
-
-  /* ==================================
-     Bottom Info Overlay (Glassmorphism)
-     ================================== */
-  .team-info-overlay {
-    position: absolute;
-    bottom: 0;
     left: 0;
+    bottom: 0;
     width: 100%;
-    padding: 64px 20px 32px;
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    padding: 20px 20px 22px;
     z-index: 2;
   }
 
-  /* The actual blur background isolated on a pseudo-element */
-  .team-info-overlay::before {
+  /* Scrim isolated on a pseudo-element so text always stays legible */
+  .team-caption::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* More transparent dark gradient */
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
-    /* More transparent blur effect */
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(6px);
-    /* Fades out the blur at the top so it doesn't leave a harsh line */
-    -webkit-mask-image: linear-gradient(to top, black 0%, black 60%, transparent 100%);
-    mask-image: linear-gradient(to top, black 0%, black 30%, transparent 100%);
+    inset: 0;
+    background: linear-gradient(to top, rgba(27, 12, 39, 0.78) 0%, rgba(27, 12, 39, 0.32) 55%, transparent 100%);
     z-index: -1;
+  }
+
+  /* Gradient accent rule — draws in on hover */
+  .team-accent-line {
+    display: block;
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    background: var(--gradient-brand);
+    transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .team-card:hover .team-accent-line {
+    width: 48px;
   }
 
   .team-desig {
     font-family: var(--tertiary-font);
-    font-size: 1rem;
+    font-size: 0.75rem;
     font-weight: 500;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: rgb(200, 227, 243);
-    margin-bottom: 1.125rem;
+    color: var(--text-light-secondary);
+    margin: 0 0 6px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .team-card:hover .team-desig {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .team-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .team-name {
@@ -195,6 +147,54 @@
     font-weight: 600;
     color: var(--text-light-primary);
     margin: 0;
+  }
+
+  /* Social icons — hidden pucks that fade up alongside the designation */
+  .team-socials {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+  }
+
+  .team-card:hover .team-socials {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .team-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--text-light-primary);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .team-social-link:hover {
+    transform: translateY(-2px);
+  }
+
+  .team-social-link svg {
+    width: 13px;
+    height: 13px;
+    display: block;
+  }
+
+  .team-social-link.is-insta:hover {
+    background-color: #E1306C;
+  }
+
+  .team-social-link.is-linkedin:hover {
+    background-color: #0077B5;
   }
 
   /* ==================================
@@ -222,7 +222,7 @@
     .team-section {
       padding: 64px 0;
     }
-    
+
     .team-header {
       margin-bottom: 40px;
     }
@@ -238,9 +238,19 @@
     .team-card {
       aspect-ratio: 1 / 1.1;
     }
-    
+
     .team-name {
       font-size: 1.5rem; /* Slightly larger for single-column mobile view */
+    }
+
+    /* Mobile: the hover-revealed content is shown by default (no hover on touch) */
+    .team-accent-line {
+      width: 48px;
+    }
+    .team-desig,
+    .team-socials {
+      opacity: 1;
+      transform: none;
     }
   }
   {% end_scope_css %}
@@ -271,46 +281,49 @@
     <div class="team-grid">
       {% for member in module.teams %}
         <div class="team-card gsap-team-card">
-          
-          <!-- Profile Image -->
+
+          <!-- Profile Image (desaturated by default, blooms into color on hover) -->
           {% if member.image.src %}
             <img src="{{ member.image.src }}" alt="{{ member.user_name|default('Team Member') }}" loading="{{ member.image.loading }}">
           {% endif %}
 
-          <!-- Social Links Pill -->
-          <div class="team-social-pill">
-            <!-- Instagram -->
-            {% if member.instagram.instagram_svg %}
-              <a href="{{ member.instagram.link.url.href }}" 
-                 class="team-social-link is-insta" 
-                 aria-label="Instagram"
-                 {% if member.instagram.link.open_in_new_tab %}target="_blank"{% endif %}
-                 {% if member.instagram.link.no_follow %}rel="nofollow"{% endif %}>
-                {{ member.instagram.instagram_svg|safe }}
-              </a>
-            {% endif %}
-            
-            <!-- LinkedIn -->
-            {% if member.linkedin.linkedin_svg  %}
-              <a href="{{ member.linkedin.link.url.href }}" 
-                 class="team-social-link is-linkedin" 
-                 aria-label="LinkedIn"
-                 {% if member.linkedin.link.open_in_new_tab %}target="_blank"{% endif %}
-                 {% if member.linkedin.link.no_follow %}rel="nofollow"{% endif %}>
-                {{ member.linkedin.linkedin_svg|safe }}
-              </a>
-            {% endif %}
-          </div>
+          <!-- Bottom Caption: name always visible; designation + socials reveal on hover -->
+          <div class="team-caption">
+            <span class="team-accent-line"></span>
 
-          <!-- Bottom Text Overlay (Glassmorphism) -->
-          <div class="team-info-overlay">
             {% if member.designation %}
               <span class="team-desig">{{ member.designation }}</span>
             {% endif %}
-            
-            {% if member.user_name %}
-              <h4 class="team-name">{{ member.user_name }}</h4>
-            {% endif %}
+
+            <div class="team-name-row">
+              {% if member.user_name %}
+                <h4 class="team-name">{{ member.user_name }}</h4>
+              {% endif %}
+
+              <div class="team-socials">
+                <!-- Instagram -->
+                {% if member.instagram.instagram_svg %}
+                  <a href="{{ member.instagram.link.url.href }}"
+                     class="team-social-link is-insta"
+                     aria-label="Instagram"
+                     {% if member.instagram.link.open_in_new_tab %}target="_blank"{% endif %}
+                     {% if member.instagram.link.no_follow %}rel="nofollow"{% endif %}>
+                    {{ member.instagram.instagram_svg|safe }}
+                  </a>
+                {% endif %}
+
+                <!-- LinkedIn -->
+                {% if member.linkedin.linkedin_svg  %}
+                  <a href="{{ member.linkedin.link.url.href }}"
+                     class="team-social-link is-linkedin"
+                     aria-label="LinkedIn"
+                     {% if member.linkedin.link.open_in_new_tab %}target="_blank"{% endif %}
+                     {% if member.linkedin.link.no_follow %}rel="nofollow"{% endif %}>
+                    {{ member.linkedin.linkedin_svg|safe }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
           </div>
 
         </div>
