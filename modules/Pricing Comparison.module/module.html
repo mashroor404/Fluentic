@@ -240,12 +240,14 @@
 
   .pricing-comparison__button .button-primary {
     width: 100%;
+    box-shadow: inset 0 0 0 1px #edecef, inset 0 2px 4px 0 #fff6, 0 2px 4px 0 #0000001a;
+    border-radius: 8px;
   }
 
   .pricing-card:not(.is-popular) .pricing-comparison__button .button-primary[data-wf--button-primary--variant="v2"] {
-    background-color: var(--page-bg);
+    background-color: var(--primary-bg);
     border-color: color-mix(in srgb, var(--global-border-color) 65%, transparent);
-  }
+    }
 
   .pricing-text-block {
     color: var(--text-primary);
