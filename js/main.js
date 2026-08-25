@@ -131,54 +131,29 @@
 /////////////////////////
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Find all eyebrow text elements on the page
-  const eyebrows = document.querySelectorAll('.eyebrow-text');
+  // 1. Find all eyebrow badges on the page
+  const eyebrows = document.querySelectorAll('.eyebrow-custom');
+  if (!eyebrows.length) return;
 
-  // 2. Create the Intersection Observer to watch for scroll
+  // 2. Reveal on scroll: each badge rises 20px into place (styles live in
+  //    css/elements/_buttons.css under .eyebrow-anim / .is-visible)
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
-      // When the eyebrow text enters the viewport
       if (entry.isIntersecting) {
-        const target = entry.target;
-        const textToType = target.getAttribute('data-original-text');
-
-        // Check if it has already been animated to prevent re-typing
-        if (!target.classList.contains('is-typed')) {
-          target.classList.add('is-typed');
-          target.textContent = ''; // Clear text just before typing starts
-          
-          let i = 0;
-          const typingSpeed = 30; // Speed in milliseconds (lower is faster)
-
-          // The typing function
-          function typeWriter() {
-            if (i < textToType.length) {
-              target.textContent += textToType.charAt(i);
-              i++;
-              setTimeout(typeWriter, typingSpeed);
-            }
-          }
-          
-          typeWriter(); // Start typing
-        }
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target); // Animate once only
       }
     });
   }, {
     // Triggers the animation when the element is 10% up from the bottom of the screen
-    rootMargin: "0px 0px -10% 0px", 
+    rootMargin: "0px 0px -10% 0px",
     threshold: 0
   });
 
-  // 3. Prepare each eyebrow element on load
+  // 3. Hide each badge via a JS-added class (no-JS visitors keep them fully
+  //    visible), then watch it for the reveal
   eyebrows.forEach(eyebrow => {
-    // Store the original text from your HubL macro in a data attribute
-    const originalText = eyebrow.textContent;
-    eyebrow.setAttribute('data-original-text', originalText);
-    
-    // Empty the text visually so it's blank until the user scrolls to it
-    eyebrow.textContent = ''; 
-    
-    // Tell the observer to watch this element
+    eyebrow.classList.add('eyebrow-anim');
     observer.observe(eyebrow);
   });
 });
