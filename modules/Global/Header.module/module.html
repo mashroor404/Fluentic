@@ -69,16 +69,25 @@
   .logo_link {
     display: flex;
     align-items: center;
+    gap: 16px;
     text-decoration: none;
     z-index: 101; 
   }
 
-  .logo_image {
+  .logo_icon,
+  .logo_text_image {
     display: block;
+    flex: 0 0 auto;
     height: auto;
-    max-height: 32px;
     object-fit: contain;
-    width: 136px;
+  }
+
+  .logo_icon {
+    width: 32px;
+  }
+
+  .logo_text_image {
+    width: 87px;
   }
 
   /* ==================================
@@ -286,7 +295,10 @@
   /* Fluentic reference alignment and proportional scroll resizing. */
   .site-header {
     --nav-header-padding-top: 24px;
-    --nav-logo-width: 136px;
+    --nav-logo-gap: 16px;
+    --nav-logo-icon-width: 32px;
+    --nav-logo-text-opacity: 1;
+    --nav-logo-text-width: 87px;
     --nav-squeeze-width: 77.5rem;
     background-color: transparent;
     inset: 0 0 auto;
@@ -334,17 +346,29 @@
 
   .logo_link {
     flex: 1 1 0;
-    max-width: var(--nav-logo-width);
-    transition: max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    gap: var(--nav-logo-gap);
+    max-width: calc(var(--nav-logo-icon-width) + var(--nav-logo-gap) + var(--nav-logo-text-width));
+    transition: gap 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     width: 100%;
   }
 
-  .logo_image {
+  .logo_icon {
     flex: 0 0 auto;
     height: auto;
     max-height: 32px;
-    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    width: var(--nav-logo-width);
+    width: var(--nav-logo-icon-width);
+  }
+
+  .logo_text_image {
+    flex: 0 0 auto;
+    height: auto;
+    max-height: 18px;
+    opacity: var(--nav-logo-text-opacity);
+    overflow: hidden;
+    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    width: var(--nav-logo-text-width);
   }
 
   .nav_menu-wrap {
@@ -419,11 +443,18 @@
     }
 
     .logo_link {
-      max-width: 136px;
+      gap: 16px;
+      max-width: 135px;
     }
 
-    .logo_image {
-      width: 136px;
+    .logo_icon {
+      width: 32px;
+    }
+
+    .logo_text_image {
+      max-height: 18px;
+      opacity: 1;
+      width: 87px;
     }
 
     .nav_menu-btn {
@@ -480,7 +511,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .logo_link,
-    .logo_image,
+    .logo_icon,
+    .logo_text_image,
     .nav_menu-wrap {
       transition: none;
     }
@@ -493,7 +525,11 @@
 {% if not logo_href %}{% set logo_href = "/" %}{% endif %}
 {% set logo_src = module.logo.logo_image.src %}
 {% if not logo_src %}
-  {% set logo_src = get_asset_url('../../../css/elements/Assets/icons/697ec1c8909a6d1410bb79d7_2c1e6508fc385ddbb919bad34bc84025_Logo.svg') %}
+  {% set logo_src = get_asset_url('../../../css/elements/Assets/icons/698b27c7157f0b46c816e0ee_Logo Icon.svg') %}
+{% endif %}
+{% set logo_text_src = module.logo.logo_text_image.src %}
+{% if not logo_text_src %}
+  {% set logo_text_src = get_asset_url('../../../css/elements/Assets/icons/698b27c75f402314249d219c_06358543d347e99ff2b72ab7d04f07b6_Logo Text.svg') %}
 {% endif %}
 {% set cta_href = module.cta.button_link.url.href %}
 {% if module.cta.button_link.url.type is equalto "EMAIL_ADDRESS" %}
@@ -514,7 +550,8 @@
           {% if module.logo.logo_link.open_in_new_tab %}target="_blank"{% endif %}
           {% if module.logo.logo_link.open_in_new_tab or module.logo.logo_link.no_follow %}rel="{% if module.logo.logo_link.no_follow %}nofollow{% endif %}{% if module.logo.logo_link.open_in_new_tab %}{% if module.logo.logo_link.no_follow %} {% endif %}noopener{% endif %}"{% endif %}
         >
-          <img loading="eager" src="{{ logo_src|escape_url }}" alt="{{ module.logo.logo_image.alt|default('Fluentic', true)|escape_attr }}" class="logo_image">
+          <img loading="eager" src="{{ logo_src|escape_url }}" alt="{{ module.logo.logo_image.alt|default('Fluentic logo', true)|escape_attr }}" class="logo_icon">
+          <img loading="eager" src="{{ logo_text_src|escape_url }}" alt="{{ module.logo.logo_text_image.alt|default('Fluentic', true)|escape_attr }}" class="logo_text_image">
         </a>
 
         <div class="nav_menu-wrap" id="nav-menu-{{ name|escape_attr }}" data-nav-menu>
@@ -625,10 +662,13 @@
           const remainingProgress = 1 - scrollProgress;
           const navWidth = 840 + (400 * remainingProgress);
           const headerPadding = 16 + (8 * remainingProgress);
-          const logoWidth = 112 + (24 * remainingProgress);
+          const logoGap = 16 * remainingProgress;
+          const logoTextWidth = 87 * remainingProgress;
 
           header.style.setProperty('--nav-header-padding-top', `${headerPadding.toFixed(3)}px`);
-          header.style.setProperty('--nav-logo-width', `${logoWidth.toFixed(3)}px`);
+          header.style.setProperty('--nav-logo-gap', `${logoGap.toFixed(3)}px`);
+          header.style.setProperty('--nav-logo-text-opacity', remainingProgress.toFixed(3));
+          header.style.setProperty('--nav-logo-text-width', `${logoTextWidth.toFixed(3)}px`);
           header.style.setProperty('--nav-squeeze-width', `${navWidth.toFixed(3)}px`);
           header.classList.toggle('is-scrolled', scrollProgress >= 1);
           scrollFrame = null;

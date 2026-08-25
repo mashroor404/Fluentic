@@ -7,7 +7,24 @@
   "children" : [ {
     "id" : "hdr-logo-image",
     "name" : "logo_image",
-    "label" : "Logo Image",
+    "label" : "Logo Icon",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "Fluentic",
+      "width" : 0,
+      "height" : 0
+    }
+  }, {
+    "id" : "hdr-logo-text-image",
+    "name" : "logo_text_image",
+    "label" : "Logo Text Image",
     "required" : false,
     "locked" : false,
     "responsive" : false,
@@ -48,6 +65,12 @@
   "display_width" : null,
   "default" : {
     "logo_image" : {
+      "src" : "",
+      "alt" : "Fluentic",
+      "width" : 0,
+      "height" : 0
+    },
+    "logo_text_image" : {
       "src" : "",
       "alt" : "Fluentic",
       "width" : 0,
